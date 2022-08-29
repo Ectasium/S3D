@@ -141,7 +141,7 @@ function init () {
     const raycaster = new THREE.Raycaster();
     const clickMouse = new THREE.Vector2();
 
-    //Button scene red
+    //Button show Factory
     let btn_red = document.getElementById("button_red");
     btn_red.addEventListener("click", function () {
     scene.remove(office);
@@ -150,7 +150,7 @@ function init () {
     
     });
 
-    //button scne green
+    //Button show Office
     let btn_green = document.getElementById("button_green");
     btn_green.addEventListener("click", function () {
     scene.remove(factory);
