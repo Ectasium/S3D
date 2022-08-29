@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import { ACESFilmicToneMapping } from 'three';
 import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 
@@ -15,19 +16,24 @@ function init () {
     // scene setup
     scene = new THREE.Scene();
 
+    //axes helper
+    /* const axesHelper = new THREE.AxesHelper( 5 );
+    scene.add( axesHelper ); */
+
     //camera setup
     const fov = 40;
     const aspect = canvasSize.offsetWidth / canvasSize.offsetHeight;
     const near = 0.1;
     const far = 1000;
     camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
-    //camera.rotation.z += Math.PI;
-    camera.position.set(0, 20, 0);
-    camera.lookAt(scene.position); 
-    camera.position.y -= 20;
+    //camera.position.set(0, 0, 0);
+    camera.translateX(-4);
+    camera.translateY(11);
+    camera.translateZ(7); 
+    //const helper = new THREE.CameraHelper( camera );
     scene.add(camera);
+    camera.updateProjectionMatrix();
     
-
     //renderer setup
     renderer = new THREE.WebGLRenderer({
         antialias: true,
@@ -39,9 +45,30 @@ function init () {
     renderer.autoClear = false;
     renderer.setClearColor(0x000000, 0.0);
 
-    // orbitcontrol setup
+    //Testbox GREEN
+    const testboxgreen_geometry = new THREE.BoxGeometry(5, 5, 5);
+    const testboxgreen_material = new THREE.MeshBasicMaterial( {color: 0x00f700} );
+    const testboxgreen = new THREE.Mesh(testboxgreen_geometry, testboxgreen_material);
+    testboxgreen.position.set(0, 0, 0);
+    testboxgreen.rotation.y = 0;
+    testboxgreen.userData.name = 'testboxgreen';
+    testboxgreen.visible = false;
+    scene.add(testboxgreen);
+    
+     //Testbox RED
+     const testboxred_geometry = new THREE.BoxGeometry(5, 5, 5);
+     const testboxred_material = new THREE.MeshBasicMaterial( {color: 0xff0000} );
+     const testboxred = new THREE.Mesh(testboxred_geometry, testboxred_material);
+     testboxred.position.set(0, 0, 0);
+     testboxred.rotation.y = 0;
+     testboxred.userData.name = 'testboxred';
+     testboxred.visible = false;
+     testboxred.name = "red_name";
+     scene.add(testboxred);
+ 
+    //Orbitcontrol Setup
     const controls = new OrbitControls(camera, renderer.domElement);
-    controls.target.set( 0, 0, 0 );
+    //controls.target.set(0,0,0);
     controls.enablePan = false;
     controls.enableDamping = false;
     controls.dampingFactor = 3;
@@ -69,7 +96,7 @@ function init () {
     const door = new THREE.Mesh(door_geometry, door_material);
     door.position.set(-3.11, 0.5, -4.8);
     door.userData.name = 'door';
-    door.visible = true;
+    door.visible = false;
     scene.add(door);
 
     // add printer cube
@@ -79,7 +106,7 @@ function init () {
     printer_cube.position.set(4.44, 0, 3.56);
     printer_cube.rotation.y = 0;
     printer_cube.userData.name = 'printer_cube';
-    printer_cube.visible = true;
+    printer_cube.visible = false;
     scene.add(printer_cube);
 
     // add ball sphere
@@ -88,7 +115,7 @@ function init () {
     const ball_sphere = new THREE.Mesh(ball_geometry,ball_material );
     ball_sphere.position.set(4.3, -1.47, -4.19);
     ball_sphere.userData.name = 'ball_sphere';
-    ball_sphere.visible = true;
+    ball_sphere.visible = false;
     scene.add(ball_sphere);
 
     // ambient light setup
@@ -114,9 +141,10 @@ function init () {
         office.visible = true;
         office.scale.set(2, 2, 2);
         office.position.set(0, 1.5, 0);
-        //office.rotation.x = 0.4;
+        //office.rotation.x = Math.PI/-2;
         //office.rotation.y = 0.8;
         scene.add(gltf.scene);
+                
     });
 
     // loading factory
@@ -125,12 +153,12 @@ function init () {
      url = "" + url;
      factory_loader.load(url, (gltf) => {
          factory = gltf.scene.children[0];
-         
+         factory.visible = true;
          factory.scale.set(4, 4, 4);
-         factory.position.set(0, -35, 0);
-         //factory.rotation.x = 0.4;
+         factory.position.set(0, 4.5, 0);
+         //factory.rotation.x = Math.PI/-2;
          //factory.rotation.y = 0.8;
-         scene.add(gltf.scene);
+         //scene.add(gltf.scene);
      });
 
     animate();
@@ -138,6 +166,26 @@ function init () {
     // Raycaster
     const raycaster = new THREE.Raycaster();
     const clickMouse = new THREE.Vector2();
+
+    //Button scene red
+    let btn_red = document.getElementById("button_red");
+    btn_red.addEventListener("click", function () {
+    //alert("Button geklickt");
+    scene.remove(office);
+    scene.add(factory);
+    //animate();
+    
+    });
+
+    //button scne green
+    let btn_green = document.getElementById("button_green");
+    btn_green.addEventListener("click", function () {
+    //alert("Button geklickt");
+    scene.remove(factory);
+    scene.add(office);
+    //animate();
+    });
+
 
     window.addEventListener('click', event => {
         
@@ -167,6 +215,9 @@ function init () {
 
 };
 
+
+
+
 // rendering scene and camera
 const render = () => {
     renderer.render(scene, camera);
@@ -191,10 +242,11 @@ const animate = () => {
 window.onload = init();
 window.addEventListener('resize', windowResize, false);
 
-//button in index.html
-let btn = document.getElementById("button");
-btn.addEventListener("click", function () {
-    alert("Button geklickt");
-    //console.log(cvs);
-   
-});
+
+
+    
+
+
+
+
+
