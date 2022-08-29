@@ -1,5 +1,4 @@
 import * as THREE from 'three';
-import { ACESFilmicToneMapping } from 'three';
 import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 
@@ -15,10 +14,6 @@ function init () {
 
     // scene setup
     scene = new THREE.Scene();
-
-    //axes helper
-    /* const axesHelper = new THREE.AxesHelper( 5 );
-    scene.add( axesHelper ); */
 
     //camera setup
     const fov = 40;
@@ -45,27 +40,6 @@ function init () {
     renderer.autoClear = false;
     renderer.setClearColor(0x000000, 0.0);
 
-    //Testbox GREEN
-    const testboxgreen_geometry = new THREE.BoxGeometry(5, 5, 5);
-    const testboxgreen_material = new THREE.MeshBasicMaterial( {color: 0x00f700} );
-    const testboxgreen = new THREE.Mesh(testboxgreen_geometry, testboxgreen_material);
-    testboxgreen.position.set(0, 0, 0);
-    testboxgreen.rotation.y = 0;
-    testboxgreen.userData.name = 'testboxgreen';
-    testboxgreen.visible = false;
-    scene.add(testboxgreen);
-    
-     //Testbox RED
-     const testboxred_geometry = new THREE.BoxGeometry(5, 5, 5);
-     const testboxred_material = new THREE.MeshBasicMaterial( {color: 0xff0000} );
-     const testboxred = new THREE.Mesh(testboxred_geometry, testboxred_material);
-     testboxred.position.set(0, 0, 0);
-     testboxred.rotation.y = 0;
-     testboxred.userData.name = 'testboxred';
-     testboxred.visible = false;
-     testboxred.name = "red_name";
-     scene.add(testboxred);
- 
     //Orbitcontrol Setup
     const controls = new OrbitControls(camera, renderer.domElement);
     //controls.target.set(0,0,0);
@@ -170,7 +144,6 @@ function init () {
     //Button scene red
     let btn_red = document.getElementById("button_red");
     btn_red.addEventListener("click", function () {
-    //alert("Button geklickt");
     scene.remove(office);
     scene.add(factory);
     //animate();
@@ -180,12 +153,10 @@ function init () {
     //button scne green
     let btn_green = document.getElementById("button_green");
     btn_green.addEventListener("click", function () {
-    //alert("Button geklickt");
     scene.remove(factory);
     scene.add(office);
     //animate();
     });
-
 
     window.addEventListener('click', event => {
         
@@ -215,9 +186,6 @@ function init () {
 
 };
 
-
-
-
 // rendering scene and camera
 const render = () => {
     renderer.render(scene, camera);
@@ -241,12 +209,3 @@ const animate = () => {
 //start scene
 window.onload = init();
 window.addEventListener('resize', windowResize, false);
-
-
-
-    
-
-
-
-
-
