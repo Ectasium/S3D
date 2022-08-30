@@ -4,7 +4,7 @@
 :root{
     --primary-color: #171717;
     --secondary-color: #444444;
-    --accent-color: #DA0037;
+    --accent-color: #e66802;
     --complimentary-color: #c8ccd0;
     --white-color: #eeeeee;
     --black-color: #181818;
@@ -90,3 +90,14 @@ h1, p{
     height: 100%;
     position: static;
 }
+
+.button {
+    background-color: #e66802; /* Orange */
+    border: 5px;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 18px;
+  }
