@@ -135,12 +135,7 @@ function init () {
          //scene.add(gltf.scene);
      });
 
-    animate();
-
-    // Raycaster
-    const raycaster = new THREE.Raycaster();
-    const clickMouse = new THREE.Vector2();
-
+   
     //Button show Factory
     let btn_red = document.getElementById("button_red");
     btn_red.addEventListener("click", function () {
@@ -158,6 +153,9 @@ function init () {
     //animate();
     });
 
+    // Raycaster
+    const raycaster = new THREE.Raycaster();
+    const clickMouse = new THREE.Vector2();
     window.addEventListener('click', event => {
         
         const rect = renderer.domElement.getBoundingClientRect();
@@ -182,8 +180,9 @@ function init () {
                 alert("You already want to go?");
                 break;
         };
-    }); 
-
+    });
+    
+    animate();
 };
 
 // rendering scene and camera
@@ -192,7 +191,7 @@ const render = () => {
 };
 
 // animation recursive function
-//let step = 0
+let step = 0;
 const animate = () => {
     requestAnimationFrame(animate);
     render();
