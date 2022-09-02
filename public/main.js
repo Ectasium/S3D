@@ -92,21 +92,15 @@ function init () {
     ball_sphere.visible = false;
     scene.add(ball_sphere);
 
-    // ambient light setup
+    //light setup
     const ambientLight = new THREE.AmbientLight(0xffeeee, 0.5);
-    scene.add(ambientLight);
-
-    // hemisphere light setup
     const hemisphereLight = new THREE.HemisphereLight(0xffeeb1, 0x080820, 1);
-    scene.add(hemisphereLight);
-
-     // direction lights setup
     const spotLight1 = new THREE.SpotLight(0xffffff, 1);
     spotLight1.position.set(0, 300, 0);
     spotLight1.castShadow = true;
-    scene.add(spotLight1);
+    scene.add(ambientLight, hemisphereLight, spotLight1);
 
-    // loding office
+    // load office
     const office_loader = new GLTFLoader();
     url = new URL( './model/office.glb', import.meta.url );
     url = "" + url;
@@ -117,11 +111,11 @@ function init () {
         office.position.set(0, 1.5, 0);
         //office.rotation.x = Math.PI/-2;
         //office.rotation.y = 0.8;
-        scene.add(gltf.scene);
+        //scene.add(gltf.scene);
                 
     });
 
-    // loading factory
+    // load factory
      const factory_loader = new GLTFLoader();
      url = new URL( './model/factory.glb', import.meta.url );
      url = "" + url;
@@ -130,28 +124,94 @@ function init () {
          factory.visible = true;
          factory.scale.set(4, 4, 4);
          factory.position.set(0, 4.5, 0);
+         factory.matrixAutoUpdate = true;
+         factory.updateMatrix();
          //factory.rotation.x = Math.PI/-2;
          //factory.rotation.y = 0.8;
          //scene.add(gltf.scene);
      });
 
-   
-    //Button show Factory
-    let btn_red = document.getElementById("button_red");
-    btn_red.addEventListener("click", function () {
-    scene.remove(office);
-    scene.add(factory);
-    //animate();
+
+     // load world
+     const world_loader = new GLTFLoader();
+     url = new URL( './model/world.glb', import.meta.url );
+     url = "" + url;
+     world_loader.load(url, (gltf) => {
+         world = gltf.scene.children[0];
+         world.visible = true;
+         world.scale.set(10, 10, 10);
+         world.position.set(0, 2.6, 0);
+         //world.rotation.x = Math.PI/-2;
+         //world.rotation.y = 0.8;
+         world.matrixAutoUpdate = true;
+         world.updateMatrix();
+         //scene.add(gltf.scene);
+         scene.add(world);
+     });
+
+     // load house
+     const house_loader = new GLTFLoader();
+     url = new URL( './model/house.glb', import.meta.url );
+     url = "" + url;
+     house_loader.load(url, (gltf) => {
+         house = gltf.scene.children[0];
+         house.visible = true;
+         house.scale.set(12, 12, 12);
+         house.position.set(0, 1.4, 0);
+         //house.rotation.x = Math.PI/-2;
+         //house.rotation.y = 0.8;
+         //scene.add(gltf.scene);
+                 
+     });
+
+    //initialize and hide buttons
+    let button_next_1 = document.getElementById("button_next_1");
+    button_next_1.style.display = "none"; 
+    let button_next_2 = document.getElementById("button_next_2");
+    button_next_2.style.display = "none"; 
+    let button_restart = document.getElementById("button_restart");
+    button_restart.style.display = "none"; 
     
+    //Button start show Factory
+    let button_start = document.getElementById("button_start");
+    button_start.addEventListener("click", function () {
+        scene.add(factory);
+        scene.remove(world);
+        controls.reset();
+        button_start.style.display = "none";
+        button_next_1.style.display = "block";
     });
 
     //Button show Office
-    let btn_green = document.getElementById("button_green");
-    btn_green.addEventListener("click", function () {
-    scene.remove(factory);
-    scene.add(office);
-    //animate();
+    button_next_1.addEventListener("click", function () {
+        scene.remove(factory);
+        scene.add(office);
+        controls.reset();
+        button_next_1.style.display = "none";
+        button_next_2.style.display = "block";
+        //animate();
     });
+
+     //Button show House
+     button_next_2.addEventListener("click", function () {
+        scene.remove(office);
+        scene.add(house);
+        controls.reset();
+        button_restart.style.display = "block";
+        button_next_2.style.display = "none";
+        //animate();
+    });
+
+    //Button restart
+    button_restart.addEventListener("click", function () {
+        scene.remove(house);
+        scene.add(world);
+        controls.reset();
+        button_restart.style.display = "none";
+        button_start.style.display = "block";
+        //animate();
+    });
+
 
     // Raycaster
     const raycaster = new THREE.Raycaster();
