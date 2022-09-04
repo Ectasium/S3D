@@ -42,7 +42,7 @@ function init () {
 
     //Orbitcontrol Setup
     const controls = new OrbitControls(camera, renderer.domElement);
-    //controls.target.set(0,0,0);
+    controls.target.set(0,0,0);
     controls.enablePan = false;
     controls.enableDamping = false;
     controls.dampingFactor = 3;
@@ -63,35 +63,7 @@ function init () {
     background.position.set(0, 0, 0);
     background.visible = false;
     scene.add(background);
-
-    //door box
-    const door_geometry = new THREE.BoxGeometry(2.2, 5, 0.03);
-    const door_material = new THREE.MeshBasicMaterial( {color: 0x00ff00} );
-    const door = new THREE.Mesh(door_geometry, door_material);
-    door.position.set(-3.11, 0.5, -4.8);
-    door.userData.name = 'door';
-    door.visible = false;
-    scene.add(door);
-
-    // add printer cube
-    const printer_geometry = new THREE.BoxGeometry(0.67, 0.67, 0.77);
-    const printer_material = new THREE.MeshBasicMaterial( {color: 0x00ff00} );
-    const printer_cube = new THREE.Mesh(printer_geometry, printer_material);
-    printer_cube.position.set(4.44, 0, 3.56);
-    printer_cube.rotation.y = 0;
-    printer_cube.userData.name = 'printer_cube';
-    printer_cube.visible = false;
-    scene.add(printer_cube);
-
-    // add ball sphere
-    const ball_geometry = new THREE.SphereGeometry(0.5, 32, 32);
-    const ball_material = new THREE.MeshBasicMaterial( {color: 0x00ff00} );
-    const ball_sphere = new THREE.Mesh(ball_geometry,ball_material );
-    ball_sphere.position.set(4.3, -1.47, -4.19);
-    ball_sphere.userData.name = 'ball_sphere';
-    ball_sphere.visible = false;
-    scene.add(ball_sphere);
-
+    
     //light setup
     const ambientLight = new THREE.AmbientLight(0xffeeee, 0.5);
     const hemisphereLight = new THREE.HemisphereLight(0xffeeb1, 0x080820, 1);
@@ -112,9 +84,37 @@ function init () {
         //office.rotation.x = Math.PI/-2;
         //office.rotation.y = 0.8;
         //scene.add(gltf.scene);
-                
     });
 
+    //door box
+    const door_geometry = new THREE.BoxGeometry(2.2, 5, 0.03);
+    const door_material = new THREE.MeshBasicMaterial( {color: 0x00ff00} );
+    const door = new THREE.Mesh(door_geometry, door_material);
+    door.position.set(-3.11, 0.5, -4.8);
+    door.userData.name = 'door';
+    
+    // add printer cube
+    const printer_geometry = new THREE.BoxGeometry(0.67, 0.67, 0.77);
+    const printer_material = new THREE.MeshBasicMaterial( {color: 0x00ff00} );
+    const printer_cube = new THREE.Mesh(printer_geometry, printer_material);
+    printer_cube.position.set(4.44, 0, 3.56);
+    printer_cube.rotation.y = 0;
+    printer_cube.userData.name = 'printer_cube';
+    
+    // add ball sphere
+    const ball_geometry = new THREE.SphereGeometry(0.5, 32, 32);
+    const ball_material = new THREE.MeshBasicMaterial( {color: 0x00ff00} );
+    const ball_sphere = new THREE.Mesh(ball_geometry,ball_material );
+    ball_sphere.position.set(4.3, -1.47, -4.19);
+    ball_sphere.userData.name = 'ball_sphere';
+  
+    const office_clickobjects = new THREE.Group();
+    //office_group.add(office);
+    office_clickobjects.add(ball_sphere);
+    office_clickobjects.add(printer_cube);
+    office_clickobjects.add(door);
+    office_clickobjects.visible = true;
+      
     // load factory
      const factory_loader = new GLTFLoader();
      url = new URL( './model/factory.glb', import.meta.url );
@@ -185,20 +185,22 @@ function init () {
     //Button show Office
     button_next_1.addEventListener("click", function () {
         scene.remove(factory);
-        scene.add(office);
+        scene.add(office, office_clickobjects);
         controls.reset();
         button_next_1.style.display = "none";
         button_next_2.style.display = "block";
+        controls.enablePan = false;
         //animate();
     });
 
      //Button show House
      button_next_2.addEventListener("click", function () {
-        scene.remove(office);
+        scene.remove(office, office_clickobjects);
         scene.add(house);
         controls.reset();
         button_restart.style.display = "block";
         button_next_2.style.display = "none";
+        controls.enablePan = false;
         //animate();
     });
 
@@ -213,7 +215,7 @@ function init () {
     });
 
 
-    // Raycaster
+    // Raycaster for Clickobjects
     const raycaster = new THREE.Raycaster();
     const clickMouse = new THREE.Vector2();
     window.addEventListener('click', event => {
@@ -224,7 +226,6 @@ function init () {
 
         raycaster.setFromCamera(clickMouse, camera);
         
-        //to be replaced by switch...case
         const found = raycaster.intersectObjects(scene.children, true);
         
         switch (found.length > 0 && found[0].object.userData.name) {
