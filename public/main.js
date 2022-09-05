@@ -10,12 +10,13 @@ let scene;
 const canvasSize = document.querySelector('.canvas-element');
 let model_container = document.querySelector('.webgl');
 
+
 function init () {
 
-    // scene setup
+    // SCENE //////////////////////////////////////////////////////////////////////
     scene = new THREE.Scene();
 
-    //camera setup
+    //CAMERA //////////////////////////////////////////////////////////////////////
     const fov = 40;
     const aspect = canvasSize.offsetWidth / canvasSize.offsetHeight;
     const near = 0.1;
@@ -29,7 +30,7 @@ function init () {
     scene.add(camera);
     camera.updateProjectionMatrix();
     
-    //renderer setup
+    //RENDERER /////////////////////////////////////////////////////////////////////
     renderer = new THREE.WebGLRenderer({
         antialias: true,
         alpha: true,
@@ -40,7 +41,7 @@ function init () {
     renderer.autoClear = false;
     renderer.setClearColor(0x000000, 0.0);
 
-    //Orbitcontrol Setup
+    //CONTROLS //////////////////////////////////////////////////////////////////
     const controls = new OrbitControls(camera, renderer.domElement);
     controls.target.set(0,0,0);
     controls.enablePan = false;
@@ -56,6 +57,16 @@ function init () {
     //controls.minPolarAngle = Math.PI * 0.3;
     //controls.maxPolarAngle = Math.PI * 0.6;
 
+    //LIGHT ////////////////////////////////////////////////////////////////////////
+    const ambientLight = new THREE.AmbientLight(0xffeeee, 0.5);
+    const hemisphereLight = new THREE.HemisphereLight(0xffeeb1, 0x080820, 1);
+    const spotLight1 = new THREE.SpotLight(0xffffff, 1);
+    spotLight1.position.set(0, 300, 0);
+    spotLight1.castShadow = true;
+    scene.add(ambientLight, hemisphereLight, spotLight1);
+
+    // OBJECTS //////////////////////////////////////////////////////////////////////
+    
     //background box
     const background_geometry = new THREE.BoxGeometry(2, 2, 2);
     const background_material = new THREE.MeshBasicMaterial( {color: 0x00ff00} );
@@ -63,14 +74,6 @@ function init () {
     background.position.set(0, 0, 0);
     background.visible = false;
     scene.add(background);
-    
-    //light setup
-    const ambientLight = new THREE.AmbientLight(0xffeeee, 0.5);
-    const hemisphereLight = new THREE.HemisphereLight(0xffeeb1, 0x080820, 1);
-    const spotLight1 = new THREE.SpotLight(0xffffff, 1);
-    spotLight1.position.set(0, 300, 0);
-    spotLight1.castShadow = true;
-    scene.add(ambientLight, hemisphereLight, spotLight1);
 
     // load office
     const office_loader = new GLTFLoader();
@@ -131,7 +134,6 @@ function init () {
          //scene.add(gltf.scene);
      });
 
-
      // load world
      const world_loader = new GLTFLoader();
      url = new URL( './model/world.glb', import.meta.url );
@@ -164,87 +166,135 @@ function init () {
                  
      });
 
-    //initialize and hide buttons
-    let button_next_1 = document.getElementById("button_next_1");
-    button_next_1.style.display = "none"; 
-    let button_next_2 = document.getElementById("button_next_2");
-    button_next_2.style.display = "none"; 
-    let button_restart = document.getElementById("button_restart");
-    button_restart.style.display = "none"; 
-    
-    //Button start show Factory
-    let button_start = document.getElementById("button_start");
-    button_start.addEventListener("click", function () {
-        scene.add(factory);
-        scene.remove(world);
-        controls.reset();
-        button_start.style.display = "none";
-        button_next_1.style.display = "block";
-    });
+    // BUTTONS/////////////////////////////////////////////////////////////
 
-    //Button show Office
-    button_next_1.addEventListener("click", function () {
-        scene.remove(factory);
-        scene.add(office, office_clickobjects);
-        controls.reset();
-        button_next_1.style.display = "none";
-        button_next_2.style.display = "block";
-        controls.enablePan = false;
-        //animate();
-    });
-
-     //Button show House
-     button_next_2.addEventListener("click", function () {
-        scene.remove(office, office_clickobjects);
-        scene.add(house);
-        controls.reset();
-        button_restart.style.display = "block";
-        button_next_2.style.display = "none";
-        controls.enablePan = false;
-        //animate();
-    });
-
-    //Button restart
-    button_restart.addEventListener("click", function () {
-        scene.remove(house);
-        scene.add(world);
-        controls.reset();
-        button_restart.style.display = "none";
-        button_start.style.display = "block";
-        //animate();
-    });
-
-
-    // Raycaster for Clickobjects
-    const raycaster = new THREE.Raycaster();
-    const clickMouse = new THREE.Vector2();
-    window.addEventListener('click', event => {
+    function buttons_init() {
+        //Initialize and hide buttons
+        let button_next_1 = document.getElementById("button_next_1");
+        button_next_1.style.display = "none"; 
+        let button_next_2 = document.getElementById("button_next_2");
+        button_next_2.style.display = "none"; 
+        let button_restart = document.getElementById("button_restart");
+        button_restart.style.display = "none"; 
         
-        const rect = renderer.domElement.getBoundingClientRect();
-        clickMouse.x = ( ( event.clientX - rect.left ) / ( rect.right - rect.left ) ) * 2 - 1;
-        clickMouse.y = - ( ( event.clientY - rect.top ) / ( rect.bottom - rect.top) ) * 2 + 1;
+        //Button start show Factory
+        let button_start = document.getElementById("button_start");
+        button_start.addEventListener("click", function () {
+            scene.add(factory);
+            scene.remove(world);
+            controls.reset();
+            button_start.style.display = "none";
+            button_next_1.style.display = "block";
+        });
 
-        raycaster.setFromCamera(clickMouse, camera);
+        //Button show Office
+        button_next_1.addEventListener("click", function () {
+            scene.remove(factory);
+            scene.add(office, office_clickobjects);
+            controls.reset();
+            button_next_1.style.display = "none";
+            button_next_2.style.display = "block";
+            controls.enablePan = false;
+            //animate();
+        });
+
+        //Button show House
+        button_next_2.addEventListener("click", function () {
+            scene.remove(office, office_clickobjects);
+            scene.add(house);
+            controls.reset();
+            button_restart.style.display = "block";
+            button_next_2.style.display = "none";
+            controls.enablePan = false;
+            //animate();
+        });
+
+        //Button restart
+        button_restart.addEventListener("click", function () {
+            scene.remove(house);
+            scene.add(world);
+            controls.reset();
+            button_restart.style.display = "none";
+            button_start.style.display = "block";
+            //animate();
+        });
+
+    };
+
+    buttons_init();
         
-        const found = raycaster.intersectObjects(scene.children, true);
-        
-        switch (found.length > 0 && found[0].object.userData.name) {
-            case 'printer_cube':
-                alert("That's your new ACME Lightspeed 5000 L printer.");
-                break;   
-
-            case 'ball_sphere':
-                alert("Hey, keep off my basketball with the Dirk Nowitzky autograph!"); 
-                break;
-
-            case 'door':
-                alert("You already want to go?");
-                break;
-        };
-    });
-    
-    animate();
 };
+
+// RAYCASTER ////////////////////////////////////////////////////////////////////
+
+// Raycaster onclick
+
+const raycaster_click = new THREE.Raycaster();
+const clickMouse = new THREE.Vector2();
+window.addEventListener('click', event => {
+    
+    const rect = renderer.domElement.getBoundingClientRect();
+    clickMouse.x = ( ( event.clientX - rect.left ) / ( rect.right - rect.left ) ) * 2 - 1;
+    clickMouse.y = - ( ( event.clientY - rect.top ) / ( rect.bottom - rect.top) ) * 2 + 1;
+
+    raycaster_click.setFromCamera(clickMouse, camera);
+    
+    const found = raycaster_click.intersectObjects(scene.children, true);
+
+    //console.log(found[0]);
+    
+    switch (found.length > 0 && found[0].object.userData.name) {
+        case 'printer_cube':
+            alert("That's your new ACME Lightspeed 5000 L printer.");
+            break;   
+
+        case 'ball_sphere':
+            alert("Hey, keep off my basketball with the Dirk Nowitzky autograph!"); 
+            break;
+
+        case 'door':
+            alert("You already want to go?");
+            break;
+    };
+});
+
+// Raycaster onmouseover
+
+const raycaster_move = new THREE.Raycaster();
+const moveMouse = new THREE.Vector2();
+
+function onPointerMove( event ) {
+
+	// calculate pointer position in normalized device coordinates
+	// (-1 to +1) for both components
+
+	const rect = renderer.domElement.getBoundingClientRect();
+    moveMouse.x = ( ( event.clientX - rect.left ) / ( rect.right - rect.left ) ) * 2 - 1;
+    moveMouse.y = - ( ( event.clientY - rect.top ) / ( rect.bottom - rect.top) ) * 2 + 1;
+
+    // update the picking ray with the camera and pointer position
+	raycaster_move.setFromCamera(moveMouse, camera);
+
+	// calculate objects intersecting the picking ray
+	const found = raycaster_move.intersectObjects( scene.children );
+    
+	switch (found.length > 0 && found[0].object.userData.name) {
+        case 'printer_cube':
+            console.log("INFO: Printer");
+            break;   
+
+        case 'ball_sphere':
+            console.log("INFO: Basketball"); 
+            break;
+
+        case 'door':
+            console.log("INFO: Door");
+            break;
+    };
+
+};
+
+window.addEventListener( 'pointermove', onPointerMove );
 
 // rendering scene and camera
 const render = () => {
@@ -268,4 +318,5 @@ const animate = () => {
 
 //start scene
 window.onload = init();
+animate();
 window.addEventListener('resize', windowResize, false);
