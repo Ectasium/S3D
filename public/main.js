@@ -263,7 +263,7 @@ window.addEventListener('click', event => {
 const raycaster_move = new THREE.Raycaster();
 const moveMouse = new THREE.Vector2();
 
-function onPointerMove( event ) {
+function onPointerMove(event) {
 
 	// calculate pointer position in normalized device coordinates
 	// (-1 to +1) for both components
