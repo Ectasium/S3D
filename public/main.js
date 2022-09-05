@@ -10,7 +10,6 @@ let scene;
 const canvasSize = document.querySelector('.canvas-element');
 let model_container = document.querySelector('.webgl');
 
-
 function init () {
 
     // SCENE //////////////////////////////////////////////////////////////////////
@@ -222,7 +221,6 @@ function init () {
     };
 
     buttons_init();
-        
 };
 
 // RAYCASTER ////////////////////////////////////////////////////////////////////
@@ -281,14 +279,17 @@ function onPointerMove(event) {
 	switch (found.length > 0 && found[0].object.userData.name) {
         case 'printer_cube':
             console.log("INFO: Printer");
+            found[0].object.material.color.set( 0xff0000 );
             break;   
 
         case 'ball_sphere':
-            console.log("INFO: Basketball"); 
+            console.log("INFO: Basketball");
+            found[0].object.material.color.set( 0xff0000 ); 
             break;
 
         case 'door':
             console.log("INFO: Door");
+            found[0].object.material.color.set( 0xff0000 );
             break;
     };
 
@@ -302,8 +303,7 @@ const render = () => {
 };
 
 // animation recursive function
-let step = 0;
-const animate = () => {
+function animate () {
     requestAnimationFrame(animate);
     render();
 };
