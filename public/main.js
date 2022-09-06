@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import { DiscreteInterpolant } from 'three';
 import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 
@@ -178,12 +179,22 @@ function init () {
         
         //Button start show Factory
         let button_start = document.getElementById("button_start");
+        //hl.remove();
         button_start.addEventListener("click", function () {
             scene.add(factory);
             scene.remove(world);
             controls.reset();
+            
             button_start.style.display = "none";
             button_next_1.style.display = "block";
+            
+            let hl = document.querySelector('.flex-container > .main-content > h1');
+            hl.remove();
+            let hl2 = document.createElement('h1');
+            hl2.appendChild = "How Secure is <span class=&quot;accent&quot;>Your Global Work</span>?"
+            console.log(hl2);
+            let div = document.querySelector('.flex-container > .main-content');
+            div.appendChild(hl2);
         });
 
         //Button show Office
