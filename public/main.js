@@ -382,7 +382,7 @@ function onPointerMove(event) {
 	const found = raycaster_move.intersectObjects(scene.children);
         
     
-   /*  switch (found.length > 0 && found[0].object.userData.name) {
+    switch (found.length > 0 && found[0].object.userData.name) {
         case 'printer_cube':
             console.log("INFO: Printer");
             found[0].object.material.color.set( 0xff0000 );
@@ -397,18 +397,19 @@ function onPointerMove(event) {
             console.log("INFO: Door");
             found[0].object.material.color.set( 0xff0000 );
             break;
-    }; */
+    };
 
     ////////////////////////////////////////////////////////////////////
-    let INTERSECTED;
+   /*  let INTERSECTED;
 
     if (found.length > 0 && found[0].object.userData.class == 'mouseover_object') {
-
+        console.log(INTERSECTED);
         if (INTERSECTED != found[0].object) {
 
             if (INTERSECTED) INTERSECTED.material.emissive.setHex(INTERSECTED.currentHex);
 
             INTERSECTED = found[0].object;
+            console.log(INTERSECTED);
             INTERSECTED.currentHex = INTERSECTED.material.emissive.getHex();
             INTERSECTED.material.emissive.setHex(0xff00ff);
             console.log(found[0].object);
@@ -421,13 +422,13 @@ function onPointerMove(event) {
 
         INTERSECTED = null;
 
-    };
+    }; */
 
     //////////////////////////////////////////////////////////////////////////
 
 };
 
-window.addEventListener( 'pointermove', onPointerMove );
+window.addEventListener('mousemove', onPointerMove );
 
 // rendering scene and camera
 const render = () => {
