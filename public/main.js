@@ -94,6 +94,7 @@ function init () {
     const door = new THREE.Mesh(door_geometry, door_material);
     door.position.set(-3.11, 0.5, -4.8);
     door.userData.name = 'door';
+    door.userData.class = 'mouseover_object';
     
     // add printer cube
     const printer_geometry = new THREE.BoxGeometry(0.67, 0.67, 0.77);
@@ -102,6 +103,7 @@ function init () {
     printer_cube.position.set(4.44, 0, 3.56);
     printer_cube.rotation.y = 0;
     printer_cube.userData.name = 'printer_cube';
+    printer_cube.userData.class = 'mouseover_object';
     
     // add ball sphere
     const ball_geometry = new THREE.SphereGeometry(0.5, 32, 32);
@@ -109,6 +111,7 @@ function init () {
     const ball_sphere = new THREE.Mesh(ball_geometry,ball_material );
     ball_sphere.position.set(4.3, -1.47, -4.19);
     ball_sphere.userData.name = 'ball_sphere';
+    ball_sphere.userData.class = 'mouseover_object';
   
     const office_clickobjects = new THREE.Group();
     //office_group.add(office);
@@ -376,9 +379,10 @@ function onPointerMove(event) {
 	raycaster_move.setFromCamera(moveMouse, camera);
 
 	// calculate objects intersecting the picking ray
-	const found = raycaster_move.intersectObjects( scene.children );
+	const found = raycaster_move.intersectObjects(scene.children);
+        
     
-	switch (found.length > 0 && found[0].object.userData.name) {
+   /*  switch (found.length > 0 && found[0].object.userData.name) {
         case 'printer_cube':
             console.log("INFO: Printer");
             found[0].object.material.color.set( 0xff0000 );
@@ -393,7 +397,33 @@ function onPointerMove(event) {
             console.log("INFO: Door");
             found[0].object.material.color.set( 0xff0000 );
             break;
+    }; */
+
+    ////////////////////////////////////////////////////////////////////
+    let INTERSECTED;
+
+    if (found.length > 0 && found[0].object.userData.class == 'mouseover_object') {
+
+        if (INTERSECTED != found[0].object) {
+
+            if (INTERSECTED) INTERSECTED.material.emissive.setHex(INTERSECTED.currentHex);
+
+            INTERSECTED = found[0].object;
+            INTERSECTED.currentHex = INTERSECTED.material.emissive.getHex();
+            INTERSECTED.material.emissive.setHex(0xff00ff);
+            console.log(found[0].object);
+            
+        }
+
+    } else {
+
+        if (INTERSECTED) INTERSECTED.material.emissive.setHex(INTERSECTED.currentHex);
+
+        INTERSECTED = null;
+
     };
+
+    //////////////////////////////////////////////////////////////////////////
 
 };
 
