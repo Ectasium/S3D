@@ -178,23 +178,44 @@ function init () {
         button_restart.style.display = "none"; 
         
         //Button start show Factory
-        let button_start = document.getElementById("button_start");
-        //hl.remove();
-        button_start.addEventListener("click", function () {
-            scene.add(factory);
+        let button_start = document.getElementById("button_start");        
+
+        button_start.addEventListener("click", function() {
             scene.remove(world);
-            controls.reset();
-            
+            scene.add(factory);
+            controls.reset(); 
+            controls.enablePan = false; 
             button_start.style.display = "none";
             button_next_1.style.display = "block";
             
-            let hl = document.querySelector('.flex-container > .main-content > h1');
-            hl.remove();
+            // Change HL //////////////////////////
+            
+            // Delete old HL
+            let hlstart = document.querySelector('.flex-container > .main-content > h1');
+            hlstart.remove();
+                   
+            // Create and insert new HL
             let hl2 = document.createElement('h1');
-            hl2.appendChild = "How Secure is <span class=&quot;accent&quot;>Your Global Work</span>?"
-            console.log(hl2);
-            let div = document.querySelector('.flex-container > .main-content');
-            div.appendChild(hl2);
+            let hl2text = document.createTextNode("How Secure is Your Workplace?");
+            hl2.appendChild(hl2text);
+            let main = document.querySelector('.flex-container > .main-content');
+            main.insertAdjacentElement("afterbegin", hl2);
+
+            // Change description //////////////////////////
+            
+            // Delete old description
+            let description_start = document.querySelector('.flex-container > .main-content > p');
+            //description_start.remove();
+                   
+            // Create and insert new description
+            let description2 = document.createElement('p');
+            let description2text = document.createTextNode("Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo.");
+            description2.appendChild(description2text);
+            
+            let maincontent = document.getElementsByClassName("main-content");
+            console.log(maincontent);
+            description_start.replaceWith(description2);
+            
         });
 
         //Button show Office
@@ -202,10 +223,33 @@ function init () {
             scene.remove(factory);
             scene.add(office, office_clickobjects);
             controls.reset();
+            controls.enablePan = false;
             button_next_1.style.display = "none";
             button_next_2.style.display = "block";
-            controls.enablePan = false;
-            //animate();
+            
+            // Delete old HL
+            let hl2 = document.querySelector('.flex-container > .main-content > h1');
+            hl2.remove();
+                   
+            // Create and insert new HL
+            let hl3 = document.createElement('h1');
+            let hl3text = document.createTextNode("How Secure is Your Office at Home?");
+            hl3.appendChild(hl3text);
+            let main = document.querySelector('.flex-container > .main-content');
+            main.insertAdjacentElement("afterbegin", hl3);
+           
+
+            // Change description //////////////////////////
+            
+            // Old description
+            let description2 = document.querySelector('.flex-container > .main-content > p');
+                               
+            // Replace description
+            let description3 = document.createElement('p');
+            let description3text = document.createTextNode("Jemand musste Josef K. verleumdet haben, denn ohne dass er etwas Böses getan hätte, wurde er eines Morgens verhaftet. »Wie ein Hund!« sagte er, es war, als sollte die Scham ihn überleben. Als Gregor Samsa eines Morgens aus unruhigen Träumen erwachte, fand er sich in seinem Bett zu einem ungeheueren Ungeziefer verwandelt. Und es war ihnen wie eine Bestätigung ihrer neuen Träume und guten Absichten, als am Ziele ihrer Fahrt die Tochter als erste sich erhob und ihren jungen Körper dehnte.");
+            description3.appendChild(description3text);
+            description2.replaceWith(description3);
+            
         });
 
         //Button show House
@@ -213,10 +257,34 @@ function init () {
             scene.remove(office, office_clickobjects);
             scene.add(house);
             controls.reset();
+            controls.enablePan = false;
             button_restart.style.display = "block";
             button_next_2.style.display = "none";
-            controls.enablePan = false;
-            //animate();
+
+            // Delete old HL
+            let hl3 = document.querySelector('.flex-container > .main-content > h1');
+            hl3.remove();
+                    
+            // Create and insert new HL
+            let hl4 = document.createElement('h1');
+            let hl4text = document.createTextNode("How Secure is Your Desktop Computer?");
+            hl4.appendChild(hl4text);
+            let main = document.querySelector('.flex-container > .main-content');
+            main.insertAdjacentElement("afterbegin", hl4);
+                      
+
+            // Change description //////////////////////////
+            
+            // Old description
+            let description3 = document.querySelector('.flex-container > .main-content > p');
+                               
+            // Replace description
+            let description4 = document.createElement('p');
+            let description4text = document.createTextNode("Zwei flinke Boxer jagen die quirlige Eva und ihren Mops durch Sylt. Franz jagt im komplett verwahrlosten Taxi quer durch Bayern. Zwölf Boxkämpfer jagen Viktor quer über den großen Sylter Deich. Vogel Quax zwickt Johnys Pferd Bim. Sylvia wagt quick den Jux bei Pforzheim. Polyfon zwitschernd aßen Mäxchens Vögel Rüben, Joghurt und Quark. Fix, Schwyz! quäkt Jürgen blöd vom Paß. Victor jagt zwölf Boxkämpfer quer über den großen Sylter Deich. Falsches Üben von Xylophonmusik quält jeden größeren Zwerg.");
+            description4.appendChild(description4text);
+            
+            description3.replaceWith(description4);
+            
         });
 
         //Button restart
@@ -226,7 +294,31 @@ function init () {
             controls.reset();
             button_restart.style.display = "none";
             button_start.style.display = "block";
-            //animate();
+            // Delete old HL
+            let hl5 = document.querySelector('.flex-container > .main-content > h1');
+            hl5.remove();
+                    
+            // Create and insert new HL
+            let hlstart = document.createElement('h1');
+            let hlstarttext = document.createTextNode("How Secure is Your Global Work Environment?");
+            hlstart.appendChild(hlstarttext);
+            let main = document.querySelector('.flex-container > .main-content');
+            main.insertAdjacentElement("afterbegin", hlstart);
+            controls.enablePan = false;
+            controls.enablePan = false;
+
+            // Change description //////////////////////////
+            
+            // Old description
+            let description4 = document.querySelector('.flex-container > .main-content > p');
+                               
+            // Replace description
+            let descriptionstart = document.createElement('p');
+            let descriptionstarttext = document.createTextNode("Auch gibt es niemanden, der den Schmerz an sich liebt, sucht oder wünscht, nur, weil er Schmerz ist, es sei denn, es kommt zu zufälligen Umständen, in denen Mühen und Schmerz ihm große Freude bereiten können. Um ein triviales Beispiel zu nehmen, wer von uns unterzieht sich je anstrengender körperlicher Betätigung, außer um Vorteile daraus zu ziehen?");
+            descriptionstart.appendChild(descriptionstarttext);
+            
+            description4.replaceWith(descriptionstart);
+            
         });
 
     };
@@ -236,7 +328,7 @@ function init () {
 
 // RAYCASTER ////////////////////////////////////////////////////////////////////
 
-// Raycaster onclick
+// Raycaster onClick
 
 const raycaster_click = new THREE.Raycaster();
 const clickMouse = new THREE.Vector2();
@@ -267,7 +359,7 @@ window.addEventListener('click', event => {
     };
 });
 
-// Raycaster onmouseover
+// Raycaster onMouseOver
 
 const raycaster_move = new THREE.Raycaster();
 const moveMouse = new THREE.Vector2();

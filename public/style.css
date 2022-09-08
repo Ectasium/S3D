@@ -54,6 +54,7 @@ h1, p{
     font-size: 3.9rem;
     text-transform: uppercase;
     margin-bottom: 0.8em;
+    color: var(--complimentary-color);
 }
 
 .main-content p{
