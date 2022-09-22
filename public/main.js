@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import { CubeCamera } from 'three';
 import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 
@@ -101,6 +102,7 @@ function init () {
     const printer_material = new THREE.MeshBasicMaterial( {color: 0x00ff00} );
     const printer_cube = new THREE.Mesh(printer_geometry, printer_material);
     printer_cube.position.set(4.44, 0, 3.56);
+    console.log(printer_cube.position);
     printer_cube.rotation.y = 0;
     printer_cube.userData.name = 'printer_cube';
     printer_cube.userData.class = 'mouseover_object';
@@ -358,19 +360,24 @@ window.addEventListener('click', event => {
     raycaster_click.setFromCamera(clickMouse, camera);
     
     const found = raycaster_click.intersectObjects(scene.children, true);
-
-    //console.log(found[0]);
+    const favDialog = document.getElementById('basketball');
     
     switch (found.length > 0 && found[0].object.userData.name) {
         case 'printer_cube':
             alert("That's your new ACME Lightspeed 5000 L printer.");
             break;   
 
-        case 'ball_sphere':
-            alert("Hey, keep off my basketball with the Dirk Nowitzky autograph!"); 
+        
+            case 'ball_sphere':
+            if (typeof favDialog.showModal === "function") {
+                favDialog.showModal();
+              } else {
+                outputBox.value = "Hey, keep off my basketball with the Dirk Nowitzky autograph!";
+              };            
             break;
 
-        case 'door':
+        
+            case 'door':
             alert("You already want to go?");
             break;
     };
@@ -400,20 +407,23 @@ function onPointerMove(event) {
     switch (found.length > 0 && found[0].object.userData.name) {
         case 'printer_cube':
             console.log("INFO: Printer");
-            //found[0].object.material.color.set( 0xff0000 );
+            //console.log(found[0].object.position);
             scene.add(warning);
+            warning.position.set(1, 1, 1);
             break;   
 
         case 'ball_sphere':
             console.log("INFO: Basketball");
             //found[0].object.material.color.set( 0xff0000 ); 
             scene.add(warning);
+            warning.position.set(1, 1, 1);
             break;
 
         case 'door':
             console.log("INFO: Door");
             //found[0].object.material.color.set( 0xff0000 );
             scene.add(warning);
+            warning.position.set(1, 1, 1);
             break;
 
         default:            
@@ -422,36 +432,6 @@ function onPointerMove(event) {
             break;
             
     };
-
-
-    ////////////////////////////////////////////////////////////////////
-   /*  let INTERSECTED;
-
-    if (found.length > 0 && found[0].object.userData.class == 'mouseover_object') {
-        console.log(INTERSECTED);
-        if (INTERSECTED != found[0].object) {
-
-            if (INTERSECTED) INTERSECTED.material.emissive.setHex(INTERSECTED.currentHex);
-
-            INTERSECTED = found[0].object;
-            console.log(INTERSECTED);
-            INTERSECTED.currentHex = INTERSECTED.material.emissive.getHex();
-            INTERSECTED.material.emissive.setHex(0xff00ff);
-            console.log(found[0].object);
-            
-        }
-
-    } else if {
-
-        if (INTERSECTED) INTERSECTED.material.emissive.setHex(INTERSECTED.currentHex);
-
-        PSEUDO: found[0].object.userData.class == 'mouseover_object'
-
-        INTERSECTED = null;
-
-    }; */
-
-    //////////////////////////////////////////////////////////////////////////
 
 };
 

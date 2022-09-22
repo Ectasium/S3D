@@ -102,3 +102,15 @@ h1, p{
     display: inline-block;
     font-size: 18px;
   }
+
+  dialog {
+    border: solid rgb(245, 4, 4) 5px;
+    border-radius: 20px;
+    padding: 100px 100px;
+    align-self: safe center;
+    position: absolute;
+  }
+
+  dialog::backdrop { 
+    background: rgba(92, 92, 92, 0.5) ;
+  }
