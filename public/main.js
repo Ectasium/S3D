@@ -362,6 +362,7 @@ window.addEventListener('click', event => {
     const found = raycaster_click.intersectObjects(scene.children, true);
         
     switch (found.length > 0 && found[0].object.userData.name) {
+        
             case 'printer_cube':
                 // Get the modal
                 var modal = document.getElementById("printer");
@@ -425,21 +426,18 @@ function onPointerMove(event) {
     switch (found.length > 0 && found[0].object.userData.name) {
         case 'printer_cube':
             console.log("INFO: Printer");
-            //console.log(found[0].object.position);
             scene.add(warning);
             warning.position.set(1, 1, 1);
             break;   
 
         case 'ball_sphere':
             console.log("INFO: Basketball");
-            //found[0].object.material.color.set( 0xff0000 ); 
             scene.add(warning);
             warning.position.set(1, 1, 1);
             break;
 
         case 'door':
             console.log("INFO: Door");
-            //found[0].object.material.color.set( 0xff0000 );
             scene.add(warning);
             warning.position.set(1, 1, 1);
             break;
