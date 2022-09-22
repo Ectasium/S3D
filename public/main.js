@@ -360,25 +360,43 @@ window.addEventListener('click', event => {
     raycaster_click.setFromCamera(clickMouse, camera);
     
     const found = raycaster_click.intersectObjects(scene.children, true);
-    const favDialog = document.getElementById('basketball');
-    
+        
     switch (found.length > 0 && found[0].object.userData.name) {
-        case 'printer_cube':
-            alert("That's your new ACME Lightspeed 5000 L printer.");
+            case 'printer_cube':
+                // Get the modal
+                var modal = document.getElementById("printer");
+                // Get the <span> element that closes the modal
+                var span_printer = document.getElementById("close_printer");
+                modal.style.display = "block";
+                // When the user clicks on <span> (x), close the modal
+                span_printer.onclick = function() {
+                modal.style.display = "none";
+                };        
             break;   
 
         
             case 'ball_sphere':
-            if (typeof favDialog.showModal === "function") {
-                favDialog.showModal();
-              } else {
-                outputBox.value = "Hey, keep off my basketball with the Dirk Nowitzky autograph!";
-              };            
+                // Get the modal
+                var modal = document.getElementById("basketball");
+                // Get the <span> element that closes the modal
+                var span_basketball = document.getElementById("close_basketball");
+                modal.style.display = "block";
+                // When the user clicks on <span> (x), close the modal
+                span_basketball.onclick = function() {
+                modal.style.display = "none";
+                };        
             break;
-
         
             case 'door':
-            alert("You already want to go?");
+                // Get the modal
+                var modal = document.getElementById("door");
+                // Get the <span> element that closes the modal
+                var span_door = document.getElementById("close_door");
+                modal.style.display = "block";
+                // When the user clicks on <span> (x), close the modal
+                span_door.onclick = function() {
+                modal.style.display = "none";
+            };        
             break;
     };
 });
