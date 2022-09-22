@@ -118,7 +118,7 @@ function init () {
     office_clickobjects.add(ball_sphere);
     office_clickobjects.add(printer_cube);
     office_clickobjects.add(door);
-    office_clickobjects.visible = true;
+    office_clickobjects.visible = false;
       
     // load factory
      const factory_loader = new GLTFLoader();
@@ -164,6 +164,21 @@ function init () {
          house.position.set(0, 1.4, 0);
          //house.rotation.x = Math.PI/-2;
          //house.rotation.y = 0.8;
+         //scene.add(gltf.scene);
+                 
+     });
+
+     // load warning-sign
+     const warning_loader = new GLTFLoader();
+     url = new URL( './model/warning.glb', import.meta.url );
+     url = "" + url;
+     warning_loader.load(url, (gltf) => {
+         warning = gltf.scene.children[0];
+         warning.visible = true;
+         warning.scale.set(12, 12, 12);
+         warning.position.set(0, 1.4, 0);
+         //warning.rotation.x = Math.PI/-2;
+         //warning.rotation.y = 0.8;
          //scene.add(gltf.scene);
                  
      });
@@ -385,19 +400,29 @@ function onPointerMove(event) {
     switch (found.length > 0 && found[0].object.userData.name) {
         case 'printer_cube':
             console.log("INFO: Printer");
-            found[0].object.material.color.set( 0xff0000 );
+            //found[0].object.material.color.set( 0xff0000 );
+            scene.add(warning);
             break;   
 
         case 'ball_sphere':
             console.log("INFO: Basketball");
-            found[0].object.material.color.set( 0xff0000 ); 
+            //found[0].object.material.color.set( 0xff0000 ); 
+            scene.add(warning);
             break;
 
         case 'door':
             console.log("INFO: Door");
-            found[0].object.material.color.set( 0xff0000 );
+            //found[0].object.material.color.set( 0xff0000 );
+            scene.add(warning);
             break;
+
+        default:            
+            console.log("Default!");
+            scene.remove(warning);
+            break;
+            
     };
+
 
     ////////////////////////////////////////////////////////////////////
    /*  let INTERSECTED;
@@ -416,9 +441,11 @@ function onPointerMove(event) {
             
         }
 
-    } else {
+    } else if {
 
         if (INTERSECTED) INTERSECTED.material.emissive.setHex(INTERSECTED.currentHex);
+
+        PSEUDO: found[0].object.userData.class == 'mouseover_object'
 
         INTERSECTED = null;
 
