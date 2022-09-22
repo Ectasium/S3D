@@ -129,7 +129,7 @@ h1, p{
     -webkit-animation-name: animatetop;
     -webkit-animation-duration: 0.4s;
     animation-name: animatetop;
-    animation-duration: 0.4s
+    animation-duration: 0.6s
   }
   
   /* Add Animation */
@@ -169,8 +169,10 @@ h1, p{
     color: var(--black-color);
   }
   
-  .modal-footer {
+  .modal-content {
     padding: 2px 16px;
     background-color: #e66802;
     color: rgb(222, 222, 222);
   }
+
+ 
