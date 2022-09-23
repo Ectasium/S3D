@@ -182,23 +182,6 @@ function init () {
                  
      });
 
-     // load warning-sign
-     const warning_loader = new GLTFLoader();
-     url = new URL( './model/warning.glb', import.meta.url );
-     url = "" + url;
-     warning_loader.load(url, (gltf) => {
-         warning = gltf.scene.children[0];
-         warning.visible = true;
-         warning.scale.set(12, 12, 12);
-         warning.position.set(0, 1.4, 0);
-
-         //warning.rotation.x = Math.PI/-2;
-         //warning.rotation.y = 0.8;
-         //scene.add(gltf.scene);
-                 
-     });
-    
-
     // BUTTONS/////////////////////////////////////////////////////////////
 
     function buttons_init() {
