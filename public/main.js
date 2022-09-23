@@ -96,6 +96,7 @@ function init () {
     door.position.set(-3.11, 0.5, -4.8);
     door.userData.name = 'door';
     door.userData.class = 'mouseover_object';
+    door.visible = false;
     
     // add printer cube
     const printer_geometry = new THREE.BoxGeometry(0.67, 0.67, 0.77);
@@ -106,21 +107,25 @@ function init () {
     printer_cube.rotation.y = 0;
     printer_cube.userData.name = 'printer_cube';
     printer_cube.userData.class = 'mouseover_object';
+    printer_cube.visible = false;
     
     // add ball sphere
     const ball_geometry = new THREE.SphereGeometry(0.5, 32, 32);
     const ball_material = new THREE.MeshBasicMaterial( {color: 0x00ff00} );
-    const ball_sphere = new THREE.Mesh(ball_geometry,ball_material );
+    const ball_sphere = new THREE.Mesh(ball_geometry, ball_material);
     ball_sphere.position.set(4.3, -1.47, -4.19);
     ball_sphere.userData.name = 'ball_sphere';
     ball_sphere.userData.class = 'mouseover_object';
+    scene.add(ball_sphere);
+    ball_sphere.visible = false;
+    
   
-    const office_clickobjects = new THREE.Group();
-    //office_group.add(office);
+    /* const office_clickobjects = new THREE.Group();
+    office_group.add(office);
     office_clickobjects.add(ball_sphere);
     office_clickobjects.add(printer_cube);
     office_clickobjects.add(door);
-    office_clickobjects.visible = false;
+    office_clickobjects.visible = false; */
       
     // load factory
      const factory_loader = new GLTFLoader();
@@ -179,6 +184,7 @@ function init () {
          warning.visible = true;
          warning.scale.set(12, 12, 12);
          warning.position.set(0, 1.4, 0);
+
          //warning.rotation.x = Math.PI/-2;
          //warning.rotation.y = 0.8;
          //scene.add(gltf.scene);
@@ -240,7 +246,7 @@ function init () {
         //Button show Office
         button_next_1.addEventListener("click", function () {
             scene.remove(factory);
-            scene.add(office, office_clickobjects);
+            scene.add(office, ball_sphere, printer_cube, door);
             controls.reset();
             controls.enablePan = false;
             button_next_1.style.display = "none";
@@ -273,7 +279,7 @@ function init () {
 
         //Button show House
         button_next_2.addEventListener("click", function () {
-            scene.remove(office, office_clickobjects);
+            scene.remove(office, ball_sphere, printer_cube, door);
             scene.add(house);
             controls.reset();
             controls.enablePan = false;
@@ -432,8 +438,9 @@ function onPointerMove(event) {
 
         case 'ball_sphere':
             console.log("INFO: Basketball");
-            scene.add(warning);
-            warning.position.set(1, 1, 1);
+            //scene.add(ball_sphere);
+            ball_sphere.visible = true;
+            //warning.position.set(1, 1, 1);
             break;
 
         case 'door':
@@ -445,6 +452,7 @@ function onPointerMove(event) {
         default:            
             console.log("Default!");
             scene.remove(warning);
+            ball_sphere.visible = false;
             break;
             
     };
