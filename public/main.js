@@ -91,7 +91,7 @@ function init () {
 
     //door box
     const door_geometry = new THREE.BoxGeometry(2.2, 5, 0.03);
-    const door_material = new THREE.MeshBasicMaterial( {color: 0x00ff00} );
+    const door_material = new THREE.MeshLambertMaterial( {color: 0x00ff00} );
     const door = new THREE.Mesh(door_geometry, door_material);
     door.position.set(-3.11, 0.5, -4.8);
     door.userData.name = 'door';
@@ -100,7 +100,7 @@ function init () {
     
     // add printer cube
     const printer_geometry = new THREE.BoxGeometry(0.67, 0.67, 0.77);
-    const printer_material = new THREE.MeshBasicMaterial( {color: 0x00ff00} );
+    const printer_material = new THREE.MeshLambertMaterial( {color: 0x00ff00} );
     const printer_cube = new THREE.Mesh(printer_geometry, printer_material);
     printer_cube.position.set(4.44, 0, 3.56);
     console.log(printer_cube.position);
@@ -110,24 +110,24 @@ function init () {
     printer_cube.visible = false;
     
     // add ball sphere
-    const ball_geometry = new THREE.SphereGeometry(0.5, 32, 32);
-    const ball_material = new THREE.MeshBasicMaterial( {color: 0x00ff00} );
-    const ball_sphere = new THREE.Mesh(ball_geometry, ball_material);
-    ball_sphere.position.set(4.3, -1.47, -4.19);
-    ball_sphere.userData.name = 'ball_sphere';
-    ball_sphere.userData.class = 'mouseover_object';
-    scene.add(ball_sphere);
-    ball_sphere.visible = false;
-    
-  
-    /* const office_clickobjects = new THREE.Group();
-    office_group.add(office);
-    office_clickobjects.add(ball_sphere);
-    office_clickobjects.add(printer_cube);
-    office_clickobjects.add(door);
-    office_clickobjects.visible = false; */
+    function add_ball() {
+        const ball_geometry = new THREE.SphereGeometry(0.5, 32, 32);
+        const ball_material = new THREE.MeshLambertMaterial( {color: 0x00ff00} );
+        ball_material.opacity = 0.3;
+        const ball_sphere = new THREE.Mesh(ball_geometry, ball_material);
+        ball_sphere.position.set(4.3, -1.47, -4.19);
+        ball_sphere.userData.name = 'ball_sphere';
+        ball_sphere.userData.class = 'mouseover_object';
+        scene.add(ball_sphere);
+        ball_sphere.visible = false;
+        ball_sphere.material.opacity = 0.2;
+        return ball_sphere;
+    };
+
+    ball = add_ball();
+     
       
-    // load factory
+     // load factory
      const factory_loader = new GLTFLoader();
      url = new URL( './model/factory.glb', import.meta.url );
      url = "" + url;
@@ -190,6 +190,7 @@ function init () {
          //scene.add(gltf.scene);
                  
      });
+    
 
     // BUTTONS/////////////////////////////////////////////////////////////
 
@@ -213,13 +214,13 @@ function init () {
             button_start.style.display = "none";
             button_next_1.style.display = "block";
             
-            // Change HL //////////////////////////
+            // Change Headline //////////////////////////
             
-            // Delete old HL
+            // Delete old Headline
             let hlstart = document.querySelector('.flex-container > .main-content > h1');
             hlstart.remove();
                    
-            // Create and insert new HL
+            // Create and insert new Headline
             let hl2 = document.createElement('h1');
             let hl2text = document.createTextNode("How Secure is Your Workplace?");
             hl2.appendChild(hl2text);
@@ -243,20 +244,20 @@ function init () {
             
         });
 
-        //Button show Office
+        //Button show office
         button_next_1.addEventListener("click", function () {
             scene.remove(factory);
-            scene.add(office, ball_sphere, printer_cube, door);
+            scene.add(office, ball, printer_cube, door);
             controls.reset();
             controls.enablePan = false;
             button_next_1.style.display = "none";
             button_next_2.style.display = "block";
             
-            // Delete old HL
+            // Delete old Headline
             let hl2 = document.querySelector('.flex-container > .main-content > h1');
             hl2.remove();
                    
-            // Create and insert new HL
+            // Create and insert new Headline
             let hl3 = document.createElement('h1');
             let hl3text = document.createTextNode("How Secure is Your Office at Home?");
             hl3.appendChild(hl3text);
@@ -279,7 +280,7 @@ function init () {
 
         //Button show House
         button_next_2.addEventListener("click", function () {
-            scene.remove(office, ball_sphere, printer_cube, door);
+            scene.remove(office, ball, printer_cube, door);
             scene.add(house);
             controls.reset();
             controls.enablePan = false;
@@ -290,7 +291,7 @@ function init () {
             let hl3 = document.querySelector('.flex-container > .main-content > h1');
             hl3.remove();
                     
-            // Create and insert new HL
+            // Create and insert new Headline
             let hl4 = document.createElement('h1');
             let hl4text = document.createTextNode("How Secure is Your Desktop Computer?");
             hl4.appendChild(hl4text);
@@ -307,7 +308,6 @@ function init () {
             let description4 = document.createElement('p');
             let description4text = document.createTextNode("Zwei flinke Boxer jagen die quirlige Eva und ihren Mops durch Sylt. Franz jagt im komplett verwahrlosten Taxi quer durch Bayern. Zwölf Boxkämpfer jagen Viktor quer über den großen Sylter Deich. Vogel Quax zwickt Johnys Pferd Bim. Sylvia wagt quick den Jux bei Pforzheim. Polyfon zwitschernd aßen Mäxchens Vögel Rüben, Joghurt und Quark. Fix, Schwyz! quäkt Jürgen blöd vom Paß. Victor jagt zwölf Boxkämpfer quer über den großen Sylter Deich. Falsches Üben von Xylophonmusik quält jeden größeren Zwerg.");
             description4.appendChild(description4text);
-            
             description3.replaceWith(description4);
             
         });
@@ -415,7 +415,7 @@ const moveMouse = new THREE.Vector2();
 
 function onPointerMove(event) {
 
-	// calculate pointer position in normalized device coordinates
+    // calculate pointer position in normalized device coordinates
 	// (-1 to +1) for both components
 
 	const rect = renderer.domElement.getBoundingClientRect();
@@ -438,8 +438,10 @@ function onPointerMove(event) {
 
         case 'ball_sphere':
             console.log("INFO: Basketball");
-            scene.add(warning);
-            warning.position.set(1, 1, 1);
+            //scene.add(warning);
+            //warning.position.set(1, 1, 1);
+            
+            ball.visible = true;
             break;
 
         case 'door':
@@ -451,6 +453,7 @@ function onPointerMove(event) {
         default:            
             console.log("Default!");
             scene.remove(warning);
+            ball.visible = false;
             break;
             
     };
