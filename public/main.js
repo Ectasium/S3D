@@ -362,43 +362,33 @@ window.addEventListener('click', event => {
     clickMouse.y = - ( ( event.clientY - rect.top ) / ( rect.bottom - rect.top) ) * 2 + 1;
 
     raycaster_click.setFromCamera(clickMouse, camera);
-    
+
     const found = raycaster_click.intersectObjects(scene.children, true);
         
     switch (found.length > 0 && found[0].object.userData.name) {
         
             case 'printer_cube':
-                // Get the modal
-                var modal = document.getElementById("printer");
-                // Get the <span> element that closes the modal
-                var span_printer = document.getElementById("close_printer");
-                modal.style.display = "block";
-                // When the user clicks on <span> (x), close the modal
-                span_printer.onclick = function() {
+                var modal = document.getElementById("printer");                
+                var span_basketball = document.getElementById("close_printer");
+                modal.style.display = "block";                
+                span_basketball.onclick = function() {
                 modal.style.display = "none";
-                };        
-            break;   
-
+                };
+            break; 
         
             case 'ball_sphere':
-                // Get the modal
-                var modal = document.getElementById("basketball");
-                // Get the <span> element that closes the modal
+                var modal = document.getElementById("basketball");                
                 var span_basketball = document.getElementById("close_basketball");
-                modal.style.display = "block";
-                // When the user clicks on <span> (x), close the modal
+                modal.style.display = "block";                
                 span_basketball.onclick = function() {
                 modal.style.display = "none";
                 };        
             break;
         
             case 'door_cube':
-                // Get the modal
                 var modal = document.getElementById("door");
-                // Get the <span> element that closes the modal
                 var span_door = document.getElementById("close_door");
                 modal.style.display = "block";
-                // When the user clicks on <span> (x), close the modal
                 span_door.onclick = function() {
                 modal.style.display = "none";
             };        
