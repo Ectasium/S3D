@@ -90,31 +90,37 @@ function init () {
     });
 
     //door box
-    const door_geometry = new THREE.BoxGeometry(2.2, 5, 0.03);
-    const door_material = new THREE.MeshLambertMaterial( {color: 0x00ff00} );
-    const door = new THREE.Mesh(door_geometry, door_material);
-    door.position.set(-3.11, 0.5, -4.8);
-    door.userData.name = 'door';
-    door.userData.class = 'mouseover_object';
-    door.visible = false;
+    function add_door() {
+        const door_cube_geometry = new THREE.BoxGeometry(2.2, 5, 0.03);
+        const door_cube_material = new THREE.MeshLambertMaterial( {color: 0x00ff00} );
+        const door_cube = new THREE.Mesh(door_cube_geometry, door_cube_material);
+        door_cube.position.set(-3.11, 0.5, -4.8);
+        door_cube.userData.name = 'door_cube';
+        door_cube.userData.class = 'mouseover_object';
+        door_cube.visible = false;
+        return door_cube;
+    };
     
     // add printer cube
-    const printer_geometry = new THREE.BoxGeometry(0.67, 0.67, 0.77);
-    const printer_material = new THREE.MeshLambertMaterial( {color: 0x00ff00} );
-    const printer_cube = new THREE.Mesh(printer_geometry, printer_material);
-    printer_cube.position.set(4.44, 0, 3.56);
-    console.log(printer_cube.position);
-    printer_cube.rotation.y = 0;
-    printer_cube.userData.name = 'printer_cube';
-    printer_cube.userData.class = 'mouseover_object';
-    printer_cube.visible = false;
+    function add_printer() {
+        const printer_cube_geometry = new THREE.BoxGeometry(0.67, 0.67, 0.77);
+        const printer_cube_material = new THREE.MeshLambertMaterial( {color: 0x00ff00} );
+        const printer_cube = new THREE.Mesh(printer_cube_geometry, printer_cube_material);
+        printer_cube.position.set(4.44, 0, 3.56);
+        console.log(printer_cube.position);
+        printer_cube.rotation.y = 0;
+        printer_cube.userData.name = 'printer_cube';
+        printer_cube.userData.class = 'mouseover_object';
+        printer_cube.visible = false;
+        return printer_cube;
+    };
     
-    // add ball sphere
+    // add ball sphere ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     function add_ball() {
-        const ball_geometry = new THREE.SphereGeometry(0.5, 32, 32);
-        const ball_material = new THREE.MeshLambertMaterial( {color: 0x00ff00} );
-        ball_material.opacity = 0.3;
-        const ball_sphere = new THREE.Mesh(ball_geometry, ball_material);
+        const ball_sphere_geometry = new THREE.SphereGeometry(0.5, 32, 32);
+        const ball_sphere_material = new THREE.MeshLambertMaterial( {color: 0x00ff00} );
+        ball_sphere_material.opacity = 0.3;
+        const ball_sphere = new THREE.Mesh(ball_sphere_geometry, ball_sphere_material);
         ball_sphere.position.set(4.3, -1.47, -4.19);
         ball_sphere.userData.name = 'ball_sphere';
         ball_sphere.userData.class = 'mouseover_object';
@@ -125,8 +131,9 @@ function init () {
     };
 
     ball = add_ball();
-     
-      
+    printer = add_printer();
+    door = add_door();
+          
      // load factory
      const factory_loader = new GLTFLoader();
      url = new URL( './model/factory.glb', import.meta.url );
@@ -247,7 +254,7 @@ function init () {
         //Button show office
         button_next_1.addEventListener("click", function () {
             scene.remove(factory);
-            scene.add(office, ball, printer_cube, door);
+            scene.add(office, ball, printer, door);
             controls.reset();
             controls.enablePan = false;
             button_next_1.style.display = "none";
@@ -280,7 +287,7 @@ function init () {
 
         //Button show House
         button_next_2.addEventListener("click", function () {
-            scene.remove(office, ball, printer_cube, door);
+            scene.remove(office, ball, printer, door);
             scene.add(house);
             controls.reset();
             controls.enablePan = false;
@@ -394,7 +401,7 @@ window.addEventListener('click', event => {
                 };        
             break;
         
-            case 'door':
+            case 'door_cube':
                 // Get the modal
                 var modal = document.getElementById("door");
                 // Get the <span> element that closes the modal
@@ -432,28 +439,24 @@ function onPointerMove(event) {
     switch (found.length > 0 && found[0].object.userData.name) {
         case 'printer_cube':
             console.log("INFO: Printer");
-            scene.add(warning);
-            warning.position.set(1, 1, 1);
+            printer.visible = true;
             break;   
 
         case 'ball_sphere':
             console.log("INFO: Basketball");
-            //scene.add(warning);
-            //warning.position.set(1, 1, 1);
-            
             ball.visible = true;
             break;
 
-        case 'door':
+        case 'door_cube':
             console.log("INFO: Door");
-            scene.add(warning);
-            warning.position.set(1, 1, 1);
+            door.visible = true;
             break;
 
         default:            
             console.log("Default!");
-            scene.remove(warning);
             ball.visible = false;
+            printer.visible = false;
+            door.visible = false;
             break;
             
     };
