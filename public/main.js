@@ -48,14 +48,12 @@ function init () {
     controls.enableDamping = false;
     controls.dampingFactor = 3;
     controls.rotateSpeed = 0.5;
-    controls.minZoom = .5;
-    controls.maxZoom = 100; 
     controls.minDistance = 5;
-    controls.maxDistance = 200;
-    //controls.minAzimuthAngle = Math.PI * 0.3;
-    //controls.maxAzimuthAngle = Math.PI * 0.6;
-    //controls.minPolarAngle = Math.PI * 0.3;
-    //controls.maxPolarAngle = Math.PI * 0.6;
+    controls.maxDistance = 20;
+    //controls.minAzimuthAngle = Math.PI * -0.5;
+    //controls.maxAzimuthAngle = Math.PI * -0.4;
+    controls.minPolarAngle = Math.PI * 0.3;
+    controls.maxPolarAngle = Math.PI * 0.6;
 
     //LIGHT ////////////////////////////////////////////////////////////////////////
     const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
