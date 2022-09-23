@@ -30,7 +30,7 @@ function init () {
     scene.add(camera);
     camera.updateProjectionMatrix();
     
-    //RENDERER /////////////////////////////////////////////////////////////////////
+    //RENDERER //////////////////////////////////////////////////////////////////
     renderer = new THREE.WebGLRenderer({
         antialias: true,
         alpha: true,
@@ -92,7 +92,10 @@ function init () {
     //door box
     function add_door() {
         const door_cube_geometry = new THREE.BoxGeometry(2.2, 5, 0.03);
-        const door_cube_material = new THREE.MeshLambertMaterial( {color: 0x00ff00} );
+        const door_cube_material = new THREE.MeshLambertMaterial( 
+            {color: 0xff0000, 
+            opacity: 0.6,
+            transparent: true});
         const door_cube = new THREE.Mesh(door_cube_geometry, door_cube_material);
         door_cube.position.set(-3.11, 0.5, -4.8);
         door_cube.userData.name = 'door_cube';
@@ -103,8 +106,11 @@ function init () {
     
     // add printer cube
     function add_printer() {
-        const printer_cube_geometry = new THREE.BoxGeometry(0.67, 0.67, 0.77);
-        const printer_cube_material = new THREE.MeshLambertMaterial( {color: 0x00ff00} );
+        const printer_cube_geometry = new THREE.BoxGeometry(0.77, 0.77, 0.87);
+        const printer_cube_material = new THREE.MeshLambertMaterial( 
+            {color: 0xff0000, 
+            opacity: 0.6,
+            transparent: true});
         const printer_cube = new THREE.Mesh(printer_cube_geometry, printer_cube_material);
         printer_cube.position.set(4.44, 0, 3.56);
         console.log(printer_cube.position);
@@ -118,8 +124,10 @@ function init () {
     // add ball sphere ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     function add_ball() {
         const ball_sphere_geometry = new THREE.SphereGeometry(0.5, 32, 32);
-        const ball_sphere_material = new THREE.MeshLambertMaterial( {color: 0x00ff00} );
-        ball_sphere_material.opacity = 0.3;
+        const ball_sphere_material = new THREE.MeshLambertMaterial( 
+            {color: 0xff0000, 
+            opacity: 0.6,
+            transparent: true});
         const ball_sphere = new THREE.Mesh(ball_sphere_geometry, ball_sphere_material);
         ball_sphere.position.set(4.3, -1.47, -4.19);
         ball_sphere.userData.name = 'ball_sphere';
