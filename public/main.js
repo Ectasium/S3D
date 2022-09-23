@@ -137,10 +137,6 @@ function init () {
         ball_sphere.material.opacity = 0.2;
         return ball_sphere;
     };
-
-    ball = add_ball();
-    printer = add_printer();
-    door = add_door();
           
      // load factory
      const factory_loader = new GLTFLoader();
@@ -190,6 +186,10 @@ function init () {
                  
      });
 
+    ball = add_ball();
+    printer = add_printer();
+    door = add_door();
+    
     // BUTTONS/////////////////////////////////////////////////////////////
 
     function buttons_init() {
