@@ -438,9 +438,8 @@ function onPointerMove(event) {
 
         case 'ball_sphere':
             console.log("INFO: Basketball");
-            //scene.add(ball_sphere);
-            ball_sphere.visible = true;
-            //warning.position.set(1, 1, 1);
+            scene.add(warning);
+            warning.position.set(1, 1, 1);
             break;
 
         case 'door':
@@ -452,7 +451,6 @@ function onPointerMove(event) {
         default:            
             console.log("Default!");
             scene.remove(warning);
-            ball_sphere.visible = false;
             break;
             
     };
