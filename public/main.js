@@ -58,12 +58,15 @@ function init () {
     //controls.maxPolarAngle = Math.PI * 0.6;
 
     //LIGHT ////////////////////////////////////////////////////////////////////////
-    const ambientLight = new THREE.AmbientLight(0xffeeee, 0.5);
-    const hemisphereLight = new THREE.HemisphereLight(0xffeeb1, 0x080820, 1);
-    const spotLight1 = new THREE.SpotLight(0xffffff, 1);
-    spotLight1.position.set(0, 300, 0);
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+    const hemisphereLight = new THREE.HemisphereLight(0xffffff, 1.5);
+    const spotLight1 = new THREE.SpotLight(0xffffff, 0.3);
+    const spotLight2 = new THREE.SpotLight(0xffffff, 0.3);
+    spotLight1.position.set(20, 30, 0);
     spotLight1.castShadow = true;
-    scene.add(ambientLight, hemisphereLight, spotLight1);
+    spotLight2.position.set(0, 10, 10);
+    spotLight2.castShadow = true;
+    scene.add(ambientLight, hemisphereLight, spotLight1, spotLight2);
 
     // OBJECTS //////////////////////////////////////////////////////////////////////
     
