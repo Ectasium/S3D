@@ -94,15 +94,14 @@ h1, p{
 
 .button {
     background-color: #e66802; /* Orange */
-    border: 5px;
+    border: 2px solid #ffa255;
     color: rgb(255, 255, 255);
     padding: 15px 32px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
     font-size: 18px;
-    border-radius: 10px 25px;
-    border-color: #e7a167; 
+    border-radius: 5px;
   }
 
   .modal {
@@ -122,11 +121,11 @@ h1, p{
   /* Modal Content */
   .modal-content {
     position: relative;
-    background-color: #fefefe;
+    background-color: #e66802;
     margin: auto;
-    padding: 5;
-    border: 0px solid rgb(207, 113, 5);
-    border-radius: 15px 28px;
+    padding: 10;
+    border: 2px solid #ffa255;
+    border-radius: 10px;
     width: 30%;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
     -webkit-animation-name: animatetop;
@@ -163,8 +162,8 @@ h1, p{
   
   .modal-header {
     padding: 2px 16px;
-    background-color: #f39548;
-    color: rgb(0, 0, 0);
+    background-color: #e66802;
+    color: #000000;
     font-size: 15px;
   }
   
@@ -178,7 +177,7 @@ h1, p{
   
   .modal-content {
     padding: 2px 16px;
-    background-color: #f39548;
+    background-color: #e66802;
     color: rgb(222, 222, 222);
   }
 
