@@ -115,7 +115,6 @@ function init () {
             transparent: true});
         const printer_cube = new THREE.Mesh(printer_cube_geometry, printer_cube_material);
         printer_cube.position.set(4.44, 0, 3.56);
-        console.log(printer_cube.position);
         printer_cube.userData.name = 'printer_cube';
         printer_cube.userData.class = 'mouseover_object';
         printer_cube.visible = false;
@@ -156,6 +155,7 @@ function init () {
      });
 
      // load world
+     function add_world() {
      const world_loader = new GLTFLoader();
      url = new URL( './model/world.glb', import.meta.url );
      url = "" + url;
@@ -167,8 +167,10 @@ function init () {
          world.matrixAutoUpdate = true;
          world.updateMatrix();
          scene.add(world);
-
-     });
+         return world;
+        });
+    };
+     
 
      // load house
      const house_loader = new GLTFLoader();
@@ -188,6 +190,7 @@ function init () {
     ball = add_ball();
     printer = add_printer();
     door = add_door();
+    world = add_world();
     
     // BUTTONS /////////////////////////////////////////////////////////////
 
@@ -465,7 +468,7 @@ function generateQuiz(questions, quizContainer, resultsContainer, submitButton){
                 // ...add an html radio button
                 answers.push(
                     '<label>'
-                        + '<input type="radio" name="question'+i+'" value="'+letter+'">'
+                        + '<input type="radio" name="question'+i +'" value="'+letter +'">'
                         + letter + ': '
                         + questions[i].answers[letter]
                     + '</label>'
@@ -474,8 +477,8 @@ function generateQuiz(questions, quizContainer, resultsContainer, submitButton){
     
             // add this question and its answers to the output
             output.push(
-                '<div class="question">' + questions[i].question + '</div>'
-                + '<div class="answers">' + answers.join('') + '</div>'
+                '<div id="question" class="question">' + questions[i].question + '</div>'
+                + '<div id="answer" class="answers">' + answers.join('') + '</div>'
             );
         }
     
@@ -502,6 +505,7 @@ function generateQuiz(questions, quizContainer, resultsContainer, submitButton){
             if(userAnswer===questions[i].correctAnswer){
                 // add to the number of correct answers
                 numCorrect++;
+                console.log(numCorrect++);
                 
                 // color the answers green
                 answerContainers[i].style.color = 'lightgreen';
@@ -510,8 +514,8 @@ function generateQuiz(questions, quizContainer, resultsContainer, submitButton){
             else{
                 // color the answers red
                 answerContainers[i].style.color = 'red';
-            }
-        }
+            };
+        };
     
         // show number of correct answers out of total
         resultsContainer.innerHTML = numCorrect + ' out of ' + questions.length;
@@ -557,8 +561,10 @@ const render = () => {
 // animation recursive function
 function animate () {
     requestAnimationFrame(animate);
+    // resizing only works when world animation is turned off(?)
+    //world.rotation.y += 0.005;
     render();
-    world.rotation.y += 0.005;
+    
 };
 
  // making canvas responsive

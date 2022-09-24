@@ -181,4 +181,20 @@ h1, p{
     color: rgb(222, 222, 222);
   }
 
+  #question {
+    padding: 5px 20px;
+    color: var(--black-color);
+    font-size: 20px;
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: 500;
+
+  }
  
+  #answer {
+    padding: 5px 20px;
+    color: var(--black-color);
+    font-size: 20px;
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: 500;
+
+  }
