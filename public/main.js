@@ -572,7 +572,7 @@ function animate () {
     camera.aspect = canvasSize.offsetWidth / canvasSize.offsetHeight;
     camera.updateProjectionMatrix();
     renderer.setSize(canvasSize.offsetWidth, canvasSize.offsetHeight);
-    render();
+    //render();
 };
 
 //start scene
