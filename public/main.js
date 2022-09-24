@@ -1,5 +1,4 @@
 import * as THREE from 'three';
-import { CubeCamera } from 'three';
 import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 
@@ -23,7 +22,7 @@ function init () {
     const far = 1000;
     camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
     //camera.position.set(0, 0, 0);
-    camera.translateX(-4);
+    camera.translateX(-6);
     camera.translateY(11);
     camera.translateZ(7); 
     //const helper = new THREE.CameraHelper( camera );
@@ -43,6 +42,7 @@ function init () {
 
     //CONTROLS //////////////////////////////////////////////////////////////////
     const controls = new OrbitControls(camera, renderer.domElement);
+    controls.enabled = false;
     controls.target.set(0,0,0);
     controls.enablePan = false;
     controls.enableDamping = false;
@@ -54,6 +54,7 @@ function init () {
     //controls.maxAzimuthAngle = Math.PI * -0.4;
     controls.minPolarAngle = Math.PI * 0.3;
     controls.maxPolarAngle = Math.PI * 0.6;
+
 
     //LIGHT ////////////////////////////////////////////////////////////////////////
     const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
@@ -115,7 +116,6 @@ function init () {
         const printer_cube = new THREE.Mesh(printer_cube_geometry, printer_cube_material);
         printer_cube.position.set(4.44, 0, 3.56);
         console.log(printer_cube.position);
-        printer_cube.rotation.y = 0;
         printer_cube.userData.name = 'printer_cube';
         printer_cube.userData.class = 'mouseover_object';
         printer_cube.visible = false;
@@ -127,7 +127,7 @@ function init () {
         const ball_sphere_geometry = new THREE.SphereGeometry(0.5, 32, 32);
         const ball_sphere_material = new THREE.MeshLambertMaterial( 
             {color: 0xff0000, 
-            opacity: 0.6,
+            opacity: 0.9,
             transparent: true});
         const ball_sphere = new THREE.Mesh(ball_sphere_geometry, ball_sphere_material);
         ball_sphere.position.set(4.3, -1.47, -4.19);
@@ -163,13 +163,11 @@ function init () {
          world = gltf.scene.children[0];
          world.visible = true;
          world.scale.set(10, 10, 10);
-         world.position.set(0, 2.6, 0);
-         //world.rotation.x = Math.PI/-2;
-         //world.rotation.y = 0.8;
+         world.position.set(0, 0.7, 0);
          world.matrixAutoUpdate = true;
          world.updateMatrix();
-         //scene.add(gltf.scene);
          scene.add(world);
+
      });
 
      // load house
@@ -208,6 +206,7 @@ function init () {
         button_start.addEventListener("click", function() {
             scene.remove(world);
             scene.add(factory);
+            controls.enabled = true;
             controls.reset(); 
             controls.enablePan = false; 
             button_start.style.display = "none";
@@ -329,7 +328,8 @@ function init () {
             let main = document.querySelector('.flex-container > .main-content');
             main.insertAdjacentElement("afterbegin", hlstart);
             controls.enablePan = false;
-            controls.enablePan = false;
+            controls.enabled = false;
+            
 
             // Change description //////////////////////////
             
@@ -374,6 +374,7 @@ window.addEventListener('click', event => {
                 modal.style.display = "block";                
                 span_basketball.onclick = function() {
                 modal.style.display = "none";
+                //click & hover should be disabeld here
                 };
             break; 
         
@@ -455,6 +456,7 @@ const render = () => {
 // animation recursive function
 function animate () {
     requestAnimationFrame(animate);
+    world.rotation.y += 0.005;
     render();
 };
 
