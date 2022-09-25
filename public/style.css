@@ -96,7 +96,7 @@ h1, p{
     background-color: #e66802; /* Orange */
     border: 2px solid #ffa255;
     color: rgb(255, 255, 255);
-    padding: 20px 32px;
+    padding: 10px 15px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
@@ -109,12 +109,7 @@ h1, p{
     background-color: #e6b38a;
     border: 2px solid #fff8f3;
     color: rgb(204, 204, 204);
-    padding: 20px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 18px;
-    border-radius: 5px;
+    
 }
 
   .modal {

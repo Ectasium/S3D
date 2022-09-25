@@ -542,7 +542,7 @@ var submitButton = document.getElementById('submit');
 
 var myQuestions = [
 	{
-		question: "How can an USB drive be misused?",
+		question: "Ok, this is just an ordinary basketball - and not a USB stick. But if it were, what dangers would it pose? Choose the correct answer.",
 		answers: {
 			a: 'Storing data',
 			b: 'Spreading malware',
