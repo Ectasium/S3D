@@ -469,8 +469,9 @@ function generateQuiz(questions, quizContainer, resultsContainer, submitButton){
                 answers.push(
                     '<label>'
                         + '<input type="radio" name="question'+i +'" value="'+letter +'">'
-                        + letter + ': '
+                        + ' '
                         + questions[i].answers[letter]
+                        + '<br>'
                     + '</label>'
                 );
             }
@@ -507,18 +508,18 @@ function generateQuiz(questions, quizContainer, resultsContainer, submitButton){
                 numCorrect++;
                 console.log(numCorrect++);
                 
-                // color the answers green
+                // color the answers green or do something elese ....
                 answerContainers[i].style.color = 'lightgreen';
+                console.log("That was right!");
             }
             // if answer is wrong or blank
             else{
                 // color the answers red
+                //answerContainers[i].style.color = 'red';
                 answerContainers[i].style.color = 'red';
+                console.log("That's not right! The right answer is ...");
             };
-        };
-    
-        // show number of correct answers out of total
-        resultsContainer.innerHTML = numCorrect + ' out of ' + questions.length;
+        };    
     };
 
 	// show the questions
@@ -540,8 +541,9 @@ var myQuestions = [
 		answers: {
 			a: 'Storing data',
 			b: 'Spreading malware',
-			c: 'No misuse possible'
-		},
+			c: 'No misuse possible',
+            d: 'i do not know.',
+        },
 		correctAnswer: 'b'
 	},
 ];
@@ -564,7 +566,6 @@ function animate () {
     // resizing only works when world animation is turned off(?)
     //world.rotation.y += 0.005;
     render();
-    
 };
 
  // making canvas responsive
