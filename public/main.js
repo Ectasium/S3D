@@ -468,8 +468,9 @@ function generateQuiz(questions, quizContainer, resultsContainer, submitButton){
                 // ...add an html radio button
                 answers.push(
                     '<label>'
+                        + '<br>'
                         + '<input type="radio" name="question'+i +'" value="'+letter +'">'
-                        + ' '
+                        + '     '
                         + questions[i].answers[letter]
                         + '<br>'
                     + '</label>'
@@ -487,7 +488,7 @@ function generateQuiz(questions, quizContainer, resultsContainer, submitButton){
         quizContainer.innerHTML = output.join('');
     };
 
-	function showResults(questions, quizContainer, resultsContainer){
+	function showResults(questions, quizContainer, feedbackContainer){
 	
         // gather answer containers from our quiz
         var answerContainers = quizContainer.querySelectorAll('.answers');
@@ -509,17 +510,20 @@ function generateQuiz(questions, quizContainer, resultsContainer, submitButton){
                 console.log(numCorrect++);
                 
                 // color the answers green or do something elese ....
-                answerContainers[i].style.color = 'lightgreen';
-                console.log("That was right!");
+                feedbackContainer.style.color = 'lightgreen';
+                feedback = 'That was right!';
             }
             // if answer is wrong or blank
             else{
                 // color the answers red
                 //answerContainers[i].style.color = 'red';
-                answerContainers[i].style.color = 'red';
-                console.log("That's not right! The right answer is ...");
+                feedbackContainer.style.color = 'red';
+                feedback = 'Thats not right! The right answer is ...';
             };
-        };    
+        };   
+        
+        feedbackContainer.innerHTML = feedback;
+        
     };
 
 	// show the questions
@@ -527,12 +531,12 @@ function generateQuiz(questions, quizContainer, resultsContainer, submitButton){
 
 	// when user clicks submit, show results
 	submitButton.onclick = function(){
-		showResults(questions, quizContainer, resultsContainer);
+		showResults(questions, quizContainer, feedbackContainer);
 	};
 };
 
 var quizContainer = document.getElementById('quiz');
-var resultsContainer = document.getElementById('results');
+var feedbackContainer = document.getElementById('feedback');
 var submitButton = document.getElementById('submit');
 
 var myQuestions = [
@@ -548,7 +552,7 @@ var myQuestions = [
 	},
 ];
 
-generateQuiz(myQuestions, quizContainer, resultsContainer, submitButton);
+generateQuiz(myQuestions, quizContainer, feedbackContainer, submitButton);
 
 // Generate Quizzes End /////////////////////////////////////////////////////////////////
 
