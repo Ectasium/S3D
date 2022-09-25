@@ -543,7 +543,7 @@ var myQuestions = [
 			a: 'Storing data',
 			b: 'Spreading malware',
 			c: 'No misuse possible',
-            d: 'i do not know.',
+            d: 'I do not know.',
         },
 		correctAnswer: 'b'
 	},

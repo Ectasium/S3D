@@ -171,8 +171,8 @@ h1, p{
   .modal-header {
     padding: 2px 16px;
     background-color: #e66802;
-    color: #000000;
-    font-size: 15px;
+    color: #ffffff;
+    font-size: 35px;
   }
   
   .modal-body, .modal-quiz {
