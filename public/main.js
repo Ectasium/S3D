@@ -483,14 +483,16 @@ function generateQuiz(questions, quizContainer, resultsContainer, submitButton){
         quizContainer.innerHTML = output.join('');
     };
 
-	function showResults(questions, quizContainer, feedbackContainer){
+    window.numCorrect = 0;
+
+    function showResults(questions, quizContainer, feedbackContainer){
 	
         // gather answer containers from our quiz
         var answerContainers = quizContainer.querySelectorAll('.answers');
         
         // keep track of user's answers
         var userAnswer = '';
-        var numCorrect = 0;
+        //var window.numCorrect = 0;
                         
         // for each question...
         for(var i=0; i<questions.length; i++){
@@ -501,14 +503,10 @@ function generateQuiz(questions, quizContainer, resultsContainer, submitButton){
             
             // Case correct answer
             if(userAnswer===questions[i].correctAnswer){
-                // add to the number of correct answers
-                numCorrect++;
-                console.log(numCorrect);
-                                                
-                // color the answers green or do something elese ....
                 feedbackContainer.style.color = 'mediumseagreen';
                 feedback = '<br>' + 'Yes, that was right. A USB drive can easyliy spread malware.' + '<br>' + '<br>';
-                submitButton.disabled = true; 
+                submitButton.disabled = true;
+                window.numCorrect += 1; 
             }
             // Case wrong answer
             else{
@@ -552,6 +550,7 @@ var myQuestions = [
 ];
 
 generateQuiz(myQuestions, quizContainer, feedbackContainer, submitButton);
+console.log("Ist das die Variable?" + window.numCorrect);
 
 // Generate Quizzes End /////////////////////////////////////////////////////////////////
 
