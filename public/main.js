@@ -55,7 +55,6 @@ function init () {
     controls.minPolarAngle = Math.PI * 0.3;
     controls.maxPolarAngle = Math.PI * 0.6;
 
-
     //LIGHT ////////////////////////////////////////////////////////////////////////
     const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
     const hemisphereLight = new THREE.HemisphereLight(0xffffff, 1.5);
@@ -169,8 +168,7 @@ function init () {
          scene.add(world);
          return world;
         });
-    };
-     
+    };     
 
      // load house
      const house_loader = new GLTFLoader();
@@ -441,10 +439,8 @@ function onPointerMove(event) {
             ball.visible = false;
             printer.visible = false;
             door.visible = false;
-            break;
-            
+            break;            
     };
-
 };
 
 // Generate Quizzes ////////////////////////////////////////////////////////////////////
