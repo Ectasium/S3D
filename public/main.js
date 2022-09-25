@@ -353,7 +353,7 @@ function init () {
 
 // RAYCASTER ////////////////////////////////////////////////////////////////////
 
-// Raycaster onClick
+// Raycaster onClick /////////////////////////////////////////
 
 const raycaster_click = new THREE.Raycaster();
 const clickMouse = new THREE.Vector2();
@@ -399,7 +399,7 @@ window.addEventListener('click', event => {
     };
 });
 
-// Raycaster onMouseOver
+// Raycaster onMouseOver /////////////////////////////////////////
 
 const raycaster_move = new THREE.Raycaster();
 const moveMouse = new THREE.Vector2();
@@ -495,7 +495,7 @@ function generateQuiz(questions, quizContainer, resultsContainer, submitButton){
         // keep track of user's answers
         var userAnswer = '';
         var numCorrect = 0;
-        
+                        
         // for each question...
         for(var i=0; i<questions.length; i++){
     
@@ -508,32 +508,34 @@ function generateQuiz(questions, quizContainer, resultsContainer, submitButton){
                 // add to the number of correct answers
                 numCorrect++;
                 console.log(numCorrect);
-                                
+                                                
                 // color the answers green or do something elese ....
-                feedbackContainer.style.color = 'lightgreen';
-                feedback = '<br>' + 'Yes, that was right. A USB drive can easyliy spread malware.' + '<br>';
+                feedbackContainer.style.color = 'mediumseagreen';
+                feedback = '<br>' + 'Yes, that was right. A USB drive can easyliy spread malware.' + '<br>' + '<br>';
                 submitButton.disabled = true; 
             }
             // Case wrong answer
             else{
                 
-                feedbackContainer.style.color = 'red';
-                feedback = '<br>' + 'Thats not right! A USB drive can easyliy spread malware.' + '<br>';
+                feedbackContainer.style.color = 'firebrick';
+                feedback = '<br>' + 'Thats not right! A USB drive can easyliy spread malware.' + '<br>' + '<br>';
                 submitButton.disabled = true;
             };
+            
         };   
         
-        feedbackContainer.innerHTML = feedback;
+        feedbackContainer.innerHTML = feedback;    
         
     };
 
 	// show the questions
 	showQuestions(questions, quizContainer);
 
-	// when user clicks submit, show results
+	// when user clicks submit, show feedback abd store results
 	submitButton.onclick = function(){
 		showResults(questions, quizContainer, feedbackContainer);
 	};
+    
 };
 
 var quizContainer = document.getElementById('quiz');
@@ -556,7 +558,6 @@ var myQuestions = [
 generateQuiz(myQuestions, quizContainer, feedbackContainer, submitButton);
 
 // Generate Quizzes End /////////////////////////////////////////////////////////////////
-
 
 window.addEventListener('mousemove', onPointerMove );
 
