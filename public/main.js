@@ -470,9 +470,8 @@ function generateQuiz(questions, quizContainer, resultsContainer, submitButton){
                     '<label>'
                         + '<br>'
                         + '<input type="radio" name="question'+i +'" value="'+letter +'">'
-                        + '     '
+                        + ' '
                         + questions[i].answers[letter]
-                        + '<br>'
                     + '</label>'
                 );
             }
@@ -502,23 +501,25 @@ function generateQuiz(questions, quizContainer, resultsContainer, submitButton){
     
             // find selected answer
             userAnswer = (answerContainers[i].querySelector('input[name=question'+i+']:checked')||{}).value;
+            submitButton = document.getElementById('submit');
             
-            // if answer is correct
+            // Case correct answer
             if(userAnswer===questions[i].correctAnswer){
                 // add to the number of correct answers
                 numCorrect++;
-                console.log(numCorrect++);
-                
+                console.log(numCorrect);
+                                
                 // color the answers green or do something elese ....
                 feedbackContainer.style.color = 'lightgreen';
-                feedback = 'That was right!';
+                feedback = '<br>' + 'Yes, that was right. A USB drive can easyliy spread malware.' + '<br>';
+                submitButton.disabled = true; 
             }
-            // if answer is wrong or blank
+            // Case wrong answer
             else{
-                // color the answers red
-                //answerContainers[i].style.color = 'red';
+                
                 feedbackContainer.style.color = 'red';
-                feedback = 'Thats not right! The right answer is ...';
+                feedback = '<br>' + 'Thats not right! A USB drive can easyliy spread malware.' + '<br>';
+                submitButton.disabled = true;
             };
         };   
         
