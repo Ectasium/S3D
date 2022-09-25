@@ -120,7 +120,7 @@ function init () {
         return printer_cube;
     };
     
-    // add ball sphere ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // add ball sphere ////////////////////////////////////////////////////////////////////
     function add_ball() {
         const ball_sphere_geometry = new THREE.SphereGeometry(0.5, 32, 32);
         const ball_sphere_material = new THREE.MeshLambertMaterial( 
@@ -137,7 +137,7 @@ function init () {
         return ball_sphere;
     };
           
-     // load factory
+     // load factory /////////////////////////////////////////////
      const factory_loader = new GLTFLoader();
      url = new URL( './model/factory.glb', import.meta.url );
      url = "" + url;
