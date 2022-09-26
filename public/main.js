@@ -582,7 +582,7 @@ const render = () => {
 function animate () {
     requestAnimationFrame(animate);
     // resizing only works when world animation is turned off(?)
-    //world.rotation.y += 0.005;
+    world.rotation.y += 0.005;
     render();
 };
 
@@ -591,10 +591,8 @@ function animate () {
     camera.aspect = canvasSize.offsetWidth / canvasSize.offsetHeight;
     camera.updateProjectionMatrix();
     renderer.setSize(canvasSize.offsetWidth, canvasSize.offsetHeight);
-    //render();
+    render();
 };
-
-//removeEventListener('mousemove', window, Event);
 
 //start scene
 window.onload = init();
