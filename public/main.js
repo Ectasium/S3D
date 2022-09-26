@@ -236,9 +236,6 @@ function init () {
             let description2 = document.createElement('p');
             let description2text = document.createTextNode("Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo.");
             description2.appendChild(description2text);
-            
-            let maincontent = document.getElementsByClassName("main-content");
-            console.log(maincontent);
             description_start.replaceWith(description2);
             
         });
@@ -351,14 +348,12 @@ function init () {
 
 // RAYCASTER ////////////////////////////////////////////////////////////////////
 
-// Raycaster onClick /////////////////////////////////////////
+// Raycaster onClick on Clickobjects /////////////////////////////////////////
 
 const raycaster_click = new THREE.Raycaster();
 const clickMouse = new THREE.Vector2();
 
-//window.addEventListener('click', event => {
-
-var clickOnClickObjects = function (event) {
+var clickOnObjects = function (event) {
     
     const rect = renderer.domElement.getBoundingClientRect();
     clickMouse.x = ( ( event.clientX - rect.left ) / ( rect.right - rect.left ) ) * 2 - 1;
@@ -371,54 +366,65 @@ var clickOnClickObjects = function (event) {
     switch (found.length > 0 && found[0].object.userData.name) {
         
             case 'printer_cube':
-                window.removeEventListener('mousemove', moveOnClickObjects); 
-                window.removeEventListener('click', clickOnClickObjects); 
+                removeEventListener('mousemove', moveOnObjects); 
+                removeEventListener('click', clickOnObjects); 
                 var modal = document.getElementById("printer");                
                 var span_basketball = document.getElementById("close_printer");
-                modal.style.display = "block";                
+                modal.style.display = "block";   
+                //close modal             
                 span_basketball.onclick = function() {
                 modal.style.display = "none";
-                window.addEventListener('mousemove', moveOnClickObjects); 
-                window.addEventListener('click', clickOnClickObjects);
-                };
+                addEventListener('mousemove', moveOnObjects); 
+                    setTimeout(function() {
+                        addEventListener('click', clickOnObjects);    
+                    }, 100);
+                };                
             break; 
         
             case 'ball_sphere':
-                window.removeEventListener('mousemove', moveOnClickObjects); 
-                window.removeEventListener('click', clickOnClickObjects);
+                removeEventListener('mousemove', moveOnObjects); 
+                removeEventListener('click', clickOnObjects);
+                generateQuiz(myQuestions, quizContainer, feedbackContainer, submitButton);
                 var modal = document.getElementById("basketball");                
                 var span_basketball = document.getElementById("close_basketball");
-                modal.style.display = "block";                
+                modal.style.display = "block";                 
+                //close modal               
                 span_basketball.onclick = function() {
                 modal.style.display = "none";
-                window.addEventListener('mousemove', moveOnClickObjects); 
-                window.addEventListener('click', clickOnClickObjects);
-                };        
+                addEventListener('mousemove', moveOnObjects); 
+                    setTimeout(function() {
+                        addEventListener('click', clickOnObjects);    
+                    }, 100);
+                };                        
             break;
         
             case 'door_cube':
-                window.removeEventListener('mousemove', moveOnClickObjects); 
-                window.removeEventListener('click', clickOnClickObjects);
+                removeEventListener('mousemove', moveOnObjects); 
+                removeEventListener('click', clickOnObjects);
                 var modal = document.getElementById("door");
                 var span_door = document.getElementById("close_door");
                 modal.style.display = "block";
+                //close modal
                 span_door.onclick = function() {
                 modal.style.display = "none";
-                window.addEventListener('mousemove', moveOnClickObjects); 
-                window.addEventListener('click', clickOnClickObjects);
-                };        
+                addEventListener('mousemove', moveOnObjects); 
+                    setTimeout(function() {
+                        addEventListener('click', clickOnObjects);    
+                    }, 100);
+                };                        
             break;
     };
 };
 
-window.addEventListener('click', clickOnClickObjects);
+addEventListener('click', clickOnObjects);
 
-// Raycaster onMouseOver /////////////////////////////////////////
+
+// Raycaster onMouseOver Clickobjects/////////////////////////////////////////
 
 const raycaster_move = new THREE.Raycaster();
 const moveMouse = new THREE.Vector2();
 
-var moveOnClickObjects = function (event) {
+var moveOnObjects = function (event) {
         //function onPointerMove(event) {
         // calculate pointer position in normalized device coordinates
         // (-1 to +1) for both components
@@ -434,22 +440,18 @@ var moveOnClickObjects = function (event) {
 
         switch (found.length > 0 && found[0].object.userData.name) {
             case 'printer_cube':
-                console.log("INFO: Printer");
                 printer.visible = true;
                 break;
 
             case 'ball_sphere':
-                console.log("INFO: Basketball");
                 ball.visible = true;
                 break;
 
             case 'door_cube':
-                console.log("INFO: Door");
                 door.visible = true;
                 break;
 
             default:
-                console.log("Default!");
                 ball.visible = false;
                 printer.visible = false;
                 door.visible = false;
@@ -457,11 +459,11 @@ var moveOnClickObjects = function (event) {
         };
     };
 
-window.addEventListener('mousemove', moveOnClickObjects); 
+window.addEventListener('mousemove', moveOnObjects); 
 
 // Generate Quizzes ////////////////////////////////////////////////////////////////////
 
-function generateQuiz(questions, quizContainer, resultsContainer, submitButton){
+function generateQuiz(questions, quizContainer, feedbackContainer, submitButton){
 
 	function showQuestions(questions, quizContainer){
         // we'll need a place to store the output and the answer choices
@@ -497,9 +499,7 @@ function generateQuiz(questions, quizContainer, resultsContainer, submitButton){
     
         // finally combine our output list into one string of html and put it on the page
         quizContainer.innerHTML = output.join('');
-    };
-
-    window.numCorrect = 0;
+    };   
 
     function showResults(questions, quizContainer, feedbackContainer){
 	
@@ -520,15 +520,18 @@ function generateQuiz(questions, quizContainer, resultsContainer, submitButton){
             // Case correct answer
             if(userAnswer===questions[i].correctAnswer){
                 feedbackContainer.style.color = 'mediumseagreen';
-                feedback = '<br>' + 'Yes, that was right. A USB drive can easyliy spread malware.' + '<br>' + '<br>';
+                //get feedback CORRECT from additiopnal property in myQuestions[]
+                feedback = '<br>' + 'Yes, that was right!' + '<br>' + '<br>';
                 submitButton.disabled = true;
                 window.numCorrect += 1; 
-            }
+                            }
+            
             // Case wrong answer
             else{
                 
                 feedbackContainer.style.color = 'firebrick';
-                feedback = '<br>' + 'Thats not right! A USB drive can easyliy spread malware.' + '<br>' + '<br>';
+                //get feedback WRONG from additiopnal property in myQuestions[]
+                feedback = '<br>' + 'Sorry, this is not the right answer.' + '<br>' + '<br>';
                 submitButton.disabled = true;
             };
             
@@ -554,19 +557,19 @@ var submitButton = document.getElementById('submit');
 
 var myQuestions = [
 	{
-		question: "Ok, this is just an ordinary basketball - and not a USB stick. But if it were, what dangers would it pose? Choose the correct answer.",
+		question: "Ok, this is just an ordinary basketball - and not a USB drive. But if it were, what dangers would it pose? Choose the correct answer.",
 		answers: {
-			a: 'Storing data',
-			b: 'Spreading malware',
-			c: 'No misuse possible',
-            d: 'I do not know.',
+			a: 'It could store too much data.',
+			b: 'It could spread malware when thoughtlessly used.',
+			c: 'It is just a USB drive, no misuse possible.',
+            d: 'It depends on the operating system, you are using.',
         },
 		correctAnswer: 'b'
 	},
 ];
 
-generateQuiz(myQuestions, quizContainer, feedbackContainer, submitButton);
-console.log("Ist das die Variable?" + window.numCorrect);
+
+console.log("Wert von numCorrect: " + window.numCorrect);
 
 // Generate Quizzes End /////////////////////////////////////////////////////////////////
 
