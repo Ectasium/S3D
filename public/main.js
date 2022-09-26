@@ -355,7 +355,10 @@ function init () {
 
 const raycaster_click = new THREE.Raycaster();
 const clickMouse = new THREE.Vector2();
-window.addEventListener('click', event => {
+
+//window.addEventListener('click', event => {
+
+var clickOnClickObjects = function (event) {
     
     const rect = renderer.domElement.getBoundingClientRect();
     clickMouse.x = ( ( event.clientX - rect.left ) / ( rect.right - rect.left ) ) * 2 - 1;
@@ -368,80 +371,93 @@ window.addEventListener('click', event => {
     switch (found.length > 0 && found[0].object.userData.name) {
         
             case 'printer_cube':
+                window.removeEventListener('mousemove', moveOnClickObjects); 
+                window.removeEventListener('click', clickOnClickObjects); 
                 var modal = document.getElementById("printer");                
                 var span_basketball = document.getElementById("close_printer");
                 modal.style.display = "block";                
                 span_basketball.onclick = function() {
                 modal.style.display = "none";
-                //click & hover should be disabeld here
+                window.addEventListener('mousemove', moveOnClickObjects); 
+                window.addEventListener('click', clickOnClickObjects);
                 };
             break; 
         
             case 'ball_sphere':
+                window.removeEventListener('mousemove', moveOnClickObjects); 
+                window.removeEventListener('click', clickOnClickObjects);
                 var modal = document.getElementById("basketball");                
                 var span_basketball = document.getElementById("close_basketball");
                 modal.style.display = "block";                
                 span_basketball.onclick = function() {
                 modal.style.display = "none";
+                window.addEventListener('mousemove', moveOnClickObjects); 
+                window.addEventListener('click', clickOnClickObjects);
                 };        
             break;
         
             case 'door_cube':
+                window.removeEventListener('mousemove', moveOnClickObjects); 
+                window.removeEventListener('click', clickOnClickObjects);
                 var modal = document.getElementById("door");
                 var span_door = document.getElementById("close_door");
                 modal.style.display = "block";
                 span_door.onclick = function() {
                 modal.style.display = "none";
-            };        
+                window.addEventListener('mousemove', moveOnClickObjects); 
+                window.addEventListener('click', clickOnClickObjects);
+                };        
             break;
     };
-});
+};
+
+window.addEventListener('click', clickOnClickObjects);
 
 // Raycaster onMouseOver /////////////////////////////////////////
 
 const raycaster_move = new THREE.Raycaster();
 const moveMouse = new THREE.Vector2();
 
-function onPointerMove(event) {
+var moveOnClickObjects = function (event) {
+        //function onPointerMove(event) {
+        // calculate pointer position in normalized device coordinates
+        // (-1 to +1) for both components
+        const rect = renderer.domElement.getBoundingClientRect();
+        moveMouse.x = ((event.clientX - rect.left) / (rect.right - rect.left)) * 2 - 1;
+        moveMouse.y = -((event.clientY - rect.top) / (rect.bottom - rect.top)) * 2 + 1;
 
-    // calculate pointer position in normalized device coordinates
-	// (-1 to +1) for both components
+        // update the picking ray with the camera and pointer position
+        raycaster_move.setFromCamera(moveMouse, camera);
 
-	const rect = renderer.domElement.getBoundingClientRect();
-    moveMouse.x = ( ( event.clientX - rect.left ) / ( rect.right - rect.left ) ) * 2 - 1;
-    moveMouse.y = - ( ( event.clientY - rect.top ) / ( rect.bottom - rect.top) ) * 2 + 1;
+        // calculate objects intersecting the picking ray
+        const found = raycaster_move.intersectObjects(scene.children);
 
-    // update the picking ray with the camera and pointer position
-	raycaster_move.setFromCamera(moveMouse, camera);
+        switch (found.length > 0 && found[0].object.userData.name) {
+            case 'printer_cube':
+                console.log("INFO: Printer");
+                printer.visible = true;
+                break;
 
-	// calculate objects intersecting the picking ray
-	const found = raycaster_move.intersectObjects(scene.children);
-        
-    
-    switch (found.length > 0 && found[0].object.userData.name) {
-        case 'printer_cube':
-            console.log("INFO: Printer");
-            printer.visible = true;
-            break;   
+            case 'ball_sphere':
+                console.log("INFO: Basketball");
+                ball.visible = true;
+                break;
 
-        case 'ball_sphere':
-            console.log("INFO: Basketball");
-            ball.visible = true;
-            break;
+            case 'door_cube':
+                console.log("INFO: Door");
+                door.visible = true;
+                break;
 
-        case 'door_cube':
-            console.log("INFO: Door");
-            door.visible = true;
-            break;
-
-        default:            
-            console.log("Default!");
-            ball.visible = false;
-            printer.visible = false;
-            door.visible = false;
-            break;            
+            default:
+                console.log("Default!");
+                ball.visible = false;
+                printer.visible = false;
+                door.visible = false;
+                break;
+        };
     };
-};
+
+window.addEventListener('mousemove', moveOnClickObjects); 
 
 // Generate Quizzes ////////////////////////////////////////////////////////////////////
 
@@ -554,8 +570,6 @@ console.log("Ist das die Variable?" + window.numCorrect);
 
 // Generate Quizzes End /////////////////////////////////////////////////////////////////
 
-window.addEventListener('mousemove', onPointerMove );
-
 // rendering scene and camera
 const render = () => {
     renderer.render(scene, camera);
@@ -576,6 +590,8 @@ function animate () {
     renderer.setSize(canvasSize.offsetWidth, canvasSize.offsetHeight);
     //render();
 };
+
+//removeEventListener('mousemove', window, Event);
 
 //start scene
 window.onload = init();
