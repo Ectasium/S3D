@@ -189,6 +189,8 @@ function init () {
     printer = add_printer();
     door = add_door();
     world = add_world();
+    removeEventListener('mousemove', moveOnObjects);
+    removeEventListener('click', clickOnObjects);
     
     // BUTTONS /////////////////////////////////////////////////////////////
 
@@ -208,6 +210,8 @@ function init () {
             scene.remove(world);
             scene.add(factory);
             controls.enabled = true;
+            addEventListener('mousemove', moveOnObjects);
+            addEventListener('click', clickOnObjects);
             controls.reset(); 
             controls.enablePan = false; 
             button_start.style.display = "none";
@@ -312,6 +316,8 @@ function init () {
             scene.remove(house);
             scene.add(world);
             controls.reset();
+            removeEventListener('mousemove', moveOnObjects);
+            removeEventListener('click', clickOnObjects);
             button_restart.style.display = "none";
             button_start.style.display = "block";
             // Delete old HL
@@ -384,7 +390,7 @@ var clickOnObjects = function (event) {
             case 'ball_sphere':
                 removeEventListener('mousemove', moveOnObjects); 
                 removeEventListener('click', clickOnObjects);
-                generateQuiz(myQuestions, quizContainer, feedbackContainer, submitButton);
+                generateQuiz(quizBasketball, quizContainer, feedbackContainer, submitButton);
                 var modal = document.getElementById("basketball");                
                 var span_basketball = document.getElementById("close_basketball");
                 modal.style.display = "block";                 
@@ -460,6 +466,8 @@ var moveOnObjects = function (event) {
     };
 
 window.addEventListener('mousemove', moveOnObjects); 
+
+
 
 // Generate Quizzes ////////////////////////////////////////////////////////////////////
 
@@ -555,7 +563,7 @@ var quizContainer = document.getElementById('quiz');
 var feedbackContainer = document.getElementById('feedback');
 var submitButton = document.getElementById('submit');
 
-var myQuestions = [
+var quizBasketball = [
 	{
 		question: "Ok, this is just an ordinary basketball - and not a USB drive. But if it were, what dangers would it pose? Choose the correct answer.",
 		answers: {
@@ -568,6 +576,16 @@ var myQuestions = [
 	},
 ];
 
+var quizPrinter = [
+	{
+		question: "This is a printer. What should you consider, when using it?",
+		answers: {
+			a: 'Nothing',
+			b: 'Do not forget to take out all printouts.',
+        },
+		correctAnswer: 'b'
+	},
+];
 
 console.log("Wert von numCorrect: " + window.numCorrect);
 
