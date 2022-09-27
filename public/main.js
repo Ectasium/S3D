@@ -465,11 +465,12 @@ var moveOnObjects = function (event) {
         };
     };
 
-window.addEventListener('mousemove', moveOnObjects); 
-
+window.addEventListener('mousemove', moveOnObjects);
 
 
 // Generate Quizzes ////////////////////////////////////////////////////////////////////
+
+let numCorrect = 0;
 
 function generateQuiz(questions, quizContainer, feedbackContainer, submitButton){
 
@@ -509,6 +510,8 @@ function generateQuiz(questions, quizContainer, feedbackContainer, submitButton)
         quizContainer.innerHTML = output.join('');
     };   
 
+    
+
     function showResults(questions, quizContainer, feedbackContainer){
 	
         // gather answer containers from our quiz
@@ -516,8 +519,7 @@ function generateQuiz(questions, quizContainer, feedbackContainer, submitButton)
         
         // keep track of user's answers
         var userAnswer = '';
-        //var window.numCorrect = 0;
-                        
+                                
         // for each question...
         for(var i=0; i<questions.length; i++){
     
@@ -531,7 +533,7 @@ function generateQuiz(questions, quizContainer, feedbackContainer, submitButton)
                 //get feedback CORRECT from additiopnal property in myQuestions[]
                 feedback = '<br>' + 'Yes, that was right!' + '<br>' + '<br>';
                 submitButton.disabled = true;
-                window.numCorrect += 1; 
+                numCorrect += 1; 
                 }
             
             // Case wrong answer
@@ -589,7 +591,7 @@ var quizBasketball = [
 	},
 ]; */
 
-console.log("Wert von numCorrect: " + window.numCorrect);
+console.log("Wert von numCorrect: " + numCorrect);
 
 // Generate Quizzes End /////////////////////////////////////////////////////////////////
 
