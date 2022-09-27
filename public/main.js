@@ -85,8 +85,6 @@ function init () {
         office.visible = true;
         office.scale.set(2, 2, 2);
         office.position.set(0, 1.5, 0);
-        //office.rotation.x = Math.PI/-2;
-        //office.rotation.y = 0.8;
         //scene.add(gltf.scene);
     });
 
