@@ -532,7 +532,7 @@ function generateQuiz(questions, quizContainer, feedbackContainer, submitButton)
                 feedback = '<br>' + 'Yes, that was right!' + '<br>' + '<br>';
                 submitButton.disabled = true;
                 window.numCorrect += 1; 
-                            }
+                }
             
             // Case wrong answer
             else{
