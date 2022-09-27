@@ -90,7 +90,7 @@ function init () {
         //scene.add(gltf.scene);
     });
 
-    //door box
+    // create add door box
     function add_door() {
         const door_cube_geometry = new THREE.BoxGeometry(2.2, 5, 0.03);
         const door_cube_material = new THREE.MeshLambertMaterial( 
@@ -105,7 +105,7 @@ function init () {
         return door_cube;
     };
     
-    // add printer cube
+    // create printer cube
     function add_printer() {
         const printer_cube_geometry = new THREE.BoxGeometry(0.77, 0.77, 0.87);
         const printer_cube_material = new THREE.MeshLambertMaterial( 
@@ -120,7 +120,7 @@ function init () {
         return printer_cube;
     };
     
-    // add ball sphere ////////////////////////////////////////////////////////////////////
+    // create ball sphere ////////////////////////////////////////////////////////////////////
     function add_ball() {
         const ball_sphere_geometry = new THREE.SphereGeometry(0.5, 32, 32);
         const ball_sphere_material = new THREE.MeshLambertMaterial( 
@@ -576,7 +576,9 @@ var quizBasketball = [
 	},
 ];
 
-var quizPrinter = [
+// More quiz content to come ...
+
+/* var quizPrinter = [
 	{
 		question: "This is a printer. What should you consider, when using it?",
 		answers: {
@@ -585,7 +587,7 @@ var quizPrinter = [
         },
 		correctAnswer: 'b'
 	},
-];
+]; */
 
 console.log("Wert von numCorrect: " + window.numCorrect);
 
