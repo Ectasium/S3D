@@ -12,22 +12,39 @@
 
 <body>
 
-    <!-- Dialog modals beginning -->
+<!-- Dialog modals beginning -->
+
+ <!-- quiz modal printer -->
+
+<div id="printer" class="modal">
+  <!-- Modal content -->
+  <div class="modal-content">
+    <div class="modal-header">
+      <span id="closePrinter" class="close">&times;</span>
+      <div id="headerPrinter">QUIZ - Printer</div>
+    </div>            
+      <!-- Modal Quiz -->
+      <div id="quizPrinter"></div>
+      <br>
+      <button id="submitPrinter" class="button">Submit</button>
+      <div class="modal-body" id="feedbackPrinter"></div>
+  </div>
+</div>
 
     <!-- Quiz modal basketball -->
 
-    <div id="basketball" class="modal">
-        <!-- Modal content -->
-        <div class="modal-content">
+<div id="basketball" class="modal">
+      <!-- Modal content -->
+      <div class="modal-content">
           <div class="modal-header">
-            <span id="close_basketball" class="close">&times;</span>
-            <div id="modal-header">QUIZ</div>
+            <span id="closeBasketball" class="close">&times;</span>
+            <div id="modal-header">QUIZ - Basketball</div>
           </div>            
             <!-- Modal Quiz -->
-            <div id="quiz"></div>
+            <div id="quizBasketball"></div>
             <br>
-            <button id="submit" class="button">Submit</button>
-            <div class="modal-body" id="feedback"></div>
+            <button id="submitBasketball" class="button">Submit</button>
+            <div class="modal-body" id="feedbackBasketball"></div>
         </div>
     </div>
 
@@ -37,7 +54,7 @@
         <!-- Modal content -->
         <div class="modal-content">
           <div class="modal-header">
-            <span class="close" id="close_door">&times;</span>
+            <span class="close" id="closeDoor">&times;</span>
             <div id="modal-header">INFO - The Door</div>
           </div>
           <div class="modal-body">
@@ -46,20 +63,7 @@
         </div>
     </div>
 
-    <!-- Info modal printer -->
-
-    <div id="printer" class="modal">
-        <!-- Modal content -->
-        <div class="modal-content">
-          <div class="modal-header">
-            <span id="close_printer" class="close">&times;</span>
-            <div id="modal-header">INFO - The Printer</div>
-          </div>
-          <div class="modal-body">
-            In office technology and data processing, a printer is a peripheral device of a computer for outputting data (e.g. texts, characters, numbers, graphics, photos and diagrams) on a two-dimensional carrier medium, usually paper.
-            </div>
-        </div>
-    </div>
+   
     
     <!-- Dialog modals end -->
 

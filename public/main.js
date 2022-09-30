@@ -287,8 +287,7 @@ function init () {
 
             // Delete old HL
             let hl3 = document.querySelector('.flex-container > .main-content > h1');
-            hl3.remove();
-                    
+            hl3.remove();                    
             // Create and insert new Headline
             let hl4 = document.createElement('h1');
             let hl4text = document.createTextNode("How Secure is Your Desktop Computer?");
@@ -371,29 +370,30 @@ var clickOnObjects = function (event) {
         
             case 'printer_cube':
                 removeEventListener('mousemove', moveOnObjects); 
-                removeEventListener('click', clickOnObjects); 
+                removeEventListener('click', clickOnObjects);
+                generateQuiz(quizPrinter, quizContainerPrinter, feedbackContainerPrinter, submitButtonPrinter);
                 var modal = document.getElementById("printer");                
-                var span_basketball = document.getElementById("close_printer");
-                modal.style.display = "block";   
-                //close modal             
-                span_basketball.onclick = function() {
+                var span_printer = document.getElementById("closePrinter");
+                modal.style.display = "block";                 
+                //close modal               
+                span_printer.onclick = function() {
                 modal.style.display = "none";
                 addEventListener('mousemove', moveOnObjects); 
                     setTimeout(function() {
                         addEventListener('click', clickOnObjects);    
                     }, 100);
-                };                
-            break; 
+                };                        
+            break;
         
             case 'ball_sphere':
                 removeEventListener('mousemove', moveOnObjects); 
                 removeEventListener('click', clickOnObjects);
-                generateQuiz(quizBasketball, quizContainer, feedbackContainer, submitButton);
+                generateQuiz(quizBasketball, quizContainerBasketball, feedbackContainerBasketball, submitButtonBasketball);
                 var modal = document.getElementById("basketball");                
-                var span_basketball = document.getElementById("close_basketball");
+                var closeBasketball = document.getElementById("closeBasketball");
                 modal.style.display = "block";                 
                 //close modal               
-                span_basketball.onclick = function() {
+                closeBasketball.onclick = function() {
                 modal.style.display = "none";
                 addEventListener('mousemove', moveOnObjects); 
                     setTimeout(function() {
@@ -406,7 +406,7 @@ var clickOnObjects = function (event) {
                 removeEventListener('mousemove', moveOnObjects); 
                 removeEventListener('click', clickOnObjects);
                 var modal = document.getElementById("door");
-                var span_door = document.getElementById("close_door");
+                var span_door = document.getElementById("closeDoor");
                 modal.style.display = "block";
                 //close modal
                 span_door.onclick = function() {
@@ -523,13 +523,13 @@ function generateQuiz(questions, quizContainer, feedbackContainer, submitButton)
     
             // find selected answer
             userAnswer = (answerContainers[i].querySelector('input[name=question'+i+']:checked')||{}).value;
-            submitButton = document.getElementById('submit');
+            //submitButton = document.getElementById('submit');
             
             // Case correct answer
             if(userAnswer===questions[i].correctAnswer){
                 feedbackContainer.style.color = 'mediumseagreen';
                 //get feedback CORRECT from additiopnal property in myQuestions[]
-                feedback = '<br>' + 'Yes, that was right!' + '<br>' + '<br>';
+                feedback = '<br>' + questions[0].feedbackRight + '<br>' + '<br>';
                 submitButton.disabled = true;
                 numCorrect += 1; 
                 }
@@ -539,7 +539,7 @@ function generateQuiz(questions, quizContainer, feedbackContainer, submitButton)
                 
                 feedbackContainer.style.color = 'firebrick';
                 //get feedback WRONG from additiopnal property in myQuestions[]
-                feedback = '<br>' + 'Sorry, this is not the right answer.' + '<br>' + '<br>';
+                feedback = '<br>' + questions[0].feedbackWrong + '<br>' + '<br>';
                 submitButton.disabled = true;
             };
             
@@ -555,13 +555,16 @@ function generateQuiz(questions, quizContainer, feedbackContainer, submitButton)
 	// when user clicks submit, show feedback abd store results
 	submitButton.onclick = function(){
 		showResults(questions, quizContainer, feedbackContainer);
+        
 	};
     
 };
 
-var quizContainer = document.getElementById('quiz');
-var feedbackContainer = document.getElementById('feedback');
-var submitButton = document.getElementById('submit');
+//Quiz content basketball ////////////////////////////////
+
+var quizContainerBasketball = document.getElementById('quizBasketball');
+var feedbackContainerBasketball = document.getElementById('feedbackBasketball');
+var submitButtonBasketball = document.getElementById('submitBasketball');
 
 var quizBasketball = [
 	{
@@ -572,26 +575,36 @@ var quizBasketball = [
 			c: 'It is just a USB drive, no misuse possible.',
             d: 'It depends on the operating system, you are using.',
         },
-		correctAnswer: 'b'
+		correctAnswer: 'b', 
+        feedbackRight: 'Yes, that was right! USB drives can be quite dangerous.',
+        feedbackWrong: 'Sorry, this is not the right answer. A USB drive is anything but harmless.'
 	},
 ];
 
-// More quiz content to come ...
+//Quiz content printer ////////////////////////////////////
 
-/* var quizPrinter = [
+var quizContainerPrinter = document.getElementById('quizPrinter');
+var feedbackContainerPrinter = document.getElementById('feedbackPrinter');
+var submitButtonPrinter = document.getElementById('submitPrinter');
+
+var quizPrinter = [
 	{
 		question: "This is a printer. What should you consider, when using it?",
 		answers: {
 			a: 'Nothing',
 			b: 'Do not forget to take out all printouts.',
         },
-		correctAnswer: 'b'
+		correctAnswer: 'b',
+        feedbackRight: 'Yes, that was right! Never leave printouts lying in the printer.',
+        feedbackWrong: 'No, that is not the right mindset! Consider printouts lying in the printer for too long, for example.'
 	},
-]; */
+];
 
-console.log("Wert von numCorrect: " + numCorrect);
+//console.log("Wert von numCorrect: " + numCorrect);
 
 // Generate Quizzes End /////////////////////////////////////////////////////////////////
+
+
 
 // rendering scene and camera
 const render = () => {
