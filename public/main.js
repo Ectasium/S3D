@@ -66,7 +66,7 @@ function init () {
     spotLight2.castShadow = true;
     scene.add(ambientLight, hemisphereLight, spotLight1, spotLight2);
 
-    // OBJECTS //////////////////////////////////////////////////////////////////////
+    // Load/Create OBJECTS //////////////////////////////////////////////////////////////////////
     
     //background box
     const background_geometry = new THREE.BoxGeometry(2, 2, 2);
@@ -118,6 +118,22 @@ function init () {
         return printer_cube;
     };
     
+    // create note cube
+    function add_note() {
+        const note_cube_geometry = new THREE.BoxGeometry(0.77, 0.77, 0.87);
+        const note_cube_material = new THREE.MeshLambertMaterial( 
+            {color: 0xff0000, 
+            opacity: 0.6,
+            transparent: true});
+        const note_cube = new THREE.Mesh(note_cube_geometry, note_cube_material);
+        note_cube.position.set(1.44, 0, 3.56);
+        note_cube.userData.name = 'note_cube';
+        note_cube.userData.class = 'mouseover_object';
+        note_cube.visible = true;
+        return note_cube;
+    };
+
+
     // create ball sphere ////////////////////////////////////////////////////////////////////
     function add_ball() {
         const ball_sphere_geometry = new THREE.SphereGeometry(0.5, 32, 32);
@@ -186,11 +202,12 @@ function init () {
     ball = add_ball();
     printer = add_printer();
     door = add_door();
+    note = add_note();
     world = add_world();
     removeEventListener('mousemove', moveOnObjects);
     removeEventListener('click', clickOnObjects);
     
-    // BUTTONS /////////////////////////////////////////////////////////////
+    // BUTTONS - Change scenes /////////////////////////////////////////////////////////////
 
     function buttons_init() {
         //Initialize and hide buttons
@@ -245,7 +262,7 @@ function init () {
         //Button show office
         button_next_1.addEventListener("click", function () {
             scene.remove(factory);
-            scene.add(office, ball, printer, door);
+            scene.add(office, ball, printer, door, note);
             controls.reset();
             controls.enablePan = false;
             button_next_1.style.display = "none";
@@ -266,8 +283,7 @@ function init () {
             // Change description //////////////////////////
             
             // Old description
-            let description2 = document.querySelector('.flex-container > .main-content > p');
-                               
+            let description2 = document.querySelector('.flex-container > .main-content > p');                               
             // Replace description
             let description3 = document.createElement('p');
             let description3text = document.createTextNode("Jemand musste Josef K. verleumdet haben, denn ohne dass er etwas Böses getan hätte, wurde er eines Morgens verhaftet. »Wie ein Hund!« sagte er, es war, als sollte die Scham ihn überleben. Als Gregor Samsa eines Morgens aus unruhigen Träumen erwachte, fand er sich in seinem Bett zu einem ungeheueren Ungeziefer verwandelt. Und es war ihnen wie eine Bestätigung ihrer neuen Träume und guten Absichten, als am Ziele ihrer Fahrt die Tochter als erste sich erhob und ihren jungen Körper dehnte.");
@@ -298,8 +314,7 @@ function init () {
             // Change description //////////////////////////
             
             // Old description
-            let description3 = document.querySelector('.flex-container > .main-content > p');
-                               
+            let description3 = document.querySelector('.flex-container > .main-content > p');                               
             // Replace description
             let description4 = document.createElement('p');
             let description4text = document.createTextNode("Zwei flinke Boxer jagen die quirlige Eva und ihren Mops durch Sylt. Franz jagt im komplett verwahrlosten Taxi quer durch Bayern. Zwölf Boxkämpfer jagen Viktor quer über den großen Sylter Deich. Vogel Quax zwickt Johnys Pferd Bim. Sylvia wagt quick den Jux bei Pforzheim. Polyfon zwitschernd aßen Mäxchens Vögel Rüben, Joghurt und Quark. Fix, Schwyz! quäkt Jürgen blöd vom Paß. Victor jagt zwölf Boxkämpfer quer über den großen Sylter Deich. Falsches Üben von Xylophonmusik quält jeden größeren Zwerg.");
@@ -385,6 +400,24 @@ var clickOnObjects = function (event) {
                 };                        
             break;
         
+            case 'note_cube':
+                removeEventListener('mousemove', moveOnObjects); 
+                removeEventListener('click', clickOnObjects);
+                generateQuiz(quizNote, quizContainerNote, feedbackContainerNote, submitButtonNote);
+                var modal = document.getElementById("note");                
+                var closeNote = document.getElementById("closeNote");
+                modal.style.display = "block";                 
+                //close modal               
+                closeNote.onclick = function() {
+                modal.style.display = "none";
+                addEventListener('mousemove', moveOnObjects); 
+                    setTimeout(function() {
+                        addEventListener('click', clickOnObjects);    
+                    }, 100);
+                };                        
+            break;
+
+
             case 'ball_sphere':
                 removeEventListener('mousemove', moveOnObjects); 
                 removeEventListener('click', clickOnObjects);
@@ -406,10 +439,10 @@ var clickOnObjects = function (event) {
                 removeEventListener('mousemove', moveOnObjects); 
                 removeEventListener('click', clickOnObjects);
                 var modal = document.getElementById("door");
-                var span_door = document.getElementById("closeDoor");
+                var closeDoor = document.getElementById("closeDoor");
                 modal.style.display = "block";
                 //close modal
-                span_door.onclick = function() {
+                closeDoor.onclick = function() {
                 modal.style.display = "none";
                 addEventListener('mousemove', moveOnObjects); 
                     setTimeout(function() {
@@ -446,6 +479,10 @@ var moveOnObjects = function (event) {
             case 'printer_cube':
                 printer.visible = true;
                 break;
+
+            case 'note_cube':
+                    note.visible = true;
+                    break;
 
             case 'ball_sphere':
                 ball.visible = true;
@@ -523,12 +560,11 @@ function generateQuiz(questions, quizContainer, feedbackContainer, submitButton)
     
             // find selected answer
             userAnswer = (answerContainers[i].querySelector('input[name=question'+i+']:checked')||{}).value;
-            //submitButton = document.getElementById('submit');
-            
+                        
             // Case correct answer
             if(userAnswer===questions[i].correctAnswer){
                 feedbackContainer.style.color = 'mediumseagreen';
-                //get feedback CORRECT from additiopnal property in myQuestions[]
+                //get feedback CORRECT from additiopnal property in questions[]
                 feedback = '<br>' + questions[0].feedbackRight + '<br>' + '<br>';
                 submitButton.disabled = true;
                 numCorrect += 1; 
@@ -600,13 +636,31 @@ var quizPrinter = [
 	},
 ];
 
-//console.log("Wert von numCorrect: " + numCorrect);
+//Quiz content note ////////////////////////////////////
+
+var quizContainerNote = document.getElementById('quizNote');
+var feedbackContainerNote = document.getElementById('feedbackNote');
+var submitButtonNote = document.getElementById('submitNote');
+
+var quizNote = [
+	{
+		question: "An unusual place for a note, especially if it still has a password on it. What do you think: Is it a good idea to write down passwords on notepads?",
+		answers: {
+			a: 'Why not? The note is well hidden.',
+			b: 'No, that is not a good idea at all!',
+        },
+		correctAnswer: 'b',
+        feedbackRight: 'You are right. Writing down passswords on notes is never a good idea.',
+        feedbackWrong: 'Are you sure? What if not you, but someone else finds it?'
+	},
+];
+
+
+console.log("Wert von numCorrect: " + numCorrect);
 
 // Generate Quizzes End /////////////////////////////////////////////////////////////////
 
-
-
-// rendering scene and camera
+// Render scene and camera
 const render = () => {
     renderer.render(scene, camera);
 };
@@ -614,7 +668,7 @@ const render = () => {
 // animation recursive function
 function animate () {
     requestAnimationFrame(animate);
-    // resizing only works when world animation is turned off(?)
+    // resizing only works with animation turned off(?)
     world.rotation.y += 0.005;
     render();
 };
