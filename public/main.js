@@ -655,7 +655,6 @@ var quizNote = [
 	},
 ];
 
-
 console.log("Wert von numCorrect: " + numCorrect);
 
 // Generate Quizzes End /////////////////////////////////////////////////////////////////
