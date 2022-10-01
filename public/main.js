@@ -294,7 +294,7 @@ function init () {
 
         //Button show House
         button_next_2.addEventListener("click", function () {
-            scene.remove(office, ball, printer, door);
+            scene.remove(office, ball, printer, door, note);
             scene.add(house);
             controls.reset();
             controls.enablePan = false;
@@ -320,7 +320,8 @@ function init () {
             let description4text = document.createTextNode("Zwei flinke Boxer jagen die quirlige Eva und ihren Mops durch Sylt. Franz jagt im komplett verwahrlosten Taxi quer durch Bayern. Zwölf Boxkämpfer jagen Viktor quer über den großen Sylter Deich. Vogel Quax zwickt Johnys Pferd Bim. Sylvia wagt quick den Jux bei Pforzheim. Polyfon zwitschernd aßen Mäxchens Vögel Rüben, Joghurt und Quark. Fix, Schwyz! quäkt Jürgen blöd vom Paß. Victor jagt zwölf Boxkämpfer quer über den großen Sylter Deich. Falsches Üben von Xylophonmusik quält jeden größeren Zwerg.");
             description4.appendChild(description4text);
             description3.replaceWith(description4);
-            
+            alert("Sie haben " + window.numCorrect + " Fragen richtig beantwortet.");
+                        
         });
 
         //Button restart
@@ -505,15 +506,15 @@ window.addEventListener('mousemove', moveOnObjects);
 
 // Generate Quizzes ////////////////////////////////////////////////////////////////////
 
-let numCorrect = 0;
+window.numCorrect = 0;
 
 function generateQuiz(questions, quizContainer, feedbackContainer, submitButton){
 
-	function showQuestions(questions, quizContainer){
+    function showQuestions(questions, quizContainer){
         // we'll need a place to store the output and the answer choices
         var output = [];
         var answers;
-    
+                    
         // for each question...
         for(var i=0; i<questions.length; i++){
             
@@ -544,30 +545,29 @@ function generateQuiz(questions, quizContainer, feedbackContainer, submitButton)
         // finally combine our output list into one string of html and put it on the page
         quizContainer.innerHTML = output.join('');
     };   
-
     
-
-    function showResults(questions, quizContainer, feedbackContainer){
+        function showResults(questions, quizContainer, feedbackContainer){
 	
         // gather answer containers from our quiz
         var answerContainers = quizContainer.querySelectorAll('.answers');
         
         // keep track of user's answers
         var userAnswer = '';
-                                
-        // for each question...
+                                        
+        // for each question...      
+
         for(var i=0; i<questions.length; i++){
     
             // find selected answer
-            userAnswer = (answerContainers[i].querySelector('input[name=question'+i+']:checked')||{}).value;
-                        
+            userAnswer = (answerContainers[i].querySelector('input[name=question'+i+']:checked')||{}).value;            
+            
             // Case correct answer
             if(userAnswer===questions[i].correctAnswer){
+                window.numCorrect += 1;
                 feedbackContainer.style.color = 'mediumseagreen';
                 //get feedback CORRECT from additiopnal property in questions[]
                 feedback = '<br>' + questions[0].feedbackRight + '<br>' + '<br>';
                 submitButton.disabled = true;
-                numCorrect += 1; 
                 }
             
             // Case wrong answer
@@ -577,13 +577,17 @@ function generateQuiz(questions, quizContainer, feedbackContainer, submitButton)
                 //get feedback WRONG from additiopnal property in myQuestions[]
                 feedback = '<br>' + questions[0].feedbackWrong + '<br>' + '<br>';
                 submitButton.disabled = true;
-            };
+            };           
             
+            
+
         };   
         
-        feedbackContainer.innerHTML = feedback;    
+        feedbackContainer.innerHTML = feedback;  
         
     };
+
+    
 
 	// show the questions
 	showQuestions(questions, quizContainer);
@@ -593,8 +597,12 @@ function generateQuiz(questions, quizContainer, feedbackContainer, submitButton)
 		showResults(questions, quizContainer, feedbackContainer);
         
 	};
+
+    
     
 };
+
+
 
 //Quiz content basketball ////////////////////////////////
 
@@ -655,8 +663,6 @@ var quizNote = [
 	},
 ];
 
-console.log("Wert von numCorrect: " + numCorrect);
-
 // Generate Quizzes End /////////////////////////////////////////////////////////////////
 
 // Render scene and camera
@@ -668,7 +674,7 @@ const render = () => {
 function animate () {
     requestAnimationFrame(animate);
     // resizing only works with animation turned off(?)
-    world.rotation.y += 0.005;
+    //world.rotation.y += 0.005;
     render();
 };
 
