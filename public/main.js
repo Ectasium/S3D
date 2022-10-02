@@ -673,8 +673,7 @@ const render = () => {
 // animation recursive function
 function animate () {
     requestAnimationFrame(animate);
-    // resizing only works with animation turned off(?)
-    //world.rotation.y += 0.005;
+    world.rotation.y += 0.005;
     render();
 };
 
@@ -688,5 +687,5 @@ function animate () {
 
 //start scene
 window.onload = init();
-animate();
 window.addEventListener('resize', windowResize, false);
+animate();
