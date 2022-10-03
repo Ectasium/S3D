@@ -199,7 +199,6 @@ function init () {
          //house.rotation.x = Math.PI/-2;
          //house.rotation.y = 0.8;
          //scene.add(gltf.scene);
-                 
      });
 
     bin = add_bin();
@@ -258,8 +257,7 @@ function init () {
             let description2 = document.createElement('p');
             let description2text = document.createTextNode("Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo.");
             description2.appendChild(description2text);
-            description_start.replaceWith(description2);
-            
+            description_start.replaceWith(description2);            
         });
 
         //Button show office
@@ -291,8 +289,7 @@ function init () {
             let description3 = document.createElement('p');
             let description3text = document.createTextNode("Jemand musste Josef K. verleumdet haben, denn ohne dass er etwas Böses getan hätte, wurde er eines Morgens verhaftet. »Wie ein Hund!« sagte er, es war, als sollte die Scham ihn überleben. Als Gregor Samsa eines Morgens aus unruhigen Träumen erwachte, fand er sich in seinem Bett zu einem ungeheueren Ungeziefer verwandelt. Und es war ihnen wie eine Bestätigung ihrer neuen Träume und guten Absichten, als am Ziele ihrer Fahrt die Tochter als erste sich erhob und ihren jungen Körper dehnte.");
             description3.appendChild(description3text);
-            description2.replaceWith(description3);
-            
+            description2.replaceWith(description3);            
         });
 
         //Button show House
@@ -323,8 +320,7 @@ function init () {
             let description4text = document.createTextNode("Zwei flinke Boxer jagen die quirlige Eva und ihren Mops durch Sylt. Franz jagt im komplett verwahrlosten Taxi quer durch Bayern. Zwölf Boxkämpfer jagen Viktor quer über den großen Sylter Deich. Vogel Quax zwickt Johnys Pferd Bim. Sylvia wagt quick den Jux bei Pforzheim. Polyfon zwitschernd aßen Mäxchens Vögel Rüben, Joghurt und Quark. Fix, Schwyz! quäkt Jürgen blöd vom Paß. Victor jagt zwölf Boxkämpfer quer über den großen Sylter Deich. Falsches Üben von Xylophonmusik quält jeden größeren Zwerg.");
             description4.appendChild(description4text);
             description3.replaceWith(description4);
-            alert("Sie haben " + window.numCorrect + " Fragen richtig beantwortet.");
-                        
+            alert("Sie haben " + window.numCorrect + " Fragen richtig beantwortet.");                        
         });
 
         //Button restart
@@ -359,12 +355,9 @@ function init () {
             let descriptionstarttext = document.createTextNode("Auch gibt es niemanden, der den Schmerz an sich liebt, sucht oder wünscht, nur, weil er Schmerz ist, es sei denn, es kommt zu zufälligen Umständen, in denen Mühen und Schmerz ihm große Freude bereiten können. Um ein triviales Beispiel zu nehmen, wer von uns unterzieht sich je anstrengender körperlicher Betätigung, außer um Vorteile daraus zu ziehen?");
             descriptionstart.appendChild(descriptionstarttext);
             
-            description4.replaceWith(descriptionstart);
-            
+            description4.replaceWith(descriptionstart);            
         });
-
     };
-
     buttons_init();
 };
 
@@ -558,27 +551,19 @@ function generateQuiz(questions, quizContainer, feedbackContainer, submitButton)
                 //get feedback WRONG from additiopnal property in myQuestions[]
                 feedback = '<br>' + questions[0].feedbackWrong + '<br>' + '<br>';
                 submitButton.disabled = true;
-            };           
-            
-            
-
-        };   
-        
+            }; 
+        };           
         feedbackContainer.innerHTML = feedback;  
-        
     };
 
-    
 
 	// show the questions
 	showQuestions(questions, quizContainer);
 
 	// when user clicks submit, show feedback abd store results
 	submitButton.onclick = function(){
-		showResults(questions, quizContainer, feedbackContainer);
-        
-	};
-    
+		showResults(questions, quizContainer, feedbackContainer);        
+	};    
 };
 
 //Quiz content bin ////////////////////////////////
