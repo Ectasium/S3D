@@ -381,59 +381,36 @@ var clickOnObjects = function (event) {
     raycaster_click.setFromCamera(clickMouse, camera);
 
     const found = raycaster_click.intersectObjects(scene.children, true);
+
+    function clickQuizObject (quizObject, quizContainerObject, feedbackContainerObject, submitButtonObject, object, closeObject) {
+        removeEventListener('mousemove', moveOnObjects); 
+        removeEventListener('click', clickOnObjects);
+        generateQuiz(quizObject, quizContainerObject, feedbackContainerObject, submitButtonObject);
+        var modal = document.getElementById(object);                
+        var close = document.getElementById(closeObject);
+        modal.style.display = "block";                 
+        //close modal               
+        close.onclick = function() {
+        modal.style.display = "none";
+        addEventListener('mousemove', moveOnObjects); 
+            setTimeout(function() {
+                addEventListener('click', clickOnObjects);    
+            }, 100);
+        }; 
+    };        
         
     switch (found.length > 0 && found[0].object.userData.name) {
         
             case 'printer_cube':
-                removeEventListener('mousemove', moveOnObjects); 
-                removeEventListener('click', clickOnObjects);
-                generateQuiz(quizPrinter, quizContainerPrinter, feedbackContainerPrinter, submitButtonPrinter);
-                var modal = document.getElementById("printer");                
-                var span_printer = document.getElementById("closePrinter");
-                modal.style.display = "block";                 
-                //close modal               
-                span_printer.onclick = function() {
-                modal.style.display = "none";
-                addEventListener('mousemove', moveOnObjects); 
-                    setTimeout(function() {
-                        addEventListener('click', clickOnObjects);    
-                    }, 100);
-                };                        
+                clickQuizObject(quizPrinter, quizContainerPrinter, feedbackContainerPrinter, submitButtonPrinter, "printer", "closePrinter");                               
             break;
         
             case 'note_cube':
-                removeEventListener('mousemove', moveOnObjects); 
-                removeEventListener('click', clickOnObjects);
-                generateQuiz(quizNote, quizContainerNote, feedbackContainerNote, submitButtonNote);
-                var modal = document.getElementById("note");                
-                var closeNote = document.getElementById("closeNote");
-                modal.style.display = "block";                 
-                //close modal               
-                closeNote.onclick = function() {
-                modal.style.display = "none";
-                addEventListener('mousemove', moveOnObjects); 
-                    setTimeout(function() {
-                        addEventListener('click', clickOnObjects);    
-                    }, 100);
-                };                        
+                clickQuizObject(quizNote, quizContainerNote, feedbackContainerNote, submitButtonNote, "note", "closeNote");             
             break;
 
-
             case 'ball_sphere':
-                removeEventListener('mousemove', moveOnObjects); 
-                removeEventListener('click', clickOnObjects);
-                generateQuiz(quizBasketball, quizContainerBasketball, feedbackContainerBasketball, submitButtonBasketball);
-                var modal = document.getElementById("basketball");                
-                var closeBasketball = document.getElementById("closeBasketball");
-                modal.style.display = "block";                 
-                //close modal               
-                closeBasketball.onclick = function() {
-                modal.style.display = "none";
-                addEventListener('mousemove', moveOnObjects); 
-                    setTimeout(function() {
-                        addEventListener('click', clickOnObjects);    
-                    }, 100);
-                };                        
+                clickQuizObject(quizBasketball, quizContainerBasketball, feedbackContainerBasketball, submitButtonBasketball, "basketball", "closeBasketball");                               
             break;
         
             case 'door_cube':
@@ -597,12 +574,8 @@ function generateQuiz(questions, quizContainer, feedbackContainer, submitButton)
 		showResults(questions, quizContainer, feedbackContainer);
         
 	};
-
-    
     
 };
-
-
 
 //Quiz content basketball ////////////////////////////////
 
