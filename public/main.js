@@ -90,16 +90,16 @@ function init () {
 
     // create add door box
     function add_door() {
-        const door_cube_geometry = new THREE.BoxGeometry(2.2, 5, 0.03);
+        const door_cube_geometry = new THREE.BoxGeometry(2.2, 5, 0.17);
         const door_cube_material = new THREE.MeshLambertMaterial( 
             {color: 0xff0000, 
             opacity: 0.6,
             transparent: true});
         const door_cube = new THREE.Mesh(door_cube_geometry, door_cube_material);
-        door_cube.position.set(-3.11, 0.5, -4.8);
+        door_cube.position.set(-3.11, 0.5, -5);
         door_cube.userData.name = 'door_cube';
         door_cube.userData.class = 'mouseover_object';
-        door_cube.visible = false;
+        door_cube.visible = true;
         return door_cube;
     };
     
@@ -129,7 +129,7 @@ function init () {
         note_cube.position.set(1.22, 0.43, 0.18);
         note_cube.userData.name = 'note_cube';
         note_cube.userData.class = 'mouseover_object';
-        note_cube.visible = true;
+        note_cube.visible = false;
         return note_cube;
     };
 
