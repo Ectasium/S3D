@@ -88,7 +88,6 @@ function init () {
         //scene.add(gltf.scene);
     });
 
-    // create add door box
     function add_door() {
         const door_cube_geometry = new THREE.BoxGeometry(2.2, 5, 0.17);
         const door_cube_material = new THREE.MeshLambertMaterial( 
