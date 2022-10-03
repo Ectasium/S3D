@@ -69,12 +69,12 @@ function init () {
     // Load/Create OBJECTS //////////////////////////////////////////////////////////////////////
     
     //background box
-    const background_geometry = new THREE.BoxGeometry(2, 2, 2);
+    /* const background_geometry = new THREE.BoxGeometry(2, 2, 2);
     const background_material = new THREE.MeshBasicMaterial( {color: 0x00ff00} );
     const background = new THREE.Mesh(background_geometry, background_material);
     background.position.set(0, 0, 0);
     background.visible = false;
-    scene.add(background);
+    scene.add(background); */
 
     // load office
     const office_loader = new GLTFLoader();
@@ -120,50 +120,50 @@ function init () {
     
     // create note cube
     function add_note() {
-        const note_cube_geometry = new THREE.BoxGeometry(0.18, 0.017, 0.18);
+        const note_cube_geometry = new THREE.BoxGeometry(0.19, 0.15, 0.19);
         const note_cube_material = new THREE.MeshLambertMaterial( 
             {color: 0xff0000, 
             opacity: 0.6,
             transparent: true});
         const note_cube = new THREE.Mesh(note_cube_geometry, note_cube_material);
-        note_cube.position.set(1.22, 0.43, 0.28);
+        note_cube.position.set(1.22, 0.43, 0.18);
         note_cube.userData.name = 'note_cube';
         note_cube.userData.class = 'mouseover_object';
-        note_cube.visible = false;
+        note_cube.visible = true;
         return note_cube;
     };
 
 
-    // create ball sphere ////////////////////////////////////////////////////////////////////
-    function add_ball() {
-        const ball_sphere_geometry = new THREE.SphereGeometry(0.5, 32, 32);
-        const ball_sphere_material = new THREE.MeshLambertMaterial( 
+    // create bin cube ////////////////////////////////////////////////////////////////////
+    function add_bin() {
+        const bin_cube_geometry = new THREE.BoxGeometry(0.77, 0.87, 0.77);
+        const bin_cube_material = new THREE.MeshLambertMaterial( 
             {color: 0xff0000, 
             opacity: 0.9,
             transparent: true});
-        const ball_sphere = new THREE.Mesh(ball_sphere_geometry, ball_sphere_material);
-        ball_sphere.position.set(4.3, -1.47, -4.19);
-        ball_sphere.userData.name = 'ball_sphere';
-        ball_sphere.userData.class = 'mouseover_object';
-        scene.add(ball_sphere);
-        ball_sphere.visible = false;
-        ball_sphere.material.opacity = 0.2;
-        return ball_sphere;
+        const bin_cube = new THREE.Mesh(bin_cube_geometry, bin_cube_material);
+        bin_cube.position.set(4.3, -1.47, -4.19);
+        bin_cube.userData.name = 'bin_cube';
+        bin_cube.userData.class = 'mouseover_object';
+        scene.add(bin_cube);
+        bin_cube.visible = false;
+        bin_cube.material.opacity = 0.2;
+        return bin_cube;
     };
           
-     // load factory /////////////////////////////////////////////
-     const factory_loader = new GLTFLoader();
-     url = new URL( './model/factory.glb', import.meta.url );
+     // load livingroom /////////////////////////////////////////////
+     const livingroom_loader = new GLTFLoader();
+     url = new URL( './model/livingroom.glb', import.meta.url );
      url = "" + url;
-     factory_loader.load(url, (gltf) => {
-         factory = gltf.scene.children[0];
-         factory.visible = true;
-         factory.scale.set(4, 4, 4);
-         factory.position.set(0, 4.5, 0);
-         factory.matrixAutoUpdate = true;
-         factory.updateMatrix();
-         //factory.rotation.x = Math.PI/-2;
-         //factory.rotation.y = 0.8;
+     livingroom_loader.load(url, (gltf) => {
+         livingroom = gltf.scene.children[0];
+         livingroom.visible = true;
+         livingroom.scale.set(2, 2, 2);
+         livingroom.position.set(0, 1.5, 0);
+         livingroom.matrixAutoUpdate = true;
+         livingroom.updateMatrix();
+         //livingroom.rotation.x = Math.PI/-2;
+         //livingrrom.rotation.y = 0.8;
          //scene.add(gltf.scene);
      });
 
@@ -199,7 +199,7 @@ function init () {
                  
      });
 
-    ball = add_ball();
+    bin = add_bin();
     printer = add_printer();
     door = add_door();
     note = add_note();
@@ -218,12 +218,12 @@ function init () {
         let button_restart = document.getElementById("button_restart");
         button_restart.style.display = "none"; 
         
-        //Button start show Factory
+        //Button start show livingroom
         let button_start = document.getElementById("button_start");        
 
         button_start.addEventListener("click", function() {
             scene.remove(world);
-            scene.add(factory);
+            scene.add(livingroom);
             controls.enabled = true;
             addEventListener('mousemove', moveOnObjects);
             addEventListener('click', clickOnObjects);
@@ -240,7 +240,7 @@ function init () {
                    
             // Create and insert new Headline
             let hl2 = document.createElement('h1');
-            let hl2text = document.createTextNode("How Secure is Your Workplace?");
+            let hl2text = document.createTextNode("How Secure is Your Home?");
             hl2.appendChild(hl2text);
             let main = document.querySelector('.flex-container > .main-content');
             main.insertAdjacentElement("afterbegin", hl2);
@@ -261,8 +261,8 @@ function init () {
 
         //Button show office
         button_next_1.addEventListener("click", function () {
-            scene.remove(factory);
-            scene.add(office, ball, printer, door, note);
+            scene.remove(livingroom);
+            scene.add(office, bin, printer, door, note);
             controls.reset();
             controls.enablePan = false;
             button_next_1.style.display = "none";
@@ -294,7 +294,7 @@ function init () {
 
         //Button show House
         button_next_2.addEventListener("click", function () {
-            scene.remove(office, ball, printer, door, note);
+            scene.remove(office, bin, printer, door, note);
             scene.add(house);
             controls.reset();
             controls.enablePan = false;
@@ -409,8 +409,8 @@ var clickOnObjects = function (event) {
                 clickQuizObject(quizNote, quizContainerNote, feedbackContainerNote, submitButtonNote, "note", "closeNote");             
             break;
 
-            case 'ball_sphere':
-                clickQuizObject(quizBasketball, quizContainerBasketball, feedbackContainerBasketball, submitButtonBasketball, "basketball", "closeBasketball");                               
+            case 'bin_cube':
+                clickQuizObject(quizBin, quizContainerBin, feedbackContainerBin, submitButtonBin, "bin", "closeBin");                               
             break;
         
             case 'door_cube':
@@ -462,8 +462,8 @@ var moveOnObjects = function (event) {
                     note.visible = true;
                     break;
 
-            case 'ball_sphere':
-                ball.visible = true;
+            case 'bin_cube':
+                bin.visible = true;
                 break;
 
             case 'door_cube':
@@ -471,7 +471,7 @@ var moveOnObjects = function (event) {
                 break;
 
             default:
-                ball.visible = false;
+                bin.visible = false;
                 printer.visible = false;
                 door.visible = false;
                 note.visible = false;
@@ -578,15 +578,15 @@ function generateQuiz(questions, quizContainer, feedbackContainer, submitButton)
     
 };
 
-//Quiz content basketball ////////////////////////////////
+//Quiz content bin ////////////////////////////////
 
-var quizContainerBasketball = document.getElementById('quizBasketball');
-var feedbackContainerBasketball = document.getElementById('feedbackBasketball');
-var submitButtonBasketball = document.getElementById('submitBasketball');
+var quizContainerBin = document.getElementById('quizBin');
+var feedbackContainerBin = document.getElementById('feedbackBin');
+var submitButtonBin = document.getElementById('submitBin');
 
-var quizBasketball = [
+var quizBin = [
 	{
-		question: "Ok, this is just an ordinary basketball - and not a USB drive. But if it were, what dangers would it pose? Choose the correct answer.",
+		question: "This is a bin. But if it were, what dangers would it pose? Choose the correct answer.",
 		answers: {
 			a: 'It could store too much data.',
 			b: 'It could spread malware when thoughtlessly used.',
