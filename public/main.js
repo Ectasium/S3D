@@ -120,16 +120,16 @@ function init () {
     
     // create note cube
     function add_note() {
-        const note_cube_geometry = new THREE.BoxGeometry(0.77, 0.77, 0.87);
+        const note_cube_geometry = new THREE.BoxGeometry(0.18, 0.017, 0.18);
         const note_cube_material = new THREE.MeshLambertMaterial( 
             {color: 0xff0000, 
             opacity: 0.6,
             transparent: true});
         const note_cube = new THREE.Mesh(note_cube_geometry, note_cube_material);
-        note_cube.position.set(1.44, 0, 3.56);
+        note_cube.position.set(1.22, 0.43, 0.28);
         note_cube.userData.name = 'note_cube';
         note_cube.userData.class = 'mouseover_object';
-        note_cube.visible = true;
+        note_cube.visible = false;
         return note_cube;
     };
 
@@ -474,6 +474,7 @@ var moveOnObjects = function (event) {
                 ball.visible = false;
                 printer.visible = false;
                 door.visible = false;
+                note.visible = false;
                 break;
         };
     };
