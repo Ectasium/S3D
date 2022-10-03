@@ -33,14 +33,18 @@ function init () {
     renderer = new THREE.WebGLRenderer({
         antialias: true,
         alpha: true,
+        logarithmicDepthBuffer: true,
         canvas: model_container
     });
     renderer.setSize(canvasSize.offsetWidth, canvasSize.offsetHeight);
     renderer.setPixelRatio((window.devicePixelRatio) ? window.devicePixelRatio : 1);
-    renderer.autoClear = false;
-    renderer.setClearColor(0x000000, 0.0);
+    renderer.outputEncoding = THREE.sRGBEncoding;
+	renderer.physicallyCorrectLights = true;
+    /* renderer.autoClear = false;
+    renderer.setClearColor(0x000000, 0.0); */
 
-    //CONTROLS //////////////////////////////////////////////////////////////////
+
+   //CONTROLS //////////////////////////////////////////////////////////////////
     const controls = new OrbitControls(camera, renderer.domElement);
     controls.enabled = false;
     controls.target.set(0,0,0);
@@ -56,10 +60,10 @@ function init () {
     controls.maxPolarAngle = Math.PI * 0.6;
 
     //LIGHT ////////////////////////////////////////////////////////////////////////
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
-    const hemisphereLight = new THREE.HemisphereLight(0xffffff, 1.5);
-    const spotLight1 = new THREE.SpotLight(0xffffff, 0.3);
-    const spotLight2 = new THREE.SpotLight(0xffffff, 0.3);
+    const ambientLight = new THREE.AmbientLight( 0xffffff, 2 ); // soft white light
+	const hemisphereLight = new THREE.HemisphereLight(0xffffff, 0.5);
+    const spotLight1 = new THREE.SpotLight(0xffffff, 3);
+    const spotLight2 = new THREE.SpotLight(0xffffff, 3);
     spotLight1.position.set(20, 30, 0);
     spotLight1.castShadow = true;
     spotLight2.position.set(0, 10, 10);
