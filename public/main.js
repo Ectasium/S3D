@@ -170,7 +170,7 @@ function init () {
          //scene.add(gltf.scene);
      });
 
-     // load world
+     // load world ////////
      function add_world() {
      const world_loader = new GLTFLoader();
      url = new URL( './model/world.glb', import.meta.url );
@@ -187,19 +187,32 @@ function init () {
         });
     };     
 
-     // load house
-     const house_loader = new GLTFLoader();
-     url = new URL( './model/house.glb', import.meta.url );
+     // load factory
+     const factory_loader = new GLTFLoader();
+     url = new URL( './model/factory.glb', import.meta.url );
      url = "" + url;
-     house_loader.load(url, (gltf) => {
-         house = gltf.scene.children[0];
-         house.visible = true;
-         house.scale.set(12, 12, 12);
-         house.position.set(0, 1.4, 0);
-         //house.rotation.x = Math.PI/-2;
-         //house.rotation.y = 0.8;
+     factory_loader.load(url, (gltf) => {
+         factory = gltf.scene.children[0];
+         factory.visible = true;
+         factory.scale.set(1, 1, 1);
+         factory.position.set(0, 3.2, 0);
+         //factory.rotation.x = Math.PI/-2;
+         //factory.rotation.y = 0.8;
          //scene.add(gltf.scene);
      });
+
+     // load score
+     const score_loader = new GLTFLoader();
+     url = new URL( './model/score.glb', import.meta.url );
+     url = "" + url;
+     score_loader.load(url, (gltf) => {
+         score = gltf.scene.children[0];
+         score.visible = true;
+         score.scale.set(10, 10, 10);
+         score.position.set(0, 0.7, 0);
+         
+     });
+
 
     bin = add_bin();
     printer = add_printer();
@@ -215,8 +228,13 @@ function init () {
         //Initialize and hide buttons
         let button_next_1 = document.getElementById("button_next_1");
         button_next_1.style.display = "none"; 
+        
         let button_next_2 = document.getElementById("button_next_2");
         button_next_2.style.display = "none"; 
+        
+        let button_next_3 = document.getElementById("button_next_3");
+        button_next_3.style.display = "none"; 
+        
         let button_restart = document.getElementById("button_restart");
         button_restart.style.display = "none"; 
         
@@ -242,7 +260,7 @@ function init () {
                    
             // Create and insert new Headline
             let hl2 = document.createElement('h1');
-            let hl2text = document.createTextNode("How Secure is Your Home?");
+            let hl2text = document.createTextNode("How Secure is Your Leisure Time?");
             hl2.appendChild(hl2text);
             let main = document.querySelector('.flex-container > .main-content');
             main.insertAdjacentElement("afterbegin", hl2);
@@ -255,7 +273,7 @@ function init () {
                    
             // Create and insert new description
             let description2 = document.createElement('p');
-            let description2text = document.createTextNode("Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo.");
+            let description2text = document.createTextNode("Leisure Time: Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo.");
             description2.appendChild(description2text);
             description_start.replaceWith(description2);            
         });
@@ -287,26 +305,26 @@ function init () {
             let description2 = document.querySelector('.flex-container > .main-content > p');                               
             // Replace description
             let description3 = document.createElement('p');
-            let description3text = document.createTextNode("Jemand musste Josef K. verleumdet haben, denn ohne dass er etwas Böses getan hätte, wurde er eines Morgens verhaftet. »Wie ein Hund!« sagte er, es war, als sollte die Scham ihn überleben. Als Gregor Samsa eines Morgens aus unruhigen Träumen erwachte, fand er sich in seinem Bett zu einem ungeheueren Ungeziefer verwandelt. Und es war ihnen wie eine Bestätigung ihrer neuen Träume und guten Absichten, als am Ziele ihrer Fahrt die Tochter als erste sich erhob und ihren jungen Körper dehnte.");
+            let description3text = document.createTextNode("Office at Home: Jemand musste Josef K. verleumdet haben, denn ohne dass er etwas Böses getan hätte, wurde er eines Morgens verhaftet. »Wie ein Hund!« sagte er, es war, als sollte die Scham ihn überleben. Als Gregor Samsa eines Morgens aus unruhigen Träumen erwachte, fand er sich in seinem Bett zu einem ungeheueren Ungeziefer verwandelt. Und es war ihnen wie eine Bestätigung ihrer neuen Träume und guten Absichten, als am Ziele ihrer Fahrt die Tochter als erste sich erhob und ihren jungen Körper dehnte.");
             description3.appendChild(description3text);
             description2.replaceWith(description3);            
         });
 
-        //Button show House
+        //Button show Factory
         button_next_2.addEventListener("click", function () {
             scene.remove(office, bin, printer, door, note);
-            scene.add(house);
+            scene.add(factory);
             controls.reset();
             controls.enablePan = false;
-            button_restart.style.display = "block";
             button_next_2.style.display = "none";
+            button_next_3.style.display = "block";
 
             // Delete old HL
             let hl3 = document.querySelector('.flex-container > .main-content > h1');
             hl3.remove();                    
             // Create and insert new Headline
             let hl4 = document.createElement('h1');
-            let hl4text = document.createTextNode("How Secure is Your Desktop Computer?");
+            let hl4text = document.createTextNode("How Secure is Your Workplace?");
             hl4.appendChild(hl4text);
             let main = document.querySelector('.flex-container > .main-content');
             main.insertAdjacentElement("afterbegin", hl4);                      
@@ -317,15 +335,47 @@ function init () {
             let description3 = document.querySelector('.flex-container > .main-content > p');                               
             // Replace description
             let description4 = document.createElement('p');
-            let description4text = document.createTextNode("Zwei flinke Boxer jagen die quirlige Eva und ihren Mops durch Sylt. Franz jagt im komplett verwahrlosten Taxi quer durch Bayern. Zwölf Boxkämpfer jagen Viktor quer über den großen Sylter Deich. Vogel Quax zwickt Johnys Pferd Bim. Sylvia wagt quick den Jux bei Pforzheim. Polyfon zwitschernd aßen Mäxchens Vögel Rüben, Joghurt und Quark. Fix, Schwyz! quäkt Jürgen blöd vom Paß. Victor jagt zwölf Boxkämpfer quer über den großen Sylter Deich. Falsches Üben von Xylophonmusik quält jeden größeren Zwerg.");
+            let description4text = document.createTextNode("Workplace: Zwei flinke Boxer jagen die quirlige Eva und ihren Mops durch Sylt. Franz jagt im komplett verwahrlosten Taxi quer durch Bayern. Zwölf Boxkämpfer jagen Viktor quer über den großen Sylter Deich. Vogel Quax zwickt Johnys Pferd Bim. Sylvia wagt quick den Jux bei Pforzheim. Polyfon zwitschernd aßen Mäxchens Vögel Rüben, Joghurt und Quark. Fix, Schwyz! quäkt Jürgen blöd vom Paß. Victor jagt zwölf Boxkämpfer quer über den großen Sylter Deich. Falsches Üben von Xylophonmusik quält jeden größeren Zwerg.");
             description4.appendChild(description4text);
             description3.replaceWith(description4);
-            alert("Sie haben " + window.numCorrect + " Fragen richtig beantwortet.");                        
+                                    
         });
 
+    // Button show Score page
+    button_next_3.addEventListener("click", function () {
+        scene.remove(factory);
+        scene.add(score);
+        controls.reset();
+        controls.enablePan = false;
+        button_next_3.style.display = "none";
+        button_restart.style.display = "block";
+
+        // Delete old HL
+        let hl4 = document.querySelector('.flex-container > .main-content > h1');
+        hl4.remove();                    
+        // Create and insert new Headline
+        let hl5 = document.createElement('h1');
+        let hl5text = document.createTextNode("This is the End of the Training - and this is Your Score");
+        hl5.appendChild(hl5text);
+        let main = document.querySelector('.flex-container > .main-content');
+        main.insertAdjacentElement("afterbegin", hl5);                      
+
+        // Change description //////////////////////////
+        
+        // Old description
+        let description4 = document.querySelector('.flex-container > .main-content > p');                               
+        // Replace description
+        let description5 = document.createElement('p');
+        let description5text = document.createTextNode("The End of the Training: Thank you very much. We hope you had the same fun playing what we had creating this game. See you next time!");
+        description5.appendChild(description5text);
+        description4.replaceWith(description5);
+        alert("You Correctly Answered " + window.numCorrect + " Questions.");  
+                             
+    });
+        
         //Button restart
         button_restart.addEventListener("click", function () {
-            scene.remove(house);
+            scene.remove(score);
             scene.add(world);
             controls.reset();
             removeEventListener('mousemove', moveOnObjects);
@@ -338,7 +388,7 @@ function init () {
                     
             // Create and insert new HL
             let hlstart = document.createElement('h1');
-            let hlstarttext = document.createTextNode("How Secure is Your Global Work Environment?");
+            let hlstarttext = document.createTextNode("How Secure is Your Global Work Environment");
             hlstart.appendChild(hlstarttext);
             let main = document.querySelector('.flex-container > .main-content');
             main.insertAdjacentElement("afterbegin", hlstart);
@@ -352,10 +402,10 @@ function init () {
                                
             // Replace description
             let descriptionstart = document.createElement('p');
-            let descriptionstarttext = document.createTextNode("Auch gibt es niemanden, der den Schmerz an sich liebt, sucht oder wünscht, nur, weil er Schmerz ist, es sei denn, es kommt zu zufälligen Umständen, in denen Mühen und Schmerz ihm große Freude bereiten können. Um ein triviales Beispiel zu nehmen, wer von uns unterzieht sich je anstrengender körperlicher Betätigung, außer um Vorteile daraus zu ziehen?");
-            descriptionstart.appendChild(descriptionstarttext);
-            
-            description4.replaceWith(descriptionstart);            
+            let descriptionstarttext = document.createTextNode("Global Work Environment: Auch gibt es niemanden, der den Schmerz an sich liebt, sucht oder wünscht, nur, weil er Schmerz ist, es sei denn, es kommt zu zufälligen Umständen, in denen Mühen und Schmerz ihm große Freude bereiten können. Um ein triviales Beispiel zu nehmen, wer von uns unterzieht sich je anstrengender körperlicher Betätigung, außer um Vorteile daraus zu ziehen? ");
+            descriptionstart.appendChild(descriptionstarttext);            
+            description4.replaceWith(descriptionstart);   
+                      
         });
     };
     buttons_init();
