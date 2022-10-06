@@ -44,7 +44,6 @@ function init () {
     /* renderer.autoClear = false;
     renderer.setClearColor(0x000000, 0.0); */
 
-
    //CONTROLS //////////////////////////////////////////////////////////////////
     const controls = new OrbitControls(camera, renderer.domElement);
     controls.enabled = false;
@@ -335,8 +334,7 @@ function init () {
             let hl3text = document.createTextNode("How Secure is Your Office at Home?");
             hl3.appendChild(hl3text);
             let main = document.querySelector('.flex-container > .main-content');
-            main.insertAdjacentElement("afterbegin", hl3);
-                       
+            main.insertAdjacentElement("afterbegin", hl3);                       
 
             // Change description //////////////////////////
             
