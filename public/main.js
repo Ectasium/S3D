@@ -89,18 +89,23 @@ function init () {
         cube.visible = true;
 
         var box = gui.addFolder('Object Dimensions');
-        box.add(cube.scale, 'x', 0, 3).name('Width').listen();
-        box.add(cube.scale, 'y', 0, 3).name('Height').listen();
-        box.add(cube.scale, 'z', 0, 3).name('Length').listen();
+        box.add(cube.scale, 'x', 0, 3, 0.01).name('Width').listen();
+        box.add(cube.scale, 'y', 0, 3, 0.01).name('Height').listen();
+        box.add(cube.scale, 'z', 0, 3, 0.01).name('Length').listen();
         box.open();
 
         var box = gui.addFolder('Object Position');
-        box.add(cube.position, 'x', -10, 10).name('x-Position').listen();
-        box.add(cube.position, 'y', -10, 10).name('y-Position').listen();
-        box.add(cube.position, 'z', -10, 10).name('z-Position').listen();
-        box.add(cube.material, 'wireframe').listen();
+        box.add(cube.position, 'x', -8, 8, 0.01).name('x-Position').listen();
+        box.add(cube.position, 'y', -8, 8, 0.01).name('y-Position').listen();
+        box.add(cube.position, 'z', -8, 8, 0.01).name('z-Position').listen();
         box.open();
         
+        var box = gui.addFolder('Object Rotation');
+        box.add(cube.rotation, 'x', -1.5, 1.5, 0.01).name('x-Rotation').listen();
+        box.add(cube.rotation, 'y', -1.5, 1.5, 0.01).name('y-Rotation').listen();
+        box.add(cube.rotation, 'z', -1.5, 1.5, 0.01).name('z-Rotation').listen();
+        box.add(cube.material, 'wireframe').listen();
+        box.open();
         //gui.add(options, 'reset');
 
     };
@@ -174,7 +179,6 @@ function init () {
         return note_cube;
     };
 
-
     // create bin cube ////////////////////////////////////////////////////////////////////
     function add_bin() {
         const bin_cube_geometry = new THREE.BoxGeometry(0.77, 0.87, 0.77);
@@ -186,7 +190,6 @@ function init () {
         bin_cube.position.set(4.3, -1.47, -4.19);
         bin_cube.userData.name = 'bin_cube';
         bin_cube.userData.class = 'mouseover_object';
-        scene.add(bin_cube);
         bin_cube.visible = false;
         bin_cube.material.opacity = 0.2;
         return bin_cube;
