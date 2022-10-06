@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+import { GUI } from 'dat.gui';
 
 let office;
 let camera;
@@ -70,6 +71,42 @@ function init () {
     spotLight2.castShadow = true;
     scene.add(ambientLight, hemisphereLight, spotLight1, spotLight2);
 
+    // GUI ////////////////////////////////////
+
+    function testObject() {
+    
+        var gui = new GUI();
+
+        const cube_geometry = new THREE.BoxGeometry(1, 1, 1);
+        const cube_material = new THREE.MeshLambertMaterial( 
+            {color: 0x08f26e, 
+            opacity: 0.6,
+            transparent: true});
+        const cube = new THREE.Mesh(cube_geometry, cube_material);
+        cube.position.set(0, 0, 0);
+        scene.add(cube);
+
+        cube.visible = true;
+
+        var box = gui.addFolder('Object Dimensions');
+        box.add(cube.scale, 'x', 0, 3).name('Width').listen();
+        box.add(cube.scale, 'y', 0, 3).name('Height').listen();
+        box.add(cube.scale, 'z', 0, 3).name('Length').listen();
+        box.open();
+
+        var box = gui.addFolder('Object Position');
+        box.add(cube.position, 'x', -10, 10).name('x-Position').listen();
+        box.add(cube.position, 'y', -10, 10).name('y-Position').listen();
+        box.add(cube.position, 'z', -10, 10).name('z-Position').listen();
+        box.add(cube.material, 'wireframe').listen();
+        box.open();
+        
+        //gui.add(options, 'reset');
+
+    };
+
+    testObject();
+
     // Load/Create OBJECTS //////////////////////////////////////////////////////////////////////
     
     //background box
@@ -120,7 +157,8 @@ function init () {
         printer_cube.visible = false;
         return printer_cube;
     };
-    
+       
+
     // create note cube
     function add_note() {
         const note_cube_geometry = new THREE.BoxGeometry(0.19, 0.15, 0.19);
@@ -219,7 +257,7 @@ function init () {
     world = add_world();
     removeEventListener('mousemove', moveOnObjects);
     removeEventListener('click', clickOnObjects);
-    
+
     // BUTTONS - Change scenes /////////////////////////////////////////////////////////////
 
     function buttons_init() {
@@ -670,6 +708,7 @@ var quizNote = [
 ];
 
 // Generate Quizzes End /////////////////////////////////////////////////////////////////
+
 
 // Render scene and camera
 const render = () => {
