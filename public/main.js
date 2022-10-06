@@ -295,7 +295,7 @@ function init () {
             hl3.appendChild(hl3text);
             let main = document.querySelector('.flex-container > .main-content');
             main.insertAdjacentElement("afterbegin", hl3);
-           
+                       
 
             // Change description //////////////////////////
             
@@ -600,7 +600,6 @@ function generateQuiz(questions, quizContainer, feedbackContainer, submitButton)
         };           
         feedbackContainer.innerHTML = feedback; 
     };
-
 
 	// show the questions
 	showQuestions(questions, quizContainer);
