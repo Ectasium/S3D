@@ -37,6 +37,7 @@ function init () {
         logarithmicDepthBuffer: true,
         canvas: model_container
     });
+    
     renderer.setSize(canvasSize.offsetWidth, canvasSize.offsetHeight);
     renderer.setPixelRatio((window.devicePixelRatio) ? window.devicePixelRatio : 1);
     renderer.outputEncoding = THREE.sRGBEncoding;
