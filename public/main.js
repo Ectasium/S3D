@@ -110,18 +110,10 @@ function init () {
 
     };
 
-    testObject();
+    //testObject();
 
     // Load/Create OBJECTS //////////////////////////////////////////////////////////////////////
     
-    //background box
-    /* const background_geometry = new THREE.BoxGeometry(2, 2, 2);
-    const background_material = new THREE.MeshBasicMaterial( {color: 0x00ff00} );
-    const background = new THREE.Mesh(background_geometry, background_material);
-    background.position.set(0, 0, 0);
-    background.visible = false;
-    scene.add(background); */
-
     // load office
     const office_loader = new GLTFLoader();
     url = new URL( './model/office.glb', import.meta.url );
@@ -194,7 +186,8 @@ function init () {
         bin_cube.material.opacity = 0.2;
         return bin_cube;
     };
-          
+    
+        
      // load livingroom /////////////////////////////////////////////
      const livingroom_loader = new GLTFLoader();
      url = new URL( './model/livingroom.glb', import.meta.url );
@@ -210,6 +203,22 @@ function init () {
          //livingrrom.rotation.y = 0.8;
          //scene.add(gltf.scene);
      });
+
+     //add camera_cube //////////
+     function add_cctv() {
+        const cctv_cube_geometry = new THREE.BoxGeometry(0.61, 0.41, 0.41);
+        const cctv_cube_material = new THREE.MeshLambertMaterial( 
+            {color: 0xff0000, 
+            opacity: 0.9,
+            transparent: true});
+        const cctv_cube = new THREE.Mesh(cctv_cube_geometry, cctv_cube_material);
+        cctv_cube.position.set(3.89, 3.89, -4.58);
+        cctv_cube.userData.name = 'ccvt_cube';
+        cctv_cube.userData.class = 'mouseover_object';
+        cctv_cube.visible = false;
+        cctv_cube.material.opacity = 0.2;
+        return cctv_cube;
+    };
 
      // load world ////////
      function add_world() {
@@ -257,7 +266,9 @@ function init () {
     printer = add_printer();
     door = add_door();
     note = add_note();
+    cctv = add_cctv();
     world = add_world();
+
     removeEventListener('mousemove', moveOnObjects);
     removeEventListener('click', clickOnObjects);
 
@@ -282,7 +293,7 @@ function init () {
 
         button_start.addEventListener("click", function() {
             scene.remove(world);
-            scene.add(livingroom);
+            scene.add(livingroom, cctv);
             controls.enabled = true;
             addEventListener('mousemove', moveOnObjects);
             addEventListener('click', clickOnObjects);
@@ -319,7 +330,7 @@ function init () {
 
         //Button show office
         button_next_1.addEventListener("click", function () {
-            scene.remove(livingroom);
+            scene.remove(livingroom, cctv);
             scene.add(office, bin, printer, door, note);
             controls.reset();
             controls.enablePan = false;
@@ -478,8 +489,24 @@ var clickOnObjects = function (event) {
                 addEventListener('click', clickOnObjects);    
             }, 100);
         }; 
-    };        
-        
+    };  
+
+    function clickInfoObject (object, closeObject) {
+        removeEventListener('mousemove', moveOnObjects); 
+        removeEventListener('click', clickOnObjects);
+        var modal = document.getElementById(object);
+        var close = document.getElementById(closeObject);
+        modal.style.display = "block";
+        //close modal
+        close.onclick = function() {
+        modal.style.display = "none";
+        addEventListener('mousemove', moveOnObjects); 
+            setTimeout(function() {
+                addEventListener('click', clickOnObjects);    
+            }, 100);
+        };    
+    };
+            
     switch (found.length > 0 && found[0].object.userData.name) {
         
             case 'printer_cube':
@@ -495,25 +522,16 @@ var clickOnObjects = function (event) {
             break;
         
             case 'door_cube':
-                removeEventListener('mousemove', moveOnObjects); 
-                removeEventListener('click', clickOnObjects);
-                var modal = document.getElementById("door");
-                var closeDoor = document.getElementById("closeDoor");
-                modal.style.display = "block";
-                //close modal
-                closeDoor.onclick = function() {
-                modal.style.display = "none";
-                addEventListener('mousemove', moveOnObjects); 
-                    setTimeout(function() {
-                        addEventListener('click', clickOnObjects);    
-                    }, 100);
-                };                        
+                clickInfoObject ("door", "closeDoor");                  
+            break;
+
+            case 'cctv_cube':
+                clickInfoObject ("cctv", "closeCctv");                  
             break;
     };
 };
 
 addEventListener('click', clickOnObjects);
-
 
 // Raycaster onMouseOver Clickobjects/////////////////////////////////////////
 
@@ -551,11 +569,16 @@ var moveOnObjects = function (event) {
                 door.visible = true;
                 break;
 
+            case 'cctv_cube':
+                cctv.visible = true;
+                break;
+
             default:
                 bin.visible = false;
                 printer.visible = false;
                 door.visible = false;
                 note.visible = false;
+                cctv.visible = false;
                 break;
         };
     };
