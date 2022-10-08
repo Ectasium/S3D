@@ -125,7 +125,7 @@ function init () {
         office.position.set(0, 1.5, 0);
         //scene.add(gltf.scene);
     });
-
+   
     function add_door() {
         const door_cube_geometry = new THREE.BoxGeometry(2.2, 5, 0.17);
         const door_cube_material = new THREE.MeshLambertMaterial( 
@@ -236,7 +236,7 @@ function init () {
         return roomba_cube;
     };
 
-    //add alexa_cube //////////
+    //add alexa_cube 
     function add_alexa() {
         const alexa_cube_geometry = new THREE.BoxGeometry(0.3, 0.38, 0.34);
         const alexa_cube_material = new THREE.MeshLambertMaterial( 
@@ -250,6 +250,38 @@ function init () {
         alexa_cube.visible = false;
         alexa_cube.material.opacity = 0.2;
         return alexa_cube;
+    };
+
+    //add smartcontrol_cube 
+    function add_smartcontrol() {
+        const smartcontrol_cube_geometry = new THREE.BoxGeometry(0.15, 0.41, 0.58);
+        const smartcontrol_cube_material = new THREE.MeshLambertMaterial( 
+            {color: 0xff0000, 
+            opacity: 0.9,
+            transparent: true});
+        const smartcontrol_cube = new THREE.Mesh(smartcontrol_cube_geometry, smartcontrol_cube_material);
+        smartcontrol_cube.position.set(4.6, 1.07, -1.22);
+        smartcontrol_cube.userData.name = 'smartcontrol_cube';
+        smartcontrol_cube.userData.class = 'mouseover_object';
+        smartcontrol_cube.visible = false;
+        smartcontrol_cube.material.opacity = 0.2;
+        return smartcontrol_cube;
+    };
+
+    //add tv_cube 
+    function add_tv() {
+        const tv_cube_geometry = new THREE.BoxGeometry(0.25, 1.04, 1.7);
+        const tv_cube_material = new THREE.MeshLambertMaterial( 
+            {color: 0xff0000, 
+            opacity: 0.9,
+            transparent: true});
+        const tv_cube = new THREE.Mesh(tv_cube_geometry, tv_cube_material);
+        tv_cube.position.set(-4.05, 0.37, -1.05);
+        tv_cube.userData.name = 'tv_cube';
+        tv_cube.userData.class = 'mouseover_object';
+        tv_cube.visible = false;
+        tv_cube.material.opacity = 0.2;
+        return tv_cube;
     };
 
      // load world ////////
@@ -360,6 +392,8 @@ function init () {
     trash = add_trash();
     alexa = add_alexa();
     backpack = add_backpack();
+    smartcontrol = add_smartcontrol();
+    tv = add_tv();
 
     removeEventListener('mousemove', moveOnObjects);
     removeEventListener('click', clickOnObjects);
@@ -385,12 +419,13 @@ function init () {
 
         button_start.addEventListener("click", function() {
             scene.remove(world);
-            scene.add(livingroom, cctv, roomba, alexa);
+            scene.add(livingroom, cctv, roomba, alexa, smartcontrol, tv);
             controls.enabled = true;
             addEventListener('mousemove', moveOnObjects);
             addEventListener('click', clickOnObjects);
             controls.reset(); 
             controls.enablePan = false; 
+            ambientLight.intensity = 0.01;
             button_start.style.display = "none";
             button_next_1.style.display = "block";
             
@@ -422,10 +457,11 @@ function init () {
 
         //Button show office /////////////////////////////////////////////////////////////////////
         button_next_1.addEventListener("click", function () {
-            scene.remove(livingroom, cctv, roomba, alexa);
+            scene.remove(livingroom, cctv, roomba, alexa, smartcontrol, tv);
             scene.add(office, bin, printer, door, note);
             controls.reset();
             controls.enablePan = false;
+            ambientLight.intensity = 2;
             button_next_1.style.display = "none";
             button_next_2.style.display = "block";
             
@@ -644,6 +680,14 @@ var clickOnObjects = function (event) {
             case 'backpack_cube':
                 clickQuizObject(quizBackpack, quizContainerBackpack, feedbackContainerBackpack, submitButtonBackpack, "backpack", "closeBackpack");                               
             break;
+
+            case 'smartcontrol_cube':
+                clickQuizObject(quizSmartcontrol, quizContainerSmartcontrol, feedbackContainerSmartcontrol, submitButtonSmartcontrol, "smartcontrol", "closeSmartcontrol");                               
+            break;
+
+            case 'tv_cube':
+                clickQuizObject(quizTv, quizContainerTv, feedbackContainerTv, submitButtonTv, "tv", "closeTv");                               
+            break;
     };
 };
 
@@ -709,6 +753,14 @@ var moveOnObjects = function (event) {
                 backpack.visible = true;
                 break;
 
+            case 'smartcontrol_cube':
+                smartcontrol.visible = true;
+                break;
+
+            case 'tv_cube':
+                tv.visible = true;
+                break;
+
             default:
                 bin.visible = false;
                 printer.visible = false;
@@ -720,6 +772,8 @@ var moveOnObjects = function (event) {
                 trash.visible = false;
                 alexa.visible = false;
                 backpack.visible = false;
+                smartcontrol.visible = false;
+                tv.visible = false;
                 break;
         };
     };
@@ -950,6 +1004,47 @@ var quizTrash = [
 		correctAnswer: 'b', 
         feedbackRight: 'Correct! Among social engineers dumpster diving is a common practice to retrieve information even from trash.',
         feedbackWrong: 'No! Think twice: What could be among the trash like printouts with confidential information which have not been properly destroyed?'
+	},
+];
+
+
+//Quiz content smart-control ////////////////////////////////////
+
+var quizContainerSmartcontrol = document.getElementById('quizSmartcontrol');
+var feedbackContainerSmartcontrol = document.getElementById('feedbackSmartcontrol');
+var submitButtonSmartcontrol = document.getElementById('submitSmartcontrol');
+
+var quizSmartcontrol = [
+	{
+		question: "This is a smart control panel. From here you may control all of your smart devices. But what should you always consider when setting new devices up?",
+		answers: {
+			a: 'Nothing special. It is supposed to be a smart home, right?',
+			b: 'Always change the default password, and set up an encrypted connection, if possible.',
+        },
+		correctAnswer: 'b',
+        feedbackRight: 'Right. It is always a good idea to take secuity measures into account, when setting up any smart device.',
+        feedbackWrong: 'No, smart does not necessarily mean, that devices are secure by default.'
+	},
+];
+
+// Quiz content TV //////////
+
+var quizContainerTv = document.getElementById('quizTv');
+var feedbackContainerTv = document.getElementById('feedbackTv');
+var submitButtonTv = document.getElementById('submitTv');
+
+var quizTv = [
+	{
+		question: "This is a smart TV. It relies on a Wifi connection to work properly. Which problems could occur?",
+		answers: {
+			a: 'It could play the wrong movie.',
+			b: 'When connected to your Wifi it could be misused by hackers.',
+			c: 'When left alone it could stop working.',
+            d: 'This is a save device, it should be fine.',
+        },
+		correctAnswer: 'b', 
+        feedbackRight: 'Yes, that was right! All devices connected to your Wifi are potential backdors for hackers.',
+        feedbackWrong: 'Sorry, this is not the right answer. Any device connected to a Wifi could be misused from outside.'
 	},
 ];
 
