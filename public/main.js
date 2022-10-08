@@ -286,6 +286,24 @@ function init () {
         return car_cube;
     };
 
+     // add trash cube ///////////////
+
+     function add_trash() {
+        const trash_cube_geometry = new THREE.BoxGeometry(1.04, 0.44, 0.44);
+        const trash_cube_material = new THREE.MeshLambertMaterial( 
+            {color: 0xff0000, 
+            opacity: 0.9,
+            transparent: true});
+        const trash_cube = new THREE.Mesh(trash_cube_geometry, trash_cube_material);
+        trash_cube.position.set(0.19, 0.37, -2.99);
+        trash_cube.userData.name = 'trash_cube';
+        trash_cube.userData.class = 'mouseover_object';
+        trash_cube.visible = false;
+        trash_cube.material.opacity = 0.2;
+        return trash_cube;
+    };
+
+
 
      // load score
      const score_loader = new GLTFLoader();
@@ -306,6 +324,7 @@ function init () {
     world = add_world();
     roomba = add_roomba();
     car = add_car();
+    trash = add_trash();
 
     removeEventListener('mousemove', moveOnObjects);
     removeEventListener('click', clickOnObjects);
@@ -400,7 +419,7 @@ function init () {
         //Button show Factory
         button_next_2.addEventListener("click", function () {
             scene.remove(office, bin, printer, door, note);
-            scene.add(factory, car);
+            scene.add(factory, car, trash);
             controls.reset();
             controls.enablePan = false;
             button_next_2.style.display = "none";
@@ -429,7 +448,7 @@ function init () {
 
     // Button show Score page
     button_next_3.addEventListener("click", function () {
-        scene.remove(factory, car);
+        scene.remove(factory, car, trash);
         scene.add(score);
         controls.reset();
         controls.enablePan = false;
@@ -578,6 +597,10 @@ var clickOnObjects = function (event) {
             case 'car_cube':
                 clickInfoObject("car", "closeCar");                               
             break;
+
+            case 'trash_cube':
+                clickQuizObject(quizTrash, quizContainerTrash, feedbackContainerTrash, submitButtonTrash, "trash", "closeTrash");                               
+            break;
     };
 };
 
@@ -631,6 +654,10 @@ var moveOnObjects = function (event) {
                 car.visible = true;
                 break;
 
+            case 'trash_cube':
+                trash.visible = true;
+                break;
+
             default:
                 bin.visible = false;
                 printer.visible = false;
@@ -639,6 +666,7 @@ var moveOnObjects = function (event) {
                 cctv.visible = false;
                 roomba.visible = false;
                 car.visible = false;
+                trash.visible = false;
                 break;
         };
     };
@@ -810,6 +838,26 @@ var quizRoomba = [
 		correctAnswer: 'b', 
         feedbackRight: 'Yes, that was right! All devices connected to your Wifi are potential backdors for hackers.',
         feedbackWrong: 'Sorry, this is not the right answer. Any device connected to a Wifi could be misused from outside.'
+	},
+];
+
+//Quiz content trash container //////////////////////
+
+var quizContainerTrash = document.getElementById('quizTrash');
+var feedbackContainerTrash = document.getElementById('feedbackTrash');
+var submitButtonTrash = document.getElementById('submitTrash');
+
+var quizTrash = [
+	{
+		question: "This is a trash container. Dangerous or not?",
+		answers: {
+			a: 'It is just trash and is of no value at all.',
+			b: 'Social engineers could find valuable information in here.',
+			
+        },
+		correctAnswer: 'b', 
+        feedbackRight: 'Correct! Among social engineers dumpster diving is a common practice to retrieve information even from trash.',
+        feedbackWrong: 'No! Think twice: What could be among the trash like printouts with confidential information which have not been properly destroyed.'
 	},
 ];
 
