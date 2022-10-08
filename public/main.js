@@ -213,11 +213,27 @@ function init () {
             transparent: true});
         const cctv_cube = new THREE.Mesh(cctv_cube_geometry, cctv_cube_material);
         cctv_cube.position.set(3.89, 3.89, -4.58);
-        cctv_cube.userData.name = 'ccvt_cube';
+        cctv_cube.userData.name = 'cctv_cube';
         cctv_cube.userData.class = 'mouseover_object';
         cctv_cube.visible = false;
         cctv_cube.material.opacity = 0.2;
         return cctv_cube;
+    };
+
+    //add roomba_cube //////////
+    function add_roomba() {
+        const roomba_cube_geometry = new THREE.BoxGeometry(1.4, 0.48, 1.3);
+        const roomba_cube_material = new THREE.MeshLambertMaterial( 
+            {color: 0xff0000, 
+            opacity: 0.9,
+            transparent: true});
+        const roomba_cube = new THREE.Mesh(roomba_cube_geometry, roomba_cube_material);
+        roomba_cube.position.set(-4.05, -1.58, -1.4);
+        roomba_cube.userData.name = 'roomba_cube';
+        roomba_cube.userData.class = 'mouseover_object';
+        roomba_cube.visible = false;
+        roomba_cube.material.opacity = 0.2;
+        return roomba_cube;
     };
 
      // load world ////////
@@ -268,6 +284,7 @@ function init () {
     note = add_note();
     cctv = add_cctv();
     world = add_world();
+    roomba = add_roomba();
 
     removeEventListener('mousemove', moveOnObjects);
     removeEventListener('click', clickOnObjects);
@@ -288,12 +305,12 @@ function init () {
         let button_restart = document.getElementById("button_restart");
         button_restart.style.display = "none"; 
         
-        //Button start show livingroom
+        //Button start and show livingroom
         let button_start = document.getElementById("button_start");        
 
         button_start.addEventListener("click", function() {
             scene.remove(world);
-            scene.add(livingroom, cctv);
+            scene.add(livingroom, cctv, roomba);
             controls.enabled = true;
             addEventListener('mousemove', moveOnObjects);
             addEventListener('click', clickOnObjects);
@@ -330,7 +347,7 @@ function init () {
 
         //Button show office
         button_next_1.addEventListener("click", function () {
-            scene.remove(livingroom, cctv);
+            scene.remove(livingroom, cctv, roomba);
             scene.add(office, bin, printer, door, note);
             controls.reset();
             controls.enablePan = false;
@@ -528,6 +545,14 @@ var clickOnObjects = function (event) {
             case 'cctv_cube':
                 clickInfoObject ("cctv", "closeCctv");                  
             break;
+
+            case 'printer_cube':
+                clickQuizObject(quizPrinter, quizContainerPrinter, feedbackContainerPrinter, submitButtonPrinter, "printer", "closePrinter");                               
+            break;
+
+            case 'roomba_cube':
+                clickQuizObject(quizRoomba, quizContainerRoomba, feedbackContainerRoomba, submitButtonRoomba, "roomba", "closeRoomba");                               
+            break;
     };
 };
 
@@ -573,12 +598,17 @@ var moveOnObjects = function (event) {
                 cctv.visible = true;
                 break;
 
+            case 'roomba_cube':
+                roomba.visible = true;
+                break;
+
             default:
                 bin.visible = false;
                 printer.visible = false;
                 door.visible = false;
                 note.visible = false;
                 cctv.visible = false;
+                roomba.visible = false;
                 break;
         };
     };
@@ -729,6 +759,27 @@ var quizNote = [
 		correctAnswer: 'b',
         feedbackRight: 'You are right. Writing down passswords on notes is never a good idea.',
         feedbackWrong: 'Are you sure? What if not you, but someone else finds it?'
+	},
+];
+
+// Quiz content roomba //////////
+
+var quizContainerRoomba = document.getElementById('quizRoomba');
+var feedbackContainerRoomba = document.getElementById('feedbackRoomba');
+var submitButtonRoomba = document.getElementById('submitRoomba');
+
+var quizRoomba = [
+	{
+		question: "This is a robot vacuum cleaner. It relies on a Wifi connection to work properly. Which problems could occur?",
+		answers: {
+			a: 'It could suck away lego bricks.',
+			b: 'When connected to your Wifi it could be misused by hackers.',
+			c: 'When left alone it could stop working.',
+            d: 'This is a save device, it should be fine.',
+        },
+		correctAnswer: 'b', 
+        feedbackRight: 'Yes, that was right! All devices connected to your Wifi are potential backdors for hackers.',
+        feedbackWrong: 'Sorry, this is not the right answer. Any device connected to a Wifi could be misused from outside.'
 	},
 ];
 

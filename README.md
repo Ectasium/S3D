@@ -1,6 +1,5 @@
 # S3D
 
-
 How to add a ClickObject in a scene
 
 1. Create Object (function add_clickObject () (130ff)) + call function (260ff))
