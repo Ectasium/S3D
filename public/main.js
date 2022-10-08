@@ -23,9 +23,9 @@ function init () {
     const far = 1000;
     camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
     //camera.position.set(0, 0, 0);
-    camera.translateX(-6);
-    camera.translateY(11);
-    camera.translateZ(7); 
+    camera.translateX(-9);
+    camera.translateY(6);
+    camera.translateZ(9); 
     //const helper = new THREE.CameraHelper( camera );
     scene.add(camera);
     camera.updateProjectionMatrix();
@@ -204,7 +204,7 @@ function init () {
          //scene.add(gltf.scene);
      });
 
-     //add camera_cube //////////
+     //add camera_cube 
      function add_cctv() {
         const cctv_cube_geometry = new THREE.BoxGeometry(0.61, 0.41, 0.41);
         const cctv_cube_material = new THREE.MeshLambertMaterial( 
@@ -220,7 +220,7 @@ function init () {
         return cctv_cube;
     };
 
-    //add roomba_cube //////////
+    //add roomba_cube 
     function add_roomba() {
         const roomba_cube_geometry = new THREE.BoxGeometry(1.4, 0.48, 1.3);
         const roomba_cube_material = new THREE.MeshLambertMaterial( 
@@ -316,8 +316,7 @@ function init () {
      });
 
 
-     // add car cube ///////////////
-
+     // add car cube 
      function add_car() {
         const car_cube_geometry = new THREE.BoxGeometry(0.64, 0.44, 1.2);
         const car_cube_material = new THREE.MeshLambertMaterial( 
@@ -334,8 +333,7 @@ function init () {
         return car_cube;
     };
 
-     // add trash cube ///////////////
-
+     // add trash cube 
      function add_trash() {
         const trash_cube_geometry = new THREE.BoxGeometry(1.04, 0.44, 0.44);
         const trash_cube_material = new THREE.MeshLambertMaterial( 
@@ -343,7 +341,7 @@ function init () {
             opacity: 0.9,
             transparent: true});
         const trash_cube = new THREE.Mesh(trash_cube_geometry, trash_cube_material);
-        trash_cube.position.set(0.19, 0.37, -2.99);
+        trash_cube.position.set(0.25, 0.46, -2.99);
         trash_cube.userData.name = 'trash_cube';
         trash_cube.userData.class = 'mouseover_object';
         trash_cube.visible = false;
@@ -351,8 +349,7 @@ function init () {
         return trash_cube;
     };
 
-    // add backpack cube ///////////////
-
+    // add backpack cube 
     function add_backpack() {
         const backpack_cube_geometry = new THREE.BoxGeometry(0.15, 0.18, 0.18);
         const backpack_cube_material = new THREE.MeshLambertMaterial( 
@@ -369,8 +366,42 @@ function init () {
         return backpack_cube;
     };
 
+    // add USB drive
+    function add_usb() {
+        const usb_cube_geometry = new THREE.BoxGeometry(0.08, 0.01, 0.05);
+        const usb_cube_material = new THREE.MeshLambertMaterial( 
+            {color: 0xff0000, 
+            opacity: 0.9,
+            transparent: true});
+        const usb_cube = new THREE.Mesh(usb_cube_geometry, usb_cube_material);
+        usb_cube.position.set(2.13, 0.44, 3.40);
+        usb_cube.userData.name = 'usb_cube';
+        usb_cube.userData.class = 'mouseover_object';
+        usb_cube.visible = true;
+        usb_cube.material.opacity = 0.2;
+        usb_cube.rotation.y = -0.32;
+        return usb_cube;
+    };
 
-     // load score
+
+    // add Entrance
+    function add_entrance() {
+        const entrance_cube_geometry = new THREE.BoxGeometry(0.54, 0.54, 0.05);
+        const entrance_cube_material = new THREE.MeshLambertMaterial( 
+            {color: 0xff0000, 
+            opacity: 0.9,
+            transparent: true});
+        const entrance_cube = new THREE.Mesh(entrance_cube_geometry, entrance_cube_material);
+        entrance_cube.position.set(2.66, 0.72, 3.12);
+        entrance_cube.userData.name = 'entrance_cube';
+        entrance_cube.userData.class = 'mouseover_object';
+        entrance_cube.visible = true;
+        entrance_cube.material.opacity = 0.2;
+        return entrance_cube;
+    };
+
+
+     // load score     
      const score_loader = new GLTFLoader();
      url = new URL( './model/score.glb', import.meta.url );
      url = "" + url;
@@ -394,6 +425,8 @@ function init () {
     backpack = add_backpack();
     smartcontrol = add_smartcontrol();
     tv = add_tv();
+    usb = add_usb();
+    entrance = add_entrance();
 
     removeEventListener('mousemove', moveOnObjects);
     removeEventListener('click', clickOnObjects);
@@ -490,7 +523,7 @@ function init () {
         //Button show Factory ///////////////////////////////////////////////////////////////////////
         button_next_2.addEventListener("click", function () {
             scene.remove(office, bin, printer, door, note);
-            scene.add(factory, car, trash, backpack);
+            scene.add(factory, car, trash, backpack, usb, entrance);
             controls.reset();
             controls.enablePan = false;
             button_next_2.style.display = "none";
@@ -519,7 +552,7 @@ function init () {
 
     // Button show Score page ////////////////////////////////////////////////////////////
     button_next_3.addEventListener("click", function () {
-        scene.remove(factory, car, trash, backpack);
+        scene.remove(factory, car, trash, backpack, usb, entrance);
         scene.add(score);
         controls.reset();
         controls.enablePan = false;
@@ -582,6 +615,7 @@ function init () {
             description4.replaceWith(descriptionstart);                         
         });
     };
+
     buttons_init();
 };
 
@@ -688,6 +722,14 @@ var clickOnObjects = function (event) {
             case 'tv_cube':
                 clickQuizObject(quizTv, quizContainerTv, feedbackContainerTv, submitButtonTv, "tv", "closeTv");                               
             break;
+
+            case 'usb_cube':
+                clickQuizObject(quizUsb, quizContainerUsb, feedbackContainerUsb, submitButtonUsb, "usb", "closeUsb");                               
+            break;
+
+            case 'entrance_cube':
+                clickInfoObject("entrance", "closeEntrance");                               
+            break;
     };
 };
 
@@ -761,6 +803,14 @@ var moveOnObjects = function (event) {
                 tv.visible = true;
                 break;
 
+            case 'usb_cube':
+                usb.visible = true;
+                break;
+
+             case 'entrance_cube':
+                entrance.visible = true;
+                break;
+
             default:
                 bin.visible = false;
                 printer.visible = false;
@@ -774,6 +824,8 @@ var moveOnObjects = function (event) {
                 backpack.visible = false;
                 smartcontrol.visible = false;
                 tv.visible = false;
+                usb.visible = false;
+                entrance.visible = false;
                 break;
         };
     };
@@ -1048,7 +1100,25 @@ var quizTv = [
 	},
 ];
 
-// Generate Quizzes End /////////////////////////////////////////////////////////////////
+// Quiz content USB drive //////////
+
+var quizContainerUsb = document.getElementById('quizUsb');
+var feedbackContainerUsb = document.getElementById('feedbackUsb');
+var submitButtonUsb = document.getElementById('submitUsb');
+
+var quizUsb = [
+	{
+		question: "What a find! A USB drive. But wait: What should you do with it?",
+		answers: {
+			a: 'Take to the IT security department. And of course, do not copnnect it to any device.',
+			b: 'Free storage. And who knows, what data it contains. You should find out.',
+			c: 'Could contain malware. So better let a colleague try it out.'            
+        },
+		correctAnswer: 'a', 
+        feedbackRight: 'Yes, that was right! Never ever connect an unknown data storage device to a computer. It could contain malware.',
+        feedbackWrong: 'Wrong! Never use a device, you do not know!'
+	},
+];
 
 
 // Render scene and camera
@@ -1059,7 +1129,7 @@ const render = () => {
 // animation recursive function
 function animate () {
     requestAnimationFrame(animate);
-    world.rotation.y += 0.005;
+    world.rotation.y += 0.007;
     render();
 };
 
