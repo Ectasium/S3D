@@ -171,7 +171,7 @@ function init () {
         return note_cube;
     };
 
-    // create bin cube ////////////////////////////////////////////////////////////////////
+    // create bin cube 
     function add_bin() {
         const bin_cube_geometry = new THREE.BoxGeometry(0.77, 0.87, 0.77);
         const bin_cube_material = new THREE.MeshLambertMaterial( 
@@ -234,6 +234,22 @@ function init () {
         roomba_cube.visible = false;
         roomba_cube.material.opacity = 0.2;
         return roomba_cube;
+    };
+
+    //add alexa_cube //////////
+    function add_alexa() {
+        const alexa_cube_geometry = new THREE.BoxGeometry(0.3, 0.38, 0.34);
+        const alexa_cube_material = new THREE.MeshLambertMaterial( 
+            {color: 0xff0000, 
+            opacity: 0.9,
+            transparent: true});
+        const alexa_cube = new THREE.Mesh(alexa_cube_geometry, alexa_cube_material);
+        alexa_cube.position.set(-4.22, -0.16, 0.01);
+        alexa_cube.userData.name = 'alexa_cube';
+        alexa_cube.userData.class = 'mouseover_object';
+        alexa_cube.visible = false;
+        alexa_cube.material.opacity = 0.2;
+        return alexa_cube;
     };
 
      // load world ////////
@@ -303,6 +319,23 @@ function init () {
         return trash_cube;
     };
 
+    // add backpack cube ///////////////
+
+    function add_backpack() {
+        const backpack_cube_geometry = new THREE.BoxGeometry(0.15, 0.18, 0.18);
+        const backpack_cube_material = new THREE.MeshLambertMaterial( 
+            {color: 0xff0000, 
+            opacity: 0.9,
+            transparent: true});
+        const backpack_cube = new THREE.Mesh(backpack_cube_geometry, backpack_cube_material);
+        backpack_cube.position.set(0.01, 0.54, 2.31);
+        backpack_cube.rotation.y = 0.23;
+        backpack_cube.userData.name = 'backpack_cube';
+        backpack_cube.userData.class = 'mouseover_object';
+        backpack_cube.visible = false;
+        backpack_cube.material.opacity = 0.2;
+        return backpack_cube;
+    };
 
 
      // load score
@@ -325,6 +358,8 @@ function init () {
     roomba = add_roomba();
     car = add_car();
     trash = add_trash();
+    alexa = add_alexa();
+    backpack = add_backpack();
 
     removeEventListener('mousemove', moveOnObjects);
     removeEventListener('click', clickOnObjects);
@@ -345,12 +380,12 @@ function init () {
         let button_restart = document.getElementById("button_restart");
         button_restart.style.display = "none"; 
         
-        //Button start and show livingroom
+        //Button start and show livingroom /////////////////////////////////////////////////////////
         let button_start = document.getElementById("button_start");        
 
         button_start.addEventListener("click", function() {
             scene.remove(world);
-            scene.add(livingroom, cctv, roomba);
+            scene.add(livingroom, cctv, roomba, alexa);
             controls.enabled = true;
             addEventListener('mousemove', moveOnObjects);
             addEventListener('click', clickOnObjects);
@@ -385,9 +420,9 @@ function init () {
             description_start.replaceWith(description2);            
         });
 
-        //Button show office
+        //Button show office /////////////////////////////////////////////////////////////////////
         button_next_1.addEventListener("click", function () {
-            scene.remove(livingroom, cctv, roomba);
+            scene.remove(livingroom, cctv, roomba, alexa);
             scene.add(office, bin, printer, door, note);
             controls.reset();
             controls.enablePan = false;
@@ -416,10 +451,10 @@ function init () {
             description2.replaceWith(description3);            
         });
 
-        //Button show Factory
+        //Button show Factory ///////////////////////////////////////////////////////////////////////
         button_next_2.addEventListener("click", function () {
             scene.remove(office, bin, printer, door, note);
-            scene.add(factory, car, trash);
+            scene.add(factory, car, trash, backpack);
             controls.reset();
             controls.enablePan = false;
             button_next_2.style.display = "none";
@@ -446,9 +481,9 @@ function init () {
             description3.replaceWith(description4);                                    
         });
 
-    // Button show Score page
+    // Button show Score page ////////////////////////////////////////////////////////////
     button_next_3.addEventListener("click", function () {
-        scene.remove(factory, car, trash);
+        scene.remove(factory, car, trash, backpack);
         scene.add(score);
         controls.reset();
         controls.enablePan = false;
@@ -601,6 +636,14 @@ var clickOnObjects = function (event) {
             case 'trash_cube':
                 clickQuizObject(quizTrash, quizContainerTrash, feedbackContainerTrash, submitButtonTrash, "trash", "closeTrash");                               
             break;
+
+            case 'alexa_cube':
+                clickQuizObject(quizAlexa, quizContainerAlexa, feedbackContainerAlexa, submitButtonAlexa, "alexa", "closeAlexa");                               
+            break;
+
+            case 'backpack_cube':
+                clickQuizObject(quizBackpack, quizContainerBackpack, feedbackContainerBackpack, submitButtonBackpack, "backpack", "closeBackpack");                               
+            break;
     };
 };
 
@@ -658,6 +701,14 @@ var moveOnObjects = function (event) {
                 trash.visible = true;
                 break;
 
+            case 'alexa_cube':
+                alexa.visible = true;
+                break;
+
+            case 'backpack_cube':
+                backpack.visible = true;
+                break;
+
             default:
                 bin.visible = false;
                 printer.visible = false;
@@ -667,12 +718,13 @@ var moveOnObjects = function (event) {
                 roomba.visible = false;
                 car.visible = false;
                 trash.visible = false;
+                alexa.visible = false;
+                backpack.visible = false;
                 break;
         };
     };
 
 window.addEventListener('mousemove', moveOnObjects);
-
 
 // Generate Quizzes ////////////////////////////////////////////////////////////////////
 
@@ -841,6 +893,46 @@ var quizRoomba = [
 	},
 ];
 
+// Quiz content alexa //////////
+
+var quizContainerAlexa = document.getElementById('quizAlexa');
+var feedbackContainerAlexa = document.getElementById('feedbackAlexa');
+var submitButtonAlexa = document.getElementById('submitAlexa');
+
+var quizAlexa = [
+	{
+		question: "This is a voice assistant. It relies on a Wifi connection to work properly. Which problems could occur?",
+		answers: {
+			a: 'It could play the wrong music.',
+			b: 'When connected to your Wifi it could be misused by hackers.',
+			c: 'When left alone it could stop working.',
+            d: 'This is a save device, it should be fine.',
+        },
+		correctAnswer: 'b', 
+        feedbackRight: 'Yes, that was right! All devices connected to your Wifi are potential backdors for hackers.',
+        feedbackWrong: 'Sorry, this is not the right answer. Any device connected to a Wifi could be misused from outside.'
+	},
+];
+
+//Quiz content backpack ////////////////////////////////////
+
+var quizContainerBackpack = document.getElementById('quizBackpack');
+var feedbackContainerBackpack = document.getElementById('feedbackBackpack');
+var submitButtonBackpack = document.getElementById('submitBackpack');
+
+var quizBackpack = [
+	{
+		question: "This is a backpack in a car. Did somebody just forget it? Wjat could happen?",
+		answers: {
+			a: 'Nothing',
+			b: 'Maybe it contains valuble material or information. So better do not leave your belongings in the car.',
+        },
+		correctAnswer: 'b',
+        feedbackRight: 'Yes, that was right! Never leave your belongings lying around.',
+        feedbackWrong: 'No, that is not the right mindset! You never now, what could happen with the information in the backpack, on a laptop for example.'
+	},
+];
+
 //Quiz content trash container //////////////////////
 
 var quizContainerTrash = document.getElementById('quizTrash');
@@ -857,7 +949,7 @@ var quizTrash = [
         },
 		correctAnswer: 'b', 
         feedbackRight: 'Correct! Among social engineers dumpster diving is a common practice to retrieve information even from trash.',
-        feedbackWrong: 'No! Think twice: What could be among the trash like printouts with confidential information which have not been properly destroyed.'
+        feedbackWrong: 'No! Think twice: What could be among the trash like printouts with confidential information which have not been properly destroyed?'
 	},
 ];
 
