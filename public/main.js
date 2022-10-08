@@ -922,7 +922,7 @@ var submitButtonBackpack = document.getElementById('submitBackpack');
 
 var quizBackpack = [
 	{
-		question: "This is a backpack in a car. Did somebody just forget it? Wjat could happen?",
+		question: "This is a backpack in a car. Did somebody just forget it? What could happen?",
 		answers: {
 			a: 'Nothing',
 			b: 'Maybe it contains valuble material or information. So better do not leave your belongings in the car.',
