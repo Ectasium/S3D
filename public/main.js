@@ -267,6 +267,26 @@ function init () {
          //scene.add(gltf.scene);
      });
 
+
+     // add car cube ///////////////
+
+     function add_car() {
+        const car_cube_geometry = new THREE.BoxGeometry(0.64, 0.44, 1.2);
+        const car_cube_material = new THREE.MeshLambertMaterial( 
+            {color: 0xff0000, 
+            opacity: 0.9,
+            transparent: true});
+        const car_cube = new THREE.Mesh(car_cube_geometry, car_cube_material);
+        car_cube.position.set(-1.05, 0.37, 2.31);
+        car_cube.rotation.y = 0.23
+        car_cube.userData.name = 'car_cube';
+        car_cube.userData.class = 'mouseover_object';
+        car_cube.visible = false;
+        car_cube.material.opacity = 0.2;
+        return car_cube;
+    };
+
+
      // load score
      const score_loader = new GLTFLoader();
      url = new URL( './model/score.glb', import.meta.url );
@@ -285,6 +305,7 @@ function init () {
     cctv = add_cctv();
     world = add_world();
     roomba = add_roomba();
+    car = add_car();
 
     removeEventListener('mousemove', moveOnObjects);
     removeEventListener('click', clickOnObjects);
@@ -379,7 +400,7 @@ function init () {
         //Button show Factory
         button_next_2.addEventListener("click", function () {
             scene.remove(office, bin, printer, door, note);
-            scene.add(factory);
+            scene.add(factory, car);
             controls.reset();
             controls.enablePan = false;
             button_next_2.style.display = "none";
@@ -408,7 +429,7 @@ function init () {
 
     // Button show Score page
     button_next_3.addEventListener("click", function () {
-        scene.remove(factory);
+        scene.remove(factory, car);
         scene.add(score);
         controls.reset();
         controls.enablePan = false;
@@ -553,6 +574,10 @@ var clickOnObjects = function (event) {
             case 'roomba_cube':
                 clickQuizObject(quizRoomba, quizContainerRoomba, feedbackContainerRoomba, submitButtonRoomba, "roomba", "closeRoomba");                               
             break;
+
+            case 'car_cube':
+                clickInfoObject("car", "closeCar");                               
+            break;
     };
 };
 
@@ -602,6 +627,10 @@ var moveOnObjects = function (event) {
                 roomba.visible = true;
                 break;
 
+            case 'car_cube':
+                car.visible = true;
+                break;
+
             default:
                 bin.visible = false;
                 printer.visible = false;
@@ -609,6 +638,7 @@ var moveOnObjects = function (event) {
                 note.visible = false;
                 cctv.visible = false;
                 roomba.visible = false;
+                car.visible = false;
                 break;
         };
     };
