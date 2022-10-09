@@ -634,7 +634,7 @@ function init () {
                 hl4.remove();                    
                 // Create and insert new Headline for fail
                 let hl5 = document.createElement('h1');
-                let hl5text = document.createTextNode("Sorry, you failed. You only Answered " + window.numCorrect + " out of 12 Questions Correctly.");
+                let hl5text = document.createTextNode("Sorry, you failed. You only Answered " + window.numCorrect + " out of 11 Questions Correctly.");
                 hl5.appendChild(hl5text);
                 let main = document.querySelector('.flex-container > .main-content');
                 main.insertAdjacentElement("afterbegin", hl5);
