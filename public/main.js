@@ -186,6 +186,22 @@ function init () {
         bin_cube.material.opacity = 0.2;
         return bin_cube;
     };
+
+     // add wifi 
+     function add_wifi() {
+        const wifi_cube_geometry = new THREE.BoxGeometry(0.84, 0.21, 0.61);
+        const wifi_cube_material = new THREE.MeshLambertMaterial( 
+            {color: 0xff0000, 
+            opacity: 0.9,
+            transparent: true});
+        const wifi_cube = new THREE.Mesh(wifi_cube_geometry, wifi_cube_material);
+        wifi_cube.position.set(-0.34, 0.54, -5.28);
+        wifi_cube.userData.name = 'wifi_cube';
+        wifi_cube.userData.class = 'mouseover_object';
+        wifi_cube.visible = false;
+        wifi_cube.material.opacity = 0.2;
+        return wifi_cube;
+    };
     
         
      // load livingroom /////////////////////////////////////////////
@@ -216,6 +232,7 @@ function init () {
         cctv_cube.userData.name = 'cctv_cube';
         cctv_cube.userData.class = 'mouseover_object';
         cctv_cube.visible = false;
+        cctv_cube.rotation.z = 0.3;
         cctv_cube.material.opacity = 0.2;
         return cctv_cube;
     };
@@ -238,13 +255,13 @@ function init () {
 
     //add alexa_cube 
     function add_alexa() {
-        const alexa_cube_geometry = new THREE.BoxGeometry(0.3, 0.38, 0.34);
+        const alexa_cube_geometry = new THREE.BoxGeometry(0.21, 0.37, 0.25);
         const alexa_cube_material = new THREE.MeshLambertMaterial( 
             {color: 0xff0000, 
             opacity: 0.9,
             transparent: true});
         const alexa_cube = new THREE.Mesh(alexa_cube_geometry, alexa_cube_material);
-        alexa_cube.position.set(-4.22, -0.16, 0.01);
+        alexa_cube.position.set(-4.27, -0.16, -0.03);
         alexa_cube.userData.name = 'alexa_cube';
         alexa_cube.userData.class = 'mouseover_object';
         alexa_cube.visible = false;
@@ -254,13 +271,13 @@ function init () {
 
     //add smartcontrol_cube 
     function add_smartcontrol() {
-        const smartcontrol_cube_geometry = new THREE.BoxGeometry(0.15, 0.41, 0.58);
+        const smartcontrol_cube_geometry = new THREE.BoxGeometry(0.13, 0.39, 0.56);
         const smartcontrol_cube_material = new THREE.MeshLambertMaterial( 
             {color: 0xff0000, 
             opacity: 0.9,
             transparent: true});
         const smartcontrol_cube = new THREE.Mesh(smartcontrol_cube_geometry, smartcontrol_cube_material);
-        smartcontrol_cube.position.set(4.6, 1.07, -1.22);
+        smartcontrol_cube.position.set(4.8, 1.1, -1.22);
         smartcontrol_cube.userData.name = 'smartcontrol_cube';
         smartcontrol_cube.userData.class = 'mouseover_object';
         smartcontrol_cube.visible = false;
@@ -270,13 +287,13 @@ function init () {
 
     //add tv_cube 
     function add_tv() {
-        const tv_cube_geometry = new THREE.BoxGeometry(0.25, 1.04, 1.7);
+        const tv_cube_geometry = new THREE.BoxGeometry(0.22, 1.01, 1.67);
         const tv_cube_material = new THREE.MeshLambertMaterial( 
             {color: 0xff0000, 
             opacity: 0.9,
             transparent: true});
         const tv_cube = new THREE.Mesh(tv_cube_geometry, tv_cube_material);
-        tv_cube.position.set(-4.05, 0.37, -1.05);
+        tv_cube.position.set(-4.05, 0.37, -1.09);
         tv_cube.userData.name = 'tv_cube';
         tv_cube.userData.class = 'mouseover_object';
         tv_cube.visible = false;
@@ -324,7 +341,7 @@ function init () {
             opacity: 0.9,
             transparent: true});
         const car_cube = new THREE.Mesh(car_cube_geometry, car_cube_material);
-        car_cube.position.set(-1.05, 0.37, 2.31);
+        car_cube.position.set(-1.11, 0.37, 2.36);
         car_cube.rotation.y = 0.23
         car_cube.userData.name = 'car_cube';
         car_cube.userData.class = 'mouseover_object';
@@ -351,14 +368,14 @@ function init () {
 
     // add backpack cube 
     function add_backpack() {
-        const backpack_cube_geometry = new THREE.BoxGeometry(0.15, 0.18, 0.18);
+        const backpack_cube_geometry = new THREE.BoxGeometry(0.15, 0.12, 0.15);
         const backpack_cube_material = new THREE.MeshLambertMaterial( 
             {color: 0xff0000, 
             opacity: 0.9,
             transparent: true});
         const backpack_cube = new THREE.Mesh(backpack_cube_geometry, backpack_cube_material);
-        backpack_cube.position.set(0.01, 0.54, 2.31);
-        backpack_cube.rotation.y = 0.23;
+        backpack_cube.position.set(0.08, 0.48, 2.56);
+        backpack_cube.rotation.y = -0.4;
         backpack_cube.userData.name = 'backpack_cube';
         backpack_cube.userData.class = 'mouseover_object';
         backpack_cube.visible = false;
@@ -368,7 +385,7 @@ function init () {
 
     // add USB drive
     function add_usb() {
-        const usb_cube_geometry = new THREE.BoxGeometry(0.08, 0.01, 0.05);
+        const usb_cube_geometry = new THREE.BoxGeometry(0.08, 0.02, 0.05);
         const usb_cube_material = new THREE.MeshLambertMaterial( 
             {color: 0xff0000, 
             opacity: 0.9,
@@ -382,7 +399,6 @@ function init () {
         usb_cube.rotation.y = -0.32;
         return usb_cube;
     };
-
 
     // add Entrance
     function add_entrance() {
@@ -400,17 +416,27 @@ function init () {
         return entrance_cube;
     };
 
-
-     // load score     
-     const score_loader = new GLTFLoader();
-     url = new URL( './model/score.glb', import.meta.url );
+     // load pass     
+     const pass_loader = new GLTFLoader();
+     url = new URL( './model/pass.glb', import.meta.url );
      url = "" + url;
-     score_loader.load(url, (gltf) => {
-         score = gltf.scene.children[0];
-         score.visible = true;
-         score.scale.set(10, 10, 10);
-         score.position.set(0, 0.7, 0);         
-     });
+     pass_loader.load(url, (gltf) => {
+         pass = gltf.scene.children[0];
+         pass.visible = false;
+         pass.scale.set(10, 10, 10);
+         pass.position.set(0, 0.7, 0);         
+     });     
+
+    // load fail
+    const fail_loader = new GLTFLoader();
+    url = new URL( './model/fail.glb', import.meta.url );
+    url = "" + url;
+    fail_loader.load(url, (gltf) => {
+        fail = gltf.scene.children[0];
+        fail.visible = false;
+        fail.scale.set(10, 10, 10);
+        fail.position.set(0, 0.7, 0);         
+    });     
 
     bin = add_bin();
     printer = add_printer();
@@ -427,10 +453,12 @@ function init () {
     tv = add_tv();
     usb = add_usb();
     entrance = add_entrance();
+    wifi = add_wifi();
 
     removeEventListener('mousemove', moveOnObjects);
     removeEventListener('click', clickOnObjects);
-
+      
+    
     // BUTTONS - Change scenes /////////////////////////////////////////////////////////////
 
     function buttons_init() {
@@ -458,7 +486,7 @@ function init () {
             addEventListener('click', clickOnObjects);
             controls.reset(); 
             controls.enablePan = false; 
-            ambientLight.intensity = 0.01;
+            //ambientLight.intensity = 0.01;
             button_start.style.display = "none";
             button_next_1.style.display = "block";
             
@@ -491,10 +519,10 @@ function init () {
         //Button show office /////////////////////////////////////////////////////////////////////
         button_next_1.addEventListener("click", function () {
             scene.remove(livingroom, cctv, roomba, alexa, smartcontrol, tv);
-            scene.add(office, bin, printer, door, note);
+            scene.add(office, bin, printer, door, note, wifi);
             controls.reset();
             controls.enablePan = false;
-            ambientLight.intensity = 2;
+            //ambientLight.intensity = 2;
             button_next_1.style.display = "none";
             button_next_2.style.display = "block";
             
@@ -522,7 +550,7 @@ function init () {
 
         //Button show Factory ///////////////////////////////////////////////////////////////////////
         button_next_2.addEventListener("click", function () {
-            scene.remove(office, bin, printer, door, note);
+            scene.remove(office, bin, printer, door, note, wifi);
             scene.add(factory, car, trash, backpack, usb, entrance);
             controls.reset();
             controls.enablePan = false;
@@ -553,24 +581,16 @@ function init () {
     // Button show Score page ////////////////////////////////////////////////////////////
     button_next_3.addEventListener("click", function () {
         scene.remove(factory, car, trash, backpack, usb, entrance);
-        scene.add(score);
-        controls.reset();
+        scene.add(pass,fail);
+        controls.enabled = false;
+        //pass.visible = false;
+        //fail.visible = false;
+        controls.reset();        
         controls.enablePan = false;
         button_next_3.style.display = "none";
-        button_restart.style.display = "block";
-
-        // Delete old HL
-        let hl4 = document.querySelector('.flex-container > .main-content > h1');
-        hl4.remove();                    
-        // Create and insert new Headline
-        let hl5 = document.createElement('h1');
-        let hl5text = document.createTextNode("This is the End of the Training - and this is Your Score");
-        hl5.appendChild(hl5text);
-        let main = document.querySelector('.flex-container > .main-content');
-        main.insertAdjacentElement("afterbegin", hl5);                      
+        button_restart.style.display = "block";          
 
         // Change description //////////////////////////
-        
         // Old description
         let description4 = document.querySelector('.flex-container > .main-content > p');                               
         // Replace description
@@ -578,12 +598,61 @@ function init () {
         let description5text = document.createTextNode("The End of the Training: Thank you very much. We hope you had the same fun playing what we had creating this game. See you next time!");
         description5.appendChild(description5text);
         description4.replaceWith(description5);
-        alert("You Correctly Answered " + window.numCorrect + " Questions.");                             
+        
+        //alert("You Correctly Answered " + window.numCorrect + " Questions.");   
+        
+        if (window.numCorrect >= 9 ) {            
+            pass.visible = true;
+            fail.visible = false;
+
+                // Delete old HL
+                let hl4 = document.querySelector('.flex-container > .main-content > h1');
+                hl4.remove();                    
+                // Create and insert new Headline for pass
+                let hl5 = document.createElement('h1');
+                let hl5text = document.createTextNode("Congratulations, you passed! You Correctly Answered " + window.numCorrect + " out of 11 Questions.");
+                hl5.appendChild(hl5text);
+                let main = document.querySelector('.flex-container > .main-content');
+                main.insertAdjacentElement("afterbegin", hl5);  
+                
+                // Change description //////////////////////////
+                // Old description
+                let description4 = document.querySelector('.flex-container > .main-content > p');                               
+                // Replace description for pass
+                let description5 = document.createElement('p');
+                let description5text = document.createTextNode("You can now truly call yourself a true cyber forensics professional. Remember to always keep your eyes open in your everyday life as well, because it is only through you that your organization becomes secure.  ");
+                description5.appendChild(description5text);
+                description4.replaceWith(description5);
+
+            } else {  
+
+                pass.visible = false;
+                fail.visible = true;
+
+                // Delete old HL
+                let hl4 = document.querySelector('.flex-container > .main-content > h1');
+                hl4.remove();                    
+                // Create and insert new Headline for fail
+                let hl5 = document.createElement('h1');
+                let hl5text = document.createTextNode("Sorry, you failed. You only Answered " + window.numCorrect + " out of 12 Questions Correctly.");
+                hl5.appendChild(hl5text);
+                let main = document.querySelector('.flex-container > .main-content');
+                main.insertAdjacentElement("afterbegin", hl5);
+                
+                // Change description //////////////////////////
+                // Old description
+                let description4 = document.querySelector('.flex-container > .main-content > p');                               
+                // Replace description for fail
+                let description5 = document.createElement('p');
+                let description5text = document.createTextNode("Unfortunately, that hasn't worked out yet. But just try it again. To do this, simply click on the Restart button. Good luck! ");
+                description5.appendChild(description5text);
+                description4.replaceWith(description5);
+        };       
     });
         
         //Button restart
         button_restart.addEventListener("click", function () {
-            scene.remove(score);
+            scene.remove(fail, pass);
             scene.add(world);
             controls.reset();
             removeEventListener('mousemove', moveOnObjects);
@@ -600,14 +669,12 @@ function init () {
             hlstart.appendChild(hlstarttext);
             let main = document.querySelector('.flex-container > .main-content');
             main.insertAdjacentElement("afterbegin", hlstart);
-            controls.enablePan = false;
-            controls.enabled = false;            
+            //controls.enablePan = false;                   
 
             // Change description //////////////////////////
             
             // Old description
-            let description4 = document.querySelector('.flex-container > .main-content > p');
-                               
+            let description4 = document.querySelector('.flex-container > .main-content > p');                               
             // Replace description
             let descriptionstart = document.createElement('p');
             let descriptionstarttext = document.createTextNode("Global Work Environment: Auch gibt es niemanden, der den Schmerz an sich liebt, sucht oder wünscht, nur, weil er Schmerz ist, es sei denn, es kommt zu zufälligen Umständen, in denen Mühen und Schmerz ihm große Freude bereiten können. Um ein triviales Beispiel zu nehmen, wer von uns unterzieht sich je anstrengender körperlicher Betätigung, außer um Vorteile daraus zu ziehen? ");
@@ -689,11 +756,7 @@ var clickOnObjects = function (event) {
 
             case 'cctv_cube':
                 clickInfoObject ("cctv", "closeCctv");                  
-            break;
-
-            case 'printer_cube':
-                clickQuizObject(quizPrinter, quizContainerPrinter, feedbackContainerPrinter, submitButtonPrinter, "printer", "closePrinter");                               
-            break;
+            break;          
 
             case 'roomba_cube':
                 clickQuizObject(quizRoomba, quizContainerRoomba, feedbackContainerRoomba, submitButtonRoomba, "roomba", "closeRoomba");                               
@@ -729,6 +792,10 @@ var clickOnObjects = function (event) {
 
             case 'entrance_cube':
                 clickInfoObject("entrance", "closeEntrance");                               
+            break;
+
+            case 'wifi_cube':
+                clickQuizObject(quizWifi, quizContainerWifi, feedbackContainerWifi, submitButtonWifi, "wifi", "closeWifi");                               
             break;
     };
 };
@@ -811,6 +878,10 @@ var moveOnObjects = function (event) {
                 entrance.visible = true;
                 break;
 
+            case 'wifi_cube':
+                wifi.visible = true;
+                break;
+
             default:
                 bin.visible = false;
                 printer.visible = false;
@@ -826,6 +897,7 @@ var moveOnObjects = function (event) {
                 tv.visible = false;
                 usb.visible = false;
                 entrance.visible = false;
+                wifi.visible = false;
                 break;
         };
     };
@@ -1120,6 +1192,27 @@ var quizUsb = [
 	},
 ];
 
+//Quiz content wifi ////////////////////////////////
+
+var quizContainerWifi = document.getElementById('quizWifi');
+var feedbackContainerWifi = document.getElementById('feedbackWifi');
+var submitButtonWifi = document.getElementById('submitWifi');
+
+var quizWifi = [
+	{
+		question: "This is a Wifi router. Choose the correct answer.",
+		answers: {
+			a: 'It could store too much data.',
+			b: 'It could spread malware when thoughtlessly used.',
+			c: 'It is just a USB drive, no misuse possible.',
+            d: 'It depends on the operating system, you are using.',
+        },
+		correctAnswer: 'b', 
+        feedbackRight: 'Yes, that was right! USB drives can be quite dangerous.',
+        feedbackWrong: 'Sorry, this is not the right answer. A USB drive is anything but harmless.'
+	},
+];
+
 
 // Render scene and camera
 const render = () => {
@@ -1130,6 +1223,8 @@ const render = () => {
 function animate () {
     requestAnimationFrame(animate);
     world.rotation.y += 0.007;
+    fail.rotation.y += 0.007;
+    pass.rotation.y += 0.007;
     render();
 };
 
