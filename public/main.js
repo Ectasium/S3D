@@ -23,9 +23,9 @@ function init () {
     const far = 1000;
     camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
     //camera.position.set(0, 0, 0);
-    camera.translateX(-9);
-    camera.translateY(6);
-    camera.translateZ(9); 
+    camera.translateX(-11);
+    camera.translateY(8.6);
+    camera.translateZ(11); 
     //const helper = new THREE.CameraHelper( camera );
     scene.add(camera);
     camera.updateProjectionMatrix();
@@ -652,6 +652,7 @@ function init () {
         
         //Button restart
         button_restart.addEventListener("click", function () {
+            
             scene.remove(fail, pass);
             scene.add(world);
             controls.reset();
@@ -659,6 +660,7 @@ function init () {
             removeEventListener('click', clickOnObjects);
             button_restart.style.display = "none";
             button_start.style.display = "block";
+            
             // Delete old HL
             let hl5 = document.querySelector('.flex-container > .main-content > h1');
             hl5.remove();
@@ -669,7 +671,7 @@ function init () {
             hlstart.appendChild(hlstarttext);
             let main = document.querySelector('.flex-container > .main-content');
             main.insertAdjacentElement("afterbegin", hlstart);
-            //controls.enablePan = false;                   
+                    
 
             // Change description //////////////////////////
             
@@ -679,7 +681,8 @@ function init () {
             let descriptionstart = document.createElement('p');
             let descriptionstarttext = document.createTextNode("Global Work Environment: Auch gibt es niemanden, der den Schmerz an sich liebt, sucht oder wünscht, nur, weil er Schmerz ist, es sei denn, es kommt zu zufälligen Umständen, in denen Mühen und Schmerz ihm große Freude bereiten können. Um ein triviales Beispiel zu nehmen, wer von uns unterzieht sich je anstrengender körperlicher Betätigung, außer um Vorteile daraus zu ziehen? ");
             descriptionstart.appendChild(descriptionstarttext);            
-            description4.replaceWith(descriptionstart);                         
+            description4.replaceWith(descriptionstart);  
+                                   
         });
     };
 
@@ -1212,7 +1215,6 @@ var quizWifi = [
         feedbackWrong: 'Sorry, this is not the right answer. A USB drive is anything but harmless.'
 	},
 ];
-
 
 // Render scene and camera
 const render = () => {
