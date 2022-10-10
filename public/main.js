@@ -516,7 +516,7 @@ function init () {
             description_start.replaceWith(description2);            
         });
 
-        //Button show office /////////////////////////////////////////////////////////////////////
+        //Button show home office /////////////////////////////////////////////////////////////////////
         button_next_1.addEventListener("click", function () {
             scene.remove(livingroom, cctv, roomba, alexa, smartcontrol, tv);
             scene.add(office, bin, printer, door, note, wifi);
@@ -532,7 +532,7 @@ function init () {
                    
             // Create and insert new Headline
             let hl3 = document.createElement('h1');
-            let hl3text = document.createTextNode("How Secure is Your Office at Home?");
+            let hl3text = document.createTextNode("The Work-From-Home Environment");
             hl3.appendChild(hl3text);
             let main = document.querySelector('.flex-container > .main-content');
             main.insertAdjacentElement("afterbegin", hl3);                       
@@ -562,7 +562,7 @@ function init () {
             hl3.remove();                    
             // Create and insert new Headline
             let hl4 = document.createElement('h1');
-            let hl4text = document.createTextNode("How Secure is Your Workplace?");
+            let hl4text = document.createTextNode("The Company Premises");
             hl4.appendChild(hl4text);
             let main = document.querySelector('.flex-container > .main-content');
             main.insertAdjacentElement("afterbegin", hl4);                      
@@ -667,7 +667,7 @@ function init () {
                     
             // Create and insert new HL
             let hlstart = document.createElement('h1');
-            let hlstarttext = document.createTextNode("How Secure is Your Global Work Environment");
+            let hlstarttext = document.createTextNode("Train Your Cyber Eye");
             hlstart.appendChild(hlstarttext);
             let main = document.querySelector('.flex-container > .main-content');
             main.insertAdjacentElement("afterbegin", hlstart);
