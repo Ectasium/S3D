@@ -1002,16 +1002,14 @@ var submitButtonBin = document.getElementById('submitBin');
 
 var quizBin = [
 	{
-		question: "This is a bin. But if it were, what dangers would it pose? Choose the correct answer.",
+		question: "An overflowing wastebasket. In it are a number of still legible documents, such as invoices, budget spreadsheets or printed e-mails (yes, some people still print out their e-mails). ",
 		answers: {
-			a: 'It could store too much data.',
-			b: 'It could spread malware when thoughtlessly used.',
-			c: 'It is just a USB drive, no misuse possible.',
-            d: 'It depends on the operating system, you are using.',
-        },
-		correctAnswer: 'b', 
-        feedbackRight: 'Yes, that was right! USB drives can be quite dangerous.',
-        feedbackWrong: 'Sorry, this is not the right answer. A USB drive is anything but harmless.'
+			a: 'Under no circumstances should readable documents end up in the trash. They belong in the shredder first.',
+			b: 'No problem, because the documents will be destroyed by the garbage collection at the latest.',
+		},
+		correctAnswer: 'a', 
+        feedbackRight: 'True. Documents that are still readable can quickly fall into the wrong hands. They can thus become a valuable source of information for cybercriminals.',
+        feedbackWrong: 'Not true. Just think what such documents could contain: Personal data, planning data or even passwords. A lot of damage if that falls into the wrong hands.'
 	},
 ];
 
