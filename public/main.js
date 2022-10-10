@@ -1120,14 +1120,14 @@ var submitButtonTrash = document.getElementById('submitTrash');
 
 var quizTrash = [
 	{
-		question: "This is a trash container. Dangerous or not?",
+		question: "Two dumpsters at the back of the building. How would you assess this?",
 		answers: {
-			a: 'It is just trash and is of no value at all.',
-			b: 'Social engineers could find valuable information in here.',
+			a: 'It is just trash and of no value at all.',
+			b: 'Cybercriminals could find valuable documents in here that have not been properly destroyed.',
 			
         },
 		correctAnswer: 'b', 
-        feedbackRight: 'Correct! Among social engineers dumpster diving is a common practice to retrieve information even from trash.',
+        feedbackRight: 'Correct! By the way, the practice to search for valuable documents and information in the garbage is called "dumpster diving".',
         feedbackWrong: 'No! Think twice: What could be among the trash like printouts with confidential information which have not been properly destroyed?'
 	},
 ];
@@ -1181,15 +1181,14 @@ var submitButtonUsb = document.getElementById('submitUsb');
 
 var quizUsb = [
 	{
-		question: "What a find! A USB drive. But wait: What should you do with it?",
+		question: "A USB flash drive, right in front of the entrance. What should you do with it now?",
 		answers: {
-			a: 'Take to the IT security department. And of course, do not copnnect it to any device.',
-			b: 'Free storage. And who knows, what data it contains. You should find out.',
-			c: 'Could contain malware. So better let a colleague try it out.'            
+			a: 'You should under no circumstances connect this USB stick to a computer!',
+			b: 'Free storage. And who knows what valuable data it contains. Try it out.'			 
         },
 		correctAnswer: 'a', 
-        feedbackRight: 'Yes, that was right! Never ever connect an unknown data storage device to a computer. It could contain malware.',
-        feedbackWrong: 'Wrong! Never use a device, you do not know!'
+        feedbackRight: 'Correct. It is quite possible that it was laid out here by cybercriminals to spread malware - curious employees are very helpful here.',
+        feedbackWrong: 'Wrong. You can never know if there might not be malware on the USB stick.'
 	},
 ];
 
