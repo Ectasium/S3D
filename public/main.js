@@ -309,7 +309,7 @@ function init () {
      world_loader.load(url, (gltf) => {
          world = gltf.scene.children[0];
          world.visible = true;
-         world.scale.set(10, 10, 10);
+         world.scale.set(15, 15, 15);
          world.position.set(0, 0.7, 0);
          world.matrixAutoUpdate = true;
          world.updateMatrix();
@@ -498,7 +498,7 @@ function init () {
                    
             // Create and insert new Headline
             let hl2 = document.createElement('h1');
-            let hl2text = document.createTextNode("How Secure is Your Leisure Time?");
+            let hl2text = document.createTextNode("The Livingroom");
             hl2.appendChild(hl2text);
             let main = document.querySelector('.flex-container > .main-content');
             main.insertAdjacentElement("afterbegin", hl2);
@@ -511,7 +511,7 @@ function init () {
                    
             // Create and insert new description
             let description2 = document.createElement('p');
-            let description2text = document.createTextNode("Leisure Time: Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo.");
+            let description2text = document.createTextNode("Your first place of action: the living room. Maybe it looks the same in your house. And maybe some things here will look familiar to you. But be careful: now you have to take a closer look!");
             description2.appendChild(description2text);
             description_start.replaceWith(description2);            
         });
