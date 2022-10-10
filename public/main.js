@@ -125,6 +125,18 @@ function init () {
         office.position.set(0, 1.5, 0);
         //scene.add(gltf.scene);
     });
+
+    // load drawer
+    const drawer_loader = new GLTFLoader();
+    url = new URL( './model/drawer.glb', import.meta.url );
+    url = "" + url;
+    drawer_loader.load(url, (gltf) => {
+        drawer = gltf.scene.children[0];
+        drawer.visible = true;
+        drawer.scale.set(1, 1, 1);
+        drawer.position.set(0, 1.5, 0);
+        //scene.add(gltf.scene);
+    });    
    
     function add_door() {
         const door_cube_geometry = new THREE.BoxGeometry(2.2, 5, 0.17);
@@ -436,7 +448,7 @@ function init () {
         fail.visible = false;
         fail.scale.set(10, 10, 10);
         fail.position.set(0, 0.7, 0);         
-    });     
+    });
 
     bin = add_bin();
     printer = add_printer();
@@ -519,7 +531,7 @@ function init () {
         //Button show home office /////////////////////////////////////////////////////////////////////
         button_next_1.addEventListener("click", function () {
             scene.remove(livingroom, cctv, roomba, alexa, smartcontrol, tv);
-            scene.add(office, bin, printer, door, note, wifi);
+            scene.add(office, bin, printer, door, note, wifi, drawer);
             controls.reset();
             controls.enablePan = false;
             //ambientLight.intensity = 2;
@@ -550,7 +562,7 @@ function init () {
 
         //Button show Factory ///////////////////////////////////////////////////////////////////////
         button_next_2.addEventListener("click", function () {
-            scene.remove(office, bin, printer, door, note, wifi);
+            scene.remove(office, bin, printer, door, note, wifi, drawer);
             scene.add(factory, car, trash, backpack, usb, entrance);
             controls.reset();
             controls.enablePan = false;
@@ -598,9 +610,7 @@ function init () {
         let description5text = document.createTextNode("The End of the Training: Thank you very much. We hope you had the same fun playing what we had creating this game. See you next time!");
         description5.appendChild(description5text);
         description4.replaceWith(description5);
-        
-        //alert("You Correctly Answered " + window.numCorrect + " Questions.");   
-        
+               
         if (window.numCorrect >= 9 ) {            
             pass.visible = true;
             fail.visible = false;
