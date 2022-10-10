@@ -1141,7 +1141,7 @@ var submitButtonSmartcontrol = document.getElementById('submitSmartcontrol');
 
 var quizSmartcontrol = [
 	{
-		question: "This is a smart control panel. From here you may control all of your smart devices. But what should you always consider when setting new devices up?",
+		question: "This is a smart control panel. From here you can access and control all of your smart devices. But what should you always consider when setting new devices up?",
 		answers: {
 			a: 'Nothing special. It is supposed to be a smart home, right?',
 			b: 'Always change the default password, and set up an encrypted connection, if possible.',
