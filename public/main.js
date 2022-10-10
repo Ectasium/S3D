@@ -1207,12 +1207,12 @@ var quizWifi = [
 		answers: {
 			a: 'It could store too much data.',
 			b: 'It could spread malware when thoughtlessly used.',
-			c: 'It is just a USB drive, no misuse possible.',
+			c: 'It is just a wifi router, no misuse possible.',
             d: 'It depends on the operating system, you are using.',
         },
 		correctAnswer: 'b', 
-        feedbackRight: 'Yes, that was right! USB drives can be quite dangerous.',
-        feedbackWrong: 'Sorry, this is not the right answer. A USB drive is anything but harmless.'
+        feedbackRight: 'Yes, that was right! Unprotected wifi networks can be quite dangerous.',
+        feedbackWrong: 'Sorry, this is not the right answer. An unprotected wifi network is anything but harmless.'
 	},
 ];
 
