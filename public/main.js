@@ -132,7 +132,7 @@ function init () {
     url = "" + url;
     drawer_loader.load(url, (gltf) => {
         drawer = gltf.scene.children[0];
-        drawer.visible = true;
+        drawer.visible = false;
         drawer.scale.set(1, 1, 1);
         drawer.position.set(0, 1.5, 0);
         //scene.add(gltf.scene);

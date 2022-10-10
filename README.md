@@ -12,7 +12,6 @@ npm init
 npm --save-dev install parcel
 npm install three
 npm --save dat.gui
-npm install gsap
 
 # Add a ClickObject in a scene
 Create Object (function add_clickObject () (130ff)) + call function (260ff))
