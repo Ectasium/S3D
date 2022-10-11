@@ -1,4 +1,4 @@
-# S3D (aka ** Cyber Forensics 3D **) 
+# Cyber Forensics 3D (formerly known as S3D) 
 
 
 ## Setup Git
