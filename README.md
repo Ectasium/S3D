@@ -30,7 +30,9 @@ npm --save-dev install parcel
 
 npm install three
 
-npm --save dat.gui
+npm --save-dev install dat.gui
+
+npm install @tweenjs/tween.js
 
 
 ## Add a ClickObject in a scene
@@ -49,6 +51,4 @@ if quiz, add questions object (665ff)
 
 create modal in indexed.html (either quiz or info)
 
-## import tween.js (no need to install npm package??)
 
-import { TWEEN } from 'three/examples/jsm/libs/tween.module.min'

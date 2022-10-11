@@ -2,6 +2,7 @@ import * as THREE from 'three';
 import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { GUI } from 'dat.gui';
+import * as TWEEN from '@tweenjs/tween.js';
 
 let office;
 let camera;
@@ -132,9 +133,9 @@ function init () {
     url = "" + url;
     drawer_loader.load(url, (gltf) => {
         drawer = gltf.scene.children[0];
-        drawer.visible = false;
-        drawer.scale.set(1, 1, 1);
-        drawer.position.set(0, 1.5, 0);
+        drawer.visible = true;
+        drawer.scale.set(2.59, 2.59, 2.59);
+        drawer.position.set(0.53, -1.3, 1.4);
         //scene.add(gltf.scene);
     });    
    
@@ -534,6 +535,15 @@ function init () {
             scene.add(office, bin, printer, door, note, wifi, drawer);
             controls.reset();
             controls.enablePan = false;
+            
+            // Tween drawer
+            new TWEEN.Tween(drawer.position)
+            .to( {x:-0.8, y:-1.3, z:1.4}, 5000) 
+            .repeat(0)
+            .easing(TWEEN.Easing.Cubic.InOut)
+            .delay(3000)
+            .start();             
+                        
             //ambientLight.intensity = 2;
             button_next_1.style.display = "none";
             button_next_2.style.display = "block";
@@ -1226,10 +1236,12 @@ var quizWifi = [
 // Render scene and camera
 const render = () => {
     renderer.render(scene, camera);
+    
 };
 
 // animation recursive function
-function animate () {
+function animate (time) {
+    TWEEN.update(time);
     requestAnimationFrame(animate);
     world.rotation.y += 0.007;
     fail.rotation.y += 0.007;
