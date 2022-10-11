@@ -3,7 +3,7 @@
 
 ## Setup Git
 
-git init -y
+git init
 
 git config --global init.defaultBranch main
 
@@ -24,7 +24,7 @@ git push origin main
 
 ## Install npm Packages
 
-npm init
+npm init -y
 
 npm --save-dev install parcel
 
