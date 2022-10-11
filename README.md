@@ -3,7 +3,7 @@
 
 ## Setup Git
 
-git init
+git init -y
 
 git config --global init.defaultBranch main
 
