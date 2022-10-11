@@ -5,11 +5,15 @@
 
 git init
 
+git config --global init.defaultBranch main
+
 git config --global user.name "FIRST_NAME LAST_NAME"
 
 git config --global user.email "MY_NAME@example.com"
 
 git remote add origin https://github.com/Ectasium/S3D.git
+
+git pull origin main 
 
 git add -A
 
