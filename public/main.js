@@ -109,7 +109,7 @@ function init () {
         //gui.add(options, 'reset');
 
     };
-
+    // Add test object if needed
     //testObject();
 
     // Load/Create OBJECTS //////////////////////////////////////////////////////////////////////
@@ -342,7 +342,7 @@ function init () {
          //factory.rotation.x = Math.PI/-2;
          //factory.rotation.y = 0.8;
          //scene.add(gltf.scene);
-     });
+    });
 
 
      // add car cube 
