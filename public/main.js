@@ -137,7 +137,22 @@ function init () {
         drawer.scale.set(2.59, 2.59, 2.59);
         drawer.position.set(0.53, -1.3, 1.4);
         //scene.add(gltf.scene);
-    });    
+    });  
+    
+    // create drawer cube
+    function add_drawer() {
+        const drawer_cube_geometry = new THREE.BoxGeometry(0.08, 0.55, 1.28);
+        const drawer_cube_material = new THREE.MeshLambertMaterial( 
+            {color: 0xff0000, 
+            opacity: 0.6,
+            transparent: true});
+        const drawer_cube = new THREE.Mesh(drawer_cube_geometry, drawer_cube_material);
+        drawer_cube.position.set(-0.16, -1.3, 1.78);
+        drawer_cube.userData.name = 'drawer_cube';
+        drawer_cube.userData.class = 'mouseover_object';
+        drawer_cube.visible = false;
+        return drawer_cube;
+    };
    
     function add_door() {
         const door_cube_geometry = new THREE.BoxGeometry(2.2, 5, 0.17);
@@ -166,8 +181,7 @@ function init () {
         printer_cube.userData.class = 'mouseover_object';
         printer_cube.visible = false;
         return printer_cube;
-    };
-       
+    };      
 
     // create note cube
     function add_note() {
@@ -467,6 +481,7 @@ function init () {
     usb = add_usb();
     entrance = add_entrance();
     wifi = add_wifi();
+    drawerCube = add_drawer();
 
     removeEventListener('mousemove', moveOnObjects);
     removeEventListener('click', clickOnObjects);
@@ -532,17 +547,9 @@ function init () {
         //Button show home office /////////////////////////////////////////////////////////////////////
         button_next_1.addEventListener("click", function () {
             scene.remove(livingroom, cctv, roomba, alexa, smartcontrol, tv);
-            scene.add(office, bin, printer, door, note, wifi, drawer);
+            scene.add(office, bin, printer, door, note, wifi, drawer, drawerCube);
             controls.reset();
-            controls.enablePan = false;
-            
-            // Tween drawer
-            new TWEEN.Tween(drawer.position)
-            .to( {x:-0.8, y:-1.3, z:1.4}, 5000) 
-            .repeat(0)
-            .easing(TWEEN.Easing.Cubic.InOut)
-            .delay(3000)
-            .start();             
+            controls.enablePan = false;                    
                         
             //ambientLight.intensity = 2;
             button_next_1.style.display = "none";
@@ -572,7 +579,7 @@ function init () {
 
         //Button show Factory ///////////////////////////////////////////////////////////////////////
         button_next_2.addEventListener("click", function () {
-            scene.remove(office, bin, printer, door, note, wifi, drawer);
+            scene.remove(office, bin, printer, door, note, wifi, drawer, drawerCube);
             scene.add(factory, car, trash, backpack, usb, entrance);
             controls.reset();
             controls.enablePan = false;
@@ -820,6 +827,16 @@ var clickOnObjects = function (event) {
             case 'wifi_cube':
                 clickQuizObject(quizWifi, quizContainerWifi, feedbackContainerWifi, submitButtonWifi, "wifi", "closeWifi");                               
             break;
+
+            case 'drawer_cube':
+                new TWEEN.Tween(drawer.position)
+                .to( {x:-0.7, y:-1.3, z:1.4}, 3000) 
+                .repeat(0)
+                .easing(TWEEN.Easing.Cubic.InOut)
+                .delay(300)
+                .start(); 
+                scene.remove(drawerCube);                               
+            break;
     };
 };
 
@@ -905,6 +922,10 @@ var moveOnObjects = function (event) {
                 wifi.visible = true;
                 break;
 
+            case 'drawer_cube':
+                drawerCube.visible = true;
+                break;
+
             default:
                 bin.visible = false;
                 printer.visible = false;
@@ -921,6 +942,7 @@ var moveOnObjects = function (event) {
                 usb.visible = false;
                 entrance.visible = false;
                 wifi.visible = false;
+                drawerCube.visible = false;
                 break;
         };
     };
