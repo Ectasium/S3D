@@ -680,36 +680,7 @@ function init () {
         //Button restart
         button_restart.addEventListener("click", function () {
 
-            location.reload(true);
-            
-            /* scene.remove(fail, pass);
-            scene.add(world);
-            controls.reset();
-            removeEventListener('mousemove', moveOnObjects);
-            removeEventListener('click', clickOnObjects);
-            button_restart.style.display = "none";
-            button_start.style.display = "block";
-            
-            // Delete old HL
-            let hl5 = document.querySelector('.flex-container > .main-content > h1');
-            hl5.remove();
-                    
-            // Create and insert new HL
-            let hlstart = document.createElement('h1');
-            let hlstarttext = document.createTextNode("Train Your Cyber Eye");
-            hlstart.appendChild(hlstarttext);
-            let main = document.querySelector('.flex-container > .main-content');
-            main.insertAdjacentElement("afterbegin", hlstart);           
-
-            // Change description //////////////////////////
-            
-            // Old description
-            let description4 = document.querySelector('.flex-container > .main-content > p');                               
-            // Replace description
-            let descriptionstart = document.createElement('p');
-            let descriptionstarttext = document.createTextNode("Global Work Environment: Auch gibt es niemanden, der den Schmerz an sich liebt, sucht oder wünscht, nur, weil er Schmerz ist, es sei denn, es kommt zu zufälligen Umständen, in denen Mühen und Schmerz ihm große Freude bereiten können. Um ein triviales Beispiel zu nehmen, wer von uns unterzieht sich je anstrengender körperlicher Betätigung, außer um Vorteile daraus zu ziehen? ");
-            descriptionstart.appendChild(descriptionstarttext);            
-            description4.replaceWith(descriptionstart);      */
+            location.reload(true);                   
                                    
         });        
     };    
