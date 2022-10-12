@@ -241,11 +241,43 @@ function init () {
          livingroom.scale.set(2, 2, 2);
          livingroom.position.set(0, 1.5, 0);
          livingroom.matrixAutoUpdate = true;
-         livingroom.updateMatrix();
+         //livingroom.updateMatrix();
          //livingroom.rotation.x = Math.PI/-2;
          //livingrrom.rotation.y = 0.8;
          //scene.add(gltf.scene);
      });
+
+     // load roomba 
+     const roomba_loader = new GLTFLoader();
+     url = new URL( './model/roomba.glb', import.meta.url );
+     url = "" + url;
+     roomba_loader.load(url, (gltf) => {
+         roomba = gltf.scene.children[0];
+         roomba.visible = true;
+         roomba.scale.set(20, 20, 20);
+         roomba.position.set(-4.05, -1.58, -1.4);
+         roomba.matrixAutoUpdate = true;
+         //roomba.updateMatrix();
+         //roomba.rotation.x = Math.PI/-2;
+         //roomba.rotation.y = 0.8;
+         //scene.add(gltf.scene);
+     });
+
+     //add roombaCube 
+    function add_roombaCube() {
+        const roomba_cube_geometry = new THREE.BoxGeometry(1.4, 0.48, 1.3);
+        const roomba_cube_material = new THREE.MeshLambertMaterial( 
+            {color: 0xff0000, 
+            opacity: 0.9,
+            transparent: true});
+        const roomba_cube = new THREE.Mesh(roomba_cube_geometry, roomba_cube_material);
+        roomba_cube.position.set(-4.05, -1.58, -1.4);
+        roomba_cube.userData.name = 'roomba_cube';
+        roomba_cube.userData.class = 'mouseover_object';
+        roomba_cube.visible = false;
+        roomba_cube.material.opacity = 0.2;
+        return roomba_cube;
+    };
 
      //add camera_cube 
      function add_cctv() {
@@ -262,23 +294,7 @@ function init () {
         cctv_cube.rotation.z = 0.3;
         cctv_cube.material.opacity = 0.2;
         return cctv_cube;
-    };
-
-    //add roomba_cube 
-    function add_roomba() {
-        const roomba_cube_geometry = new THREE.BoxGeometry(1.4, 0.48, 1.3);
-        const roomba_cube_material = new THREE.MeshLambertMaterial( 
-            {color: 0xff0000, 
-            opacity: 0.9,
-            transparent: true});
-        const roomba_cube = new THREE.Mesh(roomba_cube_geometry, roomba_cube_material);
-        roomba_cube.position.set(-4.05, -1.58, -1.4);
-        roomba_cube.userData.name = 'roomba_cube';
-        roomba_cube.userData.class = 'mouseover_object';
-        roomba_cube.visible = false;
-        roomba_cube.material.opacity = 0.2;
-        return roomba_cube;
-    };
+    };   
 
     //add alexa_cube 
     function add_alexa() {
@@ -345,7 +361,7 @@ function init () {
         });
     };     
 
-     // load factory
+     // load factory ///////////////
      const factory_loader = new GLTFLoader();
      url = new URL( './model/factory.glb', import.meta.url );
      url = "" + url;
@@ -471,7 +487,6 @@ function init () {
     note = add_note();
     cctv = add_cctv();
     world = add_world();
-    roomba = add_roomba();
     car = add_car();
     trash = add_trash();
     alexa = add_alexa();
@@ -482,6 +497,7 @@ function init () {
     entrance = add_entrance();
     wifi = add_wifi();
     drawerCube = add_drawer();
+    roombaCube = add_roombaCube();
 
     removeEventListener('mousemove', moveOnObjects);
     removeEventListener('click', clickOnObjects);
@@ -508,7 +524,7 @@ function init () {
 
         button_start.addEventListener("click", function() {
             scene.remove(world);
-            scene.add(livingroom, cctv, roomba, alexa, smartcontrol, tv);
+            scene.add(livingroom, cctv, roomba, roombaCube, alexa, smartcontrol, tv);
             controls.enabled = true;
             addEventListener('mousemove', moveOnObjects);
             addEventListener('click', clickOnObjects);
@@ -546,7 +562,7 @@ function init () {
 
         //Button show home office /////////////////////////////////////////////////////////////////////
         button_next_1.addEventListener("click", function () {
-            scene.remove(livingroom, cctv, roomba, alexa, smartcontrol, tv);
+            scene.remove(livingroom, cctv, roomba, roombaCube, alexa, smartcontrol, tv);
             scene.add(office, bin, printer, door, note, wifi, drawer, drawerCube);
             controls.reset();
             controls.enablePan = false;                    
@@ -854,7 +870,7 @@ var moveOnObjects = function (event) {
                 break;
 
             case 'roomba_cube':
-                roomba.visible = true;
+                roombaCube.visible = true;
                 break;
 
             case 'car_cube':
@@ -903,7 +919,6 @@ var moveOnObjects = function (event) {
                 door.visible = false;
                 note.visible = false;
                 cctv.visible = false;
-                roomba.visible = false;
                 car.visible = false;
                 trash.visible = false;
                 alexa.visible = false;
@@ -914,6 +929,7 @@ var moveOnObjects = function (event) {
                 entrance.visible = false;
                 wifi.visible = false;
                 drawerCube.visible = false;
+                roombaCube.visible = false;
                 break;
         };
     };
