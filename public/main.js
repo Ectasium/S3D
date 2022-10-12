@@ -1242,10 +1242,10 @@ var quizWifi = [
 	},
 ];
 
+
 // Render scene and camera
 const render = () => {
-    renderer.render(scene, camera);
-    
+    renderer.render(scene, camera);    
 };
 
 // animation recursive function
