@@ -254,7 +254,7 @@ function init () {
      roomba_loader.load(url, (gltf) => {
          roomba = gltf.scene.children[0];
          roomba.visible = true;
-         roomba.scale.set(20, 20, 20);
+         roomba.scale.set(0.003, 0.003, 0.003);
          roomba.position.set(-4.05, -1.58, -1.4);
          roomba.matrixAutoUpdate = true;
          //roomba.updateMatrix();
