@@ -1050,14 +1050,14 @@ var submitButtonPrinter = document.getElementById('submitPrinter');
 
 var quizPrinter = [
 	{
-		question: "This is a printer. What should you consider, when using it?",
+		question: 'This is a private printer, it can print. It can also scan documents, send mails and much more. In addition, data from connected devices is stored. What should be considered here?',
 		answers: {
-			a: 'Nothing',
-			b: 'Do not forget to take out all printouts.',
+			a: 'Modern multifunction printers have sufficient protection devices, there is no danger.',
+			b: 'Print jobs that are still stored in the printer can be printed out just as easily as data from old copies, faxes or print jobs that appear to have been deleted but are actually still present can be made visible again.',
         },
 		correctAnswer: 'b',
-        feedbackRight: 'Yes, that was right! Never leave printouts lying in the printer.',
-        feedbackWrong: 'No, that is not the right mindset! Consider printouts lying in the printer for too long, for example.'
+        feedbackRight: 'True. Multifunction printers store more data than you might think.',
+        feedbackWrong: 'No, that is not the right mindset!'
 	},
 ];
 
