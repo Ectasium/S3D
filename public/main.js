@@ -812,10 +812,10 @@ var clickOnObjects = function (event) {
                 .repeat(0)
                 .easing(TWEEN.Easing.Cubic.InOut)
                 //.delay(300)
-
                 tweenRotate.chain(tweenMove);
                 tweenMove.chain(tweenFly);
-                tweenRotate.start();                               
+                tweenRotate.start();    
+                scene.remove(roombaCube);                           
             break;
 
             case 'car_cube':

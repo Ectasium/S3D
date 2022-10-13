@@ -108,9 +108,8 @@ h1, p{
   .button[disabled]{
     background-color: #e6b38a;
     border: 2px solid #fff8f3;
-    color: rgb(204, 204, 204);
-    
-}
+    color: rgb(204, 204, 204);    
+  }
 
   .modal {
     display: none; /* Hidden by default */
