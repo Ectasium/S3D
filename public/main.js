@@ -13,9 +13,7 @@ let scene;
 const canvasSize = document.querySelector('.canvas-element');
 let model_container = document.querySelector('.webgl');
 
-function init () {    
-
-
+function init () {  
 
     // SCENE //////////////////////////////////////////////////////////////////////
     scene = new THREE.Scene();
@@ -278,8 +276,8 @@ function init () {
      roomba_loader.load(url, (gltf) => {
          roomba = gltf.scene.children[0];
          roomba.visible = true;
-         roomba.scale.set(0.003, 0.003, 0.003);
-         roomba.position.set(-4.05, -1.58, -1.4);
+         roomba.scale.set(0.002, 0.002, 0.002);
+         roomba.position.set(-3.9, -1.66, -1.9);
          roomba.matrixAutoUpdate = true;
          //roomba.updateMatrix();
          //roomba.rotation.x = Math.PI/-2;
@@ -289,13 +287,13 @@ function init () {
 
      //add roombaCube 
     function add_roombaCube() {
-        const roomba_cube_geometry = new THREE.BoxGeometry(1.4, 0.48, 1.3);
+        const roomba_cube_geometry = new THREE.BoxGeometry(1.2, 0.27, 1.3);
         const roomba_cube_material = new THREE.MeshLambertMaterial( 
             {color: 0xff0000, 
             opacity: 0.9,
             transparent: true});
         const roomba_cube = new THREE.Mesh(roomba_cube_geometry, roomba_cube_material);
-        roomba_cube.position.set(-4.05, -1.58, -1.4);
+        roomba_cube.position.set(-3.9, -1.64, -1.4);
         roomba_cube.userData.name = 'roomba_cube';
         roomba_cube.userData.class = 'mouseover_object';
         roomba_cube.visible = false;
@@ -655,6 +653,14 @@ function init () {
             pass.visible = true;
             fail.visible = false;
 
+            new TWEEN.Tween(pass.rotation)
+               .to({ y: -(2 * Math.PI)}, 5000)
+               // .to( {x:-0.7, y:-1.3, z:1.4}, 3000) 
+                .repeat(Infinity)
+                // .easing(TWEEN.Easing.Cubic.InOut)
+                //.delay(300)
+                .start(); 
+
                 // Delete old HL
                 let hl4 = document.querySelector('.flex-container > .main-content > h1');
                 hl4.remove();                    
@@ -678,6 +684,14 @@ function init () {
 
                 pass.visible = false;
                 fail.visible = true;
+
+                new TWEEN.Tween(fail.rotation)
+               .to({ y: -(2 * Math.PI)}, 5000)
+               // .to( {x:-0.7, y:-1.3, z:1.4}, 3000) 
+                .repeat(Infinity)
+                // .easing(TWEEN.Easing.Cubic.InOut)
+                //.delay(300)
+                .start(); 
 
                 // Delete old HL
                 let hl4 = document.querySelector('.flex-container > .main-content > h1');
@@ -1270,8 +1284,6 @@ const render = () => {
 function animate (time) {
     TWEEN.update(time);
     requestAnimationFrame(animate);
-    fail.rotation.y += 0.007;
-    pass.rotation.y += 0.007;
     render();
 };
 
