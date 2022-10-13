@@ -124,7 +124,7 @@ function init () {
             world = gltf.scene.children[0];
             world.visible = true;
             world.scale.set(15, 15, 15);
-            world.position.set(0, 0.7, 0);
+            world.position.set(0, -0.3, 0);
             //scene.add(gltf.scene);
             scene.add(world);
             new TWEEN.Tween(world.rotation)
@@ -867,17 +867,6 @@ var clickOnObjects = function (event) {
 };
 
 addEventListener('click', clickOnObjects);
-
-/* // tween for Title ///
-function animateTitle() {
-    //scene.add(world);
-    new TWEEN.Tween(world.position)
-                .to( {x:-0.7, y:-1.3, z:1.4}, 3000) 
-                .repeat(0)
-                .easing(TWEEN.Easing.Cubic.InOut)
-                .delay(300)
-                .start(); 
-}; */
 
 // Raycaster onMouseOver Clickobjects/////////////////////////////////////////
 
