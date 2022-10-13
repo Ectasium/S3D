@@ -798,17 +798,24 @@ var clickOnObjects = function (event) {
 
             case 'roomba_cube':
                 //clickQuizObject(quizRoomba, quizContainerRoomba, feedbackContainerRoomba, submitButtonRoomba, "roomba", "closeRoomba");  
-                new TWEEN.Tween(roomba.rotation)
-               .to({ z: (0.5 * Math.PI)}, 5000)
+                var tweenRotate = new TWEEN.Tween(roomba.rotation)
+               .to({ z: (0.5 * Math.PI)}, 3000)
                // .to( {x:-0.7, y:-1.3, z:1.4}, 3000) 
                 .repeat(0)
-                new TWEEN.Tween(roomba.position)
-               .to({ z: 3, x: 1}, 6000)
+                var tweenMove = new TWEEN.Tween(roomba.position)
+               .to({ z: 3, x: 1}, 5000)
                // .to( {x:-0.7, y:-1.3, z:1.4}, 3000) 
                 .repeat(0)
-                // .easing(TWEEN.Easing.Cubic.InOut)
+                var tweenFly = new TWEEN.Tween(roomba.position)
+               .to({ y: 20}, 5000)
+               // .to( {x:-0.7, y:-1.3, z:1.4}, 3000) 
+                .repeat(0)
+                .easing(TWEEN.Easing.Cubic.InOut)
                 //.delay(300)
-                .start();                               
+
+                tweenRotate.chain(tweenMove);
+                tweenMove.chain(tweenFly);
+                tweenRotate.start();                               
             break;
 
             case 'car_cube':
