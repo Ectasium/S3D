@@ -118,7 +118,7 @@ function init () {
 
     // Load/Create OBJECTS //////////////////////////////////////////////////////////////////////
     
-    // load world ////////
+    // load and animate Title ////////
     const world_loader = new GLTFLoader();
         url = new URL( './model/world.glb', import.meta.url );
         url = "" + url;
@@ -130,8 +130,8 @@ function init () {
             //scene.add(gltf.scene);
             scene.add(world);
             new TWEEN.Tween(world.rotation)
-               .to({ y: -(90 * Math.PI / 180)}, 900)
-                // .to( {x:-0.7, y:-1.3, z:1.4}, 3000) 
+               .to({ y: -(2 * Math.PI)}, 5000)
+               // .to( {x:-0.7, y:-1.3, z:1.4}, 3000) 
                 .repeat(Infinity)
                 // .easing(TWEEN.Easing.Cubic.InOut)
                 //.delay(300)
