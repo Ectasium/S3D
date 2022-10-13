@@ -9,10 +9,13 @@ let camera;
 let renderer;
 let scene;
 
+
 const canvasSize = document.querySelector('.canvas-element');
 let model_container = document.querySelector('.webgl');
 
-function init () {
+function init () {    
+
+
 
     // SCENE //////////////////////////////////////////////////////////////////////
     scene = new THREE.Scene();
@@ -114,6 +117,27 @@ function init () {
     //testObject();
 
     // Load/Create OBJECTS //////////////////////////////////////////////////////////////////////
+    
+    // load world ////////
+    const world_loader = new GLTFLoader();
+        url = new URL( './model/world.glb', import.meta.url );
+        url = "" + url;
+        world_loader.load(url, (gltf) => {
+            world = gltf.scene.children[0];
+            world.visible = true;
+            world.scale.set(15, 15, 15);
+            world.position.set(0, 0.7, 0);
+            //scene.add(gltf.scene);
+            scene.add(world);
+            new TWEEN.Tween(world.rotation)
+               .to({ y: -(90 * Math.PI / 180)}, 900)
+                // .to( {x:-0.7, y:-1.3, z:1.4}, 3000) 
+                .repeat(Infinity)
+                // .easing(TWEEN.Easing.Cubic.InOut)
+                //.delay(300)
+                .start();             
+    });
+    
     
     // load office
     const office_loader = new GLTFLoader();
@@ -344,24 +368,7 @@ function init () {
         return tv_cube;
     };
 
-     // load world ////////
-     function add_world() {
-     const world_loader = new GLTFLoader();
-     url = new URL( './model/world.glb', import.meta.url );
-     url = "" + url;
-     world_loader.load(url, (gltf) => {
-         world = gltf.scene.children[0];
-         world.visible = true;
-         world.scale.set(15, 15, 15);
-         world.position.set(0, 0.7, 0);
-         world.matrixAutoUpdate = true;
-         world.updateMatrix();
-         scene.add(world);
-         return world;
-        });
-    };     
-
-     // load factory ///////////////
+    // load factory ///////////////
      const factory_loader = new GLTFLoader();
      url = new URL( './model/factory.glb', import.meta.url );
      url = "" + url;
@@ -486,7 +493,7 @@ function init () {
     door = add_door();
     note = add_note();
     cctv = add_cctv();
-    world = add_world();
+    //world = add_world();
     car = add_car();
     trash = add_trash();
     alexa = add_alexa();
@@ -626,7 +633,7 @@ function init () {
     // Button show Score page ////////////////////////////////////////////////////////////
     button_next_3.addEventListener("click", function () {
         scene.remove(factory, car, trash, backpack, usb, entrance);
-        scene.add(pass,fail);
+        scene.add(pass, fail);
         controls.enabled = false;
         //pass.visible = false;
         //fail.visible = false;
@@ -828,6 +835,17 @@ var clickOnObjects = function (event) {
 };
 
 addEventListener('click', clickOnObjects);
+
+/* // tween for Title ///
+function animateTitle() {
+    //scene.add(world);
+    new TWEEN.Tween(world.position)
+                .to( {x:-0.7, y:-1.3, z:1.4}, 3000) 
+                .repeat(0)
+                .easing(TWEEN.Easing.Cubic.InOut)
+                .delay(300)
+                .start(); 
+}; */
 
 // Raycaster onMouseOver Clickobjects/////////////////////////////////////////
 
@@ -1252,7 +1270,6 @@ const render = () => {
 function animate (time) {
     TWEEN.update(time);
     requestAnimationFrame(animate);
-    world.rotation.y += 0.007;
     fail.rotation.y += 0.007;
     pass.rotation.y += 0.007;
     render();
@@ -1267,6 +1284,6 @@ function animate (time) {
 };
 
 //start scene
-window.onload = init();
+window.onload = init(), 
 window.addEventListener('resize', windowResize, false);
 animate();
