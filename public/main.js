@@ -5,13 +5,16 @@ import { GUI } from 'dat.gui';
 import * as TWEEN from '@tweenjs/tween.js';
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js';
 import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js';
-import { GlitchPass } from 'three/examples/jsm/postprocessing/GlitchPass.js';
+//import { GlitchPass } from 'three/examples/jsm/postprocessing/GlitchPass.js';
+import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass.js';
+
 
 let office;
 let camera;
 let renderer;
 let scene;
 let glitchPass;
+//let bloomPass;
 let composer;
 
 const canvasSize = document.querySelector('.canvas-element');
@@ -48,23 +51,35 @@ function init () {
     renderer.setPixelRatio((window.devicePixelRatio) ? window.devicePixelRatio : 1);
     renderer.outputEncoding = THREE.sRGBEncoding;
 	renderer.physicallyCorrectLights = true;
-    /* renderer.autoClear = false;
-    renderer.setClearColor(0x000000, 0.0); */
+    // renderer.autoClear = false;
+    renderer.setClearColor(0x000000);
 
     // Composer & Effects ///////////////////////////////////////////////////////////
-    var parameters = {
-        minFilter: THREE.LinearFilter,
-        magFilter: THREE.LinearFilter,
-        format: THREE.RGBFormat,
-        stencilBuffer: true,
-      };
-
-    var renderTarget = new THREE.WebGLRenderTarget(2000, 2000, parameters);
+    
+    var renderTarget = new THREE.WebGLRenderTarget(2000, 2000);
 
     composer = new EffectComposer(renderer, renderTarget);
-	composer.addPass(new RenderPass(scene, camera));
-    glitchPass = new GlitchPass();
-	composer.addPass(glitchPass);
+	composer.addPass(new RenderPass(scene, camera));    
+    
+    // var glitchParams = {
+    //     minFilter: THREE.LinearFilter,
+    //     magFilter: THREE.LinearFilter,
+    //     format: THREE.RGBFormat,
+    //     stencilBuffer: true,
+    //   };
+    // glitchPass = new GlitchPass(glitchParams);
+	// composer.addPass(glitchPass);
+
+
+    const bloomParams = {
+        exposure: 1,
+        bloomStrength: 4.5,
+        bloomThreshold: 0,
+        bloomRadius: 0
+    };
+    bloomPass = new UnrealBloomPass(bloomParams);
+	composer.addPass(bloomPass);
+
 
     //CONTROLS //////////////////////////////////////////////////////////////////
     const controls = new OrbitControls(camera, renderer.domElement);
@@ -548,7 +563,8 @@ function init () {
 
         button_start.addEventListener("click", function() {
             scene.remove(world);
-            composer.removePass(glitchPass);
+            //composer.removePass(glitchPass);
+            composer.removePass(bloomPass);
             scene.add(livingroom, cctv, roomba, roombaCube, alexa, smartcontrol, tv);
             controls.enabled = true;
             addEventListener('mousemove', moveOnObjects);
