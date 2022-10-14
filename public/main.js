@@ -13,8 +13,8 @@ let office;
 let camera;
 let renderer;
 let scene;
-let glitchPass;
-//let bloomPass;
+//let glitchPass;
+let bloomPass;
 let composer;
 
 const canvasSize = document.querySelector('.canvas-element');
@@ -668,6 +668,7 @@ function init () {
     button_next_3.addEventListener("click", function () {
         scene.remove(factory, car, trash, backpack, usb, entrance);
         scene.add(pass, fail);
+        composer.addPass(bloomPass);
         controls.enabled = false;
         //pass.visible = false;
         //fail.visible = false;
