@@ -34,8 +34,7 @@ function init () {
     camera.translateZ(11); 
     //const helper = new THREE.CameraHelper( camera );
     scene.add(camera);
-    camera.updateProjectionMatrix();
-     
+    camera.updateProjectionMatrix();     
 
     //RENDERER //////////////////////////////////////////////////////////////////
     renderer = new THREE.WebGLRenderer({
@@ -57,7 +56,7 @@ function init () {
         minFilter: THREE.LinearFilter,
         magFilter: THREE.LinearFilter,
         format: THREE.RGBFormat,
-        stencilBuffer: true
+        stencilBuffer: true,
       };
 
     var renderTarget = new THREE.WebGLRenderTarget(2000, 2000, parameters);
