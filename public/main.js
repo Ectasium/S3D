@@ -431,7 +431,7 @@ function init () {
         return backpack_cube;
     };
 
-    // add USB drive
+    // add USB drive cube
     function add_usb() {
         const usb_cube_geometry = new THREE.BoxGeometry(0.08, 0.02, 0.05);
         const usb_cube_material = new THREE.MeshLambertMaterial( 
@@ -448,7 +448,7 @@ function init () {
         return usb_cube;
     };
 
-    // add Entrance
+    // add entrance cube
     function add_entrance() {
         const entrance_cube_geometry = new THREE.BoxGeometry(0.54, 0.54, 0.05);
         const entrance_cube_material = new THREE.MeshLambertMaterial( 
@@ -1089,14 +1089,14 @@ var submitButtonPrinter = document.getElementById('submitPrinter');
 
 var quizPrinter = [
 	{
-		question: 'This is a private printer, it can print. It can also scan documents, send mails and much more. In addition, data from connected devices is stored. What should be considered here?',
+		question: 'This is a multifunctional printer. Beside printing it can scan documents, send mails and much more. Therefore data from connected devices is stored in the internal memory. What should users consider when using it for their job?',
 		answers: {
-			a: 'Modern multifunction printers have sufficient protection devices, there is no danger.',
-			b: 'Print jobs that are still stored in the printer can be printed out just as easily as data from old copies, faxes or print jobs that appear to have been deleted but are actually still present can be made visible again.',
+			a: 'Modern multifunction printers have sufficient protection means so the data is protected.',
+			b: 'The data of connected devices are stored in the printer and may be lost..',
         },
 		correctAnswer: 'b',
-        feedbackRight: 'True. Multifunction printers store more data than you might think.',
-        feedbackWrong: 'No, that is not the right mindset!'
+        feedbackRight: 'True. Print jobs that are still stored in the printer can be printed out just as easily as data from old copies, faxes or print jobs that appear to have been deleted but are actually still present can be made visible again.',
+        feedbackWrong: 'Wring. There is a risk that data from professional devices can be stored in the printer and fall into the wrong hands'
 	},
 ];
 
@@ -1110,12 +1110,12 @@ var quizNote = [
 	{
 		question: "An unusual place for a note, especially if it still has a password on it. What do you think: Is it a good idea to write down passwords on notepads?",
 		answers: {
-			a: 'Why not? The note is well hidden.',
+			a: 'Why not? At least, this note is well hidden.',
 			b: 'No, that is not a good idea at all!',
         },
 		correctAnswer: 'b',
         feedbackRight: 'You are right. Writing down passswords on notes is never a good idea.',
-        feedbackWrong: 'Are you sure? What if not you, but someone else finds it?'
+        feedbackWrong: 'Are you sure? What if the note is lost and someone else gets the password?'
 	},
 ];
 
@@ -1127,16 +1127,15 @@ var submitButtonRoomba = document.getElementById('submitRoomba');
 
 var quizRoomba = [
 	{
-		question: "This is a robot vacuum cleaner. It relies on a Wifi connection to work properly. Which problems could occur?",
+		question: "Most robotic vacuum cleaners use mechanical and optical sensors and advanced software to do their job. And most are connected to the Internet. This means they collect a range of environmental data to do their job. Are there dangers in that?",
 		answers: {
-			a: 'It could suck away lego bricks.',
-			b: 'When connected to your Wifi it could be misused by hackers.',
-			c: 'When left alone it could stop working.',
-            d: 'This is a save device, it should be fine.',
-        },
+			a: 'No problem. These devices are safe.',
+			b: 'Yes, because unfortunately not all manufacturers deliver regular security updates.',
+			c: 'No. Manufacturers already make sure that smart robotic vacuum cleaners always have the latest software.',
+                    },
 		correctAnswer: 'b', 
-        feedbackRight: 'Yes, that was right! All devices connected to your Wifi are potential backdors for hackers.',
-        feedbackWrong: 'Sorry, this is not the right answer. Any device connected to a Wifi could be misused from outside.'
+        feedbackRight: 'That is right. Especially smaller manufacturers do not update their software regularly. And for some devices, support is discontinued after a short time.',
+        feedbackWrong: 'Wrong. Not all manufacturers and devices can be relied upon for safety.'
 	},
 ];
 
@@ -1148,16 +1147,15 @@ var submitButtonAlexa = document.getElementById('submitAlexa');
 
 var quizAlexa = [
 	{
-		question: "This is a voice assistant. It relies on a Wifi connection to work properly. Which problems could occur?",
+		question: 'This is a voice assistant connected to the internet. What do you have to keep in mind?',
 		answers: {
-			a: 'It could play the wrong music.',
-			b: 'When connected to your Wifi it could be misused by hackers.',
-			c: 'When left alone it could stop working.',
-            d: 'This is a save device, it should be fine.',
+			a: 'The sound quality of these devices is often not very good. This can pose a health risk.',
+			b: 'Most voice assistants are powered by a non-rechargeable battery.',
+			c: 'To function properly, it must accept voice commands. But it is not certain how long the corresponding recordings are stored by the manufacturer.',            
         },
-		correctAnswer: 'b', 
-        feedbackRight: 'Yes, that was right! All devices connected to your Wifi are potential backdors for hackers.',
-        feedbackWrong: 'Sorry, this is not the right answer. Any device connected to a Wifi could be misused from outside.'
+		correctAnswer: 'c', 
+        feedbackRight: 'Yes, that was right! Owners should carefully check whether their speech is recorded and how long the recordings are stored.',
+        feedbackWrong: 'No. Think about it: Do you know if and when the device records the owner\'s voice?'
 	},
 ];
 
@@ -1169,14 +1167,14 @@ var submitButtonBackpack = document.getElementById('submitBackpack');
 
 var quizBackpack = [
 	{
-		question: "This is a backpack in a car. Did somebody just forget it? What could happen?",
+		question: 'This is a backpack and inside is a password protected laptop. Is this a security risk?',
 		answers: {
-			a: 'Nothing',
-			b: 'Maybe it contains valuble material or information. So better do not leave your belongings in the car.',
+			a: 'Yes! If the computer contains sensitive or confidential data, it should never be left out of sight or lying around. ',
+			b: 'No, if the device is secured with a password and when the latest security updates are installed this is not a problem.',
         },
-		correctAnswer: 'b',
-        feedbackRight: 'Yes, that was right! Never leave your belongings lying around.',
-        feedbackWrong: 'No, that is not the right mindset! You never now, what could happen with the information in the backpack, on a laptop for example.'
+		correctAnswer: 'a',
+        feedbackRight: 'Yes, tha\'s right. Outside the company building, IT equipment should never be left out of sight.',
+        feedbackWrong: 'No, even if the device is password protected, it should never be left out of sight, especially when traveling.'
 	},
 ];
 
@@ -1209,13 +1207,13 @@ var submitButtonSmartcontrol = document.getElementById('submitSmartcontrol');
 
 var quizSmartcontrol = [
 	{
-		question: "This is a smart control panel. From here you can access and control all of your smart devices. But what should you always consider when setting new devices up?",
+		question: "This is a control monitor, the heart of a smart home. But what should be considered when setting it up? ",
 		answers: {
-			a: 'Nothing special. It is supposed to be a smart home, right?',
-			b: 'Always change the default password, and set up an encrypted connection, if possible.',
+			a: 'Nothing special. It is supposed to be a s m a r t home, right?',
+			b: 'Always change the default password of every device you connect and set up an encrypted connection, if possible.',
         },
 		correctAnswer: 'b',
-        feedbackRight: 'Right. It is always a good idea to take secuity measures into account, when setting up any smart device.',
+        feedbackRight: 'Right. It is always a good idea to take secuity measures into account, when setting up a smart home.',
         feedbackWrong: 'No, smart does not necessarily mean, that devices are secure by default.'
 	},
 ];
@@ -1228,16 +1226,15 @@ var submitButtonTv = document.getElementById('submitTv');
 
 var quizTv = [
 	{
-		question: "This is a smart TV. It relies on a Wifi connection to work properly. Which problems could occur?",
+		question: "This smart TV features facial recognition, gesture control, and voice recognition. How do you rate the safety of this device?",
 		answers: {
-			a: 'It could play the wrong movie.',
-			b: 'When connected to your Wifi it could be misused by hackers.',
-			c: 'When left alone it could stop working.',
-            d: 'This is a save device, it should be fine.',
-        },
-		correctAnswer: 'b', 
-        feedbackRight: 'Yes, that was right! All devices connected to your Wifi are potential backdors for hackers.',
-        feedbackWrong: 'Sorry, this is not the right answer. Any device connected to a Wifi could be misused from outside.'
+			a: 'The technical possibilities pose a danger. So for example the camera should be covered if you do not want it to see too much.',
+			b: 'Like all smart devices, a smart TV is secure from the factory.',
+			c: 'Even if it\'s not save, it\'s just a TV after all, what\'s going to happen?',
+                    },
+		correctAnswer: 'a', 
+        feedbackRight: 'Yes, that\'sright! All smart devices are potential backdoors for criminals.',
+        feedbackWrong: 'Sorry, this is not the right answer. Imagine what would happen if a hacker gets access to the camera for example.'
 	},
 ];
 
@@ -1251,12 +1248,12 @@ var quizUsb = [
 	{
 		question: "A USB flash drive, right in front of the entrance. What should you do with it now?",
 		answers: {
-			a: 'You should under no circumstances connect this USB stick to a computer!',
-			b: 'Free storage. And who knows what valuable data it contains. Try it out.'			 
+			a: 'Under no circumstances should the drive be connected to a computer!',
+			b: 'What a find! You should plug the stick into your computer and see what it contains. At least it\'s free storage.'			 
         },
-		correctAnswer: 'a', 
-        feedbackRight: 'Correct. It is quite possible that it was laid out here by cybercriminals to spread malware - curious employees are very helpful here.',
-        feedbackWrong: 'Wrong. You can never know if there might not be malware on the USB stick.'
+		correctAnswer: 'b', 
+        feedbackRight: 'Correct. It is quite possible that it was laid out here by cybercriminals to spread malware.',
+        feedbackWrong: 'Not the right answer. In many cases, malware has already entered a network not via the Internet, but via an infected USB drive.'
 	},
 ];
 
@@ -1268,16 +1265,15 @@ var submitButtonWifi = document.getElementById('submitWifi');
 
 var quizWifi = [
 	{
-		question: "This is a Wifi router. Choose the correct answer.",
+		question: "This is a Wifi router, the central hub for all connected devices. When checking it\'s password you find, that ist is ADMIN1234. What do you think?",
 		answers: {
-			a: 'It could store too much data.',
-			b: 'It could spread malware when thoughtlessly used.',
-			c: 'It is just a wifi router, no misuse possible.',
-            d: 'It depends on the operating system, you are using.',
-        },
-		correctAnswer: 'b', 
-        feedbackRight: 'Yes, that was right! Unprotected wifi networks can be quite dangerous.',
-        feedbackWrong: 'Sorry, this is not the right answer. An unprotected wifi network is anything but harmless.'
+			a: 'No problem. Someone has done everything right here.',
+			b: 'The term ADMIN may not be used in a password. It should be changed to SUPERHERO1234.',
+			c: 'The password is completely insecure and should be replaced with a secure one as soon as possible.',
+                    },
+		correctAnswer: 'c', 
+        feedbackRight: 'Yes, this is the right answer.Unprotected wifi networks can be quite dangerous.',
+        feedbackWrong: 'No! This password is not secure. Hackers can easily get into such a network and take control over the connected devices.'
 	},
 ];
 
