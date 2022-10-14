@@ -52,7 +52,7 @@ function init () {
     /* renderer.autoClear = false;
     renderer.setClearColor(0x000000, 0.0); */
 
-    // Composer & Effects 
+    // Composer & Effects ///////////////////////////////////////////////////////////
     var parameters = {
         minFilter: THREE.LinearFilter,
         magFilter: THREE.LinearFilter,
