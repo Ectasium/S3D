@@ -3,12 +3,16 @@ import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { GUI } from 'dat.gui';
 import * as TWEEN from '@tweenjs/tween.js';
+import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js';
+import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js';
+import { GlitchPass } from 'three/examples/jsm/postprocessing/GlitchPass.js';
 
 let office;
 let camera;
 let renderer;
 let scene;
-
+let glitchPass;
+let composer;
 
 const canvasSize = document.querySelector('.canvas-element');
 let model_container = document.querySelector('.webgl');
@@ -31,7 +35,8 @@ function init () {
     //const helper = new THREE.CameraHelper( camera );
     scene.add(camera);
     camera.updateProjectionMatrix();
-    
+     
+
     //RENDERER //////////////////////////////////////////////////////////////////
     renderer = new THREE.WebGLRenderer({
         antialias: true,
@@ -47,7 +52,22 @@ function init () {
     /* renderer.autoClear = false;
     renderer.setClearColor(0x000000, 0.0); */
 
-   //CONTROLS //////////////////////////////////////////////////////////////////
+    // Composer & Effects 
+    var parameters = {
+        minFilter: THREE.LinearFilter,
+        magFilter: THREE.LinearFilter,
+        format: THREE.RGBFormat,
+        stencilBuffer: true
+      };
+
+    var renderTarget = new THREE.WebGLRenderTarget(2000, 2000, parameters);
+
+    composer = new EffectComposer(renderer, renderTarget);
+	composer.addPass(new RenderPass(scene, camera));
+    glitchPass = new GlitchPass();
+	composer.addPass(glitchPass);
+
+    //CONTROLS //////////////////////////////////////////////////////////////////
     const controls = new OrbitControls(camera, renderer.domElement);
     controls.enabled = false;
     controls.target.set(0,0,0);
@@ -529,6 +549,7 @@ function init () {
 
         button_start.addEventListener("click", function() {
             scene.remove(world);
+            composer.removePass(glitchPass);
             scene.add(livingroom, cctv, roomba, roombaCube, alexa, smartcontrol, tv);
             controls.enabled = true;
             addEventListener('mousemove', moveOnObjects);
@@ -1280,7 +1301,8 @@ var quizWifi = [
 
 // Render scene and camera
 const render = () => {
-    renderer.render(scene, camera);    
+    //renderer.render(scene, camera); 
+    composer.render();   
 };
 
 // animation recursive function
