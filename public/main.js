@@ -1289,7 +1289,7 @@ var quizUsb = [
 			a: 'Under no circumstances should the drive be connected to a computer!',
 			b: 'What a find! You should plug the stick into your computer and see what it contains. At least it\'s free storage.'			 
         },
-		correctAnswer: 'b', 
+		correctAnswer: 'a', 
         feedbackRight: 'Correct. It is quite possible that it was laid out here by cybercriminals to spread malware.',
         feedbackWrong: 'Not the right answer. In many cases, malware has already entered a network not via the Internet, but via an infected USB drive.'
 	},
