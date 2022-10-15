@@ -190,8 +190,8 @@ function init () {
     drawer_loader.load(url, (gltf) => {
         drawer = gltf.scene.children[0];
         drawer.visible = true;
-        drawer.scale.set(2.59, 2.59, 2.59);
-        drawer.position.set(0.53, -1.3, 1.4);
+        drawer.scale.set(2.7, 2.7, 2.7);
+        drawer.position.set(0.5, -1.33, 1.07);
         //scene.add(gltf.scene);
     });  
     
@@ -703,7 +703,7 @@ function init () {
                 hl4.remove();                    
                 // Create and insert new Headline for pass
                 let hl5 = document.createElement('h1');
-                let hl5text = document.createTextNode("Congratulations, you passed! You Correctly Answered " + window.numCorrect + " out of 11 Questions.");
+                let hl5text = document.createTextNode(window.numCorrect +" out of 11 questions answered correctly.\n \n Congratulations, you passed!");
                 hl5.appendChild(hl5text);
                 let main = document.querySelector('.flex-container > .main-content');
                 main.insertAdjacentElement("afterbegin", hl5);  
@@ -713,7 +713,7 @@ function init () {
                 let description4 = document.querySelector('.flex-container > .main-content > p');                               
                 // Replace description for pass
                 let description5 = document.createElement('p');
-                let description5text = document.createTextNode("You can now truly call yourself a Cyber Forensics Investigator. Remember to always keep your eyes open in your everyday life as well, because it is only through you that your organization becomes secure.");
+                let description5text = document.createTextNode("Good job! You have demonstrated your skills as a Cyber Forensic Investigator. If you want to play again, click RESTART.");
                 description5.appendChild(description5text);
                 description4.replaceWith(description5);
 
@@ -735,7 +735,8 @@ function init () {
                 hl4.remove();                    
                 // Create and insert new Headline for fail
                 let hl5 = document.createElement('h1');
-                let hl5text = document.createTextNode("Sorry, you failed. You only Answered " + window.numCorrect + " out of 11 Questions Correctly.");
+                hl5.setAttribute('id','box-fail');
+                let hl5text = document.createTextNode(window.numCorrect +" out of 11 questions answered correctly.\n \n Sorry, you didn't pass.");
                 hl5.appendChild(hl5text);
                 let main = document.querySelector('.flex-container > .main-content');
                 main.insertAdjacentElement("afterbegin", hl5);
@@ -745,7 +746,7 @@ function init () {
                 let description4 = document.querySelector('.flex-container > .main-content > p');                               
                 // Replace description for fail
                 let description5 = document.createElement('p');
-                let description5text = document.createTextNode("Unfortunately, that hasn't worked out yet. But just try it again. To do this, simply click on the Restart button. Good luck! ");
+                let description5text = document.createTextNode("Too bad, that hasn't worked out yet. But why not try again? To do so, simply click on RESTART. Good luck!");
                 description5.appendChild(description5text);
                 description4.replaceWith(description5);
         };       
@@ -893,7 +894,7 @@ var clickOnObjects = function (event) {
 
             case 'drawer_cube':
                 new TWEEN.Tween(drawer.position)
-                .to( {x:-0.7, y:-1.3, z:1.4}, 3000) 
+                .to( {x:-0.7, y:-1.33, z:1.07}, 3000)
                 .repeat(0)
                 .easing(TWEEN.Easing.Cubic.InOut)
                 .delay(300)
@@ -1129,11 +1130,11 @@ var quizPrinter = [
 		question: 'This is a multifunctional printer. Beside printing it can scan documents, send mails and much more. Therefore data from connected devices is stored in the internal memory. What should users consider when using it for their job?',
 		answers: {
 			a: 'Modern multifunction printers have sufficient protection means so the data is protected.',
-			b: 'The data of connected devices are stored in the printer and may be lost.',
+			b: 'The data of connected devices is stored in the printer and may be lost or fall in the wrong hands.',
         },
 		correctAnswer: 'b',
         feedbackRight: 'True. Print jobs that are still stored in the printer can be printed out just as easily as data from old copies, faxes or print jobs that appear to have been deleted but are actually still present can be made visible again.',
-        feedbackWrong: 'Wring. There is a risk that data from professional devices can be stored in the printer and fall into the wrong hands'
+        feedbackWrong: 'Wrong. There is a risk that data from the internal can fall into the wrong hands'
 	},
 ];
 
