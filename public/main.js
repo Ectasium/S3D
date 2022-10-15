@@ -596,7 +596,7 @@ function init () {
                    
             // Create and insert new description
             let description2 = document.createElement('p');
-            let description2text = document.createTextNode("A modern living room, equipped with a few conveniences that a smart home provides. But is it also as safe as it is comfortable? Your first mission: take a good look around and search for security vulnerabilities. Note: Security vulnerabilities can also lurk where they are not visible at first glance. When finsished, click NEXT to move to the following scene. ");
+            let description2text = document.createTextNode("A modern living room, equipped with a few conveniences that a smart home provides. But is it also as safe as it is comfortable? Your first mission: Take a good look around and search for vulnerabilities. Note: Security gaps can also lurk where they are not visible at first glance. When finsished, click NEXT to move to the following scene.");
             description2.appendChild(description2text);
             description_start.replaceWith(description2);            
         });
