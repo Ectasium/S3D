@@ -75,7 +75,7 @@ function init () {
         exposure: 1,
         bloomStrength: 4.5,
         bloomThreshold: 0,
-        bloomRadius: 0
+        bloomRadius: 1
     };
     bloomPass = new UnrealBloomPass(bloomParams);
 	composer.addPass(bloomPass);
@@ -596,7 +596,7 @@ function init () {
                    
             // Create and insert new description
             let description2 = document.createElement('p');
-            let description2text = document.createTextNode("Your first place of action: the living room. Maybe it looks the same in your house. And maybe some things here will look familiar to you. But be careful: now you have to take a closer look!");
+            let description2text = document.createTextNode("A modern living room, equipped with a few conveniences that a smart home provides. But is it also as safe as it is comfortable? Your first mission: take a good look around and search for security vulnerabilities. Note: Security vulnerabilities can also lurk where they are not visible at first glance. When finsished, click NEXT to move to the following scene. ");
             description2.appendChild(description2text);
             description_start.replaceWith(description2);            
         });
@@ -629,7 +629,7 @@ function init () {
             let description2 = document.querySelector('.flex-container > .main-content > p');                               
             // Replace description
             let description3 = document.createElement('p');
-            let description3text = document.createTextNode("Office at Home: Jemand musste Josef K. verleumdet haben, denn ohne dass er etwas Böses getan hätte, wurde er eines Morgens verhaftet.");
+            let description3text = document.createTextNode("Working from home is just not the same as working on-site, in the organization. But how safe is it? Only you can find out. Take a thorough look around. Then click NEXT to move to the following scene.");
             description3.appendChild(description3text);
             description2.replaceWith(description3);            
         });
@@ -659,7 +659,7 @@ function init () {
             let description3 = document.querySelector('.flex-container > .main-content > p');                               
             // Replace description
             let description4 = document.createElement('p');
-            let description4text = document.createTextNode("Workplace: Zwei flinke Boxer jagen die quirlige Eva und ihren Mops durch Sylt. Franz jagt im komplett verwahrlosten Taxi quer durch Bayern. Fix, Schwyz! quäkt Jürgen blöd vom Paß. Victor jagt zwölf Boxkämpfer quer über den großen Sylter Deich. Falsches Üben von Xylophonmusik quält jeden größeren Zwerg.");
+            let description4text = document.createTextNode("A typical medium-sized company. Take a look around the premises and the building. Can you find the security gaps that criminals could exploit? Click NEXT to see your results.");
             description4.appendChild(description4text);
             description3.replaceWith(description4);                                    
         });
@@ -682,7 +682,7 @@ function init () {
         let description4 = document.querySelector('.flex-container > .main-content > p');                               
         // Replace description
         let description5 = document.createElement('p');
-        let description5text = document.createTextNode("The End of the Training: Thank you very much. We hope you had the same fun playing what we had creating this game. See you next time!");
+        let description5text = document.createTextNode("This is the end of your mission. We hope you had the same fun playing what we had creating this game. See you next time!");
         description5.appendChild(description5text);
         description4.replaceWith(description5);
                
@@ -713,7 +713,7 @@ function init () {
                 let description4 = document.querySelector('.flex-container > .main-content > p');                               
                 // Replace description for pass
                 let description5 = document.createElement('p');
-                let description5text = document.createTextNode("You can now truly call yourself a true cyber forensics professional. Remember to always keep your eyes open in your everyday life as well, because it is only through you that your organization becomes secure.  ");
+                let description5text = document.createTextNode("You can now truly call yourself a Cyber Forensics Investigator. Remember to always keep your eyes open in your everyday life as well, because it is only through you that your organization becomes secure.");
                 description5.appendChild(description5text);
                 description4.replaceWith(description5);
 
@@ -1129,7 +1129,7 @@ var quizPrinter = [
 		question: 'This is a multifunctional printer. Beside printing it can scan documents, send mails and much more. Therefore data from connected devices is stored in the internal memory. What should users consider when using it for their job?',
 		answers: {
 			a: 'Modern multifunction printers have sufficient protection means so the data is protected.',
-			b: 'The data of connected devices are stored in the printer and may be lost..',
+			b: 'The data of connected devices are stored in the printer and may be lost.',
         },
 		correctAnswer: 'b',
         feedbackRight: 'True. Print jobs that are still stored in the printer can be printed out just as easily as data from old copies, faxes or print jobs that appear to have been deleted but are actually still present can be made visible again.',
