@@ -735,7 +735,7 @@ function init () {
                 hl4.remove();                    
                 // Create and insert new Headline for fail
                 let hl5 = document.createElement('h1');
-                hl5.setAttribute('id','box-fail');
+                //hl5.setAttribute('id','box-fail');
                 let hl5text = document.createTextNode(window.numCorrect +" out of 11 questions answered correctly.\n \n Sorry, you didn't pass.");
                 hl5.appendChild(hl5text);
                 let main = document.querySelector('.flex-container > .main-content');
@@ -835,7 +835,7 @@ var clickOnObjects = function (event) {
             break;          
 
             case 'roomba_cube':
-                //clickQuizObject(quizRoomba, quizContainerRoomba, feedbackContainerRoomba, submitButtonRoomba, "roomba", "closeRoomba");  
+                clickQuizObject(quizRoomba, quizContainerRoomba, feedbackContainerRoomba, submitButtonRoomba, "roomba", "closeRoomba");  
                 var tweenRotate = new TWEEN.Tween(roomba.rotation)
                .to({ z: (0.5 * Math.PI)}, 3000)
                // .to( {x:-0.7, y:-1.3, z:1.4}, 3000) 
@@ -1046,7 +1046,7 @@ function generateQuiz(questions, quizContainer, feedbackContainer, submitButton)
     
             // add this question and its answers to the output
             output.push(
-                '<div id="question" class="question">' + questions[i].question + '</div>'
+                '<div id="question" class="question">' + questions[i].question + '</div>' 
                 + '<div id="answer" class="answers">' + answers.join('') + '</div>'
             );
         }
@@ -1289,7 +1289,7 @@ var quizUsb = [
 			a: 'Under no circumstances should the drive be connected to a computer!',
 			b: 'What a find! You should plug the stick into your computer and see what it contains. At least it\'s free storage.'			 
         },
-		correctAnswer: 'b', 
+		correctAnswer: 'a', 
         feedbackRight: 'Correct. It is quite possible that it was laid out here by cybercriminals to spread malware.',
         feedbackWrong: 'Not the right answer. In many cases, malware has already entered a network not via the Internet, but via an infected USB drive.'
 	},
