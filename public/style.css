@@ -143,26 +143,12 @@ h1, p{
     animation-duration: 0.6s
   }
   
-  #box-fail{
-  position: relative;
-    background-color: #fa6a8e;
-    margin: auto;
-    padding-left: 10;
-    border: 2px solid #ff0000;
-    border-radius: 10px;
-    width: 80%;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);    
+  #score-fail{
+    color: red;  
   }
 
-  #box-pass{
-    position: relative;
-      background-color: #a0fa76;
-      margin: auto;
-      padding-left: 10;
-      border: 2px solid #09ff00;
-      border-radius: 10px;
-      width: 80%;
-      box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);    
+  #score-pass{
+    color: green;  
     }
 
   /* Add Animation */

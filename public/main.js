@@ -686,7 +686,7 @@ function init () {
         description5.appendChild(description5text);
         description4.replaceWith(description5);
                
-        if (window.numCorrect >= 9 ) {            
+        if (window.numCorrect >= 5 ) {            
             pass.visible = true;
             fail.visible = false;
 
@@ -703,6 +703,7 @@ function init () {
                 hl4.remove();                    
                 // Create and insert new Headline for pass
                 let hl5 = document.createElement('h1');
+                hl5.setAttribute('id','score-pass');
                 let hl5text = document.createTextNode(window.numCorrect +" out of 11 questions answered correctly.\n \n Congratulations, you passed!");
                 hl5.appendChild(hl5text);
                 let main = document.querySelector('.flex-container > .main-content');
@@ -735,7 +736,7 @@ function init () {
                 hl4.remove();                    
                 // Create and insert new Headline for fail
                 let hl5 = document.createElement('h1');
-                //hl5.setAttribute('id','box-fail');
+                hl5.setAttribute('id','score-fail');
                 let hl5text = document.createTextNode(window.numCorrect +" out of 11 questions answered correctly.\n \n Sorry, you didn't pass.");
                 hl5.appendChild(hl5text);
                 let main = document.querySelector('.flex-container > .main-content');
