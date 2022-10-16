@@ -1076,8 +1076,7 @@ function generateQuiz(questions, quizContainer, feedbackContainer, submitButton)
             userAnswer = (answerContainers[i].querySelector('input[name=question'+i+']:checked')).value;              
             
             // Case correct answer
-            if(userAnswer === questions[i].correctAnswer){
-                //submitButton.disabled = false;
+            if(userAnswer === questions[i].correctAnswer){              
                 window.numCorrect += 1;
                 feedbackContainer.style.color = 'mediumseagreen';
                 //get feedback CORRECT from additiopnal property in questions[]
@@ -1086,8 +1085,7 @@ function generateQuiz(questions, quizContainer, feedbackContainer, submitButton)
                 }
             
             // Case wrong answer
-            else if (userAnswer != questions[i].correctAnswer) {
-                //submitButton.disabled = false;
+            else if (userAnswer != questions[i].correctAnswer) {                
                 feedbackContainer.style.color = 'firebrick';
                 //get feedback WRONG from additiopnal property in myQuestions[]
                 feedback = '<br>' + questions[0].feedbackWrong + '<br>' + '<br>';
