@@ -1072,10 +1072,12 @@ function generateQuiz(questions, quizContainer, feedbackContainer, submitButton)
         for(var i=0; i<questions.length; i++){
     
             // find selected answer
-            userAnswer = (answerContainers[i].querySelector('input[name=question'+i+']:checked')||{}).value;            
+            //userAnswer = (answerContainers[i].querySelector('input[name=question'+i+']:checked')||{}).value;  
+            userAnswer = (answerContainers[i].querySelector('input[name=question'+i+']:checked')).value;              
             
             // Case correct answer
-            if(userAnswer===questions[i].correctAnswer){
+            if(userAnswer === questions[i].correctAnswer){
+                //submitButton.disabled = false;
                 window.numCorrect += 1;
                 feedbackContainer.style.color = 'mediumseagreen';
                 //get feedback CORRECT from additiopnal property in questions[]
@@ -1084,12 +1086,15 @@ function generateQuiz(questions, quizContainer, feedbackContainer, submitButton)
                 }
             
             // Case wrong answer
-            else{
-                
+            else if (userAnswer != questions[i].correctAnswer) {
+                //submitButton.disabled = false;
                 feedbackContainer.style.color = 'firebrick';
                 //get feedback WRONG from additiopnal property in myQuestions[]
                 feedback = '<br>' + questions[0].feedbackWrong + '<br>' + '<br>';
                 submitButton.disabled = true;
+            
+            } else {
+                submitButton.disabled = false;
             }; 
         };           
         feedbackContainer.innerHTML = feedback; 
