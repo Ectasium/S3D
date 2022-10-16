@@ -5,7 +5,7 @@ import { GUI } from 'dat.gui';
 import * as TWEEN from '@tweenjs/tween.js';
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js';
 import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js';
-//import { GlitchPass } from 'three/examples/jsm/postprocessing/GlitchPass.js';
+import { GlitchPass } from 'three/examples/jsm/postprocessing/GlitchPass.js';
 import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass.js';
 
 
@@ -13,7 +13,7 @@ let office;
 let camera;
 let renderer;
 let scene;
-//let glitchPass;
+let glitchPass;
 let bloomPass;
 let composer;
 
@@ -61,14 +61,14 @@ function init () {
     composer = new EffectComposer(renderer, renderTarget);
 	composer.addPass(new RenderPass(scene, camera));    
     
-    // var glitchParams = {
-    //     minFilter: THREE.LinearFilter,
-    //     magFilter: THREE.LinearFilter,
-    //     format: THREE.RGBFormat,
-    //     stencilBuffer: true,
-    //   };
-    // glitchPass = new GlitchPass(glitchParams);
-	// composer.addPass(glitchPass);
+    var glitchParams = {
+        minFilter: THREE.LinearFilter,
+        magFilter: THREE.LinearFilter,
+        format: THREE.RGBFormat,
+        stencilBuffer: true,
+      };
+    glitchPass = new GlitchPass(glitchParams);
+	//composer.addPass(glitchPass);
 
 
     const bloomParams = {
@@ -563,8 +563,8 @@ function init () {
 
         button_start.addEventListener("click", function() {
             scene.remove(world);
-            //composer.removePass(glitchPass);
             composer.removePass(bloomPass);
+            composer.removePass(glitchPass);
             scene.add(livingroom, cctv, roomba, roombaCube, alexa, smartcontrol, tv);
             controls.enabled = true;
             addEventListener('mousemove', moveOnObjects);
@@ -668,7 +668,6 @@ function init () {
     button_next_3.addEventListener("click", function () {
         scene.remove(factory, car, trash, backpack, usb, entrance);
         scene.add(pass, fail);
-        composer.addPass(bloomPass);
         controls.enabled = false;
         //pass.visible = false;
         //fail.visible = false;
@@ -689,6 +688,8 @@ function init () {
         if (window.numCorrect >= 5 ) {            
             pass.visible = true;
             fail.visible = false;
+            
+            composer.addPass(bloomPass);
 
             new TWEEN.Tween(pass.rotation)
                .to({ y: -(2 * Math.PI)}, 5000)
@@ -722,6 +723,8 @@ function init () {
 
                 pass.visible = false;
                 fail.visible = true;
+
+                composer.addPass(glitchPass);
 
                 new TWEEN.Tween(fail.rotation)
                .to({ y: -(2 * Math.PI)}, 5000)
@@ -1212,7 +1215,7 @@ var quizBackpack = [
 			b: 'No, if the device is secured with a password and when the latest security updates are installed this is not a problem.',
         },
 		correctAnswer: 'a',
-        feedbackRight: 'Yes, tha\'s right. Outside the company building, IT equipment should never be left out of sight.',
+        feedbackRight: 'Yes, tha\'s right. Outside and inside the building, IT equipment should never be left out of sight.',
         feedbackWrong: 'No, even if the device is password protected, it should never be left out of sight, especially when traveling.'
 	},
 ];
