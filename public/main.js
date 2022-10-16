@@ -1314,7 +1314,7 @@ var quizWifi = [
 	{
 		question: "This is a Wifi router, the central hub for all connected devices. When checking it\'s password you find, that ist is ADMIN1234. What do you think?",
 		answers: {
-			a: 'No problem. Someone has done everything right here.',
+			a: 'No problem. Everything is fine here.',
 			b: 'The term ADMIN may not be used in a password. It should be changed to SUPERHERO1234.',
 			c: 'The password is completely insecure and should be replaced with a secure one as soon as possible.',
                     },
