@@ -562,6 +562,8 @@ function init () {
         let button_start = document.getElementById("button_start");        
 
         button_start.addEventListener("click", function() {
+            //reset Quiz counter per scene 
+            window.numQuiz = 0;
             scene.remove(world);
             composer.removePass(bloomPass);
             composer.removePass(glitchPass);
@@ -574,7 +576,7 @@ function init () {
             //ambientLight.intensity = 0.01;
             button_start.style.display = "none";
             button_next_1.style.display = "block";
-            
+                        
             // Change Headline //////////////////////////
             
             // Delete old Headline
@@ -598,11 +600,14 @@ function init () {
             let description2 = document.createElement('p');
             let description2text = document.createTextNode("A modern living room, equipped with a few conveniences that a smart home provides. But is it also as safe as it is comfortable? Your first mission: Take a good look around and search for vulnerabilities. Note: Security gaps can also lurk where they are not visible at first glance. When finished, click NEXT to move to the following scene.");
             description2.appendChild(description2text);
-            description_start.replaceWith(description2);            
+            description_start.replaceWith(description2); 
+                      
         });
 
         //Button show home office /////////////////////////////////////////////////////////////////////
         button_next_1.addEventListener("click", function () {
+             //reset Quiz counter per scene 
+             window.numQuiz = 0;
             scene.remove(livingroom, cctv, roomba, roombaCube, alexa, smartcontrol, tv);
             scene.add(office, bin, printer, door, note, wifi, drawer, drawerCube);
             controls.reset();
@@ -636,6 +641,8 @@ function init () {
 
         //Button show Factory ///////////////////////////////////////////////////////////////////////
         button_next_2.addEventListener("click", function () {
+            //reset Quiz counter per scene 
+            window.numQuiz = 0;
             scene.remove(office, bin, printer, door, note, wifi, drawer, drawerCube);
             scene.add(factory, car, trash, backpack, usb, entrance);
             controls.reset();
@@ -666,6 +673,8 @@ function init () {
 
     // Button show Score page ////////////////////////////////////////////////////////////
     button_next_3.addEventListener("click", function () {
+        //reset Quiz counter per scene 
+        window.numQuiz = 0;
         scene.remove(factory, car, trash, backpack, usb, entrance);
         scene.add(pass, fail);
         controls.enabled = false;
@@ -1020,6 +1029,7 @@ window.addEventListener('mousemove', moveOnObjects);
 // Generate Quizzes ////////////////////////////////////////////////////////////////////
 
 window.numCorrect = 0;
+window.numQuiz = 0;
 
 function generateQuiz(questions, quizContainer, feedbackContainer, submitButton){
 
@@ -1082,6 +1092,7 @@ function generateQuiz(questions, quizContainer, feedbackContainer, submitButton)
                 //get feedback CORRECT from additiopnal property in questions[]
                 feedback = '<br>' + questions[0].feedbackRight + '<br>' + '<br>';
                 submitButton.disabled = true;
+                console.log(window.numQuiz += 1);
                 }
             
             // Case wrong answer
@@ -1090,6 +1101,7 @@ function generateQuiz(questions, quizContainer, feedbackContainer, submitButton)
                 //get feedback WRONG from additiopnal property in myQuestions[]
                 feedback = '<br>' + questions[0].feedbackWrong + '<br>' + '<br>';
                 submitButton.disabled = true;
+                console.log(window.numQuiz += 1);
             
             } else {
                 submitButton.disabled = false;
