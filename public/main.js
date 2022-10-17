@@ -558,12 +558,20 @@ function init () {
         let button_restart = document.getElementById("button_restart");
         button_restart.style.display = "none"; 
         
+        // Hide on screen counter for quizzes left in scene
+        let quizCount = document.getElementById("quizzesleft");
+        quizCount.style.display = "none"; 
+                
         //Button start and show livingroom /////////////////////////////////////////////////////////
         let button_start = document.getElementById("button_start");        
 
         button_start.addEventListener("click", function() {
             //reset Quiz counter per scene 
+            quizCount.style.display = "block";
             window.numQuiz = 0;
+            window.quizzesPerScene = 4;
+            //quizCount = document.getElementById("quizzesleft");
+            quizCount.innerHTML = "Quizzes left in this Scene: " + quizzesPerScene;
             scene.remove(world);
             composer.removePass(bloomPass);
             composer.removePass(glitchPass);
@@ -606,8 +614,10 @@ function init () {
 
         //Button show home office /////////////////////////////////////////////////////////////////////
         button_next_1.addEventListener("click", function () {
-             //reset Quiz counter per scene 
-             window.numQuiz = 0;
+            //reset Quiz counter per scene 
+            window.numQuiz = 0;
+            window.quizzesPerScene = 4;
+            quizCount.innerHTML = "Quizzes left in this Scene: " + quizzesPerScene;
             scene.remove(livingroom, cctv, roomba, roombaCube, alexa, smartcontrol, tv);
             scene.add(office, bin, printer, door, note, wifi, drawer, drawerCube);
             controls.reset();
@@ -643,6 +653,8 @@ function init () {
         button_next_2.addEventListener("click", function () {
             //reset Quiz counter per scene 
             window.numQuiz = 0;
+            window.quizzesPerScene = 3;
+            quizCount.innerHTML = "Quizzes left in this Scene: " + quizzesPerScene;
             scene.remove(office, bin, printer, door, note, wifi, drawer, drawerCube);
             scene.add(factory, car, trash, backpack, usb, entrance);
             controls.reset();
@@ -674,7 +686,10 @@ function init () {
     // Button show Score page ////////////////////////////////////////////////////////////
     button_next_3.addEventListener("click", function () {
         //reset Quiz counter per scene 
+        quizCount.style.display = "none";
         window.numQuiz = 0;
+        window.quizzesPerScene = 0;
+
         scene.remove(factory, car, trash, backpack, usb, entrance);
         scene.add(pass, fail);
         controls.enabled = false;
@@ -1030,6 +1045,8 @@ window.addEventListener('mousemove', moveOnObjects);
 
 window.numCorrect = 0;
 window.numQuiz = 0;
+window.quizzesPerScene = 0;
+//quizCount;
 
 function generateQuiz(questions, quizContainer, feedbackContainer, submitButton){
 
@@ -1092,7 +1109,10 @@ function generateQuiz(questions, quizContainer, feedbackContainer, submitButton)
                 //get feedback CORRECT from additiopnal property in questions[]
                 feedback = '<br>' + questions[0].feedbackRight + '<br>' + '<br>';
                 submitButton.disabled = true;
-                console.log(window.numQuiz += 1);
+                window.numQuiz += 1;
+                quizzesLeft = quizzesPerScene - window.numQuiz;
+                quizCount = document.getElementById("quizzesleft");
+                quizCount.innerHTML = "Quizzes left in this Scene: " + quizzesLeft;
                 }
             
             // Case wrong answer
@@ -1101,10 +1121,13 @@ function generateQuiz(questions, quizContainer, feedbackContainer, submitButton)
                 //get feedback WRONG from additiopnal property in myQuestions[]
                 feedback = '<br>' + questions[0].feedbackWrong + '<br>' + '<br>';
                 submitButton.disabled = true;
-                console.log(window.numQuiz += 1);
+                window.numQuiz += 1;
+                quizzesLeft = window.quizzesPerScene - window.numQuiz;
+                quizCount = document.getElementById("quizzesleft");
+                quizCount.innerHTML = "Quizzes left in this Scene: " + quizzesLeft;
             
             } else {
-                submitButton.disabled = false;
+                submitButton.disabled = false;                
             }; 
         };           
         feedbackContainer.innerHTML = feedback; 
