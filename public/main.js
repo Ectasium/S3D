@@ -85,8 +85,8 @@ function init () {
     controls.enabled = false;
     controls.target.set(0,0,0);
     controls.enablePan = false;
-    controls.enableDamping = false;
-    controls.dampingFactor = 3;
+    controls.enableDamping = true;
+    controls.dampingFactor = 0.03;
     controls.rotateSpeed = 0.5;
     controls.minDistance = 5;
     controls.maxDistance = 20;
@@ -570,7 +570,7 @@ function init () {
             window.numQuiz = 0;
             window.quizzesPerScene = 4;
             //quizCount = document.getElementById("quizzesleft");
-            quizCount.innerHTML = "Quizzes left in this Scene: " + quizzesPerScene;
+            quizCount.innerHTML = quizzesPerScene + " Quiz Questions left";
             scene.remove(world);
             composer.removePass(bloomPass);
             composer.removePass(glitchPass);
@@ -616,7 +616,7 @@ function init () {
             //reset Quiz counter per scene 
             window.numQuiz = 0;
             window.quizzesPerScene = 4;
-            quizCount.innerHTML = "Quizzes left in this Scene: " + quizzesPerScene;
+            quizCount.innerHTML = quizzesPerScene + " Quiz Questions left";
             scene.remove(livingroom, cctv, roomba, roombaCube, alexa, smartcontrol, tv);
             scene.add(office, bin, printer, door, note, wifi, drawer, drawerCube);
             controls.reset();
@@ -653,7 +653,7 @@ function init () {
             //reset Quiz counter per scene 
             window.numQuiz = 0;
             window.quizzesPerScene = 3;
-            quizCount.innerHTML = "Quizzes left in this Scene: " + quizzesPerScene;
+            quizCount.innerHTML = quizzesPerScene + " Quiz Questions left";
             scene.remove(office, bin, printer, door, note, wifi, drawer, drawerCube);
             scene.add(factory, car, trash, backpack, usb, entrance);
             controls.reset();
@@ -1111,7 +1111,7 @@ function generateQuiz(questions, quizContainer, feedbackContainer, submitButton)
                 window.numQuiz += 1;
                 quizzesLeft = quizzesPerScene - window.numQuiz;
                 quizCount = document.getElementById("quizzesleft");
-                quizCount.innerHTML = "Quizzes left in this Scene: " + quizzesLeft;
+                quizCount.innerHTML = quizzesLeft + " Quiz Questions left";
                 }
             
             // Case wrong answer
@@ -1123,7 +1123,7 @@ function generateQuiz(questions, quizContainer, feedbackContainer, submitButton)
                 window.numQuiz += 1;
                 quizzesLeft = window.quizzesPerScene - window.numQuiz;
                 quizCount = document.getElementById("quizzesleft");
-                quizCount.innerHTML = "Quizzes left in this Scene: " + quizzesLeft;
+                quizCount.innerHTML = quizzesLeft + " Quiz Questions left";
             
             } else {
                 submitButton.disabled = false;                
@@ -1364,10 +1364,11 @@ const render = () => {
 };
 
 // animation recursive function
-function animate (time) {
+function animate (time) {    
     TWEEN.update(time);
-    requestAnimationFrame(animate);
+    requestAnimationFrame(animate);    
     render();
+    controls.update();
 };
 
  // making canvas responsive

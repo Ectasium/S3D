@@ -27,8 +27,12 @@ body{
     /* overflow: hidden; */
 }
 
-h1, p{
-    color: var(--complimentary-color);
+h1{
+    color: #e4771e;
+}
+
+p{
+  color: var(--complimentary-color);
 }
 
 .accent{
