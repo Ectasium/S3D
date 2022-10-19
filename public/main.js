@@ -1288,7 +1288,7 @@ var quizSmartcontrol = [
 	{
 		question: "This is a control monitor, the heart of a smart home. But what should be considered when setting it up? ",
 		answers: {
-			a: 'Nothing special. It is supposed to be a s m a r t home, right?',
+			a: 'Nothing special. It is supposed to be a  s m a r t  home, right?',
 			b: 'Always change the default password of every device you connect and set up an encrypted connection, if possible.',
         },
 		correctAnswer: 'b',
