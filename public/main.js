@@ -145,7 +145,7 @@ function init () {
 
     };
     // Add test object if needed
-    testObject();
+    //testObject();
 
     // Load/Create OBJECTS //////////////////////////////////////////////////////////////////////
     
@@ -207,8 +207,9 @@ function init () {
         drawer_cube.userData.class = 'mouseover_object';
         drawer_cube.visible = false;
         return drawer_cube;
-    };
-   
+    };   
+
+    // create door cube
     function add_door() {
         const door_cube_geometry = new THREE.BoxGeometry(2.2, 5, 0.17);
         const door_cube_material = new THREE.MeshLambertMaterial( 
@@ -284,7 +285,22 @@ function init () {
         wifi_cube.material.opacity = 0.2;
         return wifi_cube;
     };
-    
+
+    // add calendar 
+    function add_calendar() {
+        const calendar_cube_geometry = new THREE.BoxGeometry(0.21, 0.52, 0.41);
+        const calendar_cube_material = new THREE.MeshLambertMaterial( 
+            {color: 0xff0000, 
+            opacity: 0.9,
+            transparent: true});
+        const calendar_cube = new THREE.Mesh(calendar_cube_geometry, calendar_cube_material);
+        calendar_cube.position.set(4.83, 1.51, -3.75);
+        calendar_cube.userData.name = 'calendar_cube';
+        calendar_cube.userData.class = 'mouseover_object';
+        calendar_cube.visible = false;
+        calendar_cube.material.opacity = 0.2;
+        return calendar_cube;
+    };    
         
      // load livingroom /////////////////////////////////////////////
      const livingroom_loader = new GLTFLoader();
@@ -351,6 +367,90 @@ function init () {
         return cctv_cube;
     };   
 
+    //add xbox_cube 
+    function add_xbox() {
+        const xbox_cube_geometry = new THREE.BoxGeometry(0.47, 0.68, 0.19);
+        const xbox_cube_material = new THREE.MeshLambertMaterial( 
+            {color: 0xff0000, 
+            opacity: 0.9,
+            transparent: true});
+        const xbox_cube = new THREE.Mesh(xbox_cube_geometry, xbox_cube_material);
+        xbox_cube.position.set(-4.17, -0.02, -2.71);
+        xbox_cube.userData.name = 'xbox_cube';
+        xbox_cube.userData.class = 'mouseover_object';
+        xbox_cube.visible = false;
+        xbox_cube.material.opacity = 0.2;
+        return xbox_cube;
+    };
+
+     //add controller_cube 
+     function add_controller() {
+        const controller_cube_geometry = new THREE.BoxGeometry(0.36, 0.14, 0.23);
+        const controller_cube_material = new THREE.MeshLambertMaterial( 
+            {color: 0xff0000, 
+            opacity: 0.9,
+            transparent: true});
+        const controller_cube = new THREE.Mesh(controller_cube_geometry, controller_cube_material);
+        controller_cube.position.set(2.89, -0.57, 4.14);
+        controller_cube.userData.name = 'controller_cube';
+        controller_cube.userData.class = 'mouseover_object';
+        controller_cube.rotation.y = -0.83;
+        controller_cube.visible = false;
+        controller_cube.material.opacity = 0.2;
+        return controller_cube;
+    };
+
+     //add tablet_cube 
+     function add_tablet() {
+        const tablet_cube_geometry = new THREE.BoxGeometry(0.9, 0.04, 0.6);
+        const tablet_cube_material = new THREE.MeshLambertMaterial( 
+            {color: 0xff0000, 
+            opacity: 0.9,
+            transparent: true});
+        const tablet_cube = new THREE.Mesh(tablet_cube_geometry, tablet_cube_material);
+        tablet_cube.position.set(0.61, 0.54, -1.81);
+        tablet_cube.userData.name = 'tablet_cube';
+        tablet_cube.userData.class = 'mouseover_object';
+        tablet_cube.rotation.y = 0.45;
+        tablet_cube.visible = false;
+        tablet_cube.material.opacity = 0.2;
+        return tablet_cube;
+    };
+
+    //add laptop_cube 
+    function add_laptop() {
+        const laptop_cube_geometry = new THREE.BoxGeometry(0.67, 0.04, 0.97);
+        const laptop_cube_material = new THREE.MeshLambertMaterial( 
+            {color: 0xff0000, 
+            opacity: 0.9,
+            transparent: true});
+        const laptop_cube = new THREE.Mesh(laptop_cube_geometry, laptop_cube_material);
+        laptop_cube.position.set(0.61, 0.54, -0.02);
+        laptop_cube.userData.name = 'laptop_cube';
+        laptop_cube.userData.class = 'mouseover_object';
+        laptop_cube.rotation.y = -0.11;
+        laptop_cube.visible = false;
+        laptop_cube.material.opacity = 0.2;
+        return laptop_cube;
+    };
+
+    //add pizza_cube 
+    function add_pizza() {
+        const pizza_cube_geometry = new THREE.BoxGeometry(0.54, 0.06, 0.42);
+        const pizza_cube_material = new THREE.MeshLambertMaterial( 
+            {color: 0xff0000, 
+            opacity: 0.9,
+            transparent: true});
+        const pizza_cube = new THREE.Mesh(pizza_cube_geometry, pizza_cube_material);
+        pizza_cube.position.set(1.23, 0.61, 1.99);
+        pizza_cube.userData.name = 'pizza_cube';
+        pizza_cube.userData.class = 'mouseover_object';
+        pizza_cube.rotation.y = -0.02;
+        pizza_cube.visible = false;
+        pizza_cube.material.opacity = 0.2;
+        return pizza_cube;
+    };
+
     //add alexa_cube 
     function add_alexa() {
         const alexa_cube_geometry = new THREE.BoxGeometry(0.21, 0.37, 0.25);
@@ -365,6 +465,71 @@ function init () {
         alexa_cube.visible = false;
         alexa_cube.material.opacity = 0.2;
         return alexa_cube;
+    };
+
+    //add calendar_cube 
+    function add_calendar() {
+        const calendar_cube_geometry = new THREE.BoxGeometry(0.21, 0.52, 0.41);
+        const calendar_cube_material = new THREE.MeshLambertMaterial( 
+            {color: 0xff0000, 
+            opacity: 0.9,
+            transparent: true});
+        const calendar_cube = new THREE.Mesh(calendar_cube_geometry, calendar_cube_material);
+        calendar_cube.position.set(4.83, 1.51, -3.75);
+        calendar_cube.userData.name = 'calendar_cube';
+        calendar_cube.userData.class = 'mouseover_object';
+        calendar_cube.visible = false;
+        calendar_cube.material.opacity = 0.2;
+        return calendar_cube;
+    };
+
+    //add alarm_cube 
+    function add_alarm() {
+        const alarm_cube_geometry = new THREE.BoxGeometry(0.19, 0.2, 0.45);
+        const alarm_cube_material = new THREE.MeshLambertMaterial( 
+            {color: 0xff0000, 
+            opacity: 0.9,
+            transparent: true});
+        const alarm_cube = new THREE.Mesh(alarm_cube_geometry, alarm_cube_material);
+        alarm_cube.position.set(-5.2, 1.3, 0.75);
+        alarm_cube.userData.name = 'alarm_cube';
+        alarm_cube.userData.class = 'mouseover_object';
+        alarm_cube.visible = false;
+        alarm_cube.material.opacity = 0.2;
+        return alarm_cube;
+    };
+
+    //add vent_cube 
+    function add_vent() {
+        const vent_cube_geometry = new THREE.BoxGeometry(0.45, 0.54, 0.45);
+        const vent_cube_material = new THREE.MeshLambertMaterial( 
+            {color: 0xff0000, 
+            opacity: 0.9,
+            transparent: true});
+        const vent_cube = new THREE.Mesh(vent_cube_geometry, vent_cube_material);
+        vent_cube.position.set(-3.75, 1.37, 1.51);
+        vent_cube.userData.name = 'vent_cube';
+        vent_cube.userData.class = 'mouseover_object';
+        vent_cube.visible = false;
+        vent_cube.material.opacity = 0.2;
+        return vent_cube;
+    };
+
+    //add docs_cube 
+    function add_docs() {
+        const docs_cube_geometry = new THREE.BoxGeometry(0.86, 0.06, 0.6);
+        const docs_cube_material = new THREE.MeshLambertMaterial( 
+            {color: 0xff0000, 
+            opacity: 0.9,
+            transparent: true});
+        const docs_cube = new THREE.Mesh(docs_cube_geometry, docs_cube_material);
+        docs_cube.position.set(0.33, 0.54, 2.34);
+        docs_cube.userData.name = 'docs_cube';
+        docs_cube.userData.class = 'mouseover_object';
+        docs_cube.rotation.y = -0.31;
+        docs_cube.visible = false;
+        docs_cube.material.opacity = 0.2;
+        return docs_cube;
     };
 
     //add smartcontrol_cube 
@@ -536,6 +701,15 @@ function init () {
     wifi = add_wifi();
     drawerCube = add_drawer();
     roombaCube = add_roombaCube();
+    xbox = add_xbox();
+    controller = add_controller();
+    tablet = add_tablet();
+    laptop = add_laptop();
+    pizza = add_pizza();
+    calendar = add_calendar();
+    alarm = add_alarm();
+    vent = add_vent();
+    docs = add_docs();
 
     removeEventListener('mousemove', moveOnObjects);
     removeEventListener('click', clickOnObjects);
@@ -574,7 +748,7 @@ function init () {
             scene.remove(world);
             composer.removePass(bloomPass);
             composer.removePass(glitchPass);
-            scene.add(livingroom, cctv, roomba, roombaCube, alexa, smartcontrol, tv);
+            scene.add(livingroom, cctv, roomba, roombaCube, alexa, smartcontrol, tv, xbox, controller);
             controls.enabled = true;
             addEventListener('mousemove', moveOnObjects);
             addEventListener('click', clickOnObjects);
@@ -617,8 +791,8 @@ function init () {
             window.numQuiz = 0;
             window.quizzesPerScene = 4;
             quizCount.innerHTML = quizzesPerScene + " Quiz Questions left";
-            scene.remove(livingroom, cctv, roomba, roombaCube, alexa, smartcontrol, tv);
-            scene.add(office, bin, printer, door, note, wifi, drawer, drawerCube);
+            scene.remove(livingroom, cctv, roomba, roombaCube, alexa, smartcontrol, tv, xbox, controller);
+            scene.add(office, bin, printer, door, note, wifi, drawer, drawerCube, tablet, laptop, pizza, calendar, docs);
             controls.reset();
             controls.enablePan = false;                    
                         
@@ -654,8 +828,8 @@ function init () {
             window.numQuiz = 0;
             window.quizzesPerScene = 3;
             quizCount.innerHTML = quizzesPerScene + " Quiz Questions left";
-            scene.remove(office, bin, printer, door, note, wifi, drawer, drawerCube);
-            scene.add(factory, car, trash, backpack, usb, entrance);
+            scene.remove(office, bin, printer, door, note, wifi, drawer, drawerCube, tablet, laptop, pizza, calendar, docs);
+            scene.add(factory, car, trash, backpack, usb, entrance, alarm, vent);
             controls.reset();
             controls.enablePan = false;
             button_next_2.style.display = "none";
@@ -689,7 +863,7 @@ function init () {
         window.numQuiz = 0;
         window.quizzesPerScene = 0;
 
-        scene.remove(factory, car, trash, backpack, usb, entrance);
+        scene.remove(factory, car, trash, backpack, usb, entrance, alarm, vent);
         scene.add(pass, fail);
         controls.enabled = false;
         //pass.visible = false;
@@ -859,8 +1033,8 @@ var clickOnObjects = function (event) {
 
             case 'cctv_cube':
                 clickInfoObject ("cctv", "closeCctv");                  
-            break;          
-
+            break; 
+            
             case 'roomba_cube':
                 clickQuizObject(quizRoomba, quizContainerRoomba, feedbackContainerRoomba, submitButtonRoomba, "roomba", "closeRoomba");  
                 var tweenRotate = new TWEEN.Tween(roomba.rotation)
@@ -913,6 +1087,42 @@ var clickOnObjects = function (event) {
 
             case 'entrance_cube':
                 clickInfoObject("entrance", "closeEntrance");                               
+            break;
+
+            case 'xbox_cube':
+                clickInfoObject("xbox", "closeXbox");                               
+            break;
+
+            case 'controller_cube':
+                clickInfoObject("controller", "closeController");                               
+            break;
+
+            case 'tablet_cube':
+                clickInfoObject("tablet", "closeTablet");                               
+            break;
+
+            case 'laptop_cube':
+                clickInfoObject("laptop", "closeLaptop");                               
+            break;
+
+            case 'pizza_cube':
+                clickInfoObject("pizza", "closePizza");                               
+            break;
+
+            case 'calendar_cube':
+                clickInfoObject("calendar", "closeCalendar");                               
+            break;
+
+            case 'alarm_cube':
+                clickInfoObject("alarm", "closeAlarm");                               
+            break;
+
+            case 'vent_cube':
+                clickInfoObject("vent", "closeVent");                               
+            break;
+
+            case 'docs_cube':
+                clickInfoObject("docs", "closeDocs");                               
             break;
 
             case 'wifi_cube':
@@ -1017,6 +1227,42 @@ var moveOnObjects = function (event) {
                 drawerCube.visible = true;
                 break;
 
+            case 'xbox_cube':
+                xbox.visible = true;
+                break;
+
+            case 'controller_cube':
+                controller.visible = true;
+                break;
+
+            case 'tablet_cube':
+                tablet.visible = true;
+                break;
+                
+            case 'laptop_cube':
+                laptop.visible = true;
+                break;
+                
+            case 'pizza_cube':
+                pizza.visible = true;
+                break; 
+
+            case 'calendar_cube':
+                calendar.visible = true;
+                break; 
+
+            case 'alarm_cube':
+                alarm.visible = true;
+                break;
+                
+            case 'vent_cube':
+                vent.visible = true;
+                break;
+
+            case 'docs_cube':
+                docs.visible = true;
+                break;
+
             default:
                 bin.visible = false;
                 printer.visible = false;
@@ -1034,6 +1280,15 @@ var moveOnObjects = function (event) {
                 wifi.visible = false;
                 drawerCube.visible = false;
                 roombaCube.visible = false;
+                xbox.visible = false;
+                controller.visible = false;
+                tablet.visible = false;
+                laptop.visible = false;
+                pizza.visible = false;
+                calendar.visible = false;
+                alarm.visible = false;
+                vent.visible = false;
+                docs.visible = false;
                 break;
         };
     };
