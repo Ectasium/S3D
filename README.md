@@ -50,8 +50,9 @@ remove from next scene
 
 add to moveOnObjects (540ff) and set invisible per default
 
-if quiz, add questions object (665ff)
+create modal in index.html (either quiz or info)
 
-create modal in indexed.html (either quiz or info)
+
+if quiz, add questions object (665ff)
 
 
