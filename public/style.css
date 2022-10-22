@@ -156,7 +156,7 @@ p{
     color: #e66802;
     font-family: 'Nunito', serif;
     font-weight: 700;
-    font-size: 30px;
+    font-size: 3px;
   }  
 
   #score-fail{
@@ -240,3 +240,5 @@ p{
     font-weight: 500;
 
   }
+
+  

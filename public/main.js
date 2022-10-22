@@ -110,8 +110,8 @@ function init () {
 
     function testObject() {
     
-        var gui = new GUI();
-
+        var gui = new GUI( { width: 600});
+        
         const cube_geometry = new THREE.BoxGeometry(1, 1, 1);
         const cube_material = new THREE.MeshLambertMaterial( 
             {color: 0x08f26e, 
@@ -145,7 +145,7 @@ function init () {
 
     };
     // Add test object if needed
-    //testObject();
+    testObject();
 
     // Load/Create OBJECTS //////////////////////////////////////////////////////////////////////
     
