@@ -207,6 +207,21 @@ function init () {
         drawer_cube.userData.class = 'mouseover_object';
         drawer_cube.visible = false;
         return drawer_cube;
+    }; 
+    
+    // create closedrawer cube
+    function add_closedrawer() {
+        const closedrawer_cube_geometry = new THREE.BoxGeometry(0.08, 0.55, 1.28);
+        const closedrawer_cube_material = new THREE.MeshLambertMaterial( 
+            {color: 0xff0000, 
+            opacity: 0.6,
+            transparent: true});
+        const closedrawer_cube = new THREE.Mesh(closedrawer_cube_geometry, closedrawer_cube_material);
+        closedrawer_cube.position.set(-1.4, -1.33, 1.78);
+        closedrawer_cube.userData.name = 'closedrawer_cube';
+        closedrawer_cube.userData.class = 'mouseover_object';
+        closedrawer_cube.visible = false;
+        return closedrawer_cube;
     };   
 
     // create door cube
@@ -710,6 +725,7 @@ function init () {
     alarm = add_alarm();
     vent = add_vent();
     docs = add_docs();
+    closedrawer = add_closedrawer();
 
     removeEventListener('mousemove', moveOnObjects);
     removeEventListener('click', clickOnObjects);
@@ -828,7 +844,7 @@ function init () {
             window.numQuiz = 0;
             window.quizzesPerScene = 3;
             quizCount.innerHTML = quizzesPerScene + " Quiz Questions left";
-            scene.remove(office, bin, printer, door, note, wifi, drawer, drawerCube, tablet, laptop, pizza, calendar, docs);
+            scene.remove(office, bin, printer, door, note, wifi, drawer, closedrawer, drawerCube, tablet, laptop, pizza, calendar, docs);
             scene.add(factory, car, trash, backpack, usb, entrance, alarm, vent);
             controls.reset();
             controls.enablePan = false;
@@ -1136,7 +1152,20 @@ var clickOnObjects = function (event) {
                 .easing(TWEEN.Easing.Cubic.InOut)
                 .delay(300)
                 .start(); 
-                scene.remove(drawerCube);                               
+                scene.remove(drawerCube);
+                scene.add(closedrawer);                               
+            break;
+
+            case 'closedrawer_cube':
+                new TWEEN.Tween(drawer.position)
+                .to( {x:0.5, y:-1.33, z:1.07}, 3000)  
+                .repeat(0)
+                .easing(TWEEN.Easing.Cubic.InOut)
+                .delay(300)
+                .start(); 
+                scene.add(drawerCube);
+                scene.remove(closedrawer);
+                                               
             break;
     };
 };
@@ -1263,6 +1292,10 @@ var moveOnObjects = function (event) {
                 docs.visible = true;
                 break;
 
+            case 'closedrawer_cube':
+                closedrawer.visible = false;
+                break;
+
             default:
                 bin.visible = false;
                 printer.visible = false;
@@ -1289,6 +1322,7 @@ var moveOnObjects = function (event) {
                 alarm.visible = false;
                 vent.visible = false;
                 docs.visible = false;
+                closedrawer.visible = false;
                 break;
         };
     };
