@@ -87,8 +87,8 @@ function init () {
     controls.enablePan = false;
     controls.enableDamping = true;
     controls.dampingFactor = 0.03;
-    controls.rotateSpeed = 0.5;
-    controls.minDistance = 5;
+    //controls.rotateSpeed = 0.5;
+    controls.minDistance = 1;
     controls.maxDistance = 20;
     //controls.minAzimuthAngle = Math.PI * -0.5;
     //controls.maxAzimuthAngle = Math.PI * -0.4;
@@ -593,7 +593,6 @@ function init () {
          //scene.add(gltf.scene);
     });
 
-
      // add car cube 
      function add_car() {
         const car_cube_geometry = new THREE.BoxGeometry(0.64, 0.44, 1.2);
@@ -677,6 +676,37 @@ function init () {
         return entrance_cube;
     };
 
+    // add video cube
+    function add_video() {
+        let video = document.getElementById("video");
+        let videoTexture = new THREE.VideoTexture(video);
+        
+        videoTexture.minFilter = THREE.LinearFilter;
+        videoTexture.magFilter = THREE.LinearFilter;
+        
+        var video_cube_material = new THREE.MeshBasicMaterial({
+            map: videoTexture,
+            side: THREE.FrontSide,
+            toneMapped: false,
+        });
+
+        const video_cube_geometry = new THREE.BoxGeometry(2, 2, 2);
+        
+        // const video_cube_material = new THREE.MeshLambertMaterial( 
+        //     {color: 0xff0000, 
+        //     opacity: 0.9,
+        //     transparent: true});
+        
+        const video_cube = new THREE.Mesh(video_cube_geometry, video_cube_material);
+        
+        video_cube.position.set(2, 2, 2);
+        video_cube.userData.name = 'video_cube';
+        video_cube.userData.class = 'mouseover_object';
+        video_cube.visible = true;
+        //video_cube.material.opacity = 0.2;
+        return video_cube;
+    };
+
      // load pass     
      const pass_loader = new GLTFLoader();
      url = new URL( './model/pass.glb', import.meta.url );
@@ -726,6 +756,7 @@ function init () {
     vent = add_vent();
     docs = add_docs();
     closedrawer = add_closedrawer();
+    video = add_video();
 
     removeEventListener('mousemove', moveOnObjects);
     removeEventListener('click', clickOnObjects);
@@ -764,7 +795,7 @@ function init () {
             scene.remove(world);
             composer.removePass(bloomPass);
             composer.removePass(glitchPass);
-            scene.add(livingroom, cctv, roomba, roombaCube, alexa, smartcontrol, tv, xbox, controller);
+            scene.add(livingroom, cctv, roomba, roombaCube, alexa, smartcontrol, tv, xbox, controller, video);
             controls.enabled = true;
             addEventListener('mousemove', moveOnObjects);
             addEventListener('click', clickOnObjects);
@@ -807,7 +838,7 @@ function init () {
             window.numQuiz = 0;
             window.quizzesPerScene = 4;
             quizCount.innerHTML = quizzesPerScene + " Quiz Questions left";
-            scene.remove(livingroom, cctv, roomba, roombaCube, alexa, smartcontrol, tv, xbox, controller);
+            scene.remove(livingroom, cctv, roomba, roombaCube, alexa, smartcontrol, tv, xbox, controller, video);
             scene.add(office, bin, printer, door, note, wifi, drawer, drawerCube, tablet, laptop, pizza, calendar, docs);
             controls.reset();
             controls.enablePan = false;                    
@@ -1658,6 +1689,7 @@ function animate (time) {
     requestAnimationFrame(animate);    
     render();
     controls.update();
+    videoTexture.update(time);
 };
 
  // making canvas responsive
