@@ -15,7 +15,7 @@ let scene;
 let glitchPass;
 let bloomPass;
 let composer;
-//let controls;
+let controls;
 
 const canvasSize = document.querySelector('.canvas-element');
 let model_container = document.querySelector('.webgl');
@@ -80,16 +80,15 @@ function init () {
     bloomPass = new UnrealBloomPass(bloomParams);
 	composer.addPass(bloomPass);
 
-
     //CONTROLS //////////////////////////////////////////////////////////////////
-    const controls = new OrbitControls(camera, renderer.domElement);
+    controls = new OrbitControls(camera, renderer.domElement);
     controls.enabled = false;
     controls.target.set(0,0,0);
     controls.enablePan = false;
     controls.enableDamping = true;
-    controls.dampingFactor = 0.03;
+    controls.dampingFactor = 0.1;
     //controls.rotateSpeed = 0.5;
-    controls.minDistance = 1;
+    controls.minDistance = 3;
     controls.maxDistance = 20;
     //controls.minAzimuthAngle = Math.PI * -0.5;
     //controls.maxAzimuthAngle = Math.PI * -0.4;
@@ -677,32 +676,29 @@ function init () {
         return entrance_cube;
     };
     
-    // add video cube    
+    // add video cube      
+ 
+    // let videofile = document.createElement('video');
+    // videofile.src = "../model/rickroll.mp4";
+    // videofile.load();
+
+    // let videoTexture = new THREE.VideoTexture(videofile);        
+    //     //videoTexture.minFilter = THREE.LinearFilter;
+    //     //videoTexture.magFilter = THREE.LinearFilter;
     
-    var videofile = document.getElementById("videofile");
-    
-    function add_video() { 
+    // var video_material = new THREE.MeshStandardMaterial({
+    //     map: videoTexture,
+    //     side: THREE.FrontSide,
+    //     toneMapped: false,
+    // });
+    // const video_geometry = new THREE.BoxGeometry(2, 2, 2);
 
-        let videoTexture = new THREE.VideoTexture(videofile);        
-        videoTexture.minFilter = THREE.LinearFilter;
-        videoTexture.magFilter = THREE.LinearFilter;
-        var video_cube_material = new THREE.MeshBasicMaterial({
-            map: videoTexture,
-            side: THREE.FrontSide,
-            toneMapped: false,
-        });
+    // const video = new THREE.Mesh(video_geometry, video_material);
 
-        const video_cube_geometry = new THREE.BoxGeometry(2, 2, 2);
-        const video_cube = new THREE.Mesh(video_cube_geometry, video_cube_material);
-        video_cube.position.set(2, 2, 2);
-        video_cube.userData.name = 'video_cube';
-        video_cube.userData.class = 'mouseover_object';
-        video_cube.visible = true;
-        video_cube.material.opacity = 0.2;
-        return video_cube;
-    };
+    // video.position.set(2, 2, 2);
+    // video.visible = true;       
 
-     // load pass     
+    // load pass     
      const pass_loader = new GLTFLoader();
      url = new URL( './model/pass.glb', import.meta.url );
      url = "" + url;
@@ -711,7 +707,7 @@ function init () {
          pass.visible = false;
          pass.scale.set(10, 10, 10);
          pass.position.set(0, 0.7, 0);         
-     });     
+    });     
 
     // load fail
     const fail_loader = new GLTFLoader();
@@ -751,11 +747,9 @@ function init () {
     vent = add_vent();
     docs = add_docs();
     closedrawer = add_closedrawer();
-    video = add_video();
-
+    
     removeEventListener('mousemove', moveOnObjects);
-    removeEventListener('click', clickOnObjects);
-      
+    removeEventListener('click', clickOnObjects);      
     
     // BUTTONS - Change scenes /////////////////////////////////////////////////////////////
 
@@ -790,7 +784,7 @@ function init () {
             scene.remove(world);
             composer.removePass(bloomPass);
             composer.removePass(glitchPass);
-            scene.add(livingroom, cctv, roomba, roombaCube, alexa, smartcontrol, tv, xbox, controller, video);
+            scene.add(livingroom, cctv, roomba, roombaCube, alexa, smartcontrol, tv, xbox, controller);
             controls.enabled = true;
             addEventListener('mousemove', moveOnObjects);
             addEventListener('click', clickOnObjects);
@@ -833,7 +827,7 @@ function init () {
             window.numQuiz = 0;
             window.quizzesPerScene = 4;
             quizCount.innerHTML = quizzesPerScene + " Quiz Questions left";
-            scene.remove(livingroom, cctv, roomba, roombaCube, alexa, smartcontrol, tv, xbox, controller, video);
+            scene.remove(livingroom, cctv, roomba, roombaCube, alexa, smartcontrol, tv, xbox, controller);
             scene.add(office, bin, printer, door, note, wifi, drawer, drawerCube, tablet, laptop, pizza, calendar, docs);
             controls.reset();
             controls.enablePan = false;                    
@@ -868,7 +862,7 @@ function init () {
         button_next_2.addEventListener("click", function () {
             //reset Quiz counter per scene 
             window.numQuiz = 0;
-            window.quizzesPerScene = 3;
+            window.quizzesPerScene = 4;
             quizCount.innerHTML = quizzesPerScene + " Quiz Questions left";
             scene.remove(office, bin, printer, door, note, wifi, drawer, closedrawer, drawerCube, tablet, laptop, pizza, calendar, docs);
             scene.add(factory, car, trash, backpack, usb, entrance, alarm, vent);
@@ -944,7 +938,7 @@ function init () {
                 // Create and insert new Headline for pass
                 let hl5 = document.createElement('h1');
                 hl5.setAttribute('id','score-pass');
-                let hl5text = document.createTextNode(window.numCorrect +" out of 11 questions answered correctly.\n \n Congratulations, you passed!");
+                let hl5text = document.createTextNode(window.numCorrect +" out of 12 questions answered correctly.\n \n Congratulations, you passed!");
                 hl5.appendChild(hl5text);
                 let main = document.querySelector('.flex-container > .main-content');
                 main.insertAdjacentElement("afterbegin", hl5);  
@@ -979,7 +973,7 @@ function init () {
                 // Create and insert new Headline for fail
                 let hl5 = document.createElement('h1');
                 hl5.setAttribute('id','score-fail');
-                let hl5text = document.createTextNode(window.numCorrect +" out of 11 questions answered correctly.\n \n Sorry, you didn't pass.");
+                let hl5text = document.createTextNode(window.numCorrect +" out of 12 questions answered correctly.\n \n Sorry, you didn't pass.");
                 hl5.appendChild(hl5text);
                 let main = document.querySelector('.flex-container > .main-content');
                 main.insertAdjacentElement("afterbegin", hl5);
@@ -1128,7 +1122,7 @@ var clickOnObjects = function (event) {
             break;
 
             case 'entrance_cube':
-                clickInfoObject("entrance", "closeEntrance");                               
+                clickQuizObject(quizEntrance, quizContainerEntrance, feedbackContainerEntrance, submitButtonEntrance, "entrance", "closeEntrance");                                
             break;
 
             case 'xbox_cube':
@@ -1651,6 +1645,25 @@ var quizUsb = [
 	},
 ];
 
+// Quiz content Factory entrance //////////
+
+var quizContainerEntrance = document.getElementById('quizEntrance');
+var feedbackContainerEntrance = document.getElementById('feedbackEntrance');
+var submitButtonEntrance = document.getElementById('submitEntrance');
+
+var quizEntrance = [
+	{
+		question: "The front door. An employee has just opened it with her key card. A person unknown to the employee asks her to let her through. What should the employee do?",
+		answers: {
+			a: 'The employee should be polite and also hold the door open for an unknown person.',
+			b: 'The employee should not let the unknown person in under any circumstances.'			 
+        },
+		correctAnswer: 'b', 
+        feedbackRight: 'Correct. Especially with an unknown person, it is not certain what their intentions are. ',
+        feedbackWrong: 'Not the right answer. The person could be a criminal or someone who conducts industrial espionage.'
+	},
+];
+
 //Quiz content wifi ////////////////////////////////
 
 var quizContainerWifi = document.getElementById('quizWifi');
@@ -1684,7 +1697,7 @@ function animate (time) {
     requestAnimationFrame(animate);    
     render();
     controls.update();
-    videoTexture.update(time);
+    //video.needsUpdate = true;
 };
 
  // making canvas responsive

@@ -18,8 +18,7 @@
 
 <!-- Video for TV in living room -->
 
-<video
-id="videofile"
+<!-- <video id="videofile"
 playsinline
 webkit-playsinline
 loop
@@ -30,7 +29,7 @@ height="900"
 src="public/model/rickroll.mp4"
 type="video/mp4"
 style = "display: none"
-></video>
+></video> -->
 
 <!-- Dialog modals beginning -->
 
@@ -281,23 +280,24 @@ style = "display: none"
     </div>
 </div>
 
-<!-- Info modal Entrance door -->
+<!-- Quiz modal Entrance door -->
 
 <div id="entrance" class="modal">
   <!-- Modal content -->
   <div class="modal-content">
-    <div class="modal-header">
-      <span class="close" id="closeEntrance">&times;</span>
-      <div id="modal-header">INFO</div>
+      <div class="modal-header">
+        <span id="closeEntrance" class="close">&times;</span>
+        <div id="modal-header">QUIZ</div>
+      </div>            
+       <!-- Modal Quiz -->
+        <div id="quizEntrance"></div>       
+        <br>
+        <div><img class="modal-picture" src="public/model/entrancePicture.png" alt="A tailgater sneaking through an entrance" height="100"></div>   
+        <br>
+        <button id="submitEntrance" class="button">Submit</button>
+        <div class="modal-body" id="feedbackEntrance"></div>
     </div>
-    <div class="modal-body">
-      A perfectly normal entrance - and a potential security vulnerability: An attacker trying to gain access to a closed area where entry is either unguarded or even monitored by electronic access control can simply walk up behind a person who has credentials.
-      </div>
-      <br>
-      <div><img class="modal-picture" src="public/model/entrancePicture.png" alt="An employee passing an entrance door" height="100"></div>   
-      <br>
-  </div>
-</div>  
+</div>
 
 <!-- Info modal Xbox -->
 
