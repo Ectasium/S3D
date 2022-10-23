@@ -1147,10 +1147,10 @@ var clickOnObjects = function (event) {
 
             case 'drawer_cube':
                 new TWEEN.Tween(drawer.position)
-                .to( {x:-0.7, y:-1.33, z:1.07}, 3000)
+                .to( {x:-0.7, y:-1.33, z:1.07}, 1500)
                 .repeat(0)
                 .easing(TWEEN.Easing.Cubic.InOut)
-                .delay(300)
+                .delay(150)
                 .start(); 
                 scene.remove(drawerCube);
                 scene.add(closedrawer);                               
@@ -1158,10 +1158,10 @@ var clickOnObjects = function (event) {
 
             case 'closedrawer_cube':
                 new TWEEN.Tween(drawer.position)
-                .to( {x:0.5, y:-1.33, z:1.07}, 3000)  
+                .to( {x:0.5, y:-1.33, z:1.07}, 1500)  
                 .repeat(0)
                 .easing(TWEEN.Easing.Cubic.InOut)
-                .delay(300)
+                .delay(150)
                 .start(); 
                 scene.add(drawerCube);
                 scene.remove(closedrawer);
