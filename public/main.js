@@ -15,6 +15,7 @@ let scene;
 let glitchPass;
 let bloomPass;
 let composer;
+//let controls;
 
 const canvasSize = document.querySelector('.canvas-element');
 let model_container = document.querySelector('.webgl');
@@ -675,15 +676,16 @@ function init () {
         entrance_cube.material.opacity = 0.2;
         return entrance_cube;
     };
+    
+    // add video cube    
+    
+    var videofile = document.getElementById("videofile");
+    
+    function add_video() { 
 
-    // add video cube
-    function add_video() {
-        let video = document.getElementById("video");
-        let videoTexture = new THREE.VideoTexture(video);
-        
+        let videoTexture = new THREE.VideoTexture(videofile);        
         videoTexture.minFilter = THREE.LinearFilter;
         videoTexture.magFilter = THREE.LinearFilter;
-        
         var video_cube_material = new THREE.MeshBasicMaterial({
             map: videoTexture,
             side: THREE.FrontSide,
@@ -691,19 +693,12 @@ function init () {
         });
 
         const video_cube_geometry = new THREE.BoxGeometry(2, 2, 2);
-        
-        // const video_cube_material = new THREE.MeshLambertMaterial( 
-        //     {color: 0xff0000, 
-        //     opacity: 0.9,
-        //     transparent: true});
-        
         const video_cube = new THREE.Mesh(video_cube_geometry, video_cube_material);
-        
         video_cube.position.set(2, 2, 2);
         video_cube.userData.name = 'video_cube';
         video_cube.userData.class = 'mouseover_object';
         video_cube.visible = true;
-        //video_cube.material.opacity = 0.2;
+        video_cube.material.opacity = 0.2;
         return video_cube;
     };
 
