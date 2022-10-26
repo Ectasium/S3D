@@ -8,15 +8,6 @@ import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js';
 import { GlitchPass } from 'three/examples/jsm/postprocessing/GlitchPass.js';
 import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass.js';
 
-let office;
-let camera;
-let renderer;
-let scene;
-let glitchPass;
-let bloomPass;
-let composer;
-let controls;
-
 const canvasSize = document.querySelector('.canvas-element');
 let model_container = document.querySelector('.webgl');
 
@@ -167,8 +158,7 @@ function init () {
                 // .easing(TWEEN.Easing.Cubic.InOut)
                 //.delay(300)
                 .start();             
-    });
-    
+    });    
     
     // load office
     const office_loader = new GLTFLoader();
@@ -326,11 +316,7 @@ function init () {
          livingroom.visible = true;
          livingroom.scale.set(2, 2, 2);
          livingroom.position.set(0, 1.5, 0);
-         livingroom.matrixAutoUpdate = true;
-         //livingroom.updateMatrix();
-         //livingroom.rotation.x = Math.PI/-2;
-         //livingrrom.rotation.y = 0.8;
-         //scene.add(gltf.scene);
+         livingroom.matrixAutoUpdate = true;         
      });
 
      // load roomba 
@@ -342,11 +328,7 @@ function init () {
          roomba.visible = true;
          roomba.scale.set(0.002, 0.002, 0.002);
          roomba.position.set(-3.9, -1.66, -1.9);
-         roomba.matrixAutoUpdate = true;
-         //roomba.updateMatrix();
-         //roomba.rotation.x = Math.PI/-2;
-         //roomba.rotation.y = 0.8;
-         //scene.add(gltf.scene);
+         roomba.matrixAutoUpdate = true;        
      });
 
      //add roombaCube 
@@ -587,10 +569,7 @@ function init () {
          factory = gltf.scene.children[0];
          factory.visible = true;
          factory.scale.set(1, 1, 1);
-         factory.position.set(0, 3.2, 0);
-         //factory.rotation.x = Math.PI/-2;
-         //factory.rotation.y = 0.8;
-         //scene.add(gltf.scene);
+         factory.position.set(0, 3.2, 0);        
     });
 
      // add car cube 
@@ -725,7 +704,6 @@ function init () {
     door = add_door();
     note = add_note();
     cctv = add_cctv();
-    //world = add_world();
     car = add_car();
     trash = add_trash();
     alexa = add_alexa();
@@ -771,7 +749,7 @@ function init () {
         let quizCount = document.getElementById("quizzesleft");
         quizCount.style.display = "none"; 
                 
-        //Button start and show livingroom /////////////////////////////////////////////////////////
+        //Button start and show livingroom /////////////////
         let button_start = document.getElementById("button_start");        
 
         button_start.addEventListener("click", function() {
@@ -821,7 +799,7 @@ function init () {
                       
         });
 
-        //Button show home office /////////////////////////////////////////////////////////////////////
+        //Button show home office /////////////////////////////////////
         button_next_1.addEventListener("click", function () {
             //reset Quiz counter per scene 
             window.numQuiz = 0;
@@ -1075,16 +1053,13 @@ var clickOnObjects = function (event) {
                 clickQuizObject(quizRoomba, quizContainerRoomba, feedbackContainerRoomba, submitButtonRoomba, "roomba", "closeRoomba");  
                 var tweenRotate = new TWEEN.Tween(roomba.rotation)
                .to({ z: (0.5 * Math.PI)}, 3000)
-               // .to( {x:-0.7, y:-1.3, z:1.4}, 3000) 
-                .repeat(0)
+               .repeat(0)
                 var tweenMove = new TWEEN.Tween(roomba.position)
                .to({ z: 3, x: 1}, 5000)
-               // .to( {x:-0.7, y:-1.3, z:1.4}, 3000) 
-                .repeat(0)
+               .repeat(0)
                 var tweenFly = new TWEEN.Tween(roomba.position)
                .to({ y: 20}, 5000)
-               // .to( {x:-0.7, y:-1.3, z:1.4}, 3000) 
-                .repeat(0)
+               .repeat(0)
                 .easing(TWEEN.Easing.Cubic.InOut)
                 //.delay(300)
                 tweenRotate.chain(tweenMove);
@@ -1406,8 +1381,7 @@ function generateQuiz(questions, quizContainer, feedbackContainer, submitButton)
 
         for(var i=0; i<questions.length; i++){
     
-            // find selected answer
-            //userAnswer = (answerContainers[i].querySelector('input[name=question'+i+']:checked')||{}).value;  
+            // find selected answer            
             userAnswer = (answerContainers[i].querySelector('input[name=question'+i+']:checked')).value;              
             
             // Case correct answer
@@ -1646,7 +1620,6 @@ var quizUsb = [
 ];
 
 // Quiz content Factory entrance //////////
-
 var quizContainerEntrance = document.getElementById('quizEntrance');
 var feedbackContainerEntrance = document.getElementById('feedbackEntrance');
 var submitButtonEntrance = document.getElementById('submitEntrance');
