@@ -198,6 +198,22 @@ function init () {
         drawer_cube.visible = false;
         return drawer_cube;
     }; 
+
+    // create drawer content cube
+    function add_drawercontent() {
+        const drawercontent_cube_geometry = new THREE.BoxGeometry(0.81, 0.33, 0.6);
+        const drawercontent_cube_material = new THREE.MeshLambertMaterial( 
+            {color: 0xff0000, 
+            opacity: 0.6,
+            transparent: true});
+        const drawercontent_cube = new THREE.Mesh(drawercontent_cube_geometry, drawercontent_cube_material);
+        drawercontent_cube.position.set(-0.71, -1.4, 1.85);
+        drawercontent_cube.userData.name = 'drawercontent_cube';
+        drawercontent_cube.userData.class = 'mouseover_object';
+        drawercontent_cube.visible = false;
+        drawercontent_cube.rotation.y = 0.39;
+        return drawercontent_cube;
+    }; 
     
     // create closedrawer cube
     function add_closedrawer() {
@@ -207,7 +223,7 @@ function init () {
             opacity: 0.6,
             transparent: true});
         const closedrawer_cube = new THREE.Mesh(closedrawer_cube_geometry, closedrawer_cube_material);
-        closedrawer_cube.position.set(-1.4, -1.33, 1.78);
+        closedrawer_cube.position.set(-1.37, -1.3, 1.78);
         closedrawer_cube.userData.name = 'closedrawer_cube';
         closedrawer_cube.userData.class = 'mouseover_object';
         closedrawer_cube.visible = false;
@@ -725,6 +741,7 @@ function init () {
     vent = add_vent();
     docs = add_docs();
     closedrawer = add_closedrawer();
+    drawercontent = add_drawercontent();
     
     removeEventListener('mousemove', moveOnObjects);
     removeEventListener('click', clickOnObjects);      
@@ -842,7 +859,7 @@ function init () {
             window.numQuiz = 0;
             window.quizzesPerScene = 4;
             quizCount.innerHTML = quizzesPerScene + " Quiz Questions left";
-            scene.remove(office, bin, printer, door, note, wifi, drawer, closedrawer, drawerCube, tablet, laptop, pizza, calendar, docs);
+            scene.remove(office, bin, printer, door, note, wifi, drawer, closedrawer, drawerCube, drawercontent, tablet, laptop, pizza, calendar, docs);
             scene.add(factory, car, trash, backpack, usb, entrance, alarm, vent);
             controls.reset();
             controls.enablePan = false;
@@ -1136,6 +1153,10 @@ var clickOnObjects = function (event) {
                 clickInfoObject("docs", "closeDocs");                               
             break;
 
+            case 'drawercontent_cube':
+                clickInfoObject("drawercontent", "closeDrawercontent");                               
+            break;
+
             case 'wifi_cube':
                 clickQuizObject(quizWifi, quizContainerWifi, feedbackContainerWifi, submitButtonWifi, "wifi", "closeWifi");                               
             break;
@@ -1148,7 +1169,7 @@ var clickOnObjects = function (event) {
                 .delay(150)
                 .start(); 
                 scene.remove(drawerCube);
-                scene.add(closedrawer);                               
+                scene.add(closedrawer, drawercontent);                               
             break;
 
             case 'closedrawer_cube':
@@ -1159,7 +1180,7 @@ var clickOnObjects = function (event) {
                 .delay(150)
                 .start(); 
                 scene.add(drawerCube);
-                scene.remove(closedrawer);
+                scene.remove(closedrawer, drawercontent);
                                                
             break;
     };
@@ -1291,6 +1312,14 @@ var moveOnObjects = function (event) {
                 closedrawer.visible = false;
                 break;
 
+             case 'drawercontent_cube':
+                drawercontent.visible = true;
+                break;
+
+            case 'drawerCube':
+                drawerCube.visible = true;
+                break;
+
             default:
                 bin.visible = false;
                 printer.visible = false;
@@ -1318,6 +1347,7 @@ var moveOnObjects = function (event) {
                 vent.visible = false;
                 docs.visible = false;
                 closedrawer.visible = false;
+                drawercontent.visible = false;
                 break;
         };
     };
@@ -1656,7 +1686,6 @@ var quizWifi = [
         feedbackWrong: 'No! This password is not secure. Hackers can easily get into such a network and take control over the connected devices.'
 	},
 ];
-
 
 // Render scene and camera
 const render = () => {
