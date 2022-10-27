@@ -132,10 +132,10 @@ p{
   /* Modal Content */
   .modal-content {
     position: relative;
-    background-color: #e66802;
+    background-color: #b6b6b6;
     margin: auto;
     padding: 10;
-    border: 2px solid #ffa255;
+    border: 2px solid #494949;
     border-radius: 10px;
     width: 30%;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
@@ -195,8 +195,8 @@ p{
   
   .modal-header {
     padding: 2px 16px;
-    background-color: #e66802;
-    color: #ffffff;
+    background-color: #b6b6b6;
+    color: #000000;
     font-size: 35px;
   }
   
@@ -210,7 +210,7 @@ p{
   
   .modal-content {
     padding: 2px 16px;
-    background-color: #e66802;
+    background-color: #b9b9b9;
     color: rgb(222, 222, 222);
   }
 
