@@ -223,6 +223,14 @@ p{
     box-shadow: 2px 2px 2px rgb(0, 0, 0);
   }
 
+  .radiobutton {
+      position: relative;
+      top: 6;
+      left: -2;
+      height: 25px;
+      width: 25px;
+  }
+
   #question {
     padding: 5px 20px;
     color: var(--black-color);
