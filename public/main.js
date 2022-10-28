@@ -1169,9 +1169,7 @@ var clickOnObjects = function (event) {
                 .delay(150)
                 .start(); 
                 scene.remove(drawerCube);
-                setTimeout(function()
-                    {scene.add(closedrawer, drawercontent);
-                    },1600);                               
+                setTimeout(() => {scene.add(closedrawer, drawercontent)},1600);                               
             break;
 
             case 'closedrawer_cube':
@@ -1181,7 +1179,7 @@ var clickOnObjects = function (event) {
                 .easing(TWEEN.Easing.Cubic.InOut)
                 .delay(150)
                 .start(); 
-                scene.add(drawerCube);
+                setTimeout(() => {scene.add(drawerCube)},1600);
                 scene.remove(closedrawer, drawercontent);
                                                
             break;
@@ -1383,9 +1381,10 @@ function generateQuiz(questions, quizContainer, feedbackContainer, submitButton)
                 answers.push(
                     '<label>'
                         + '<br>'
-                        + '<input type="radio" name="question'+i +'" value="'+letter +'">'
+                        + '<input type="radio" style="height:20px; width:20px" name="question'+i +'" value="'+letter +'">'
                         + ' '
                         + questions[i].answers[letter]
+                        + '<br>'
                     + '</label>'
                 );
             }
