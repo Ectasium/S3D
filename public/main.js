@@ -1169,7 +1169,9 @@ var clickOnObjects = function (event) {
                 .delay(150)
                 .start(); 
                 scene.remove(drawerCube);
-                scene.add(closedrawer, drawercontent);                               
+                setTimeout(function()
+                    {scene.add(closedrawer, drawercontent);
+                    },1600);                               
             break;
 
             case 'closedrawer_cube':
