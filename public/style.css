@@ -210,7 +210,7 @@ p{
   
   .modal-content {
     padding: 2px 16px;
-    background-color: #b9b9b9;
+    background-color: #b6b6b6;
     color: rgb(222, 222, 222);
   }
 
@@ -220,7 +220,7 @@ p{
     margin-right: auto;
     width: 50%;
     height: 50%;
-    box-shadow: 5px 5px 5px rgb(0, 0, 0);
+    box-shadow: 2px 2px 2px rgb(0, 0, 0);
   }
 
   #question {
