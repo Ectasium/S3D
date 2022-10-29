@@ -1381,7 +1381,7 @@ function generateQuiz(questions, quizContainer, feedbackContainer, submitButton)
                 answers.push(
                     '<label>'
                         + '<br>'
-                        + '<input type="radio" class="radiobutton" style="bold" name="question'+i +'" value="'+letter +'">'
+                        + '<input type="radio" class="radiobutton" name="question'+i +'" value="'+letter +'">'
                         + ' '
                         + questions[i].answers[letter]
                         + '<br>'
