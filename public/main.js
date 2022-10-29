@@ -347,7 +347,7 @@ function init () {
          roomba.matrixAutoUpdate = true;        
      });
 
-     //add roombaCube 
+    //add roombaCube 
     function add_roombaCube() {
         const roomba_cube_geometry = new THREE.BoxGeometry(1.2, 0.27, 1.3);
         const roomba_cube_material = new THREE.MeshLambertMaterial( 
@@ -361,6 +361,22 @@ function init () {
         roomba_cube.visible = false;
         roomba_cube.material.opacity = 0.2;
         return roomba_cube;
+    };
+
+     //add roombastartCube 
+     function add_roombastart() {
+        const roombastart_cube_geometry = new THREE.BoxGeometry(1.2, 0.27, 1.3);
+        const roombastart_cube_material = new THREE.MeshLambertMaterial( 
+            {color: 0xff0000, 
+            opacity: 0.9,
+            transparent: true});
+        const roombastart_cube = new THREE.Mesh(roombastart_cube_geometry, roombastart_cube_material);
+        roombastart_cube.position.set(-3.9, -1.64, -1.4);
+        roombastart_cube.userData.name = 'roombastart_cube';
+        roombastart_cube.userData.class = 'mouseover_object';
+        roombastart_cube.visible = false;
+        roombastart_cube.material.opacity = 0.2;
+        return roombastart_cube;
     };
 
      //add camera_cube 
@@ -742,6 +758,7 @@ function init () {
     docs = add_docs();
     closedrawer = add_closedrawer();
     drawercontent = add_drawercontent();
+    roombastart = add_roombastart();
     
     removeEventListener('mousemove', moveOnObjects);
     removeEventListener('click', clickOnObjects);      
@@ -1074,13 +1091,7 @@ var clickOnObjects = function (event) {
                 var tweenMove = new TWEEN.Tween(roomba.position)
                .to({ z: 3, x: 1}, 5000)
                .repeat(0)
-                var tweenFly = new TWEEN.Tween(roomba.position)
-               .to({ y: 20}, 5000)
-               .repeat(0)
-                .easing(TWEEN.Easing.Cubic.InOut)
-                //.delay(300)
                 tweenRotate.chain(tweenMove);
-                tweenMove.chain(tweenFly);
                 tweenRotate.start();    
                 scene.remove(roombaCube);                           
             break;
