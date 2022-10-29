@@ -688,7 +688,7 @@ function init () {
         return entrance_cube;
     };
     
-    // add video cube      
+    //add video cube      
  
     // let videofile = document.createElement('video');
     // videofile.src = "../model/rickroll.mp4";
@@ -698,7 +698,7 @@ function init () {
     //     //videoTexture.minFilter = THREE.LinearFilter;
     //     //videoTexture.magFilter = THREE.LinearFilter;
     
-    // var video_material = new THREE.MeshStandardMaterial({
+    // let video_material = new THREE.MeshStandardMaterial({
     //     map: videoTexture,
     //     side: THREE.FrontSide,
     //     toneMapped: false,
@@ -840,7 +840,7 @@ function init () {
             window.numQuiz = 0;
             window.quizzesPerScene = 4;
             quizCount.innerHTML = quizzesPerScene + " Quiz Questions left";
-            scene.remove(livingroom, cctv, roomba, roombaCube, alexa, smartcontrol, tv, xbox, controller);
+            scene.remove(livingroom, cctv, roomba, roombaCube, alexa, smartcontrol, tv, xbox, controller, roombastartCube);
             scene.add(office, bin, printer, door, note, wifi, drawer, drawerCube, tablet, laptop, pizza, calendar, docs);
             controls.reset();
             controls.enablePan = false;                    
