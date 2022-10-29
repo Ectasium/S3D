@@ -365,13 +365,14 @@ function init () {
 
      //add roombastartCube 
      function add_roombastart() {
-        const roombastart_cube_geometry = new THREE.BoxGeometry(1.2, 0.27, 1.3);
+        const roombastart_cube_geometry = new THREE.BoxGeometry(1, 0.27, 1);
         const roombastart_cube_material = new THREE.MeshLambertMaterial( 
             {color: 0xff0000, 
             opacity: 0.9,
             transparent: true});
         const roombastart_cube = new THREE.Mesh(roombastart_cube_geometry, roombastart_cube_material);
-        roombastart_cube.position.set(-3.9, -1.64, -1.4);
+        roombastart_cube.position.set(-0.57, -1.61, 0.75 );   
+        //z: 0.4, x: -3.89
         roombastart_cube.userData.name = 'roombastart_cube';
         roombastart_cube.userData.class = 'mouseover_object';
         roombastart_cube.visible = false;
@@ -758,7 +759,7 @@ function init () {
     docs = add_docs();
     closedrawer = add_closedrawer();
     drawercontent = add_drawercontent();
-    roombastart = add_roombastart();
+    roombastartCube = add_roombastart();
     
     removeEventListener('mousemove', moveOnObjects);
     removeEventListener('click', clickOnObjects);      
@@ -1083,18 +1084,23 @@ var clickOnObjects = function (event) {
                 clickInfoObject ("cctv", "closeCctv");                  
             break; 
             
-            case 'roomba_cube':
-                clickQuizObject(quizRoomba, quizContainerRoomba, feedbackContainerRoomba, submitButtonRoomba, "roomba", "closeRoomba");  
+            case 'roomba_cube':                                 
                 var tweenRotate = new TWEEN.Tween(roomba.rotation)
-               .to({ z: (0.5 * Math.PI)}, 3000)
+               .to({ z: (0.24 * Math.PI)}, 1000)
                .repeat(0)
                 var tweenMove = new TWEEN.Tween(roomba.position)
-               .to({ z: 3, x: 1}, 5000)
+               .to({ z: 0.4, x: -0.9}, 3000)
                .repeat(0)
                 tweenRotate.chain(tweenMove);
                 tweenRotate.start();    
-                scene.remove(roombaCube);                           
+                scene.remove(roombaCube);
+                setTimeout(() => {scene.add(roombastartCube);},4000); 
+                                           
             break;
+
+            case 'roombastart_cube':  
+                clickQuizObject(quizRoomba, quizContainerRoomba, feedbackContainerRoomba, submitButtonRoomba, "roomba", "closeRoomba"); 
+            break;      
 
             case 'car_cube':
                 clickInfoObject("car", "closeCar");                               
@@ -1242,6 +1248,10 @@ var moveOnObjects = function (event) {
             case 'roomba_cube':
                 roombaCube.visible = true;
                 break;
+            
+            case 'roombastart_cube':
+                roombastartCube.visible = true;
+                break;
 
             case 'car_cube':
                 car.visible = true;
@@ -1359,6 +1369,7 @@ var moveOnObjects = function (event) {
                 docs.visible = false;
                 closedrawer.visible = false;
                 drawercontent.visible = false;
+                roombastartCube.visible = false;
                 break;
         };
     };
@@ -1432,7 +1443,7 @@ function generateQuiz(questions, quizContainer, feedbackContainer, submitButton)
                 feedbackContainer.style.color = 'mediumseagreen';
                 //get feedback CORRECT from additiopnal property in questions[]
                 feedback = '<br>' + questions[0].feedbackRight + '<br>' + '<br>';
-                submitButton.disabled = true;
+                submitButton.disabled = true;                
                 window.numQuiz += 1;
                 quizzesLeft = quizzesPerScene - window.numQuiz;
                 quizCount = document.getElementById("quizzesleft");
@@ -1444,7 +1455,7 @@ function generateQuiz(questions, quizContainer, feedbackContainer, submitButton)
                 feedbackContainer.style.color = 'firebrick';
                 //get feedback WRONG from additiopnal property in myQuestions[]
                 feedback = '<br>' + questions[0].feedbackWrong + '<br>' + '<br>';
-                submitButton.disabled = true;
+                submitButton.disabled = true;         
                 window.numQuiz += 1;
                 quizzesLeft = window.quizzesPerScene - window.numQuiz;
                 quizCount = document.getElementById("quizzesleft");
