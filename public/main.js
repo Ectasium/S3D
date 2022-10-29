@@ -605,6 +605,17 @@ function init () {
          factory.position.set(0, 3.2, 0);        
     });
 
+    // load factory walls ///////////////
+    const factorywalls_loader = new GLTFLoader();
+    url = new URL( './model/factorywalls.glb', import.meta.url );
+    url = "" + url;
+    factorywalls_loader.load(url, (gltf) => {
+        factorywalls = gltf.scene.children[0];
+        factorywalls.visible = true;
+        factorywalls.scale.set(1, 1, 1);
+        factorywalls.position.set(0, 3.2, 0);        
+   });
+
      // add car cube 
      function add_car() {
         const car_cube_geometry = new THREE.BoxGeometry(0.64, 0.44, 1.2);
@@ -878,7 +889,7 @@ function init () {
             window.quizzesPerScene = 4;
             quizCount.innerHTML = quizzesPerScene + " Quiz Questions left";
             scene.remove(office, bin, printer, door, note, wifi, drawer, closedrawer, drawerCube, drawercontent, tablet, laptop, pizza, calendar, docs);
-            scene.add(factory, car, trash, backpack, usb, entrance, alarm, vent);
+            scene.add(factory, car, trash, backpack, usb, entrance, alarm, vent, factorywalls);
             controls.reset();
             controls.enablePan = false;
             button_next_2.style.display = "none";
@@ -912,7 +923,7 @@ function init () {
         window.numQuiz = 0;
         window.quizzesPerScene = 0;
 
-        scene.remove(factory, car, trash, backpack, usb, entrance, alarm, vent);
+        scene.remove(factory, car, trash, backpack, usb, entrance, alarm, vent, factorywalls);
         scene.add(pass, fail);
         controls.enabled = false;
         //pass.visible = false;
