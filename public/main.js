@@ -1198,7 +1198,10 @@ var clickOnObjects = function (event) {
             break;
 
             case 'calendar_cube':
-                clickInfoObject("calendar", "closeCalendar");                               
+                clickInfoObject("calendar", "closeCalendar");
+                var date = new Date();
+	            var current_date = "Hello, Today is " + date.getFullYear()+"/"+(date.getMonth()+1)+"/"+ date.getDate() + ". Have a Nice Day!";
+	            document.getElementById("dateandtime").innerHTML = current_date;                               
             break;
 
             case 'alarm_cube':
