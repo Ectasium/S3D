@@ -230,6 +230,36 @@ function init () {
         return closedrawer_cube;
     };   
 
+     // create openroof cube
+     function add_openroof() {
+        const openroof_cube_geometry = new THREE.BoxGeometry(0.19, 0.58, 0.19);
+        const openroof_cube_material = new THREE.MeshLambertMaterial( 
+            {color: 0xff0000, 
+            opacity: 0.6,
+            transparent: true});
+        const openroof_cube = new THREE.Mesh(openroof_cube_geometry, openroof_cube_material);
+        openroof_cube.position.set(-5.27, 0.54, -2.92);
+        openroof_cube.userData.name = 'openroof_cube';
+        openroof_cube.userData.class = 'mouseover_object';
+        openroof_cube.visible = false;
+        return openroof_cube;
+    };   
+
+     // create closeroof cube
+     function add_closeroof() {
+        const closeroof_cube_geometry = new THREE.BoxGeometry(0.19, 0.58, 0.19);
+        const closeroof_cube_material = new THREE.MeshLambertMaterial( 
+            {color: 0xff0000, 
+            opacity: 0.6,
+            transparent: true});
+        const closeroof_cube = new THREE.Mesh(closeroof_cube_geometry, closeroof_cube_material);
+        closeroof_cube.position.set(-5.27, 0.54, -2.92);
+        closeroof_cube.userData.name = 'closeroof_cube';
+        closeroof_cube.userData.class = 'mouseover_object';
+        closeroof_cube.visible = false;
+        return closeroof_cube;
+    };   
+
     // create door cube
     function add_door() {
         const door_cube_geometry = new THREE.BoxGeometry(2.2, 5, 0.17);
@@ -613,7 +643,7 @@ function init () {
         factorywalls = gltf.scene.children[0];
         factorywalls.visible = true;
         factorywalls.scale.set(1, 1, 1);
-        factorywalls.position.set(-2, 3.2, 0);        
+        factorywalls.position.set(0, 3.2, 0);        
    });
 
      // add car cube 
@@ -771,6 +801,8 @@ function init () {
     closedrawer = add_closedrawer();
     drawercontent = add_drawercontent();
     roombastartCube = add_roombastart();
+    openroof = add_openroof();
+    closeroof = add_closeroof();
     
     removeEventListener('mousemove', moveOnObjects);
     removeEventListener('click', clickOnObjects);      
@@ -889,7 +921,7 @@ function init () {
             window.quizzesPerScene = 4;
             quizCount.innerHTML = quizzesPerScene + " Quiz Questions left";
             scene.remove(office, bin, printer, door, note, wifi, drawer, closedrawer, drawerCube, drawercontent, tablet, laptop, pizza, calendar, docs);
-            scene.add(factory, car, trash, backpack, usb, entrance, alarm, vent, factorywalls);
+            scene.add(factory, car, trash, backpack, usb, entrance, alarm, vent, factorywalls, openroof, closeroof);
             controls.reset();
             controls.enablePan = false;
             button_next_2.style.display = "none";
@@ -1208,8 +1240,31 @@ var clickOnObjects = function (event) {
                 .delay(150)
                 .start(); 
                 setTimeout(() => {scene.add(drawerCube)},1600);
-                scene.remove(closedrawer, drawercontent);
-                                               
+                scene.remove(closedrawer, drawercontent);                                               
+            break;
+
+            case 'openroof_cube':
+                new TWEEN.Tween(factorywalls.position)
+                .to( {x:0, y:15, z:0}, 1500)
+                .repeat(0)
+                .easing(TWEEN.Easing.Cubic.InOut)
+                .delay(150)
+                .start(); 
+                //setTimeout(() => {scene.add(drawerCube)},1600);
+                scene.remove(openroof, alarm);
+                scene.add(closeroof);                                               
+            break;
+
+            case 'closeroof_cube':
+                new TWEEN.Tween(factorywalls.position)
+                .to( {x:0, y:3.2, z:0}, 1500)  
+                .repeat(0)
+                .easing(TWEEN.Easing.Cubic.InOut)
+                .delay(150)
+                .start(); 
+                //setTimeout(() => {scene.add(drawerCube)},1600);
+                scene.remove(closeroof);
+                scene.add(openroof, alarm);                                               
             break;
     };
 };
