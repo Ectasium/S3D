@@ -3,10 +3,10 @@ import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { GUI } from 'dat.gui';
 import * as TWEEN from '@tweenjs/tween.js';
-import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js';
-import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js';
-import { GlitchPass } from 'three/examples/jsm/postprocessing/GlitchPass.js';
-import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass.js';
+// import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js';
+// import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js';
+// import { GlitchPass } from 'three/examples/jsm/postprocessing/GlitchPass.js';
+// import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass.js';
 
 const canvasSize = document.querySelector('.canvas-element');
 let model_container = document.querySelector('.webgl');
@@ -47,28 +47,28 @@ function init () {
 
     // Composer & Effects ///////////////////////////////////////////////////////////
     
-    var renderTarget = new THREE.WebGLRenderTarget(2000, 2000);
+    // var renderTarget = new THREE.WebGLRenderTarget(2000, 2000);
 
-    composer = new EffectComposer(renderer, renderTarget);
-	composer.addPass(new RenderPass(scene, camera));    
+    // composer = new EffectComposer(renderer, renderTarget);
+	// composer.addPass(new RenderPass(scene, camera));    
     
-    var glitchParams = {
-        minFilter: THREE.LinearFilter,
-        magFilter: THREE.LinearFilter,
-        format: THREE.RGBFormat,
-        stencilBuffer: true,
-      };
-    glitchPass = new GlitchPass(glitchParams);
-	//composer.addPass(glitchPass);
+    // var glitchParams = {
+    //     minFilter: THREE.LinearFilter,
+    //     magFilter: THREE.LinearFilter,
+    //     format: THREE.RGBFormat,
+    //     stencilBuffer: true,
+    //   };
+    // glitchPass = new GlitchPass(glitchParams);
+	// //composer.addPass(glitchPass);
 
-    const bloomParams = {
-        exposure: 1,
-        bloomStrength: 4.5,
-        bloomThreshold: 0,
-        bloomRadius: 1
-    };
-    bloomPass = new UnrealBloomPass(bloomParams);
-	composer.addPass(bloomPass);
+    // const bloomParams = {
+    //     exposure: 1,
+    //     bloomStrength: 4.5,
+    //     bloomThreshold: 0,
+    //     bloomRadius: 1
+    // };
+    // bloomPass = new UnrealBloomPass(bloomParams);
+	// composer.addPass(bloomPass);
 
     //CONTROLS //////////////////////////////////////////////////////////////////
     controls = new OrbitControls(camera, renderer.domElement);
@@ -837,8 +837,8 @@ function init () {
             //quizCount = document.getElementById("quizzesleft");
             quizCount.innerHTML = quizzesPerScene + " Quiz Questions left";
             scene.remove(world);
-            composer.removePass(bloomPass);
-            composer.removePass(glitchPass);
+            //composer.removePass(bloomPass);
+            //composer.removePass(glitchPass);
             scene.add(livingroom, cctv, roomba, roombaCube, alexa, smartcontrol, tv, xbox, controller);
             controls.enabled = true;
             addEventListener('mousemove', moveOnObjects);
@@ -977,7 +977,7 @@ function init () {
             pass.visible = true;
             fail.visible = false;
             
-            composer.addPass(bloomPass);
+            //composer.addPass(bloomPass);
 
             new TWEEN.Tween(pass.rotation)
                .to({ y: -(2 * Math.PI)}, 5000)
@@ -1012,7 +1012,7 @@ function init () {
                 pass.visible = false;
                 fail.visible = true;
 
-                composer.addPass(glitchPass);
+                //composer.addPass(glitchPass);
 
                 new TWEEN.Tween(fail.rotation)
                .to({ y: -(2 * Math.PI)}, 5000)
@@ -1784,8 +1784,8 @@ var quizWifi = [
 
 // Render scene and camera
 const render = () => {
-    //renderer.render(scene, camera); 
-    composer.render();   
+    renderer.render(scene, camera); 
+    //composer.render();   
 };
 
 // animation recursive function
