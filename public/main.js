@@ -1199,9 +1199,13 @@ var clickOnObjects = function (event) {
 
             case 'calendar_cube':
                 clickInfoObject("calendar", "closeCalendar");
-                var date = new Date();
-	            var current_date = "Hello, Today is " + date.getFullYear()+"/"+(date.getMonth()+1)+"/"+ date.getDate() + ". Have a Nice Day!";
-	            document.getElementById("dateandtime").innerHTML = current_date;                               
+                var date = new Date()
+                var arrayOfWeekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+                var weekdayNumber = date.getDay()
+                var weekdayName = arrayOfWeekdays[weekdayNumber]        
+                var current_date = "Hello! Today is " + weekdayName + ", " + date.getFullYear()+"/"+(date.getMonth()+1)+"/"+ date.getDate()+ " - Have a Nice Day!";
+	            
+                document.getElementById("dateandtime").innerHTML = current_date;                               
             break;
 
             case 'alarm_cube':
