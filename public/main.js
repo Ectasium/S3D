@@ -613,7 +613,7 @@ function init () {
         factorywalls = gltf.scene.children[0];
         factorywalls.visible = true;
         factorywalls.scale.set(1, 1, 1);
-        factorywalls.position.set(0, 3.2, 0);        
+        factorywalls.position.set(-2, 3.2, 0);        
    });
 
      // add car cube 
