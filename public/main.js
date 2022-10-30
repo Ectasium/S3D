@@ -61,7 +61,6 @@ function init () {
     glitchPass = new GlitchPass(glitchParams);
 	//composer.addPass(glitchPass);
 
-
     const bloomParams = {
         exposure: 1,
         bloomStrength: 4.5,
