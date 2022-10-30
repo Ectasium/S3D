@@ -1557,7 +1557,7 @@ var submitButtonBin = document.getElementById('submitBin');
 
 var quizBin = [
 	{
-		question: "An overflowing wastebasket. In it are a number of still legible documents, such as invoices, budget spreadsheets or printed e-mails (yes, some people still print out their e-mails). ",
+		question: "A more than full  wastebasket. In it are a number of still legible documents, such as invoices, budget spreadsheets or printed e-mails (yes, some people still print out their e-mails). ",
 		answers: {
 			a: 'Under no circumstances should readable documents end up in the trash. They belong in the shredder first.',
 			b: 'No problem, because the documents will be destroyed by the garbage collection at the latest.',
@@ -1576,7 +1576,7 @@ var submitButtonPrinter = document.getElementById('submitPrinter');
 
 var quizPrinter = [
 	{
-		question: 'This is a multifunctional printer. Beside printing it can scan documents, send mails and much more. Therefore data from connected devices is stored in the internal memory. What should users consider when using it for their job?',
+		question: 'A multifunctional printer. It can also scan documents or send e-mails. Therefore data from connected devices is stored in the internal memory. What should be considered before using it?',
 		answers: {
 			a: 'Modern multifunction printers have sufficient protection means so the data is protected.',
 			b: 'The data of connected devices is stored in the printer and may be lost or fall in the wrong hands.',
