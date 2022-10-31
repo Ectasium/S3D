@@ -5,6 +5,7 @@
     --primary-color: #000000;
     --secondary-color: #444444;
     --accent-color: #e66802;
+    --accent-color-light: #ffa255;
     --complimentary-color: #c8ccd0;
     --white-color: #eeeeee;
     --black-color: #181818;
@@ -28,7 +29,7 @@ body{
 }
 
 h1{
-    color: #e4771e;
+    color: var(--accent-color);
 }
 
 p{
@@ -106,6 +107,7 @@ p{
     display: inline-block;
     font-size: 18px;
     border-radius: 5px;
+    cursor: pointer;
   }
 
   .button:disabled,
@@ -113,6 +115,7 @@ p{
     background-color: #e6b38a;
     border: 2px solid #fff8f3;
     color: rgb(204, 204, 204);    
+    cursor: not-allowed;
   }
 
   .modal {
@@ -229,6 +232,7 @@ p{
       left: -2;
       height: 25px;
       width: 25px;
+      cursor: pointer;
   }
 
   .modal-body {

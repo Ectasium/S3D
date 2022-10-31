@@ -876,18 +876,20 @@ function init () {
                       
         });
 
-        //Button show home office /////////////////////////////////////
-        button_next_1.addEventListener("click", function () {
+        //Button show home office /////////////////////////////////////       
+
+        button_next_1.addEventListener("click", function () {            
             //reset Quiz counter per scene 
             window.numQuiz = 0;
             window.quizzesPerScene = 4;
-            quizCount.innerHTML = quizzesPerScene + " Quiz Questions left";
+            quizCount.innerHTML = quizzesPerScene + " Quiz Questions left";            
             scene.remove(livingroom, cctv, roomba, roombaCube, alexa, smartcontrol, tv, xbox, controller, roombastartCube);
             scene.add(office, bin, printer, door, note, wifi, drawer, drawerCube, tablet, laptop, pizza, calendar, docs);
             controls.reset();
             controls.enablePan = false;                    
                         
             //ambientLight.intensity = 2;
+            
             button_next_1.style.display = "none";
             button_next_2.style.display = "block";
             
@@ -1512,7 +1514,7 @@ function generateQuiz(questions, quizContainer, feedbackContainer, submitButton)
             // Case correct answer
             if(userAnswer === questions[i].correctAnswer){              
                 window.numCorrect += 1;
-                feedbackContainer.style.color = 'mediumseagreen';
+                feedbackContainer.style.color = 'green';
                 //get feedback CORRECT from additiopnal property in questions[]
                 feedback = '<br>' + questions[0].feedbackRight + '<br>' + '<br>';
                 submitButton.disabled = true;                
@@ -1524,7 +1526,7 @@ function generateQuiz(questions, quizContainer, feedbackContainer, submitButton)
             
             // Case wrong answer
             else if (userAnswer != questions[i].correctAnswer) {                
-                feedbackContainer.style.color = 'firebrick';
+                feedbackContainer.style.color = 'red';
                 //get feedback WRONG from additiopnal property in myQuestions[]
                 feedback = '<br>' + questions[0].feedbackWrong + '<br>' + '<br>';
                 submitButton.disabled = true;         
