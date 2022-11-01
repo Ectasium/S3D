@@ -212,7 +212,8 @@ p{
   }
   
   .modal-content {
-    padding: 2px 16px;
+    padding: 5px 10px;
+    width: 50%;
     background-color: #b6b6b6;
     color: rgb(222, 222, 222);
   }
@@ -221,8 +222,8 @@ p{
     display: block;
     margin-left: auto;
     margin-right: auto;
-    width: 50%;
-    height: 50%;
+    width: 20%;
+    height: 20%;
     box-shadow: 2px 2px 2px rgb(0, 0, 0);
   }
 
