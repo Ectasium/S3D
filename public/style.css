@@ -2,7 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@1,700&family=Roboto+Mono:wght@500&display=swap');
 
 :root{
-    --primary-color: #000000;
+    --primary-color: #1a1a1a;
     --secondary-color: #444444;
     --accent-color: #e66802;
     --accent-color-light: #ffa255;
@@ -129,7 +129,7 @@ p{
     height: 100%; /* Full height */
     overflow: auto; /* Enable scroll if needed */
     background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.8); /* Black w/ opacity */
+    background-color: rgba(48, 48, 48, 0.8); /* Black w/ opacity */
   }
   
   /* Modal Content */

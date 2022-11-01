@@ -43,7 +43,7 @@ function init () {
     renderer.outputEncoding = THREE.sRGBEncoding;
 	renderer.physicallyCorrectLights = true;
     // renderer.autoClear = false;
-    renderer.setClearColor(0x000000);
+    renderer.setClearColor(0x1a1a1a);
 
     // Composer & Effects ///////////////////////////////////////////////////////////
     
