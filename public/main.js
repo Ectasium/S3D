@@ -975,7 +975,7 @@ function init () {
         description5.appendChild(description5text);
         description4.replaceWith(description5);
                
-        if (window.numCorrect >= 5 ) {            
+        if (window.numCorrect >= 8) {            
             pass.visible = true;
             fail.visible = false;
             
