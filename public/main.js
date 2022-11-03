@@ -147,6 +147,7 @@ function init () {
             world = gltf.scene.children[0];
             world.visible = true;
             world.scale.set(15, 15, 15);
+            //world.scale.set(0.15, 0.15, 0.15);
             world.position.set(0, -0.3, 0);
             //scene.add(gltf.scene);
             scene.add(world);
@@ -857,7 +858,7 @@ function init () {
                    
             // Create and insert new Headline
             let hl2 = document.createElement('h1');
-            let hl2text = document.createTextNode("The Livingroom");
+            let hl2text = document.createTextNode("Living room");
             hl2.appendChild(hl2text);
             let main = document.querySelector('.flex-container > .main-content');
             main.insertAdjacentElement("afterbegin", hl2);
@@ -870,7 +871,7 @@ function init () {
                    
             // Create and insert new description
             let description2 = document.createElement('p');
-            let description2text = document.createTextNode("A modern living room, equipped with a few conveniences that a smart home provides. But is it also as safe as it is comfortable? Your first mission: Take a good look around and search for vulnerabilities. Note: Security gaps can also lurk where they are not visible at first glance. When finished, click NEXT to move to the following scene.");
+            let description2text = document.createTextNode("A modern living room, equipped with a few conveniences that a smart home provides. But is it also as safe as it is comfortable? Your first mission: Take a look around and search for vulnerabilities. Note: Security gaps can also lurk where they are not visible at first glance. When finished, click NEXT to move to the following scene.");
             description2.appendChild(description2text);
             description_start.replaceWith(description2); 
                       
@@ -899,7 +900,7 @@ function init () {
                    
             // Create and insert new Headline
             let hl3 = document.createElement('h1');
-            let hl3text = document.createTextNode("The Work-From-Home Environment");
+            let hl3text = document.createTextNode("Work-From-Home Environment");
             hl3.appendChild(hl3text);
             let main = document.querySelector('.flex-container > .main-content');
             main.insertAdjacentElement("afterbegin", hl3);                       
@@ -1578,14 +1579,14 @@ var submitButtonPrinter = document.getElementById('submitPrinter');
 
 var quizPrinter = [
 	{
-		question: 'A multifunctional printer. It can also scan documents or send e-mails. Therefore data from connected devices is stored in the internal memory. What should be considered before using it?',
+		question: 'A multifunctional printer. It can also scan documents or send e-mails. Therefore, all data from connected devices is stored in the internal memory. What should be considered before using it?',
 		answers: {
-			a: 'Modern multifunction printers have sufficient protection means so the data is protected.',
+			a: 'Modern multifunctional printers have sufficient security features so the data is protected.',
 			b: 'The data of connected devices is stored in the printer and may be lost or fall in the wrong hands.',
         },
 		correctAnswer: 'b',
         feedbackRight: 'True. Print jobs that are still stored in the printer can be printed out just as easily as data from old copies, faxes or print jobs that appear to have been deleted but are actually still present can be made visible again.',
-        feedbackWrong: 'Wrong. There is a risk that data from the internal can fall into the wrong hands'
+        feedbackWrong: 'Not correct. There is a risk that data from the internal memory can fall into the wrong hands.'
 	},
 ];
 
@@ -1597,13 +1598,13 @@ var submitButtonNote = document.getElementById('submitNote');
 
 var quizNote = [
 	{
-		question: "An unusual place for a note, especially if it still has a password on it. What do you think: Is it a good idea to write down passwords on notepads?",
+		question: "An unusual place for a note, especially if it still has a password on it. What do you think? Is it a smart idea to note down passwords?",
 		answers: {
 			a: 'Why not? At least, this note is well hidden.',
-			b: 'No, that is not a good idea at all!',
+			b: 'No, this is not a smart idea at all!',
         },
 		correctAnswer: 'b',
-        feedbackRight: 'You are right. Writing down passswords on notes is never a good idea.',
+        feedbackRight: 'You are right. To note down passswords is never a smart idea.',
         feedbackWrong: 'Are you sure? What if the note is lost and someone else gets the password?'
 	},
 ];
@@ -1616,15 +1617,15 @@ var submitButtonRoomba = document.getElementById('submitRoomba');
 
 var quizRoomba = [
 	{
-		question: "Most robotic vacuum cleaners use mechanical and optical sensors and advanced software to do their job. And most are connected to the Internet. This means they collect a range of environmental data to do their job. Are there dangers in that?",
+		question: "Most robot vacuum cleaners use mechanical and optical sensors and advanced software to do their job. And most are connected to the Internet. This means they collect a range of location data to do their job. Does this include any dangers?",
 		answers: {
-			a: 'No problem. These devices are safe.',
-			b: 'Yes, because unfortunately not all manufacturers deliver regular security updates.',
-			c: 'No. Manufacturers already make sure that smart robotic vacuum cleaners always have the latest software.',
+			a: 'No problem. These devices are completely safe.',
+			b: 'Yes, not all manufacturers deliver regular security updates.',
+			c: 'No. Manufacturers already guarantee that smart robot vacuum cleaners have always the latest software.',
                     },
 		correctAnswer: 'b', 
-        feedbackRight: 'That is right. Especially smaller manufacturers do not update their software regularly. And for some devices, support is discontinued after a short time.',
-        feedbackWrong: 'Wrong. Not all manufacturers and devices can be relied upon for safety.'
+        feedbackRight: 'This is right. Especially smaller manufacturers do not update their software regularly. And for some devices, support is stopped after a certain time.',
+        feedbackWrong: 'Wrong. Many manufacturers and devices are not reliable in terms of data security.'
 	},
 ];
 
@@ -1636,15 +1637,15 @@ var submitButtonAlexa = document.getElementById('submitAlexa');
 
 var quizAlexa = [
 	{
-		question: 'This is a voice assistant connected to the internet. What do you have to keep in mind?',
+		question: 'This is a voice assistant connected to the internet. What do you have to keep in mind when using it?',
 		answers: {
-			a: 'The sound quality of these devices is often not very good. This can pose a health risk.',
-			b: 'Most voice assistants are powered by a non-rechargeable battery.',
-			c: 'To function properly, it must accept voice commands. But it is not certain how long the corresponding recordings are stored by the manufacturer.',            
+			a: 'The sound quality of these devices is often poor. This can cause a health risk.',
+			b: 'Most voice assistants are powered by non-rechargeable toxic batteries.',
+			c: 'To function properly, voice assistants must accept voice commands. Keep in mind, that these data is recorded and stored by the manufacturer.',            
         },
 		correctAnswer: 'c', 
-        feedbackRight: 'Yes, that was right! Owners should carefully check whether their speech is recorded and how long the recordings are stored.',
-        feedbackWrong: 'No. Think about it: Do you know if and when the device records the owner\'s voice?'
+        feedbackRight: 'Yes, this is right! Owners should carefully check whether their speech commmands are recorded and how long the recordings are stored.',
+        feedbackWrong: 'Try again. Do you know for which purpose and how long the device stores the recordings?'
 	},
 ];
 
@@ -1656,14 +1657,14 @@ var submitButtonBackpack = document.getElementById('submitBackpack');
 
 var quizBackpack = [
 	{
-		question: 'This is a backpack and inside is a password protected laptop. Is this a security risk?',
+		question: 'This is a backpack and inside is a password-protected laptop. Is this a security risk?',
 		answers: {
-			a: 'Yes! If the computer contains sensitive or confidential data, it should never be left out of sight or lying around. ',
+			a: 'Yes! If the computer contains sensitive or confidential data, it should never be left unattended. ',
 			b: 'No, if the device is secured with a password and when the latest security updates are installed this is not a problem.',
         },
 		correctAnswer: 'a',
-        feedbackRight: 'Yes, tha\'s right. Outside and inside the building, IT equipment should never be left out of sight.',
-        feedbackWrong: 'No, even if the device is password protected, it should never be left out of sight, especially when traveling.'
+        feedbackRight: 'Yes, that\'s right. Outside and inside the building, IT equipment should never be left unattended.',
+        feedbackWrong: 'No, even when the device is password-protected, it should never be left unattended, especially when travelling.'
 	},
 ];
 
@@ -1675,15 +1676,15 @@ var submitButtonTrash = document.getElementById('submitTrash');
 
 var quizTrash = [
 	{
-		question: "Two dumpsters at the back of the building. How would you assess this?",
+		question: "Two unlocked dumpsters behind the building. Do you see any security risks?",
 		answers: {
-			a: 'It is just trash and of no value at all.',
-			b: 'Cybercriminals could find valuable documents in here that have not been properly destroyed.',
+			a: 'It is just trash and has no value at all.',
+			b: 'Criminals could find valuable documents in here that have not been properly destroyed.',
 			
         },
 		correctAnswer: 'b', 
         feedbackRight: 'Correct! By the way, the practice to search for valuable documents and information in the garbage is called "dumpster diving".',
-        feedbackWrong: 'No! Think twice: What could be among the trash like printouts with confidential information which have not been properly destroyed?'
+        feedbackWrong: 'No! Think twice: What could be in the trash, such as documents with confidential information which have not been properly destroyed?'
 	},
 ];
 
@@ -1696,10 +1697,10 @@ var submitButtonSmartcontrol = document.getElementById('submitSmartcontrol');
 
 var quizSmartcontrol = [
 	{
-		question: "This is a control monitor, the heart of a smart home. But what should be considered when setting it up? ",
+		question: "This is a control panel, the heart of a smart home. But what should be considered when setting it up? ",
 		answers: {
-			a: 'Nothing special. It is supposed to be a SMART home, right?',
-			b: 'Always change the default password of every device you connect and set up an encrypted connection, if possible.',
+			a: 'Nothing special. It is supposed to be a smart home, right?',
+			b: 'Always change the default password of every device you connect and set up an encrypted connection, when possible.',
         },
 		correctAnswer: 'b',
         feedbackRight: 'Right. It is always a good idea to take secuity measures into account, when setting up a smart home.',
@@ -1715,15 +1716,14 @@ var submitButtonTv = document.getElementById('submitTv');
 
 var quizTv = [
 	{
-		question: "This smart TV features facial recognition, gesture control, and voice recognition. How do you rate the safety of this device?",
+		question: "This smart TV features facial recognition, gesture control, and voice recognition. How do you rate the security of this device?",
 		answers: {
-			a: 'The technical possibilities pose a danger. So for example the camera should be covered if you do not want it to see too much.',
-			b: 'Like all smart devices, a smart TV is secure from the factory.',
-			c: 'Even if it\'s not save, it\'s just a TV after all, what\'s going to happen?',
-                    },
+			a: 'These technical functions create dangers. So for example the camera should be covered when you want to keep your privacy.',
+			b: 'Like all smart devices, a smart TV is in general fully secure.',
+			      },
 		correctAnswer: 'a', 
-        feedbackRight: 'Yes, that\'sright! All smart devices are potential backdoors for criminals.',
-        feedbackWrong: 'Sorry, this is not the right answer. Imagine what would happen if a hacker gets access to the camera for example.'
+        feedbackRight: 'Yes, that\'sright! All smart devices have potential backdoors for cybercriminals.',
+        feedbackWrong: 'Sorry, this is not the right answer. Imagine what would happen if a hacker gets access to the camera, for example.'
 	},
 ];
 
@@ -1735,14 +1735,14 @@ var submitButtonUsb = document.getElementById('submitUsb');
 
 var quizUsb = [
 	{
-		question: "A USB flash drive, right in front of the entrance. What should you do with it now?",
+		question: "A USB flash drive, right in front of the entrance. What should you do with it?",
 		answers: {
-			a: 'Under no circumstances should the drive be connected to a computer!',
-			b: 'What a find! You should plug the stick into your computer and see what it contains. At least it\'s free storage.'			 
+			a: 'Under no circumstances should an unknown drive be connected to a computer!',
+			b: 'What a find! You should plug the stick into your computer and see what it contains. At least it\'s free data storage.'			 
         },
 		correctAnswer: 'a', 
-        feedbackRight: 'Correct. It is quite possible that it was laid out here by cybercriminals to spread malware.',
-        feedbackWrong: 'Not the right answer. In many cases, malware has already entered a network not via the Internet, but via an infected USB drive.'
+        feedbackRight: 'Correct. It is quite possible that it was placed here by cybercriminals to spread malware.',
+        feedbackWrong: 'Not the right answer. In many cases, malware has already entered a network not via the internet, but via an infected USB drive.'
 	},
 ];
 
@@ -1753,14 +1753,14 @@ var submitButtonEntrance = document.getElementById('submitEntrance');
 
 var quizEntrance = [
 	{
-		question: "The front door. An employee has just opened it with her key card. A person unknown to the employee asks her to let her through. What should the employee do?",
+		question: "The front door: An employee has just opened it with her key card. An unknown person asks the employee to let him in. What should the employee do?",
 		answers: {
-			a: 'The employee should be polite and also hold the door open for an unknown person.',
+			a: 'The employee should be polite and let also an unknown person in.',
 			b: 'The employee should not let the unknown person in under any circumstances.'			 
         },
 		correctAnswer: 'b', 
-        feedbackRight: 'Correct. Especially with an unknown person, it is not certain what their intentions are. ',
-        feedbackWrong: 'Not the right answer. The person could be a criminal or someone who conducts industrial espionage.'
+        feedbackRight: 'Correct. Especially when persons are unknown, it is not certain what their intentions are. ',
+        feedbackWrong: 'Not the right answer. The person could be a criminal or an industrial spy.'
 	},
 ];
 
@@ -1772,22 +1772,21 @@ var submitButtonWifi = document.getElementById('submitWifi');
 
 var quizWifi = [
 	{
-		question: "This is a Wifi router, the central hub for all connected devices. When checking it\'s password you find, that ist is ADMIN1234. What do you think?",
+		question: "This is a Wi-Fi router, the central hub for all connected devices. When checking it\'s password you find out, it is ADMIN1234. What do you think?",
 		answers: {
 			a: 'No problem. Everything is fine here.',
 			b: 'The term ADMIN may not be used in a password. It should be changed to SUPERHERO1234.',
 			c: 'The password is completely insecure and should be replaced with a secure one as soon as possible.',
                     },
 		correctAnswer: 'c', 
-        feedbackRight: 'Yes, this is the right answer.Unprotected wifi networks can be quite dangerous.',
-        feedbackWrong: 'No! This password is not secure. Hackers can easily get into such a network and take control over the connected devices.'
+        feedbackRight: 'Yes, this is the right answer. Not properly protected Wi-Fi networks can be quite dangerous.',
+        feedbackWrong: 'No! This password is not secure. Hackers can easily access unsecured networks and take control of the connected devices.'
 	},
 ];
 
 // Render scene and camera
 const render = () => {
     renderer.render(scene, camera); 
-    //composer.render();   
 };
 
 // animation recursive function

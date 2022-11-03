@@ -266,4 +266,12 @@ p{
     display: block;   
   }
 
+  #badge {    
+    position: absolute;
+    left: 30px;
+    top: 30px;
+    z-index: 0;
+    display: block;   
+  }
+
   
