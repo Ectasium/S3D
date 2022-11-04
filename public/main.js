@@ -934,7 +934,7 @@ function init () {
             hl3.remove();                    
             // Create and insert new Headline
             let hl4 = document.createElement('h1');
-            let hl4text = document.createTextNode("The Company Premises");
+            let hl4text = document.createTextNode("Company Premises");
             hl4.appendChild(hl4text);
             let main = document.querySelector('.flex-container > .main-content');
             main.insertAdjacentElement("afterbegin", hl4);                      
@@ -1006,7 +1006,7 @@ function init () {
                 let description4 = document.querySelector('.flex-container > .main-content > p');                               
                 // Replace description for pass
                 let description5 = document.createElement('p');
-                let description5text = document.createTextNode("Good job! You have demonstrated your skills as a Cyber Forensic Investigator. If you want to play again, click RESTART.");
+                let description5text = document.createTextNode("Good job! You have demonstrated your skills as a Cyber Security Detective. If you want to play again, click RESTART.");
                 description5.appendChild(description5text);
                 description4.replaceWith(description5);
 
