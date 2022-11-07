@@ -996,7 +996,7 @@ function init () {
                 // Create and insert new Headline for pass
                 let hl5 = document.createElement('h1');
                 hl5.setAttribute('id','score-pass');
-                let hl5text = document.createTextNode(window.numCorrect +" out of 12 questions answered correctly.\n \n Congratulations, you passed!");
+                let hl5text = document.createTextNode(window.numCorrect +" out of 12 questions answered correctly. Good Job!");
                 hl5.appendChild(hl5text);
                 let main = document.querySelector('.flex-container > .main-content');
                 main.insertAdjacentElement("afterbegin", hl5);  
@@ -1006,7 +1006,7 @@ function init () {
                 let description4 = document.querySelector('.flex-container > .main-content > p');                               
                 // Replace description for pass
                 let description5 = document.createElement('p');
-                let description5text = document.createTextNode("Good job! You have demonstrated your skills as a Cyber Security Detective. If you want to play again, click RESTART.");
+                let description5text = document.createTextNode("You have demonstrated your skills as a Cyber Security Detective. If you want to play again, click RESTART.");
                 description5.appendChild(description5text);
                 description4.replaceWith(description5);
 
@@ -1617,11 +1617,10 @@ var submitButtonRoomba = document.getElementById('submitRoomba');
 
 var quizRoomba = [
 	{
-		question: "Most robot vacuum cleaners use mechanical and optical sensors and advanced software to do their job. And most are connected to the Internet. This means they collect a range of location data to do their job. Does this include any dangers?",
+		question: "Most robot vacuum cleaners use mechanical and optical sensors and advanced software to do their job. And most are connected to the Internet. Does this include any dangers?",
 		answers: {
-			a: 'No problem. These devices are completely safe.',
-			b: 'Yes, not all manufacturers deliver regular security updates.',
-			c: 'No. Manufacturers already guarantee that smart robot vacuum cleaners have always the latest software.',
+			a: 'No problem. These devices are completely safe even against online attacks.',
+			b: 'Yes, not all manufacturers deliver regular security updates to close potential secutity gaps and backdoors.',
                     },
 		correctAnswer: 'b', 
         feedbackRight: 'This is right. Especially smaller manufacturers do not update their software regularly. And for some devices, support is stopped after a certain time.',
