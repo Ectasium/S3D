@@ -184,6 +184,9 @@ function init () {
         //scene.add(gltf.scene);
     });  
     
+    //function create_clickCube(geometry, position, name, className) {};
+
+
     // create drawer cube
     function add_drawer() {
         const drawer_cube_geometry = new THREE.BoxGeometry(0.08, 0.55, 1.28);
