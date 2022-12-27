@@ -185,6 +185,22 @@ function init () {
     });  
     
     //function create_clickCube(geometry, position, name, className) {};
+    // let clickObjects = []
+    // function addClickObject() {
+    //     const clickObjectGeometry = new THREE.BoxGeometry(0.81, 0.33, 0.6);
+    //     const clickObjectMaterial = new THREE.MeshLambertMaterial( 
+    //         {color: 0xff0000, 
+    //         opacity: 0.6,
+    //         transparent: true});
+    //     const clickObject = new THREE.Mesh(clickObjectGeometry, clickObjectMaterial);
+    //     clickObject.position.set(-0.71, -1.4, 1.85);
+    //     clickObject.rotation.y = 0.39;
+    //     clickObject.userData.name = 'drawercontent_cube';
+    //     clickObject.userData.class = 'mouseover_object';
+    //     clickObject.visible = false;
+        
+    //     return clickObject;
+    // }; 
 
 
     // create drawer cube
