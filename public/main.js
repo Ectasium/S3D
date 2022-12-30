@@ -3,6 +3,14 @@ import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { GUI } from 'dat.gui';
 import * as TWEEN from '@tweenjs/tween.js';
+
+//import and loop JSON - 1st try
+import * as objects from './objects.json';
+for (i in objects) {
+    console.log(i);
+    console.log(objects[i].position.x);
+};
+
 // import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js';
 // import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js';
 // import { GlitchPass } from 'three/examples/jsm/postprocessing/GlitchPass.js';
@@ -194,7 +202,9 @@ function init () {
     //         transparent: true});
     //     const clickObject = new THREE.Mesh(clickObjectGeometry, clickObjectMaterial);
     //     clickObject.position.set(-0.71, -1.4, 1.85);
+    //     clickObject.rotation.x = 0;
     //     clickObject.rotation.y = 0.39;
+    //     clickObject.rotation.z = 0;
     //     clickObject.userData.name = 'drawercontent_cube';
     //     clickObject.userData.class = 'mouseover_object';
     //     clickObject.visible = false;
