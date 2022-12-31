@@ -18,5 +18,22 @@
 
 
 
+// function add_drawercontent() {
+//     const drawercontent_cube_geometry = new THREE.BoxGeometry(0.81, 0.33, 0.6);
+//     const drawercontent_cube_material = new THREE.MeshLambertMaterial( 
+//         {color: 0xff0000, 
+//         opacity: 0.6,
+//         transparent: true});
+//     const drawercontent_cube = new THREE.Mesh(drawercontent_cube_geometry, drawercontent_cube_material);
+//     drawercontent_cube.position.set(-0.71, -1.4, 1.85);
+//     drawercontent_cube.userData.name = 'drawercontent_cube';
+//     drawercontent_cube.userData.class = 'mouseover_object';
+//     drawercontent_cube.visible = false;
+//     drawercontent_cube.rotation.y = 0.39;
+    
+//     return drawercontent_cube;
+// }; 
+
+
 
 

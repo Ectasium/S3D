@@ -227,6 +227,7 @@ function init () {
         drawer_cube.visible = false;
         return drawer_cube;
     }; 
+    drawerCube = add_drawer();
 
     // create drawer content cube
     function add_drawercontent() {
@@ -243,7 +244,8 @@ function init () {
         drawercontent_cube.rotation.y = 0.39;
         return drawercontent_cube;
     }; 
-    
+    drawercontent = add_drawercontent();
+        
     // create closedrawer cube
     function add_closedrawer() {
         const closedrawer_cube_geometry = new THREE.BoxGeometry(0.08, 0.55, 1.28);
@@ -258,6 +260,7 @@ function init () {
         closedrawer_cube.visible = false;
         return closedrawer_cube;
     };   
+    closedrawer = add_closedrawer();
 
      // create openroof cube
      function add_openroof() {
@@ -272,7 +275,8 @@ function init () {
         openroof_cube.userData.class = 'mouseover_object';
         openroof_cube.visible = false;
         return openroof_cube;
-    };   
+    };  
+    openroof = add_openroof(); 
 
      // create closeroof cube
      function add_closeroof() {
@@ -287,7 +291,8 @@ function init () {
         closeroof_cube.userData.class = 'mouseover_object';
         closeroof_cube.visible = false;
         return closeroof_cube;
-    };   
+    };  
+    closeroof = add_closeroof(); 
 
     // create door cube
     function add_door() {
@@ -303,6 +308,7 @@ function init () {
         door_cube.visible = true;
         return door_cube;
     };
+    door = add_door();
     
     // create printer cube
     function add_printer() {
@@ -317,7 +323,8 @@ function init () {
         printer_cube.userData.class = 'mouseover_object';
         printer_cube.visible = false;
         return printer_cube;
-    };      
+    };   
+    printer = add_printer();   
 
     // create note cube
     function add_note() {
@@ -333,6 +340,7 @@ function init () {
         note_cube.visible = false;
         return note_cube;
     };
+    note = add_note();
 
     // create bin cube 
     function add_bin() {
@@ -349,6 +357,7 @@ function init () {
         bin_cube.material.opacity = 0.2;
         return bin_cube;
     };
+    bin = add_bin();
 
      // add wifi 
      function add_wifi() {
@@ -365,7 +374,8 @@ function init () {
         wifi_cube.material.opacity = 0.2;
         return wifi_cube;
     };
-
+    wifi = add_wifi();
+    
     // add calendar 
     function add_calendar() {
         const calendar_cube_geometry = new THREE.BoxGeometry(0.21, 0.52, 0.41);
@@ -380,7 +390,8 @@ function init () {
         calendar_cube.visible = false;
         calendar_cube.material.opacity = 0.2;
         return calendar_cube;
-    };    
+    };  
+    calendar = add_calendar();  
         
      // load livingroom /////////////////////////////////////////////
      const livingroom_loader = new GLTFLoader();
@@ -421,6 +432,7 @@ function init () {
         roomba_cube.material.opacity = 0.2;
         return roomba_cube;
     };
+    roombaCube = add_roombaCube();
 
      //add roombastartCube 
      function add_roombastart() {
@@ -438,6 +450,7 @@ function init () {
         roombastart_cube.material.opacity = 0.2;
         return roombastart_cube;
     };
+    roombastartCube = add_roombastart();
 
      //add camera_cube 
      function add_cctv() {
@@ -455,6 +468,7 @@ function init () {
         cctv_cube.material.opacity = 0.2;
         return cctv_cube;
     };   
+    cctv = add_cctv();
 
     //add xbox_cube 
     function add_xbox() {
@@ -471,6 +485,7 @@ function init () {
         xbox_cube.material.opacity = 0.2;
         return xbox_cube;
     };
+    xbox = add_xbox();
 
      //add controller_cube 
      function add_controller() {
@@ -488,6 +503,7 @@ function init () {
         controller_cube.material.opacity = 0.2;
         return controller_cube;
     };
+    controller = add_controller();
 
      //add tablet_cube 
      function add_tablet() {
@@ -505,6 +521,7 @@ function init () {
         tablet_cube.material.opacity = 0.2;
         return tablet_cube;
     };
+    tablet = add_tablet();
 
     //add laptop_cube 
     function add_laptop() {
@@ -522,6 +539,7 @@ function init () {
         laptop_cube.material.opacity = 0.2;
         return laptop_cube;
     };
+    laptop = add_laptop();
 
     //add pizza_cube 
     function add_pizza() {
@@ -539,6 +557,7 @@ function init () {
         pizza_cube.material.opacity = 0.2;
         return pizza_cube;
     };
+    pizza = add_pizza();
 
     //add alexa_cube 
     function add_alexa() {
@@ -555,6 +574,7 @@ function init () {
         alexa_cube.material.opacity = 0.2;
         return alexa_cube;
     };
+    alexa = add_alexa();
 
     //add calendar_cube 
     function add_calendar() {
@@ -571,6 +591,7 @@ function init () {
         calendar_cube.material.opacity = 0.2;
         return calendar_cube;
     };
+    calendar = add_calendar();
 
     //add alarm_cube 
     function add_alarm() {
@@ -587,6 +608,7 @@ function init () {
         alarm_cube.material.opacity = 0.2;
         return alarm_cube;
     };
+    alarm = add_alarm();
 
     //add vent_cube 
     function add_vent() {
@@ -603,6 +625,7 @@ function init () {
         vent_cube.material.opacity = 0.2;
         return vent_cube;
     };
+    vent = add_vent();
 
     //add docs_cube 
     function add_docs() {
@@ -620,6 +643,7 @@ function init () {
         docs_cube.material.opacity = 0.2;
         return docs_cube;
     };
+    docs = add_docs();
 
     //add smartcontrol_cube 
     function add_smartcontrol() {
@@ -636,6 +660,7 @@ function init () {
         smartcontrol_cube.material.opacity = 0.2;
         return smartcontrol_cube;
     };
+    smartcontrol = add_smartcontrol();
 
     //add tv_cube 
     function add_tv() {
@@ -652,6 +677,7 @@ function init () {
         tv_cube.material.opacity = 0.2;
         return tv_cube;
     };
+    tv = add_tv();
 
     // load factory ///////////////
      const factory_loader = new GLTFLoader();
@@ -691,6 +717,7 @@ function init () {
         car_cube.material.opacity = 0.2;
         return car_cube;
     };
+    car = add_car();
 
      // add trash cube 
      function add_trash() {
@@ -707,6 +734,7 @@ function init () {
         trash_cube.material.opacity = 0.2;
         return trash_cube;
     };
+    trash = add_trash();
 
     // add backpack cube 
     function add_backpack() {
@@ -724,6 +752,7 @@ function init () {
         backpack_cube.material.opacity = 0.2;
         return backpack_cube;
     };
+    backpack = add_backpack();
 
     // add USB drive cube
     function add_usb() {
@@ -741,6 +770,7 @@ function init () {
         usb_cube.rotation.y = -0.32;
         return usb_cube;
     };
+    usb = add_usb();
 
     // add entrance cube
     function add_entrance() {
@@ -757,6 +787,7 @@ function init () {
         entrance_cube.material.opacity = 0.2;
         return entrance_cube;
     };
+    entrance = add_entrance();
     
     //add video cube      
  
@@ -800,38 +831,8 @@ function init () {
         fail.visible = false;
         fail.scale.set(10, 10, 10);
         fail.position.set(0, 0.7, 0);         
-    });
-
-    bin = add_bin();
-    printer = add_printer();
-    door = add_door();
-    note = add_note();
-    cctv = add_cctv();
-    car = add_car();
-    trash = add_trash();
-    alexa = add_alexa();
-    backpack = add_backpack();
-    smartcontrol = add_smartcontrol();
-    tv = add_tv();
-    usb = add_usb();
-    entrance = add_entrance();
-    wifi = add_wifi();
-    drawerCube = add_drawer();
-    roombaCube = add_roombaCube();
-    xbox = add_xbox();
-    controller = add_controller();
-    tablet = add_tablet();
-    laptop = add_laptop();
-    pizza = add_pizza();
-    calendar = add_calendar();
-    alarm = add_alarm();
-    vent = add_vent();
-    docs = add_docs();
-    closedrawer = add_closedrawer();
-    drawercontent = add_drawercontent();
-    roombastartCube = add_roombastart();
-    openroof = add_openroof();
-    closeroof = add_closeroof();
+    }); 
+   
     
     removeEventListener('mousemove', moveOnObjects);
     removeEventListener('click', clickOnObjects);      
