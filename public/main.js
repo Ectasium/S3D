@@ -6,7 +6,11 @@ import * as TWEEN from '@tweenjs/tween.js';
 
 //import and loop JSON - 1st try
 import * as objects from './objects.json';
-import { cloneUniforms } from 'three';
+//import { clone } from 'three';
+
+//var test = JSON.parse(objects);
+
+console.log(objects);
 
 // import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js';
 // import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js';
