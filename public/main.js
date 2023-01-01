@@ -6,10 +6,7 @@ import * as TWEEN from '@tweenjs/tween.js';
 
 //import and loop JSON - 1st try
 import * as objects from './objects.json';
-for (i in objects) {
-    console.log(i);
-    console.log(objects[i].position.x);
-};
+import { cloneUniforms } from 'three';
 
 // import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js';
 // import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js';
@@ -104,8 +101,40 @@ function init () {
     spotLight2.castShadow = true;
     scene.add(ambientLight, hemisphereLight, spotLight1, spotLight2);
 
-    // GUI ////////////////////////////////////
+    
+    //Create and add Objects from JSON to scene /////
 
+    // let names = [];
+
+    // for (var i = 0; i < objects.length(); i++) {
+    //     let name = object.name;
+    //     names.push(name);
+    // };
+
+    // console.log(names)
+        
+    Object.values(objects).forEach(function (object) { 
+           
+        geometry = new THREE.BoxGeometry(object.geo.w, object.geo.h, object.geo.d);
+        material = new THREE.MeshLambertMaterial( 
+            {color: 0xff00aa, 
+             opacity: 0.9,
+             transparent: true});
+         
+        //let item = object.name; 
+
+        item = new THREE.Mesh(geometry, material);
+        item.position.set(object.pos.x, object.pos.y, object.pos.z);
+        item.userData.name = object.name;
+        item.userData.class = object.className;
+        item.visible = true;
+        item.rotation.y = object.rot.y;
+         
+        scene.add(item);
+
+    }); 
+        
+    // GUI ////////////////////////////////////
     function testObject() {
     
         var gui = new GUI( { width: 600});
