@@ -6,11 +6,12 @@ import * as TWEEN from '@tweenjs/tween.js';
 
 //import and loop JSON - 1st try
 import * as objects from './objects.json';
+
+var items = objects;
+
 //import { clone } from 'three';
 
 //var test = JSON.parse(objects);
-
-console.log(objects);
 
 // import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js';
 // import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js';
@@ -125,20 +126,21 @@ function init () {
              opacity: 0.9,
              transparent: true});
          
-        console.log(item);
+        //console.log(item);
 
         //let item = object.name; 
 
-        item = new THREE.Mesh(geometry, material);
-        item.position.set(object.pos.x, object.pos.y, object.pos.z);
-        item.userData.name = object.name;
-        item.userData.class = object.className;
-        item.visible = true;
-        item.rotation.y = object.rot.y;
+        items[0].name = new THREE.Mesh(geometry, material);
+        // item.position.set(object.pos.x, object.pos.y, object.pos.z);
+        // item.userData.name = object.name;
+        // item.userData.class = object.className;
+        // item.visible = true;
+        // item.rotation.y = object.rot.y;
          
-        scene.add(item);
+        //console.log(items[0].name);
         
-        //scene.add(objects[x].name)
+        scene.add(items[0].name);
+        console.log(items[0].name);
 
     }); 
         

@@ -1,5 +1,5 @@
-{
-	"apple": {
+[
+	{
 		"name": "appleCube",
 		"className": "appleClass",
 		"geo": {
@@ -19,7 +19,7 @@
 		}
 	},
 
-	"orange": {
+	{
 		"name": "orangeCube",
 		"className": "orangeClass",
 		"geo": {
@@ -39,7 +39,7 @@
 		}
 	},
 
-	"lemon": {
+	{
 		"name": "lemonCube",
 		"className": "lemonClass",
 		"geo": {
@@ -58,4 +58,4 @@
 			"z": 0
 		}
 	}
-}
+]
