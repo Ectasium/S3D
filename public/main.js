@@ -125,6 +125,8 @@ function init () {
              opacity: 0.9,
              transparent: true});
          
+        console.log(item);
+
         //let item = object.name; 
 
         item = new THREE.Mesh(geometry, material);
@@ -135,6 +137,8 @@ function init () {
         item.rotation.y = object.rot.y;
          
         scene.add(item);
+        
+        //scene.add(objects[x].name)
 
     }); 
         
