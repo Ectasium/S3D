@@ -122,15 +122,13 @@ function init () {
         
     Object.values(objects).forEach(function (object) { 
            
+        cubes.push(items);
+
         geometry = new THREE.BoxGeometry(object.geo.w, object.geo.h, object.geo.d);
         material = new THREE.MeshLambertMaterial( 
             {color: 0xff00aa, 
              opacity: 0.9,
              transparent: true});
-         
-        //console.log(item);
-
-        //let item = object.name; 
 
         items[0].name = new THREE.Mesh(geometry, material);
         items[0].name.position.set(items[0].pos.x, items[0].pos.y, items[0].pos.z);
@@ -138,11 +136,6 @@ function init () {
         items[0].name.userData.class = object.className;
         items[0].name.visible = true;
         items[0].name.rotation.y = object.rot.y;
-        
-        //scene.add(items[0].name);
-        //console.log(items[0].name);
-
-        cubes.push(items[0].name);
 
     }); 
         
