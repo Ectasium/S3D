@@ -117,6 +117,8 @@ function init () {
     // };
 
     // console.log(names)
+
+    cubes = [];
         
     Object.values(objects).forEach(function (object) { 
            
@@ -131,16 +133,16 @@ function init () {
         //let item = object.name; 
 
         items[0].name = new THREE.Mesh(geometry, material);
-        // item.position.set(object.pos.x, object.pos.y, object.pos.z);
-        // item.userData.name = object.name;
-        // item.userData.class = object.className;
-        // item.visible = true;
-        // item.rotation.y = object.rot.y;
-         
-        //console.log(items[0].name);
+        items[0].name.position.set(items[0].pos.x, items[0].pos.y, items[0].pos.z);
+        items[0].name.userData.name = object.name;
+        items[0].name.userData.class = object.className;
+        items[0].name.visible = true;
+        items[0].name.rotation.y = object.rot.y;
         
-        scene.add(items[0].name);
-        console.log(items[0].name);
+        //scene.add(items[0].name);
+        //console.log(items[0].name);
+
+        cubes.push(items[0].name);
 
     }); 
         
