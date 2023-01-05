@@ -7,8 +7,6 @@ import * as TWEEN from '@tweenjs/tween.js';
 //import and loop JSON - 1st try
 import * as objects from './objects.json';
 
-var items = objects;
-
 //import { clone } from 'three';
 
 //var test = JSON.parse(objects);
@@ -119,63 +117,63 @@ function init () {
     // console.log(names)
 
     cubes = [];
+
+    for (let i = 0; i < objects.length; i++) {
         
-    Object.values(objects).forEach(function (object) { 
-           
-        cubes.push(items);
+        cubes.push(objects[i]);
 
-        geometry = new THREE.BoxGeometry(object.geo.w, object.geo.h, object.geo.d);
-        material = new THREE.MeshLambertMaterial( 
-            {color: 0xff00aa, 
-             opacity: 0.9,
-             transparent: true});
+        // geometry = new THREE.BoxGeometry(objects.geo.w, objects.geo.h, objects.geo.d);
+        // material = new THREE.MeshLambertMaterial( 
+        //     {color: 0xff00aa, 
+        //      opacity: 0.9,
+        //      transparent: true});
 
-        items[0].name = new THREE.Mesh(geometry, material);
-        items[0].name.position.set(items[0].pos.x, items[0].pos.y, items[0].pos.z);
-        items[0].name.userData.name = object.name;
-        items[0].name.userData.class = object.className;
-        items[0].name.visible = true;
-        items[0].name.rotation.y = object.rot.y;
+        // objects[0].name = new THREE.Mesh(geometry, material);
+        // objects[0].name.position.set(objects[0].pos.x, objects[0].pos.y, objects[0].pos.z);
+        // objects[0].name.userData.name = object.name;
+        // objects[0].name.userData.class = object.className;
+        // objects[0].name.visible = true;
+        // objects[0].name.rotation.y = object.rot.y;
 
-    }); 
+    }; 
         
     // GUI ////////////////////////////////////
-    function testObject() {
+    // function testObject() {
     
-        var gui = new GUI( { width: 600});
+    //     var gui = new GUI( { width: 600});
         
-        const cube_geometry = new THREE.BoxGeometry(1, 1, 1);
-        const cube_material = new THREE.MeshLambertMaterial( 
-            {color: 0x08f26e, 
-            opacity: 0.6,
-            transparent: true});
-        const cube = new THREE.Mesh(cube_geometry, cube_material);
-        cube.position.set(0, 0, 0);
-        scene.add(cube);
+    //     const cube_geometry = new THREE.BoxGeometry(1, 1, 1);
+    //     const cube_material = new THREE.MeshLambertMaterial( 
+    //         {color: 0x08f26e, 
+    //         opacity: 0.6,
+    //         transparent: true});
+    //     const cube = new THREE.Mesh(cube_geometry, cube_material);
+    //     cube.position.set(0, 0, 0);
+    //     scene.add(cube);
 
-        cube.visible = true;
+    //     cube.visible = true;
 
-        var box = gui.addFolder('Object Dimensions');
-        box.add(cube.scale, 'x', 0, 3, 0.01).name('Width').listen();
-        box.add(cube.scale, 'y', 0, 3, 0.01).name('Height').listen();
-        box.add(cube.scale, 'z', 0, 3, 0.01).name('Length').listen();
-        box.open();
+    //     var box = gui.addFolder('Object Dimensions');
+    //     box.add(cube.scale, 'x', 0, 3, 0.01).name('Width').listen();
+    //     box.add(cube.scale, 'y', 0, 3, 0.01).name('Height').listen();
+    //     box.add(cube.scale, 'z', 0, 3, 0.01).name('Length').listen();
+    //     box.open();
 
-        var box = gui.addFolder('Object Position');
-        box.add(cube.position, 'x', -8, 8, 0.01).name('x-Position').listen();
-        box.add(cube.position, 'y', -8, 8, 0.01).name('y-Position').listen();
-        box.add(cube.position, 'z', -8, 8, 0.01).name('z-Position').listen();
-        box.open();
+    //     var box = gui.addFolder('Object Position');
+    //     box.add(cube.position, 'x', -8, 8, 0.01).name('x-Position').listen();
+    //     box.add(cube.position, 'y', -8, 8, 0.01).name('y-Position').listen();
+    //     box.add(cube.position, 'z', -8, 8, 0.01).name('z-Position').listen();
+    //     box.open();
         
-        var box = gui.addFolder('Object Rotation');
-        box.add(cube.rotation, 'x', -1.5, 1.5, 0.01).name('x-Rotation').listen();
-        box.add(cube.rotation, 'y', -1.5, 1.5, 0.01).name('y-Rotation').listen();
-        box.add(cube.rotation, 'z', -1.5, 1.5, 0.01).name('z-Rotation').listen();
-        box.add(cube.material, 'wireframe').listen();
-        box.open();
+    //     var box = gui.addFolder('Object Rotation');
+    //     box.add(cube.rotation, 'x', -1.5, 1.5, 0.01).name('x-Rotation').listen();
+    //     box.add(cube.rotation, 'y', -1.5, 1.5, 0.01).name('y-Rotation').listen();
+    //     box.add(cube.rotation, 'z', -1.5, 1.5, 0.01).name('z-Rotation').listen();
+    //     box.add(cube.material, 'wireframe').listen();
+    //     box.open();
         //gui.add(options, 'reset');
 
-    };
+    //};
     // Add test object if needed
     //testObject();
 
