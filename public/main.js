@@ -1,3 +1,5 @@
+"use strict";
+
 import * as THREE from 'three';
 import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
@@ -6,6 +8,7 @@ import * as TWEEN from '@tweenjs/tween.js';
 
 //import and loop JSON - 1st try
 import * as objects from './objects.json';
+import { NormalMapTypes } from 'three';
 
 //import { clone } from 'three';
 
@@ -104,39 +107,31 @@ function init () {
     spotLight2.castShadow = true;
     scene.add(ambientLight, hemisphereLight, spotLight1, spotLight2);
 
-    
     //Create and add Objects from JSON to scene /////
 
-    // let names = [];
-
-    // for (var i = 0; i < objects.length(); i++) {
-    //     let name = object.name;
-    //     names.push(name);
-    // };
-
-    // console.log(names)
-
-    cubes = [];
-
-    for (let i = 0; i < objects.length; i++) {
+    function addCube(object) {
         
-        cubes.push(objects[i]);
+            geometry = new THREE.BoxGeometry(object.geo.w, object.geo.h, object.geo.d);
+            material = new THREE.MeshLambertMaterial( 
+                 {color: 0xff00aa, 
+                 opacity: 0.9,
+                 transparent: true});
 
-        // geometry = new THREE.BoxGeometry(objects.geo.w, objects.geo.h, objects.geo.d);
-        // material = new THREE.MeshLambertMaterial( 
-        //     {color: 0xff00aa, 
-        //      opacity: 0.9,
-        //      transparent: true});
+            cube = new THREE.Mesh(geometry, material);
+            cube.position.set(object.pos.x, object.pos.y, object.pos.z);
+            cube.userData.name = object.name;
+            cube.userData.class = object.className;
+            cube.visible = true;
+            cube.rotation.x = object.rot.y;
+            cube.rotation.y = object.rot.y;
+            cube.rotation.z = object.rot.y;
+            
+            return cube;               
+        };
 
-        // objects[0].name = new THREE.Mesh(geometry, material);
-        // objects[0].name.position.set(objects[0].pos.x, objects[0].pos.y, objects[0].pos.z);
-        // objects[0].name.userData.name = object.name;
-        // objects[0].name.userData.class = object.className;
-        // objects[0].name.visible = true;
-        // objects[0].name.rotation.y = object.rot.y;
-
-    }; 
-        
+        test = addCube(objects[0]);
+        scene.add(test);
+       
     // GUI ////////////////////////////////////
     // function testObject() {
     
@@ -223,27 +218,6 @@ function init () {
         drawer.position.set(0.5, -1.33, 1.07);
         //scene.add(gltf.scene);
     });  
-    
-    //function create_clickCube(geometry, position, name, className) {};
-    // let clickObjects = []
-    // function addClickObject() {
-    //     const clickObjectGeometry = new THREE.BoxGeometry(0.81, 0.33, 0.6);
-    //     const clickObjectMaterial = new THREE.MeshLambertMaterial( 
-    //         {color: 0xff0000, 
-    //         opacity: 0.6,
-    //         transparent: true});
-    //     const clickObject = new THREE.Mesh(clickObjectGeometry, clickObjectMaterial);
-    //     clickObject.position.set(-0.71, -1.4, 1.85);
-    //     clickObject.rotation.x = 0;
-    //     clickObject.rotation.y = 0.39;
-    //     clickObject.rotation.z = 0;
-    //     clickObject.userData.name = 'drawercontent_cube';
-    //     clickObject.userData.class = 'mouseover_object';
-    //     clickObject.visible = false;
-        
-    //     return clickObject;
-    // }; 
-
 
     // create drawer cube
     function add_drawer() {
