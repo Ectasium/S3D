@@ -136,11 +136,7 @@ function init() {
             
             scene.add(cube);
             
-            test = scene.getObjectByName(`${cube.name}`);
-
-            scene.add(test);
-
-            //console.log(test);           
+            test = scene.getObjectByName(`${cube.name}`);             
             
         };
     };
