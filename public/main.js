@@ -3,17 +3,11 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
-import { GUI } from 'dat.gui';
+//import { GUI } from 'dat.gui';
 import * as TWEEN from '@tweenjs/tween.js';
 
 //import and loop JSON - 1st try
 import * as items from './objects.json';
-import { InterpolationModes } from 'three';
-//import { NormalMapTypes } from 'three';
-
-//import { clone } from 'three';
-
-//var test = JSON.parse(objects);
 
 // import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js';
 // import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js';
