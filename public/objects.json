@@ -1,16 +1,17 @@
 [
 	{
-		"name": "appleCube",
-		"className": "appleClass",
+		"name": "door_cube",
+		"className": "mouseover_object",
+		"sceneName": "office",
 		"geo": {
-			"w": 0.4,
+			"w": 2.2,    
 			"h": 5,
-			"d": 0.6
+			"d": 0.17
 		},
 		"pos": {
-			"x": -0.7,
-			"y": -1.3,
-			"z": 1.78
+			"x": -3.11, 
+			"y": 0.5,
+			"z": -5
 		},
 		"rot": {
 			"x": 0,
@@ -20,40 +21,21 @@
 	},
 
 	{
-		"name": "orangeCube",
-		"className": "orangeClass",
+		"name": "printer_cube",
+		"className": "mouseover_object",
+		"sceneName": "office",
 		"geo": {
-			"w": 0.7,
-			"h": 0.8,
-			"d": 9
+			"w": 0.77,
+			"h": 0.77,
+			"d": 0.87
 		},
 		"pos": {
-			"x": -1.96,
-			"y": -1.3,
-			"z": 1.78
+			"x": 4.44,
+			"y": 0,
+			"z": 3.56
 		},
 		"rot": {
 			"x": 0,
-			"y": 0.5,
-			"z": 0
-		}
-	},
-
-	{
-		"name": "lemonCube",
-		"className": "lemonClass",
-		"geo": {
-			"w": 1,
-			"h": 1.1,
-			"d": 1.2
-		},
-		"pos": {
-			"x": 0.46,
-			"y": -1.3,
-			"z": 1.78
-		},
-		"rot": {
-			"x": 0.4,
 			"y": 0,
 			"z": 0
 		}

@@ -127,6 +127,7 @@ function init() {
             cube = new THREE.Mesh(geometry, material);
             cube.position.set(objects[i].pos.x, objects[i].pos.y, objects[i].pos.z);
             cube.name = `${objects[i].name}`;
+            cube.userData.scene = objects[i].scene; 
             cube.userData.name = objects[i].name;
             cube.userData.class = objects[i].className;
             cube.visible = true;
@@ -134,9 +135,9 @@ function init() {
             cube.rotation.y = objects[i].rot.y;
             cube.rotation.z = objects[i].rot.z;
             
-            scene.add(cube);
+            scene.add(cube);   
             
-            test = scene.getObjectByName(`${cube.name}`);             
+            console.log(scene.getObjectByName(`${objects[i].name}`));
             
         };
     };
