@@ -113,9 +113,9 @@ function init() {
             geometry = new THREE.BoxGeometry(objects[i].geo.w, objects[i].geo.h, objects[i].geo.d);
             material = new THREE.MeshLambertMaterial(
                 {
-                    color: 0xff9999,
+                    color: 0xff0000,
                     opacity: 0.9,
-                    transparent: false
+                    transparent: true
                 });
 
             cube = new THREE.Mesh(geometry, material);
@@ -130,9 +130,7 @@ function init() {
             cube.rotation.z = objects[i].rot.z;
             
             //scene.add(cube);   
-            
-            //console.log(scene.getObjectByName(`${objects[i].name}`));
-            
+                              
         };
     };
 
@@ -636,7 +634,7 @@ function init() {
                 transparent: true
             });
         const calendar_cube = new THREE.Mesh(calendar_cube_geometry, calendar_cube_material);
-        calendar_cube.position.set(4.83, 1.51, -3.75);
+        calendar_cube.position.set(5.83, 1.51, -3.75);
         calendar_cube.userData.name = 'calendar_cube';
         calendar_cube.userData.class = 'mouseover_object';
         calendar_cube.visible = false;
