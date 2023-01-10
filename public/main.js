@@ -113,9 +113,9 @@ function init() {
             geometry = new THREE.BoxGeometry(objects[i].geo.w, objects[i].geo.h, objects[i].geo.d);
             material = new THREE.MeshLambertMaterial(
                 {
-                    color: 0xff00aa,
+                    color: 0xff9999,
                     opacity: 0.9,
-                    transparent: true
+                    transparent: false
                 });
 
             cube = new THREE.Mesh(geometry, material);
@@ -124,14 +124,14 @@ function init() {
             cube.userData.scene = objects[i].scene; 
             cube.userData.name = objects[i].name;
             cube.userData.class = objects[i].className;
-            cube.visible = true;
+            cube.visible = false;
             cube.rotation.x = objects[i].rot.x;
             cube.rotation.y = objects[i].rot.y;
             cube.rotation.z = objects[i].rot.z;
             
-            scene.add(cube);   
+            //scene.add(cube);   
             
-            console.log(scene.getObjectByName(`${objects[i].name}`));
+            //console.log(scene.getObjectByName(`${objects[i].name}`));
             
         };
     };
@@ -330,25 +330,25 @@ function init() {
         door_cube.visible = true;
         return door_cube;
     };
-    door = add_door();
+    //door = add_door();
 
-    // create printer cube
-    function add_printer() {
-        const printer_cube_geometry = new THREE.BoxGeometry(0.77, 0.77, 0.87);
-        const printer_cube_material = new THREE.MeshLambertMaterial(
-            {
-                color: 0xff0000,
-                opacity: 0.6,
-                transparent: true
-            });
-        const printer_cube = new THREE.Mesh(printer_cube_geometry, printer_cube_material);
-        printer_cube.position.set(4.44, 0, 3.56);
-        printer_cube.userData.name = 'printer_cube';
-        printer_cube.userData.class = 'mouseover_object';
-        printer_cube.visible = false;
-        return printer_cube;
-    };
-    printer = add_printer();
+    // // create printer cube
+    // function add_printer() {
+    //     const printer_cube_geometry = new THREE.BoxGeometry(0.77, 0.77, 0.87);
+    //     const printer_cube_material = new THREE.MeshLambertMaterial(
+    //         {
+    //             color: 0xff0000,
+    //             opacity: 0.6,
+    //             transparent: true
+    //         });
+    //     const printer_cube = new THREE.Mesh(printer_cube_geometry, printer_cube_material);
+    //     printer_cube.position.set(4.44, 0, 3.56);
+    //     printer_cube.userData.name = 'printer_cube';
+    //     printer_cube.userData.class = 'mouseover_object';
+    //     printer_cube.visible = false;
+    //     return printer_cube;
+    // };
+    //printer = add_printer();
 
     // create note cube
     function add_note() {
@@ -987,7 +987,7 @@ function init() {
             window.quizzesPerScene = 4;
             quizCount.innerHTML = quizzesPerScene + " Quiz Questions left";
             scene.remove(livingroom, cctv, roomba, roombaCube, alexa, smartcontrol, tv, xbox, controller, roombastartCube);
-            scene.add(office, bin, printer, door, note, wifi, drawer, drawerCube, tablet, laptop, pizza, calendar, docs);
+            scene.add(office, bin, scene.getObjectByName('printer_cube'), door, note, wifi, drawer, drawerCube, tablet, laptop, pizza, calendar, docs);
             controls.reset();
             controls.enablePan = false;
 
@@ -1024,7 +1024,7 @@ function init() {
             window.numQuiz = 0;
             window.quizzesPerScene = 4;
             quizCount.innerHTML = quizzesPerScene + " Quiz Questions left";
-            scene.remove(office, bin, printer, door, note, wifi, drawer, closedrawer, drawerCube, drawercontent, tablet, laptop, pizza, calendar, docs);
+            scene.remove(office, bin, scene.getObjectByName('printer_cube'), door, note, wifi, drawer, closedrawer, drawerCube, drawercontent, tablet, laptop, pizza, calendar, docs);
             scene.add(factory, car, trash, backpack, usb, entrance, alarm, vent, factorywalls, openroof, closeroof);
             controls.reset();
             controls.enablePan = false;
@@ -1403,7 +1403,7 @@ var moveOnObjects = function (event) {
 
     switch (found.length > 0 && found[0].object.userData.name) {
         case 'printer_cube':
-            printer.visible = true;
+            scene.getObjectByName('printer_cube').visible = true;
             break;
 
         case 'note_cube':
@@ -1520,7 +1520,7 @@ var moveOnObjects = function (event) {
 
         default:
             bin.visible = false;
-            printer.visible = false;
+            scene.getObjectByName('printer_cube').visible = false;
             door.visible = false;
             note.visible = false;
             cctv.visible = false;
