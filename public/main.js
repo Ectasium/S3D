@@ -103,6 +103,9 @@ function init() {
     scene.add(ambientLight, hemisphereLight, spotLight1, spotLight2);
 
     //Create and add Objects from JSON to scene /////   
+   
+    cubes = []; 
+    names = [];
 
     function addCube(objects) {
 
@@ -123,17 +126,36 @@ function init() {
             cube.userData.scene = objects[i].scene; 
             cube.userData.name = objects[i].name;
             cube.userData.class = objects[i].className;
-            cube.visible = false;
+            cube.visible = true;
             cube.rotation.x = objects[i].rot.x;
             cube.rotation.y = objects[i].rot.y;
             cube.rotation.z = objects[i].rot.z;
-
-            //scene.add(cube);
             
+            cubes.push(cube);
+
         };
     };
 
-   
+    function addCubeNames(objects) {
+
+        for (var i = 0; i < objects.length; i++) {
+
+            names.push(`${objects[i].name}`); 
+            
+        };
+
+    };
+
+    addCubeNames(items);
+    addCube(items);
+    
+    console.log(names);
+    console.log(cubes);
+
+    for (i = 0; i < names.length; i++) {
+        names[i] = cubes[i];
+    };
+  
     // GUI ////////////////////////////////////
     // function testObject() {
 
