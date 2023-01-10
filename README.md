@@ -103,3 +103,9 @@ case 'alexa_cube':
 default: alexa.visible = false;
 
 
+## ToDo
+
+1. Function addCubes
+2. Function createGroups (vor addCubes) --> parse objects.json, create groups, add cubes to groups
+3. Function createQuiz + createModals
+4. add cubes to scenes group-wise
